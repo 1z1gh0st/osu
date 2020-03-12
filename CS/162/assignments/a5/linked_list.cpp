@@ -105,41 +105,33 @@ unsigned int Linked_List::insert(int val, unsigned int index) {
 }
 
 void Linked_List::sort_ascending() {
-	merge_sort_asc(head);
+	merge_sort_asc(&head);
 }
 
 void Linked_List::sort_descending() {
-	merge_sort_des(head);
+	merge_sort_des(&head);
 }
 
-void Linked_List::merge_sort_asc(Node *h) {
-	if (h == NULL || h->next == NULL) {
-		return;
-	} else {
-		Node *l;
-		Node *r;
-		split(h, &l, &r);
-		merge_sort_asc(l);
-		merge_sort_asc(r);
-		h = merge_asc(l, r);
+void Linked_List::merge_sort_asc(Node **h) {
+	// Made referencing Wikipedia and Geeks for Geeks
+	Node *curr_head = *h;
+	if (curr_head != NULL && curr_head->next != NULL) { // If the list from h is length 0 or 1, this condition fails and we are done
+		Node *l, *r;
+		split(curr_head, &l, &r); // l and r now both have half the list stored in them
+		merge_sort_asc(&l);
+		merge_sort_asc(&r);
+		*h = merge_asc(l, r); // Put l and r back together into h
 	}
 }
 
-void Linked_List::merge_sort_des(Node *h) {
-	if (h == NULL || h->next == NULL) {
-		return;
-	} else {
-		Node *l;
-		Node *r;
-		split(h, &l, &r);
-		/*cout << "{LEFT}" << endl;
-		print_from_nodes(l);
-		cout << "{RIGHT}" << endl;
-		print_from_nodes(r);*/
-		merge_sort_des(l);
-		merge_sort_des(r);
-		h = merge_des(l, r);
-		print_from_nodes(h);
+void Linked_List::merge_sort_des(Node **h) {
+	Node *curr_head = *h;
+	if (curr_head != NULL && curr_head->next != NULL) { // If the list from h is length 0 or 1, this condition fails and we are done
+		Node *l, *r;
+		split(curr_head, &l, &r); // l and r now both have half the list stored in them
+		merge_sort_des(&l);
+		merge_sort_des(&r);
+		*h = merge_des(l, r); // Put l and r back together into h
 	}
 }
 
@@ -147,40 +139,55 @@ void Linked_List::split(Node *h, Node **l, Node **r) {
 	if (*l == *r) {
 		return;
 	}
-	Node *curr_1 = h;
-	Node *curr_2 = h->next;
-	while (curr_2 != NULL) {
-		curr_2 = curr_2->next;
-		if (curr_2 != NULL) {
-			curr_1 = curr_1->next;
-			curr_2 = curr_2->next;
-		}
+	*l = h; // Set left equal to the front
+	unsigned int length = get_length_from_nodes(h);
+	Node *midpoint = h;
+	for (int i = 1; i < length / 2; i++) {
+		midpoint = midpoint->next;
 	}
-	*l = h;
-	*r = curr_1->next;
-	curr_1->next = NULL;
+	*r = midpoint->next; // Setting right to everything after the midpoint
+	midpoint->next = NULL; // De-linking the two halves
 }
 
 Node* Linked_List::merge_asc(Node *l, Node *r) {
-
+	if (l == NULL) {
+		return r; // Base cases (if one of the nodes passed in is NULL)
+	} else if (r == NULL) {
+		return l;
+	} else {
+		Node *list = NULL;
+		if (l->val < r->val) {
+			list = l;
+			l = l->next;	
+		} else {
+			list = r;
+			r = r->next;
+		}
+		list->next = merge_asc(l, r);
+		return list;
+	}
 }
 
 Node* Linked_List::merge_des(Node *l, Node *r) {
 	if (l == NULL) {
-		return r;
-	}
-	if (r == NULL) {
-		return l;
-	}
-	if (l->val < r->val) {
-		l->next = merge_asc(l->next, r);
+		return r; // Base cases (if one of the nodes passed in is NULL)
+	} else if (r == NULL) {
 		return l;
 	} else {
-		r->next = merge_asc(l, r->next);
-		return r;
+		Node *list = NULL;
+		if (l->val > r->val) { // Changed from merge_asc() to be > instead of <
+			list = l;
+			l = l->next;	
+		} else {
+			list = r;
+			r = r->next;
+		}
+		list->next = merge_des(l, r); // Recurring on new l and r (one of which has moved to next)
+		return list;
 	}
 }
 
+// Deprecated
 int Linked_List::get_value_at(unsigned int i) const {
 	Node *curr = head;
 	for (int k = 0; k < i && curr->next != NULL; k++) {
@@ -189,12 +196,49 @@ int Linked_List::get_value_at(unsigned int i) const {
 	return curr->val;
 }
 
+// Function for debugging purposes : DELETE
 void Linked_List::print_from_nodes(Node *h) {
-	cout << "Calling print_from_nodes()" << endl;
 	Node *curr = h;
 	int i = 0;
+	cout << "LIST : ";
 	while (curr != NULL) {
-		cout << "[" << i++ << "] " << curr->val << endl;
+		cout << curr->val << " ";
 		curr = curr->next;
 	}
+}
+
+// Function for debugging purposes : DELETE
+unsigned int Linked_List::get_length_from_nodes(Node *h) {
+	Node *curr = h;
+	unsigned int length = 0;
+	while (curr != NULL) {
+		length++;
+		curr = curr->next;
+	}
+	return length;
+}
+
+// Counting prime numbers
+unsigned int Linked_List::prime_count() {
+	Node *curr = head;
+	unsigned int num_primes = 0;
+	while (curr != NULL) {
+		num_primes += is_prime(curr->val);
+		curr = curr->next;
+	}
+	return num_primes;
+
+}
+
+bool Linked_List::is_prime(int n) {
+	if (n < 2) {
+		return false;
+	} else {
+		for (int i = 2; i < (n / 2) + 1; i++) {
+			if ((n % i) == 0) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
