@@ -1,0 +1,25 @@
+Philip Warton
+CS161 Week 5 Worksheet
+
+Post-Midterm 1:
+    1. Reverse Vocabulary
+        a. Algorithm, Statement, and Program - I do not understand how large code has 
+            to be in order to be considered more than a statement, and to be considered an
+            algorithm.
+        b. Linker - What role does the linker play in the process of compiling my code?
+    
+    2. What did I struggle with?
+        The toughest things on the midterm were questions about errors. I do not know much
+		about errors.
+
+Functions:
+    1. Describe pre and post conditions of Functions
+        calc_average:
+            pre-conditions - Sum must be a multiple of count
+	2.
+	3.
+	4.
+	5.
+	6.
+	7.
+	

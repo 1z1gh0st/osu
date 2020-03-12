@@ -1,0 +1,173 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 342 Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{1.}
+	Consider a map $G  : P_2(\mathbb{R}) \rightarrow P_2(\mathbb{R})$ given by $G(u)=(x+1)u'-2u$.
+	\subsection*{(a.)}
+		Show that $G$ is a linear map.
+		\begin{proof}
+			Let $u, v \in P_2(\mathbb{R})$.
+			Let us check if $G(u+v) = G(u) + G(v)$.
+			Taking the image of $u + v$ we get:
+			\begin{align*}
+				G(u+v) & = (x+1)(u+v)'-2(u+v)\\
+				& = (x+1)(u' + v')-2u-2v\\
+				& = (x+1)u' + (x+1)v' - 2u - 2v\\
+				& = (x+1)u' - 2u + (x+1)v' - 2v\\
+				& = ((x+1)u' -2u) + ((x+1)v'-2v)\\
+				& = G(u) + G(v)
+			\end{align*}
+			Now we wish to verify that $G(cu)  = cG(u)$ for all $u \in P_2(\mathbb{R})$ and $c \in  \mathbb{R}$.
+			Let $u \in P_2(\mathbb{R})$ and $c \in  \mathbb{R}$.
+			Now let us take $G(cu)$, giving us:
+			\begin{align*}
+				G(cu) & = (x+1)(cu)'-2(cu) \\
+				& = c(x+1)u' -2cu \\
+				& = c((x+1)u' -2u) \\
+				& = cG(u)
+			\end{align*}
+			Since both of those equalities hold, we can say that $G$ is a linear map.
+
+		\end{proof}
+	\subsection*{(b.)}
+		Now we want to find the basis and rank of $null(G)$. Let the standard basis for $P_2(\mathbb{R})$ be $\{1, x, x^2\}$.
+		Let us create the transformation matrix $[G]_{B_2B_1}$. We can write
+		$\begin{bmatrix}
+			G(1)_{B_2} & G(x)_{B_2} & G(x^2)_{B_2}
+		\end{bmatrix} = 
+		\begin{bmatrix}
+			-2_{B_2} & (1-x)_{B_2} & (2x)_{B_2}
+		\end{bmatrix} = 
+		\begin{bmatrix}
+			-2 & 1 & 0\\
+			0 & -1 & 2\\
+			0 & 0 & 0\\
+
+		\end{bmatrix}
+		$. Let us take the product of this matrix and the vector $(a + bx + cx^2)_{B_1}$ in the null space.
+		We get$
+		\begin{bmatrix}
+			-2 & -1 & 0\\
+			0 & -1 & 2\\
+			0 & 0 & 0 \\
+		\end{bmatrix} \times
+		\begin{bmatrix}
+			a \\
+			b \\
+			c
+		\end{bmatrix} = \mathbf{0}$.
+		This is equivalent to$
+		\begin{bmatrix}
+			-2a+b \\
+			-b+2c \\
+			0
+		\end{bmatrix}$. This implies that $a = c$, and $b=2c$.
+		From there we have $null(G) = \left\{ c \begin{bmatrix}1 \\ 2 \\ 1\end{bmatrix} : c \in \mathbb{R} \right\}$.
+		Therefore we have $\left\{\begin{bmatrix}1\\2\\1\end{bmatrix}\right\}$ as the basis of $null(G)$ with nullity of $G$ being 1.
+	\subsection*{(c.)}
+		From the transformation matrix found in part \fbox{1(b.)}, we can find the basis of the range of $G$ and $rank(G)$.
+		We know that the range of $G$ is equal to $\left \{
+		\begin{bmatrix}
+			-2a+b \\
+			-b+2c \\
+			0
+		\end{bmatrix}
+		: a,b,c \in \mathbb{R} \right \}$ as seen previously. This can be broken up into the set of all combinations of four vectors
+		$G = \left \{
+		a \begin{bmatrix} -2 \\ 0 \\ 0\end{bmatrix} +
+		b \begin{bmatrix} 1 \\ -1 \\ 0 \end{bmatrix} +
+		c \begin{bmatrix} 0 \\ 2 \\ 0  \end{bmatrix}
+		: a,b,c \in \mathbb{R} \right \}$. Notice that the second vector can be written as a combination of the first and the third, and is therefore redundant.
+		Putting all of our remaining vectors into a matrix as
+		$\begin{bmatrix}
+			-2 & 0 \\
+			0 & 2 \\
+			0 & 0 \\
+		\end{bmatrix}$, we get a matrix which is already in row-echelon form, and is linearly independent as all vectors are pivot columns.
+		Therefore a valid basis for $range(G)$ would be $\left \{ 
+		\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix},
+		\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix} \right \}$.
+		It follows that the rank of $G$ is 2.
+		This is confirmed by the rank nullity theorem which tells us $dim(P_2(\mathbb{R}) = rank(G) + nullity(G)$, which in this case specifically is $3 = 2 + 1$.
+	\subsection*{(d.)}
+		Since the dimension of $P_2(\mathbb{R})$ is 3 and the dimension of $range(G)$ is 2, we know that $G$ is not monorphic or isomorphic.
+		However, with $dim(range(G)) \neq dim(P_2(\mathbb{R}))$ we know that the image of $G$ cannot be equal to its co-domain, and the function is therefore not epimorphic.
+\section*{2.}
+	\subsection*{(a.)}
+		Show that the set of matricies $V = \left \{ \begin{bmatrix} a & b\\c&d\end{bmatrix} \in M_{2\times2}(\mathbb{C}):a+b+c+di=0\right\}$ is a subspace of $M_{2\times2}(\mathbb{C})$. //
+
+			Notice that $V\subset M_{2\times2}(\mathbb{C})$. Let $a,b,c,d = 0$ and our equation $a+b+c+di=0$ still holds, so we do have the additive identity. Thus we must show only two things, closure under scaling, and closure under vector addition.//
+		
+			Let $v, w \in V$. We want to show that $v+w \in V$.
+			We can write $v = \begin{bmatrix} v_1 & v_2\\v_3&v_4\end{bmatrix}$ and $w = \begin{bmatrix} w_1 & w_2\\w_3&w_4\end{bmatrix}$.
+			Since we know $v_1 + v_2 + v_3 + v_4i = 0$ and $w_1 + w_2 + w_3 + w_4i = 0$ we can say that 
+			\begin{align*}
+				(v_1 + v_2 + v_3 + v_4i) + (w_1 + w_2 + w_3 + w_4i) & = 0 \\
+				(v_1 + w_1) + (v_2 + w_2) + (v_3 + w_3) + (v_4i + w_4i) & = \\
+				(v_1 + w_1) + (v_2 + w_2) + (v_3 + w_3) + (v_4 + w_4)i & =
+			\end{align*}
+			This satisfies the parameters of $V$ so therefore $v + w =  \begin{bmatrix} v_1+w_1 & v_2+w_2\\v_3+w_3&v_4+w_4\end{bmatrix} \in V$.//
+			Let $v \in V$ and $z \in \mathbb{C}$. If we take $zv =\begin{bmatrix} zv_1 & zv_2\\zv_3&zv_4\end{bmatrix}$, then we want to show that $zv_1 + zv_2 + zv_3 + zv_4i = 0$.
+			By factoring out $z$ we get $z(v_1 + v_2 + v_3 + v_4i) = 0$.
+			Since $v \in V$ we know that $v_1 + v_2 + v_3 + v_4i = 0$, and therefore the equation $z(0) = 0$ holds, and $zv \in V$.
+			We have shown that $V$ is a subspace.
+
+
+	\subsection*{(b.)}
+		Find a basis for $V$.
+
+			Take the equation $a + b + c + di = 0$ and rewrite it as $a=-b-c-di$.
+			If we replace $a$ with $-b-c-di$ we get $(-b-c-di)+b+c+di=0$, which is true for all $a,b,c,d \in \mathbb{C}$.
+			We can determine that $V = \left\{\begin{bmatrix}-b-c-di&b\\c&d\end{bmatrix}: b,c,d \in \mathbb{C}\right\}$.
+			This can be written as a combination of vectors in the $M_{2\times2}$ standard basis as $V= \left\{b\begin{bmatrix}-1\\1\\0\\0\end{bmatrix}+c\begin{bmatrix}-1\\0\\1\\0\end{bmatrix}+d\begin{bmatrix}-i\\0\\0\\1\end{bmatrix}:b,c,d \in \mathbb{C} \right\}$.
+			It is simple to show that these vectors are indpendent by putting them into a matrix $\begin{bmatrix}-1&-1&-i\\1&0&0\\0&1&0\\0&0&1\end{bmatrix}$ and noting that it is already in row-echelon form with all vectors being pivot columns.
+			Therefore we can state the basis of $V$, $B_V = \left\{\begin{bmatrix}-1\\1\\0\\0\end{bmatrix},\begin{bmatrix}-1\\0\\1\\0\end{bmatrix},\begin{bmatrix}-i\\0\\0\\1\end{bmatrix}\right\}$.
+
+	\subsection*{(c.)}
+		Find the matrix representation of linear map $H$ where $H\left(\begin{bmatrix}a&b\\c&d\end{bmatrix}\right)=(a+b)z^2+(b+c)z+(c+d)$.\\
+
+		Let us take our basis vectors for $V$, and write their images in the basis of the co-domain.
+		We have $H\left(\begin{bmatrix}-1\\1\\0\\0\end{bmatrix}\right) = (0)z^2+(1)z+(0)1$ which is equal to $\begin{bmatrix}0\\1\\0\end{bmatrix}$ in the basis $\{1,z,z^2\}$.
+		Repeating this process we get $H\left(\begin{bmatrix}-1\\0\\1\\0\end{bmatrix}\right) = (-1)z^2+(1)z+(1)1$ which we can represent by $\begin{bmatrix}1\\1\\-1\end{bmatrix}$.
+		Then we get $H\left(\begin{bmatrix}-i\\0\\0\\1\end{bmatrix}\right) = (-i)z^2+(0)z+(1)1$ which we can represent by $\begin{bmatrix}1\\0\\-i\end{bmatrix}$.
+		Thus we can write the transformation matrix $[H]_{B_2B_1}= \begin{bmatrix}0&1&1\\1&1&0\\0&-1&-i\end{bmatrix}$.
+	\subsection*{(d.)}
+		If we take our transformation matrix for $H$ and row reduce we get $\begin{bmatrix}1&1&0\\0&1&1\\0&0&1-i\end{bmatrix}$. 
+		From there, it is clear that $rank(H) = 3$, and we know that the dimension of $V$ is 3, so by the rank-nullity theorem it must be the case that the nullity is 0.
+		This is a suitable answer for part (e.) as well.
+\section*{3.}
+	To get a basis for all $2\times2$ matricies where the sum of entries in each row is 0 we can write\\ $V= \left\{\begin{bmatrix}a&b\\c&d\end{bmatrix}:a=-b,c=-d, \ \ a,b,c,d \in \mathbb{R}\right\}$.
+	This is equivalent to $V= \left\{\begin{bmatrix}-b&b\\-d&d\end{bmatrix}:a,b \in \mathbb{R}\right\} =\\ \left\{b\begin{bmatrix}-1&1\\0&0\end{bmatrix} + d\begin{bmatrix}0&0\\-1&1\end{bmatrix}: b,d \in \mathbb{R}\right\}$, which has a basis of $B_V = \left\{\begin{bmatrix}1\\-1\\0\\0\end{bmatrix}, \begin{bmatrix}0\\0\\1\\-1\end{bmatrix}\right\}$ when written as vectors in the standard basis.
+	For the sum of entries on columns to be zero, we simply take the transpose of the matricies represented by vectors in our basis for $V$, which gives us the basis for $W$ being $B_W = \left \{ \begin{bmatrix}1\\0\\-1\\0\end{bmatrix}, \begin{bmatrix}0\\1\\0\\-1\end{bmatrix} \right\}$ by switching the second and third rows. To get the basis for $V+W$, we must take the union of $B_V$ and $B_W$ and then take a linearly independent subset of that. We have $B_V \cup B_W = \left \{\begin{bmatrix}1\\-1\\0\\0\end{bmatrix}, \begin{bmatrix}0\\0\\1\\-1\end{bmatrix},\begin{bmatrix}1\\0\\-1\\0\end{bmatrix}, \begin{bmatrix}0\\1\\0\\-1\end{bmatrix} \right\}$, which we can put in a matrix as $\begin{bmatrix}1&0&1&0\\-1&0&0&1\\0&1&-1&0\\0&-1&0&-1\end{bmatrix}$. After row reduction this becomes $\begin{bmatrix}1&0&1&0\\0&1&-1&0\\0&0&1&1\\0&0&0&0\end{bmatrix}$. Since the last column is in the span of the first three, we can eliminate our fourth vector from $B_V \cup B_W$ to get a linearly independent subset that still spans $V+W$. This gives us $B_{V+W} = \left \{\begin{bmatrix}1\\-1\\0\\0\end{bmatrix}, \begin{bmatrix}0\\0\\1\\-1\end{bmatrix},\begin{bmatrix}1\\0\\-1\\0\end{bmatrix} \right\}$.
+
+\section*{4.}
+	\subsection*{(a.)}
+		Since the image of each basis vector is already provided $\fbox{See problem 4 on HW}$ all that is left to do is write those as vectors in a matrix with respect to $B_2$, ie $\begin{bmatrix} f(v_1)_{B2}, f(v_2)_{B2},...,f(v_7)_{B2}\end{bmatrix}$. This can be done by observing the coefficients for each $w_n$ vector and putting said coefficient in the nth row of the column for whichever vector $v \in B_1$ you are doing. This gives the following matrix:
+		$\begin{bmatrix}
+		1&3&0&1&0&1&2\\
+		1&-1&2&0&1&1&0\\
+		0&-1&5&1&0&2&-6\\
+		-1&0&-4&-1&4&3&2\\
+		0&1&7&0&5&5&1\\
+		2&4&-1&1&3&0&-1\end{bmatrix} = [f]_{B2B1}$
+	\subsection*{(b.)}
+		The following is my code to reduce the above matrix.
+		\begin{verbatim}
+m = [1,3,0,1,0,1,2;1,-1,2,0,1,1,0;0,-1,5,1,0,2,-6;-1,0,-4,-1,4,3,2;0,1,7,0,5,5,1;
+2,4,01,1,3,0,-1]
+rref(m)
+		\end{verbatim}
+		From this the first 6 vectors are linearly independent but the 7th is not. Therefore the $rank(f)=6$. From the rank nullity theorem we can say that since $dim(V) = 7$ and $rank(f) = 6$ that $nullity(f) = 1$.
+\end{document}

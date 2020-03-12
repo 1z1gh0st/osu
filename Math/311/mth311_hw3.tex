@@ -1,0 +1,107 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{tasks}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 311 Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{2.2.2}
+	\subsection*{c.)}
+		Show that $\lim \dfrac{sin(n^2)}{\sqrt[3]{n}} = 0$.
+		\begin{proof}
+			Choose $\epsilon > 0$, arbitrarily. Let $N_\epsilon > \dfrac{1}{\epsilon^3}$.
+			We can therefore write that for all $n \geqslant N_\epsilon$ we have $n > \dfrac{1}{\epsilon^3}$ which is equivalent to stating that $\epsilon^3n > 1$.
+			By properties of the sine function we also know that $|sin(n^2)| \leqslant 1$ and therefore $|sin(n^2)|^3 \leqslant 1^3 = 1$.
+			From there, we have by ordering that $|sin(n^2)|^3 < \epsilon^3n$.
+			We can divide this expression by $n$ to get the inequality $\dfrac{|sin(n^2)|^3}{n} < \epsilon^3$.
+			Since both sides are positive, this is equivalent to $\dfrac{|sin(n^2)|}{\sqrt[3]{n}} < \epsilon$.
+			With both the numerator and denominator positive, we write $\left| \dfrac{sin(n^2)}{\sqrt[3]{n}} \right| < \epsilon$.
+			Trivially subtracting a zero we get $\left| \dfrac{sin(n^2)}{\sqrt[3]{n}} - 0\right| < \epsilon$.
+			By definition of convergence we have $\lim \dfrac{sin(n^2)}{\sqrt[3]{n}} = 0$.
+	
+		\end{proof}
+
+\section*{2.2.5}
+	\subsection*{a.)}
+		Let $[[x]]$ be the floor function, where $[[x]]$ is equal to the greatest integer less than or equal to $x$. Show that $\lim \left[\left[\dfrac{5}{n}\right]\right]= 0$.
+		\begin{proof}
+			Let $\epsilon > 0$, chosen arbitrarily. Choose $N_\epsilon > \dfrac{5}{\epsilon}$.
+			From there we have for all $n \geqslant N_\epsilon$ that $n > \dfrac{5}{\epsilon}$, which is equivalent to stating $\epsilon > \dfrac{5}{n}$.
+			With $n$ positive, we have $\left[\left[\dfrac{5}{n}\right]\right] \leqslant \dfrac{5}{n} < \epsilon$, and with all terms being always positive this is equivalent to $\left|\left[\left[\dfrac{5}{n}\right]\right] - 0 \right| < \epsilon$.
+			Therefore, we have $\lim \left[\left[\dfrac{5}{n}\right]\right]= 0$.
+
+		\end{proof}
+
+\section*{2.2.7}
+	\subsection*{a.)}
+		Is the sequence $(-1)^n$ eventually or frequently in the set $\{ 1 \}$? \\
+
+		The sequence $(-1)^n$ is not eventually in the set $\{ 1 \}$. In other words, for all $N \in \mathbb{N}, \ \exists n \geqslant N : (-1)^n \notin \{ 1 \}$.
+		\begin{proof}
+			Let $N \in \mathbb{N}$, arbitrarily.
+			There are two cases, $(-1)^N = (-1)$, and $(-1)^N = 1$. \\\\
+			\fbox{Case 1: $(-1)^N = (-1)$} Let $n = N$.
+			We have $(-1)^n = (-1)^N = (-1)$, and $(-1) \notin \{ 1 \}$. \\\\
+			\fbox{Case 2: $(-1)^N = 1$} Let $n = N +1$.
+			From there we can write $(-1)^n = (-1)^{N+1}$, equivalent to $(-1)^N(-1)^1$.
+			Thus, we have $1(-1) = -1 \notin \{ 1 \}$.
+
+		\end{proof}
+		
+		The sequence $(-1)^n$ is frequently in the set $\{ 1 \}$ (ie. $\forall N \in \mathbb{N}, \ \exists n \geqslant N : (-1)^n \in \{ 1 \}$).
+		\begin{proof}
+			Let $N \in \mathbb{N}$, arbitrarily.
+			There are once again two cases, $(-1)^N = (-1)$, and $(-1)^N = 1$. \\\\
+			\fbox{Case 1: $(-1)^N = (-1)$} Let $n = N + 1$.
+			We have $(-1)^n = (-1)^{N+1}$ which is equal to $(-1)^N(-1) = 1$.
+			Since $1 \in \{ 1 \}$, we have  $(-1)^n \in 1$ for some $n \geqslant N$.\\\\
+			\fbox{Case 2: $(-1)^N = 1$} Let $n = N$.
+			From there we can write $(-1)^n = 1 \in \{ 1 \}$.
+
+		\end{proof}
+	\subsection*{b.)}
+		Eventually is stronger than frequently.
+		We can state that eventually implies frequently, but frequently does not imply eventually.\\\\
+		Suppose we have a sequence $a_n$ eventually in the set $S$.
+		Eventaully implies frequently because if there exists $N_e$ where $\forall n_e \geqslant N_e$, $a_{n_e} \in S$, then for every $N_f \in \mathbb{N}$, choose $n_f \geqslant \max \{N_e, N_f \}$.
+		Then we have $a_{n_f} \in S$ since $n_f \geqslant N_e$. \\\\
+		This does not hold in the other direction, since frequently only defines that there must exist one index greater than any $N$ that is in the proposed set.
+		Therefore it cannot be said that all indecies greater than some $N$ will be in the set.
+	\subsection*{c.)}
+		A sequence $(a_n)$ converges to $a$ if, given any $\epsilon$-neighborhood $V_e(a)$ of $a$, $(a_n)$ is eventually in $V_e(a)$.
+	\subsection*{d.)}
+		Suppose an infinite number of terms of a sequence $x_n$ are equal to 2.
+		This does not imply that $x_n$ is eventually in the interval $(1.9, 2.1)$.
+		The counterexample would be suppose $x_n = \{ 1, 2, 1, 2, 1, 2, ... \}$. \\\\
+		However, having an infinite number of terms be equal to 2 does imply that $x_n$ would be frequently in the aforementioned interval.
+		Suppose that this implication was not true, then there would be some $N$ after which all $x_n$ would not be in the interval, and therefore not equal to two.
+		Thus there would be a finite number of terms equal to 2, which is a contradiction.
+
+\section*{2.3.9}
+	Suppose $a_n$ bounded and $\lim b_n = 0$. Show that $\lim a_n b_n = 0$.
+	\begin{proof}
+		Since $a_n$ is bounded we know there exists $M > 0$ such that $|a_n| \leqslant M$ for all $n \in \mathbb{N}$.
+		Also since $b_n$ converges to 0 we have $\forall \epsilon > 0 \ \exists N_{\epsilon B} : \forall n \geqslant N_{\epsilon B}, \ \ |b_n - 0| < \epsilon$. \\\\
+		Let $\epsilon_j > 0$ be arbitrary. Choose $N_{\epsilon A B} = N_{\epsilon B}$.
+		We know that for all $n \geqslant N_{\epsilon A B}$, the following hold:
+		\begin{align*}
+			|a_n| & \leqslant M \\
+			|b_n - 0| & < \epsilon_j \ \ \ \ \ \ \text{(with all terms positive we can multiply these inequalities resulting in strict inequality)}\\
+			\Longrightarrow |a_n||b_n-0| & < M (\epsilon_j) \\
+			|a_n||b_n| = |a_nb_n-0| & < M (\epsilon_j)
+		\end{align*}
+		Since we chose $\epsilon_j$ arbitrarily, we can write this inequality for any other $\epsilon_k > 0$ by letting $\epsilon_k = M \epsilon_j$.
+		Therefore we can say that for all $\epsilon_k > 0$, there exists $N_{\epsilon A B}$ such that for all $n \geqslant N_{\epsilon A B}$, $|a_nb_n-0| < \epsilon_k$.
+		Thus $\lim a_n b_n = 0$.
+
+	\end{proof}
+\end{document}

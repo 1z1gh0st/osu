@@ -1,0 +1,92 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{tasks}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 311 Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{1.4.3}
+
+We want to show $\bigcap_{n \in N} (0, \frac{1}{n}) = \O$.
+
+\begin{proof}
+By contradiction, suppose $x \in \mathbb{R}$ where $x \in \bigcap_{n \in N} (0, \frac{1}{n})$ arbitrarily. We know that  $0 < x < \frac{1}{n}$ for all $n \in \mathbb{N}$. This is in contradiction to the archimedean property, which gives us $\exists n \in \mathbb{N} : \frac{1}{n} < x$. Therefore, there must not exist $x \in \mathbb{R} : x \in \bigcap_{n \in N} (0, \frac{1}{n})$ and thus $\bigcap_{n \in N} (0, \frac{1}{n}) = \O$.
+
+\end{proof}
+
+\section*{1.4.7}
+
+This is not a complete proof, see \fbox{Theorem 1.4.5} and its proof in the text for the proof that we are completing.
+
+\begin{proof}
+By contradiction suppose $\alpha ^2 > 2$. We know that the following is true:
+\begin{align*}
+\alpha & > \alpha - \frac{1}{n} \\
+\Longrightarrow \alpha ^2  & > (\alpha - \frac{1}{n})^2 \\
+& = \alpha ^2 - \frac{2\alpha}{n} + \frac{1}{n^2} \\
+& > \alpha ^2 - \frac{2\alpha}{n}
+\end{align*}
+Choose $n \in \mathbb{N} : n \geqslant \frac{2\alpha}{(\alpha^2-2)}$. Then  we can write the inequality as follows:
+\begin{align*}
+\alpha^2 - \frac{2\alpha}{n} & \geqslant \alpha ^2  - \frac{2\alpha(\alpha^2-2)}{2\alpha} \\
+& = \alpha^2 - (\alpha ^ 2 -2) \\
+& = 2
+\end{align*}
+Therefore we have $\alpha^2 > (\alpha - \frac{1}{n})^2 > \alpha^2 - \frac{2\alpha}{n} \geqslant 2$. Since $(\alpha - \frac{1}{n})^2 > 2$, we know that $\alpha - \frac{1}{n}$ is an upper bound for $T$ that is less than $\alpha$. Then by definition of least upper bound, $\alpha$ cannot be the least upper bound for $T$ (contradiction). Since $\alpha^2$ cannot be greater than 2, and cannot be less than 2, $\alpha^2 = 2$.
+
+\end{proof}
+
+\section*{1.5.1}
+
+Let $B$ be a countable infinite set. Let $A \subseteq B$ be an infite subset. $A$ is countable.
+
+\begin{proof}
+Since $B$ is countable, $\exists f : \mathbb{N} \rightarrow B$ where $f$ is bijective. We want to inductively define a function $g:\mathbb{N} \rightarrow A$. Let $n_1 = \min \{n \in \mathbb{N} : f(n) \in A\}$ and set $g(1) = f(n_1)$. \\ 
+
+By induction, assume we have defined $n_k$ for some $k \in \mathbb{N}$. Let $n_{k+1} = \min ( \{ n \in \mathbb{N} : f(n) \in A \} \setminus \{ n_1, n_2 , ... , n_k \} )$. We have defined $n_m \ \forall m \in \mathbb{N}$. Define $g(m) = f(n_m)$. We must now check that $g(m)$ is bijective. \\
+
+Let $k, l \in \mathbb{N}$ and suppose $g(k) = g(m)$. This can be rewritten by our definition of $g$ as $f(n_k) = f(n_m)$. With $f$ being injective, we have $n_k = n_m$. Since we defined $n_p$ such that $n_p \notin \{n_1, n_2, ... n_{p-1} \} \ \forall p \in \mathbb{N}$, we know $n_k = n_m \Longrightarrow k = m$, and therefore $g$ is injective. \\
+
+Pick $a \in A$ arbitrarily. Since $A \subset B$, we have $a \in B$. This means that $\exists q \in \mathbb{N} : f(q) = a$. Let us find which $n_s$ is associated with $a$. If $f^{-1}(a) \in \{n_1, n_2, ... n_{k-1}\}$, then choose the element $n_s$ equal to $f^{-1}(a)$ where $s < k$. Otherwise we know that $f^{-1}(a) \in \{ n \in \mathbb{N} : f(n) \in A \}$. If it is the minimum, then choose $n_k$. Otherwise choose some larger $n_k$, and eventually it will be $f^{-1}(a)$. Therefore $g(m)$ is surjective, and also bijective.
+
+\end{proof}
+
+\section*{1.5.3}
+\subsection*{a.}
+\begin{proof}
+We want to show that given sets $A_1, A_2$ where both are countable, their union is also countable. Let $B_2 = A_2 \ A_2$. Note that $A_1 \cap B_2 = \O$. Let us consider both cases where $B_2$ is finite and where $B_2$ is infinite. \\
+
+\fbox{$B_2$ is finite: }
+Since $A_1$ is countable $\exists f : \mathbb{N} \rightarrow A_1$. Let $g : \mathbb{N} \rightarrow A_1 \cup B_2$. Since $B_2$ is finite let $B_2 = \{b_1, b_2, ... ,b_i\}$ where $i = |B_2|$. Let us define our function
+\[
+    g(n) = \left\{\begin{array}{lr}
+        b_n & n \leqslant i\\
+        f(n-i) & n > i\\
+        \end{array}\right\}
+\]
+Now we must show $g(n)$ to be a bijection. To show that $g(n)$ is injective let $g(a) = g(b)$. Consider when $a,b > i$, we have $f(a-i) = f(b-i)$. Note this cannot equal the image of $f(0)$ because both $a,b > i$. Since $f$ is bijective, $f(a-i)=f(b-i) \Longrightarrow (a-i)=(b-i)$, and therefore $a = b$. If $a > i$ and $b \leqslant i$ then $f(a) \in A_1$ and $f(b) \in B_2$. These are disjoint sets and therefore $f(a) \neq f(b)$ (contradiction). Similarly the case where $a \leqslant i$ and $b > i$ is contradictory. Finally if $a,b \leqslant i$, then we have $b_a = b_b$. By defition of $B_2$ we have $a = b$. From this we konw $g(n)$ is a bijection, which is what was to be shown.\\
+
+
+\fbox{$B_2$ is infinite: }
+We have a function $f:\mathbb{N} \rightarrow A_1,$, and a function $g: \mathbb{N} \rightarrow B_2$. Note that this is not $g$ as defined in case 1, but a function granted by $B_2$ being infinite and countable. We want to show existence of a function $h: \mathbb{N} \rightarrow A_1 \cup B_2$. Let us define our function as
+\[
+    h(n) = \left\{\begin{array}{lr}
+        f(\frac{n}{2}) & \text{if } n \text{ is even}\\
+        g(\frac{n+1}{2}) & \text{if } n \text{ is odd}\\
+        \end{array}\right\}
+\]
+We wish to show $h(n)$ bijective. Let $h(a) = h(b)$. Since $A_1 \cap B_2 = \O$, we know that $a$ and $b$ must have the same parity. Otherwise, $h(a) = h(b) \in A_1 \cap B_2$ (contradiction). Therefore either $f(\frac{a}{2}) = f(\frac{b}{2})$ or $g(\frac{a+1}{2}) = g(\frac{b+1}{2})$. With both $f$ and $g$ being bijective functions, in either case it must be true that $a = b$. To show that it is onto, choose an element $d$ in $A_1 \cup B_2$ arbitrarily. If $d \in A_1$ then $\exists n \in \mathbb{N} : f(n) = d$, therefore $h(2n) = d$. If $d \in B_2$ then we know $\exists m \in \mathbb{N} : g(m) = d$. From there we know that $h(2m-1) = d$. Therefore $h$ is a bijection.
+
+\end{proof}
+
+Now we have that given two coutable sets $A$ and $B$, $A \cup B$ is countable. Therefore given any finite number of sets, it follows that their union is countable. Let $A = \{ A_1, A_2, ... , A_n\}$ be a finite collection of coutable sets. We know that $A_1 \cup A_2$ is countable. We want to show that given any countable $\bigcup_{n = 1}^{k} A_n$ we have $\bigcup_{n = 1}^{k+1} A_n$ countable. By induction suppose we have  $\bigcup_{n = 1}^{k} A_n$ being countable. Since $A_{k+1}$ is countable we can say that the union between these two countable sets is also countable. Therefore $\bigcup_{n = 1}^{k} A_n$ holds for all $k \in \mathbb{N}$.
+
+\end{document}

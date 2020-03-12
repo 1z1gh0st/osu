@@ -1,0 +1,42 @@
+get_input(int min, int max, string message)
+{
+	cout << message
+	cin >> result
+	while (result < min)
+	{
+		cout << bad number
+		cin >> result
+	}
+}
+
+random_characters(int min, int max, int length)
+{
+	random seed based on time
+	string result[length]
+	for (length)
+	{
+		result[i] = rand() % (max - min) + min			
+	}
+	return result
+}
+
+generate_password()
+{
+	int length = get_input(8, 32, please enter password lenght)
+	int letters = get_input(0, length, please enter # of desired letters)
+	int uppercase = get_input(0, (length - letters), please enter # of desired uppercase letters)
+	int lowercase = letters - uppercase
+	int numbers = length - letters
+
+	string upper = random_characters(ascii range min, ascii range max, uppercase)
+	string lower = random_characters(ascii range min, ascii range max, lowercase)
+	string nums = random_characters(ascii range min, ascii range max, numbers)
+
+	string password = upper + lower + nums
+	scramble password
+}
+
+
+get input gets a valid input for lengths
+for each type random_characters generates a string of random characters based on length and a given range
+generate password puts it all together

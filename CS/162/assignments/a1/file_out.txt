@@ -1,0 +1,4 @@
+ Date:  01/01/2020 | Amount:     269.99  | Description:              Champagne | Category:              Food
+ Date:  01/01/2020 | Amount:       4780  | Description:                 Caviar | Category:              Food
+ Date:  01/03/2020 | Amount:      12562  | Description:          Vacation_home | Category:           Housing
+ Date:  01/09/2020 | Amount:        400  | Description:                Therapy | Category:     Personal_Care

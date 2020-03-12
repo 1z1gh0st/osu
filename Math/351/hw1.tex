@@ -1,0 +1,81 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+
+\begin{document}
+
+\title{MTH 351 Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section{}
+\subsection*{a.}
+We first must take the nth derivative of $f(x)$.
+\begin{align*}
+f(t) & = \frac{1}{1-t} \\
+f(t) & = (1-t)^{-1} \\
+f'(t) & = (-1)(1-t)^{-2}(-1) \\
+f''(t) & = (-1)(-2)(1-t)^{-3}(-1)(-1) \\
+f'''(t) & = (-1)(-2)(-3)(1-t)^{-4}(-1)(-1) \\
+f^{n}(t) & = (n!)(1-t)^{-(n+1)}
+\end{align*}
+We can then determine our Taylor polynomial of degree $n$ as follows $p_n(t) = 1 + t + t^2 + t^3... + t^n$
+
+\subsection*{b.}
+Now, we use Lagrange's theorem to find $n$ sufficiently large such that our error $R_n(t) < \epsilon = 10^{-4}$. We have so far that $f^{(n+1)}(c) = (n+1)!(1-c)^{-(n+2)}$. Then we can say that 
+\begin{align*}
+R_k(t) & = (1-c)^{-(k+2)}t^{(k+1)} \\
+R_k(t) & \leqslant (1-\frac{1}{3})^{-(k+2)}(\frac{1}{3})^{k+1} \\
+& = (\frac{2}{3})^{-k-2}(\frac{1}{3})^{k+1}
+\end{align*}
+From here we can use a calculator in order to find $k : (\frac{2}{3})^{-k-2}(\frac{1}{3})^{k+1} < \epsilon$.
+This gives us $k \geqslant 13$.
+
+\section*{2}
+\subsection*{a.}
+To get the Taylor polynomial of $g(x) = \frac{1}{2+3x}$ we can start by taking a few derivatives.
+\begin{align*}
+g(x) & = (2 + 3x)^{-1}\\
+g'(x) & = (-1)(2_3x)^{-2}(3)\\
+g''(x) & = (-1)(-2)(2+3x)^{-3}(3)(3)\\
+g'''(x) & = (-1)(-2)(-3)(2 + 3x)^{-4}(3)(3)(3)\\
+&...\\
+g^n(x) & = (-1)(-2)...(-n)*(2+3x)^{-(n+1)}(3)^n
+\end{align*}
+From this we can write out the polynomial as $q_n(x) = \frac{1}{2} - \frac{3}{2^2}x + \frac{3^2}{2^3}x^2 + ... +  \frac{(-3x)^n}{2^{n+1}}$.
+
+\subsection*{b.}
+We can then construct a Langrangian error term in the form $R_n(x) = \frac{g^{n+1}(c)}{(n+1)!}(x-x_0)^{n+1}$. This gives us 
+\begin{align*}
+R_n(x) & = \frac{(-1)^{n+1}(n+1)!(2+3x)^{-(n+2)}3^{n+1}}{(n+1)!}(x-x_0)^{n+1}\\
+\leqslant |R_n(x)| & = \frac{(n+1)!(2+3x)^{-(n+2)}3^{n+1}}{(n+1)!}|(x-x_0)|^{n+1} \\
+& = \frac{3^{n+1}}{(2+3x)^{n+2}} \\
+& = (\frac{3x}{2+3c})^{n+1}(\frac{1}{2+3c}) \\
+\end{align*}
+
+Since we know $0 < x < \frac{1}{5}$, and we have positive $x$ in the numerator, we can choose $x = \frac{1}{5}$ to bound our error. With $c$ lying between $x_0 = 0$ and $x = \frac{1}{5}$, we can choose $c=0$ to bound our error when it is largest. From this, we get
+\begin{align*}
+R_n(x) & \leqslant (\frac{3(1/5)}{2+3(0)})^{n+1}(\frac{1}{2+3(0)}) \\
+& = (\frac{3}{10})^{n+1}(\frac{1}{2})
+\end{align*}
+Let this term be less than epsilon, and $n$ must be at least 8.
+
+\section*{3}
+\subsection*{a}
+For this problem we will use substitution to get our Taylor polynomial and error term. Let $\frac{1}{1-t} = \frac{1}{1+x^2}$, by solving for $t$ we get $t = -x^2$. By plugging this into our polynomial from \fbox{1a.)} we get $p_n(-x^2) = \sum_{k=1}^{n} (-x^2)^{k}$. Written out, this looks like $h(x) = 1 - x^2 + x^{2^2} - x^{2^3} + ... + (-x^2)^n$.
+\subsection*{b}
+Using this same method in order to find our Langrange error term we take our error term from \fbox{1b.}, $R_n(t)=(1-c)^{-(n+2)}t^{(n+1)}$ and let $t = -x^2$. This gives us $R_n(-x^2)=(1-c)^{-(n+2)}-x^{2^{(n+1)}}$. Rewriting this we get
+\begin{align*}
+\frac{(-x^2)^{n+1}}{(1-c)^n+2} & \leqslant \frac{|(-x^2)^{n+1}|}{(1-c)^n+2}  \\
+& = \frac{(x^2)^{n+1}}{(1-c)^n+2}
+\end{align*}
+To maximize our bound, let $x = 0.5$ and $c = 0$, so that it lies between $x$ and $x_0$ (given $x_0 = 0$). Now we have $\frac{((\frac{1}{2})^2)^{n+1}}{(1-0)^{n+2}} = (\frac{1}{4})^{n+1}$. We must choose a sufficiently large $n$ so that $(\frac{1}{4})^{n+1} < \epsilon$ where $\epsilon = 10^-5$. Using a calculator, it can be shown that $n = 8$ is large enough to make our error term smaller than $\epsilon$.
+
+\section*{4}
+See matlab file attached on canvas.
+
+\end{document}

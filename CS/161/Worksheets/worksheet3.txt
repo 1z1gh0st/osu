@@ -1,0 +1,76 @@
+Name: Philip Warton
+
+CS 161 Week 3 Worksheet
+
+Loops:
+	1.
+		While and Do/While loops differ in that Do/While loops begin by running the code, and While loops begin by checking that the condition is met.
+
+		If we want to append items to a list until it reaches a certain length, we could use a while loop:
+			while (list length < desired length) {
+				add item to list
+			}
+
+		If we wanted to demand valid input from a user, we could prompt them once, then continue to prompt them if the input is not valid using a do/while loop:
+			do {
+				print out message
+				take input
+			} while (input is not valid)
+
+	2.
+		x = 15
+		while (x < 158) {
+			cout x
+			x += 15
+		}
+
+		I used a while loop because there is no need to run it even once if x >= 158. It would not make a big difference in this case because I hardcoded th variable x to a number less than 158.
+
+Errors:
+	3.
+		Syntax is wether it follows the rules of the langauge. Errors are found at the time of compilation.
+		Semantics is wether or not the code makes functional sense, and will result in bugs encountered while running your program.
+
+	4.
+		Three Types of Errors
+			i. Syntax Errors
+				ex. you did not do a semi-colon at the end of a return statement. Expected ';'
+			ii. Logic Errors
+				ex. division of two integers without intention to truncate
+			iii. Runtime Error
+				ex. index out of range on an array
+
+	5.
+		Cout num after each step, and calculate by hand wether or not it is performing the mathematical operations correctly.
+
+Functions:
+	6.
+		Decomposition
+			-Taking one large problem and dividing it into smaller more easily understood problems.
+		Parameters
+			-Type and name of variable that are passed into a function.
+		Argument
+			-Variables passed into function upon calling it.
+		Function Prototype
+			-Basic information for the function so that it is declared before being used. Contains parameter types and function name.
+
+	7.
+		string get_last_name(string fName)
+		{
+			cout << "Hello " << fName << ", what is your last name?: ";
+			cin >> lName;
+			return lName;
+		}
+
+		This function returns last name value as string (not void).
+		This function takes first name as a parameter, in order to personalize the prompt.
+		To call this function, one could write:
+			string lName1 = get_last_name(fName1);
+
+	8.
+		String is not a primitive datatype like int, float, or char.
+
+	9.
+		a. #include <string>
+		b. string word = "";
+		c. getline(cin, word);

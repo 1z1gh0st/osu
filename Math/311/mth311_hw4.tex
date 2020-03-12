@@ -1,0 +1,49 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{tasks}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 311 Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{2.2.2}
+	\subsection*{c.)}
+		Show that $\lim \dfrac{sin(n^2)}{\sqrt[3]{n}} = 0$.
+		\begin{proof}
+			Choose $\epsilon > 0$, arbitrarily. Let $N_\epsilon > \dfrac{1}{\epsilon^3}$.
+			We can therefore write that for all $n \geqslant N_\epsilon$ we have $n > \dfrac{1}{\epsilon^3}$ which is equivalent to stating that $\epsilon^3n > 1$.
+			By properties of the sine function we also know that $|sin(n^2)| \leqslant 1$ and therefore $|sin(n^2)|^3 \leqslant 1^3 = 1$.
+			From there, we have by ordering that $|sin(n^2)|^3 < \epsilon^3n$.
+			We can divide this expression by $n$ to get the inequality $\dfrac{|sin(n^2)|^3}{n} < \epsilon^3$.
+			Since both sides are positive, this is equivalent to $\dfrac{|sin(n^2)|}{\sqrt[3]{n}} < \epsilon$.
+			With both the numerator and denominator positive, we write $\left| \dfrac{sin(n^2)}{\sqrt[3]{n}} \right| < \epsilon$.
+			Trivially subtracting a zero we get $\left| \dfrac{sin(n^2)}{\sqrt[3]{n}} - 0\right| < \epsilon$.
+			By definition of convergence we have $\lim \dfrac{sin(n^2)}{\sqrt[3]{n}} = 0$.
+	
+		\end{proof}
+
+\section*{2.5.1}
+	\subsection*{a.)}
+		By the Bolzano Weirstrass Theorem, every bounded sequence has a convergent subsequence.
+		Therefore, if a sequence has as a bounded subsequence, it also contains a convergent subsequence.
+	\subsection*{b.)}
+		We want a sequence with subsequences converging to 0 and 1, that does not contain 0 or 1.
+		Let our sequence $\large{a_n = \left\{ \frac{1}{2}, \frac{1}{3}, \frac{2}{3}, \frac{1}{4}, \frac{3}{4}, \frac{1}{5}, \frac{4}{5}, \frac{1}{6}, \frac{5}{6}, ... \right\}}$.
+	\subsection*{c.)}
+		We want a sequence that contains subsequences that converge to $\dfrac{1}{n} \ \forall n \in \mathbb{N}$.
+\section*{2.5.3}
+	Problem: Show that grouping terms of a convergent series results in a series that stil converges.
+	\begin{proof}
+		Assume that $\sum_{n=1}^{\infty} a_n$ converges to $L$. We want to show that any regrouping of terms results in a series that converges to $L$. Denote the grouping as $\sum_{n=1}^{\infty}a_n = (a_1 + a_2 + a_{n_1}) + (a_{n_1+1} + ... + a_{n_2}) + (a_{n_2+1} + ... + a_{n_3}) + ...$. We write the sequence of partial sums as $s_m = a_1 + a_2 + ... + a_m$. Let $p_k$ be a sequence such that $p_k = s_{n_k}$ where $n_k$ is derived from our grouping. Since the series converges $L$, by the definition of series', the sequence of partial sums converges to $L$. Since $p_k$ is a subsequence of $s_m$, $p_k$ converges to $L$, therefore grouping terms does not interfere with convergent series'.
+	\end{proof}
+
+	This proof does not apply to series' that do not converge, as it is reliant on the property that states: any subsequence of a convergent sequence converges.
+\end{document}

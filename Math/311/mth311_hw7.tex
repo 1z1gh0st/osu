@@ -1,0 +1,89 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 311 Homework 7}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{4.2.5}
+
+\subsection*{(a)}
+Show that $\lim_{x \rightarrow 2}(3x+4) = 10$.
+\begin{proof}
+Let $\epsilon > 0$ be arbitrary. Let $\delta = \dfrac{\epsilon}{3}$. Then, if $0 < |x - 2| < \delta$, we have
+\begin{align*}
+0 < |x - 2| & < \dfrac{\epsilon}{3} \\
+|3x-6| & < \epsilon \\
+|(3x+4) - 10| & < \epsilon
+\end{align*}
+Therefore $\lim_{x \rightarrow 2}(3x+4) = 10$.
+\end{proof}
+
+\subsection*{(b)}
+Show that $\lim_{x \rightarrow 0}x^3 = 0$.
+\begin{proof}
+Let $\epsilon > 0$ be arbitrary. Let $\delta = \sqrt[3]{\epsilon}$. Then, if $0 < |x-0| < \delta$, it follows that $|x^3| < \epsilon$. Therefore, $\lim_{x \rightarrow 0}x^3 = 0$.
+\end{proof}
+
+\section*{4.2.7}
+Let $g:A \rightarrow \mathbb{R}$. Let $f$ be a function such that $\exists M > 0 : |f(x)| \leqslant M \ \forall x \in A$. Show that if $\lim_{x \rightarrow c}g(x) = 0$, then $\lim_{x \rightarrow c}g(x)f(x)$ is also 0.
+\begin{proof}
+Assume that $\lim_{x \rightarrow c}g(x) = 0$. Let $\frac{\epsilon}{M}$ be arbitrary, where $M$ is a bound for $f$ on $A$. Then there exists $\delta$ such that if $0 < |x-c| < \delta$, then $|g(x) - 0| < \frac{\epsilon}{M}$. It Follows that $|Mg(x)| < \epsilon$, and since $f(x) \leqslant M$ for all $x \in A$, we write
+\begin{align*}
+|f(x)g(x)| \leqslant |Mg(x)| & < \epsilon \\
+\Rightarrow \ \  \ \ |(f(x)g(x)) - 0| & < \epsilon
+\end{align*}
+Therefore $\lim_{x \rightarrow c}g(x)f(x) = 0$.
+\end{proof}
+
+\section*{4.3.3}
+\subsection*{(a)}
+Prove theorem 4.3.9 using epsilon delta continuity.
+
+The theorem we wish to prove:
+Given $f: A \rightarrow \mathbb{R}$ and $g: B \rightarrow \mathbb{R}$ assume that the range $f(A) = \left \{ f(x):x \in A \right \}$ si contained in the domain $B$ so that $g \circ f(x) = g(f(x))$ is defined on $A$. If $f$ is continuous at $c \in A$, and if $g$ is continuous at $f(c) \in B$, then $g \circ f(c)$ is continuous at $c$.
+
+\begin{proof}
+Let $\epsilon_g > 0$ be arbitrary. Since $g$ is continuous at $f(c)$, there exists $\delta_g > 0$ such that for all $x$ where $|x - f(c)| < \delta_g$, we know $|g(x) -g(f(c))| < \epsilon_g$. Choose $\epsilon_f = \delta_g$, then, since $f$ is continuous at $c$, there exists $\delta_f > 0$ where if $|x-c| < \delta_f$ then $|f(x)-f(c)| < \epsilon_f = \delta_g$. Then, since $|f(x)-f(c)| < \delta_g$, it follows that $|g(f(x)) -g(f(c))| < \epsilon_g$. Therefore for any arbitrary $\epsilon_g > 0$ there exists some $\delta_f$, where $|x-c| < \delta_f \Rightarrow |g(f(x)) - g(f(c))| < \epsilon_g$.
+\end{proof}
+
+\subsection*{(b)}
+We must now proof this same theorem using the sequential characterization of continuity.
+
+\begin{proof}
+Since $f$ is continuous at $c$, for all $(x_n) \rightarrow c$ with $x_n \in A$, $f(x_n) \rightarrow f(c)$. Then, since $g$ is continuous at $f(c)$, and $f(x_n) \rightarrow f(c)$, it follows that $g(f(x_n)) \rightarrow g(f(c))$.
+\end{proof}
+
+\section*{4.3.5}
+Show using the epsilon delta definition of continuity that if $c$ is an isolated point of $A \subset \mathbb{R}$, then $f:A \rightarrow \mathbb{R}$ is continuous at $c$.
+\begin{proof}
+Let $\epsilon > 0$. Since $c$ is an isolated point of $A$, there exists some $V_\delta(c) = \{c\}$. Suppose $x \in A$, and $|x-c| < \delta$, then $x$ must be equal to $c$. Then, for all $x \in A$ where $|x-c| < \delta$, we know that $|f(x)-f(c)|$ is equivalent to $|f(c)-f(c)| = 0 < \epsilon$. Thus, $f$ is continuous at $c$.
+\end{proof}
+
+\section*{4.4.3}
+Show that $f(x) = \frac{1}{x^2}$ is uniformly continuous on the interval $[1, \infty)$ but not on the set $(0, 1]$.
+Let us begin with the first interval, the closed set $[1, \infty)$.
+\begin{proof}
+First, notice that for all $x,y$ in the interval, $x \leqslant 1$ and $y \leqslant 1$. Also note that $\dfrac{1}{x^2y^2} \leqslant 1$. Then,
+\[ \left| \frac{1}{x^2} - \frac{1}{y^2} \right| = \left|\frac{y^2-x^2}{x^2}{y^2}\right| = \left|\frac{(x+y)(x-y)}{x^2y^2}\right| = \left|\left(\frac{x}{x^2y^2} + \frac{y}{x^2y^2}\right)(x-y)\right| \leqslant \left(\frac{1}{x^2y^2} + \frac{1}{x^2y^2}\right)|x-y| \leqslant 2|x-y| \]
+Let $\epsilon >0$ be arbitrary. Choose $\delta = \dfrac{\epsilon}{2}$. Then, for all $x,y \in (0, 1]$, if $|x-y| < \delta$, then 
+\[ \left| \frac{1}{x^2} - \frac{1}{y^2} \right| \leqslant 2|x-y| < 2\delta = 2\left(\frac{\epsilon}{2}\right) = \epsilon \]
+Thus we have shown uniform continuity on the interval $(0, 1]$.
+\end{proof}
+
+Now we want to show that we do not have uniform continuity on $(0, 1]$.
+\begin{proof}
+Assume by contradiction that $f$ is uniformly continuous. Choose $\epsilon = 1$, and there should exist some $\delta > 0$ such that for all $x,y \in (0, 1]$, if $|x-y| < \delta$ then $\left| \frac{1}{x^2} - \frac{1}{y^2}\right| < 1$. Let $x < \delta$, and let $y = \dfrac{x}{\sqrt{2}}$. Then,
+\[ |x-y| = \left|x - \frac{x}{\sqrt{2}}\right| =\left |\left(\frac{\sqrt{2}-1}{\sqrt{2}}\right)x\right| < |x| < \delta \]
+And since $|x-y| < \delta$, it should follow that $\left| \frac{1}{x^2} - \frac{1}{y^2}\right| < 1$. We write
+\[ \left| \frac{1}{x^2} - \frac{1}{y^2}\right| = \left| \frac{1}{x^2} - \frac{1}{(\frac{x}{\sqrt{2}})^2}\right| \left| \frac{1}{x^2} - \frac{2}{x^2}\right|  = \left| \frac{-1}{x^2}\right| = \frac{1}{x^2} > 1\]
+Since $\left| \frac{1}{x^2} - \frac{1}{y^2}\right| < 1$, and $\left| \frac{1}{x^2} - \frac{1}{y^2}\right| > 1$ we have a contradiction, and our assumption that $f$ is uniformly continuous must be false. Therefore $f$ is not uniformly continuous on $(0, 1]$.
+\end{proof}
+
+\end{document}

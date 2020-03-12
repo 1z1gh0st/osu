@@ -1,0 +1,120 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 342 Homework 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{1}
+Let $V$ be an inner-product space and $||\cdot||$ be the norm where $||v|| = \sqrt{(v,v)}$.
+\subsection*{a}
+Show that $||u +v||^2 + ||u-v||^2 = 2(||u||^2+||v||^2)$.
+\begin{proof}
+Let $u, v \in V$ arbitrarily. Then $||u+v|| = \sqrt{(u+v,u+v)}$. Similarly $||u-v|| = \sqrt{(u-v,u-v)}$. Taking the square of eache we get 
+\begin{align*}||u+v||^2 = (u+v, u+v) \ \ \ \   \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ||u-v||^2 = (u-v,u-v)\end{align*}
+Then we have $||u+v||^2 + ||u-v||^2 = (u+v,u+v) + (u-v, u-v)$. By the linearity on the first argument and conjugate semi-linearity on the second argument we have 
+\begin{align*} 
+||u+v||^2 + ||u-v||^2 & = (u,u + v) + (v,u+v) + (u,u-v) + (-v, u-v) \\
+&= (u,u) + (u,v) + (v,u) + (v,v) + (u,u) + (u, -v) + (-v,u) + (-v,-v) \\
+& = (u,u) + (u,v) + (v,u) + (v,v) + (u,u) - (u,v) - (v,u) + (v,v) \\
+&= 2(u,u) + (u,v) - (u,v) + (v,u) - (v,u) + 2(v,v)\\
+&= 2((u,u) + (v,v)) \\
+& = 2(||u||^2 + ||v||^2)
+\end{align*}
+
+\end{proof}
+\subsection*{b}
+Show that $|(u,v)| \leqslant ||u|| \ ||v||$.
+\begin{proof}
+Let $u,v \in V$ be arbitrary. Then $||u|| \ ||v|| = \sqrt{(u,u)}\sqrt{(v,v)}$. We can write this as $\sqrt{(u,u)(v,v)}$. By our properties of linearity, we can write 
+\begin{align*}
+||u|| \ ||v|| & = \sqrt{\overline{v}\overline{u}(u,1)(v,1)} \\
+& = \sqrt{(u,v)(v,u)} \\
+& = \sqrt{(u,v)\overline{(u,v)}} \ \ \ \ \ \ \ \text{Let our field $F$ not be complex, then} \\
+& = \sqrt{(u,v)^2} \\
+& = |(u,v)|
+\end{align*}
+\end{proof}
+
+\section*{2}
+Show that the taxicab norm given by $||x|| = |x_1| + |x_2| + \dots + |x_n|$ is a norm on $\mathbb{R}^2$.
+
+\begin{proof}
+We want to show the three norm space axioms
+\begin{align*}
+\text{(i)} & \ \ \ \ \text{Triangle Inequality} \\
+\text{(ii)} &  \ \ \ \ \ ||cx|| = |c| \ ||x|| \\
+\text{(iii)} & \ \ \ \ \text{Positive definiteness} \\
+\end{align*}
+Let $x,y \in \mathbb{R}^2$ denoted $x = \begin{bmatrix}x_1\\x_2\end{bmatrix}$ and $y=\begin{bmatrix}y_1\\y_2\end{bmatrix}$. Then $||x+y|| = |x_1 + y_1| + |x_2 + y_2|$, and $||x|| +||y|| = |x_1| + |x_2| + |y_1| + |y_2|$. By the triangle inequality in the reals, we get $|x_1 + y_1| + |x_2 + y_2| \leqslant  |x_1| + |x_2| + |y_1| + |y_2|$, and thus $||x + y|| \leqslant ||x|| + ||y||$.  Therefore (i) holds.\\\\
+
+For (ii), let $c \in \mathbb{R}$. Then
+\begin{align*}
+||cx|| & = |cx_1| + |cx_2|\\
+& = |c||x_1| + |c||x_2| \\
+& = |c|(|x_1| + |x_2|) \\
+& = |c| \ ||x||
+\end{align*}
+
+Now suppose $||x|| = 0$. Then $|x_1| + |x_2| = 0$, and it follows trivially that $x_1 = x_2 = 0$, thus $x = \mathbf{0}$, and we have shown (iii). This shows that all three axioms of normed space hold, and therefore the taxicab norm is a norm.
+
+\end{proof}
+
+\section*{3}
+Let $V$ be an inner product space. Let $U$ be a subspace of $V$.
+\subsection*{a}
+Show that $U^{\perp}$ is a subspace of $V$. 
+\begin{proof}
+To show a vector $v \in U^{\perp}$, we must show that $(v, u) = 0$ for all $u \in U$.\\\\
+Since the inner product of $(\mathbf{0}, v) =0$ for all $v \in V$, we know that $(\mathbf{0}, u) = 0$ for all $u \in U$ and therefore $\mathbf{0} \in U^{\perp}$.
+ \\\\ We want to show that we have closure under vector addition. Let $u \in U$ be arbitrary and $v_1, v_2 \in U^{\perp}$ aribitrarily. Since $(v_1, u) = 0$ and $(v_2, u) = 0$, it follows that $(v_1 + v_2, u) = 0 + 0 = 0$, and therefore $v_1 + v_2 \in U^{\perp}$ and we have closure under vector addition.\\\\  To show closure under scaling, let $c \in F$ where $F$ is a field, and let $u \in U$ and $v \in U^{\perp}$. Since $(v,u) = 0$, it follows that $(cv,u) = c(v,u) = 0$. Therefore $U^{\perp}$ is closed under scaling. Since we have shown the existence of the additive identity, closure under vector addition, and closure under scaling, $U^{\perp}$ is a vector subspace.
+
+\end{proof}
+\subsection*{b}
+\begin{proof}
+First we must show this sum to be a direct sum. Let $v \in U \cap U^{\perp}$. We want to show that $v = \mathbf{0}$. Since $v \in U^{\perp}$, it follows that $(u, v) = 0$ for all $u \in U$. Since $v \in U$, then it must true when $u = v$, and therefore $(v,v) = 0$, which means that $v = \mathbf{0}$. Hence, $U \cap U^{\perp} = \{ \mathbf{0} \}$ and thus this is a direct sum. \\\\
+Since $U \subset V$ and $U^{\perp} \subset V$, we know $U \oplus U^{\perp} \subset V$. To show $U \oplus U^{\perp} = V$, we want to show that $V \subset U \oplus U^{\perp}$. Let $v \in V$. \\\\ 
+We claim there exists $u \in U$ and $u' \in U^{\perp}$ such that $u + u' = v$. Let $T: V \rightarrow U$ where $T(x) = proj_{(U)}(x)$ for all $x \in V$. Then $v =( v - T(v) )+ T(v)$.  We can show that $v-T(v) \in U^{\perp}$ and that $T(v) \in U$. Therefore, let $u = T(v)$ and $u' = v - T(v)$, and it follows that $V \subset U \oplus U^{\perp}$.
+
+\end{proof}
+
+\subsection*{c}
+\begin{proof}
+We want to show $(U^{\perp})^{\perp} = U$. \\\\
+Let $x \in (U^{\perp})^{\perp}$, and let $y \in U^{\perp}$. From \fbox{b}, we have $x = u + v$ for some $u \in U$ and for some $v \in U^{\perp}$. Then, since $(x, y) = 0$, we have $(u+v, y) = 0$. This can be rewritten $(u,y) + (v,y) = 0$. \\\\ 
+Then since $u \in U$ and $y \in U^{\perp}$, we know that $(u,y) = 0$. Therefore we have $0 + (v,y) = 0$, and since $v,y \in U^{\perp}$, they cannot be perpendicular. This means that $v = \mathbf{0}$. Thus we have $x = u \in U$. \end{proof}
+
+\section*{4}
+\begin{proof}
+We know that 
+\[ (x,y) = \left<\sum_{k=1}^n \alpha_kv_k, \sum_{k=1}^n \beta_k v_k\right>\]
+We can then write this out as 
+\[ \left< \alpha_1v_1 + \dots + \alpha_nv_n, \beta_1v_1 + \dots + \beta_nv_n\right> \]
+If we use the properties of linearity and split this into all of its different parts, we get the sum of the inner product of each combination, i.e.
+\[ \sum_{i=1}^n \sum_{j=1}^n \left< \alpha_iv_i,\beta_jv_j\right> = \sum_{i=1}^n \sum_{j=1}^n \alpha_i\overline{\beta_j}\left< v_i,v_j\right> \]
+However, since $v_i \perp v_j$ if $i \neq j$, this is equivalent to 
+\[ \sum_{k=1}^n \alpha_k\overline{\beta_k}\left<v_k,v_k\right> = \sum_{k=1}^n\alpha_k\overline{\beta_k} \]
+
+\end{proof}
+
+\section*{5}
+To find $p$, we must compute $proj_xx^2$. Taking this projection we get
+\begin{align*} p = proj_xx^2 & =\dfrac{\left<x^2,x\right>}{\left<x,x\right>}x\\\\
+& = \dfrac{\int_0^1x^3dx}{\int_0^1x^2dx}x \\\\
+& = \dfrac{3}{4}x
+\end{align*}
+Therefore we can write 
+\begin{align*}
+ ||x^2 - p|| &= \int_0^1 \left(x^2-\frac{3}{4}x\right)^2 dx \\\\
+ &= \int_0^1 x^4 - \frac{3}{2}x^3 + \frac{9}{16}x^2 dx \\\\
+ &=\frac{1}{5}x^5 - \frac{3}{8}x^4 + \frac{9}{48}x^3 \bigg|_0^1 \\\\
+ &= \frac{1}{5} - \frac{3}{8} + \frac{9}{48}
+ &= \frac{1}{80}
+ \end{align*}
+\end{document}

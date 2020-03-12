@@ -1,0 +1,61 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{tasks}
+
+\begin{document}
+
+\title{MTH 311 Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{1.3.1}
+\subsection*{a.)}
+Write a formal definition for infimum:
+
+A real number $t$ is a greatest lower bound for a set $A \subseteq \mathbb{R}$ if it meets the following conditions:
+\begin{tasks}(1)
+	\task $t$ is a lower bound for $A$
+	\task If $b$ is any lower bound for $A$, then $b \leqslant t$
+\end{tasks}
+
+\subsection*{b.)}
+Given a set $A \subseteq \mathbb{R}$, and a lower bound $t$, $t = \inf{A}$ if and only if for every choice of $\epsilon > 0, \exists a \in A$ such that $t + \epsilon > a$.
+
+\begin{proof}
+Assume $t \in \mathbb{R}$ is a lower bound for a set $A \subseteq \mathbb{R}$. We want to show that $t = \inf{A}$ if and only if for every choice of $\epsilon > 0, \exists a \in A$ such that $t + \epsilon > a$. Let us show that the implication holds in each direction. \\\\
+"$\Rightarrow$"
+Assume that $t = \inf{A}$. We have $t + \epsilon > t$ for all $\epsilon > 0$, which by our definition from \fbox{1.3.1 a.)} means that $t + \epsilon$ cannot be a lower bound for $A$, since any lower bound $b$ has the property $b \leqslant t < t + \epsilon$. Therefore, by definition of lower bound, $\exists a \in A : t + \epsilon > a$. \\\\
+"$\Leftarrow$"
+Assume now that $\forall \epsilon > 0, \exists a \in A$ such that $t + \epsilon > a$. This means that $t + \epsilon$ is not a lower bound for $A$ for all $\epsilon > 0$, by defition of lower bound. Since $t + \epsilon$ is not a lower bound for $A$ with any $\epsilon > 0$ chosen arbitrarily, it must be the case that any lower bound $b \in \mathbb{R}$ for $A$ satisfies the following: $b = t + x \ \exists x \leqslant 0$. This implies $b \leqslant t$ for any lower bound $b$. And therefore $t = \inf{A}$.
+
+\end{proof}
+
+\section*{1.3.3}
+\subsection*{a.)}
+Let $A \neq \O$ and bounded below, and define $B = \{ b \in \mathbb{R} :b$ is a lower bound for $A \}$. $\sup{B} = \inf{A}$.
+
+\begin{proof}
+Let $s$ be the infimum of $A$. We know that $s \geqslant b$ where $b$ is any lower bound for $A$. Therefore $s \geqslant b \ \forall b \in B$, so we have that $s$ is an upper bound for $B$. Let $t$ be an upper bound for $B$ chosen arbitrarily. If there exists some $t$ such that $t < s$, then we would have $b \leqslant t < s \ \forall b \in B$, therefore $s \notin B$ and $s$ would not be an upper bound for $A$ (contradiction). To avoid this contradiction we must say that for any upper bound $t$ for $B$, $t \geqslant s$. Having shown that $s$ is both an upper bound for $B$ and that for any other upper bound $t$, $s \leqslant t$, it can be said that $s = \sup{B}$.
+
+\end{proof}
+
+\subsection*{b.)}
+There is no need to assert that greatest lower bounds exist as part of the Axiom of Completeness because one could always choose the set $B$ of lower bounds, and by finding the least upper bound for $B$, you find the greatest lower bound for a bounded below set $A$.
+
+\section*{1.3.5}
+\subsection*{a.)}
+Let $A \subseteq \mathbb{R}$ and let $c \in \mathbb{R}$ and define the set $cA = \{ ca: a \in A \}$. Want to show that $c \sup{A} = \sup{cA}$, given $c > 0$.
+\begin{proof}
+Let $s = \sup{A}$. We have $s \geqslant a \ \forall a \in A$. Multiplying both sides by $c > 0$ we get $cs \geqslant ca \ \forall a \in A$. By definition of upper bound we have $cs$ is an upper bound for $cA$. Since $cs = c \sup{A}$, we have that $c \sup{A}$ is an upper bound for $cA$.
+
+Let $b$ be an upper bound for $cA$ chosen arbitrarily. By definition we have $b \geqslant ac \ \forall a \in A$. Dividing by $c$ we get $\frac{b}{c} \geqslant a \ \forall a \in A$. Then $\frac{b}{c}$ is an upper bound for $A$. Since $s = \sup{A}$ and $\frac{b}{c}$ is an upper bound for $A$, we have $\frac{b}{c} \geqslant s$ by definition of least upper bound. We can multiply both sides by $c$ and get $b \geqslant cs$ which is equivalent to $b \geqslant c \sup{A}$. Thus any upper bound $b$ for $cA$ is greater or equal to $c \sup{A}$. Since $c \sup{A}$ is an upper bound for $cA$, and $c \sup{A} \leqslant b$ where $b$ is an upper bound for $cA$, by definition of least upper bound we have $c \sup{A} = \sup{cA}$.
+
+\end{proof}
+
+\subsection*{b.)}
+Let $A \subseteq \mathbb{R}$ and let $c \in \mathbb{R}$ and define the set $cA = \{ca : a \in A\}$. Postulate: $c \sup{A} = \inf{cA} \ \forall c < 0$.
+\end{document}

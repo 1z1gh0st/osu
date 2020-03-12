@@ -1,0 +1,97 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 342 Homework 7}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{1}
+Let $E = \{ \begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix} \in \mathbb{R}^4: x_2 = x_1 + x_3 + x_4 \}$.
+\subsection*{(a)}
+Find the projection of $u$ onto $E$ where $u = \begin{bmatrix}1\\0\\-1\\2\end{bmatrix}$. 
+\begin{proof}
+We can write our space $E$ as $\left\{ \begin{bmatrix}x_1\\x_1+x_3+x_4\\x_3\\x_4\end{bmatrix}: x_1, x_3, x_4 \in \mathbb{R} \right\}$. Then since there are no restrictions on $x_1, x_2, x_3, x_4$, we can write $E = span \left\{ \begin{bmatrix}1\\1\\0\\0\end{bmatrix}, \begin{bmatrix}0\\1\\1\\0\end{bmatrix}, \begin{bmatrix}0\\1\\0\\1\end{bmatrix} \right\}$. Denote these vectors as $e_1, e_2, e_3$. To find an orthogal basis, $E' = \left\{e_1',e_2',e_3'\right\}$ we begin by letting $e_1'=e_1$. Then, let
+\begin{align*}
+e_2' & = e_2 - proj_{e_1'}e_2 \\
+& = \begin{bmatrix}0\\1\\1\\0\end{bmatrix} - \dfrac{(e_2,e_1')}{(e_1',e_1')}e_1' \\
+& = \begin{bmatrix}0\\1\\1\\0\end{bmatrix}  - \dfrac{1}{2}\begin{bmatrix}1\\1\\0\\0\end{bmatrix} \\
+& = \begin{bmatrix}-\frac{1}{2}\\ \frac{1}{2} \\ 1 \\ 0 \end{bmatrix}
+\end{align*}
+
+Then, let $e_3' = e_3 - proj_{\{e_1',e_2'\}}e_3$. We can write 
+\begin{align*}
+e_3' & = e_3 - proj_{e_1'}e_3 - proj_{e_2'}e_3 \\
+& = \begin{bmatrix}0\\1\\0\\1\end{bmatrix} - \dfrac{(e_3, e_1')}{(e_1',e_1')}e_1' - \dfrac{(e_3, e_2')}{(e_2',e_2')}e_2' \\
+& = \begin{bmatrix}0\\1\\0\\1\end{bmatrix} - \frac{1}{2}\begin{bmatrix}1\\1\\0\\0\end{bmatrix} - \frac{1}{3}\begin{bmatrix}-\frac{1}{2}\\ \frac{1}{2} \\ 1 \\ 0\end{bmatrix} \\
+& = \begin{bmatrix}-\frac{1}{3}\\ \frac{1}{3} \\ -\frac{1}{3} \\ 1 \end{bmatrix}
+\end{align*}
+Then we can write $E' = \left\{ \begin{bmatrix}1\\1\\0\\0\end{bmatrix}, \begin{bmatrix}-\frac{1}{2}\\ \frac{1}{2} \\ 1 \\ 0 \end{bmatrix}, \begin{bmatrix}-\frac{1}{3} \\ \frac{1}{3} \\ -\frac{1}{3} \\ 1 \end{bmatrix} \right\}$, an orthogonal basis for $E$. Then, to compute the projection of $u$ onto $E$, we can write $proj_{E}u = proj_{e_1'}u + proj_{e_2'}u + proj_{e_3'}u$. Then we have 
+\begin{align*}
+proj_{E}u & = \frac{1}{2}e_1' - e_2' + \frac{3}{2}e_3' \\
+& = \frac{1}{2}\begin{bmatrix}1\\1\\0\\0\end{bmatrix} - \begin{bmatrix}-\frac{1}{2}\\ \frac{1}{2} \\ 1 \\ 0\end{bmatrix} + \frac{3}{2}\begin{bmatrix}-\frac{1}{3} \\ \frac{1}{3} \\ -\frac{1}{3} \\ 1 \end{bmatrix} \\
+& = \frac{1}{2}\begin{bmatrix}1\\-1\\1\\1\end{bmatrix}
+\end{align*}
+\end{proof}
+\subsection*{(b)}
+Since we have $E'$ is an orthogonal basis, all we need to do is normalize it. We can simply divide these vectors by their magnitudes, and we get $E_n' = \left\{\begin{bmatrix}\frac{1}{\sqrt{2}} \\\\ \frac{1}{\sqrt{2}} \\\\ 0 \\\\ 0 \end{bmatrix}, \begin{bmatrix}-\frac{\sqrt{2}}{2\sqrt{3}} \\\\ \frac{\sqrt{2}}{2\sqrt{3}} \\\\ \frac{\sqrt{2}}{\sqrt{3}} \\\\ 0 \end{bmatrix}, \begin{bmatrix}-\frac{\sqrt{6}}{9} \\\\ \frac{\sqrt{6}}{9} \\\\ -\frac{\sqrt{6}}{9} \\\\ \frac{\sqrt{6}}{3}\end{bmatrix}\right\}$.
+
+\section*{2}
+Let $E$ be the space $E = \left\{ A \in M_{2\times2} : AC = CA\right\}$ where $C = \begin{bmatrix}0&1\\1&0\end{bmatrix}$. Find the projection of $u = \begin{bmatrix}1&2\\3&4\end{bmatrix}$ onto $E$. First, we must find an orthogonal basis for $E$. Let $A = \begin{bmatrix}a&b\\c&d\end{bmatrix}$ and $a,b,c,d \in \mathbb{R}$ arbitrarily. Then,
+\[ AC = \begin{bmatrix}a&b\\c&d\end{bmatrix} \begin{bmatrix}0&1\\1&0\end{bmatrix} = \begin{bmatrix}b&a\\d&c\end{bmatrix} \]
+and 
+\[ CA = \begin{bmatrix}0&1\\1&0\end{bmatrix} \begin{bmatrix}a&b\\c&d\end{bmatrix} = \begin{bmatrix}c&a\\d&b\end{bmatrix} \]
+And it follows that $AC = CA \Rightarrow b = c, a=d$. Then we write $E = \left\{ \begin{bmatrix}a&b\\b&a\end{bmatrix}  : a,b \in \mathbb{R} \right\}$. Since we have no restrictions on $a$ and $b$, we have a basis for $E$, $B = \left\{\begin{bmatrix}1&0\\0&1\end{bmatrix}, \begin{bmatrix}0&1\\1&0\end{bmatrix} \right\}$. Since their inner product is 0, they are orthogonal. Denote the vectors in $B$ as $e_1, e_2$ respectively. We now have
+\[ proj_E(u) = proj_{e_1}(u) + proj_{e_1}(u) \]
+Using the inner product characterization of projection, this is equivalent to
+\begin{align*}
+proj_E(u) & = \frac{\left(u,e_1\right)}{\left(e_1,e_1\right)}e_1 + \frac{\left(u,e_2\right)}{\left(e_2,e_2\right)}e_2 \\
+& = \frac{5}{2}e_1 + \frac{5}{2}e_2\\
+& = \frac{5}{2}\begin{bmatrix}1&1\\1&1\end{bmatrix}
+\end{align*}
+And we are done.
+\section*{3}
+To minimize this difference, we must project $e^x$ onto polynomial space of degree 3. Then we choose the shifted Legendre Polynomials as our basis for $P_3(\mathbb{R})$ where $B = \left\{ 1, 2x-1, 6x^2-6x+1, 20x^3-30x^2+12x-1 \right \}$. Denote these vectors as $p_0, ... ,p_3$ respectively. Then,
+\[ proj_{P_3(\mathbb{R})}(e^x) = proj_{p_0}(e^x) + proj_{p_1}(e^x) + proj_{p_2}(e^x) + proj_{p_3}(e^x) \]
+Then, we must take each projection individually. For $p_0$, we get
+\[proj_{p_0}e^x = \int_0^1 e^x dx = e - 1 \]
+Then for $p_1$, we get
+\[proj_{p_1}e^x = \frac{\int_0^1(e^x)(2x-1)dx}{\int_0^1(2x-1)^2dx}(2x-1) = (9-3e)(2x-1)\]
+\[proj_{p_2}e^x = \frac{\int_0^1(e^x)(6x^2-6x+1)dx}{\int_0^1(6x^2-6x+1)^2dx}(6x^2-6x+1) = (35e-95)(6x^2-6x+1)\]
+\[proj_{p_3}e^x = \frac{\int_0^1(e^x)(20x^3-30x^2+12x-1)dx}{\int_0^1(20x^3-30x^2+12x-1)^2dx}(20x^3-30x^2+12x-1) = (1351=497e)(20x^3-30x^2+12x-1)\]
+Then we can add up all of these projections to get $proj_{P_3(\mathbb{R})}$, 
+\[proj_{P_3(\mathbb{R})} = (e-1) + (9-3e)(2x-1)+(35e-95)(6x^2-6x+1) + (1351-497e)(20x^3-30x^2+12x-1)\]
+
+\section*{4}
+Let $A = \begin{bmatrix}1&2\\0&1\\2&1\\2&-1\end{bmatrix}$ and $b = \begin{bmatrix}1\\-1\\0\\3\end{bmatrix}$.
+\subsection*{(a)}
+Show that $Ax = b$ has no solutions where $x \in \mathbb{R}^2$.
+\begin{proof}
+Suppose it did have some solution $x = \begin{bmatrix}a\\b\end{bmatrix} \in \mathbb{R}^2$. Then 
+\[ Ax = \begin{bmatrix}1&2\\0&1\\2&1\\2&-1\end{bmatrix} \begin{bmatrix}a\\b\end{bmatrix} = \begin{bmatrix}a+2b\\b\\2a+b\\2a-b\end{bmatrix} =  \begin{bmatrix}1\\-1\\0\\3\end{bmatrix} = b\]
+This gives us $b= -1$, from the second row. And since $a+2b = 1$, we also have $a = 3$. Looking at the third row we have $6-1 = 5 = 0$ (contradiction), therefore no solution may exist.
+\end{proof}
+\subsection*{(b)}
+Let us take $B = \left\{ \begin{bmatrix}1\\0\\2\\2\end{bmatrix}, \begin{bmatrix}2\\1\\1\\-1\end{bmatrix} \right\}$ to be our basis. To get an orthogonal bases, let $b_1' = \begin{bmatrix}1\\0\\2\\2\end{bmatrix}$. Then let $b_2'= b_2 - proj_{b_1'}b_2 = \begin{bmatrix}2\\1\\1\\-1 \end{bmatrix} - \dfrac{2}{9}\begin{bmatrix}1\\0\\2\\2\end{bmatrix} = \dfrac{1}{9}\begin{bmatrix}16\\9\\5\\-13\end{bmatrix}$. Then, we have an orthogonal bases $B' =\left\{ \begin{bmatrix}1\\0\\2\\2\end{bmatrix}, \begin{bmatrix}16\\9\\5\\-13\end{bmatrix} \right\}$.
+Then, since this is an orthogonal basis, we can write 
+\begin{align*}
+proj_{B'}b & = proj_{b_1'}b +proj_{b_2'}b \\
+& = \dfrac{(b,b_1')}{(b_1',b_1')}\begin{bmatrix}1\\0\\2\\2\end{bmatrix} + \dfrac{(b,b_2')}{(b_2',b_2')}
+\begin{bmatrix}16\\9\\5\\-13\end{bmatrix}\\
+& = \dfrac{7}{9}\begin{bmatrix}1\\0\\2\\2\end{bmatrix} + \dfrac{-32}{531}\begin{bmatrix}16\\9\\5\\-13\end{bmatrix}
+\end{align*}
+Then, we must find the solution to $Ax = proj_{B'}b$. We write
+\[ \begin{bmatrix}1&2\\0&1\\2&1\\2&-1\end{bmatrix}\begin{bmatrix}a\\b\end{bmatrix} = \dfrac{7}{9}\begin{bmatrix}1\\0\\2\\2\end{bmatrix} + \dfrac{-32}{531}\begin{bmatrix}16\\9\\5\\-13\end{bmatrix}\]
+We can determine from the second row of $Ax$ that $b = -\dfrac{32}{59}$. It then follows that $a$ must be equal to $\dfrac{53}{59}$ from the other equations. 
+
+\section*{5}
+Let $u_1' = \begin{bmatrix}1&1&0\\0&1&0\\0&0&1\end{bmatrix}$. Then 
+\[u_2' = u_2 - proj_{u_1'}u_2 = \begin{bmatrix}1&0&1\\0&1&0\\0&0&1\end{bmatrix} - \dfrac{3}{4}\begin{bmatrix}1&1&0\\0&1&0\\0&0&1\end{bmatrix} = \dfrac{1}{4}\begin{bmatrix}1&-3&1\\0&1&0\\0&0&1\end{bmatrix}\]
+\[u_3' = u_3 - proj_{u_2'}u_3 - proj_{u_1'}u_3 = \begin{bmatrix}1&0&0\\0&1&1\\0&0&1\end{bmatrix} - \dfrac{3}{7}\dfrac{1}{4}\begin{bmatrix}1&-3&1\\0&1&0\\0&0&1\end{bmatrix} - \dfrac{3}{4}\begin{bmatrix}1&1&0\\0&1&0\\0&0&1\end{bmatrix} = \dfrac{1}{112}\begin{bmatrix}25&-75&-3\\0&25&112\\0&0&25\end{bmatrix}\]
+We write our orthogonal basis as $U' = \left\{ \begin{bmatrix}1&1&0\\0&1&0\\0&0&1\end{bmatrix}, \dfrac{1}{4}\begin{bmatrix}1&-3&1\\0&1&0\\0&0&1\end{bmatrix}, \dfrac{1}{112}\begin{bmatrix}25&-75&-3\\0&25&112\\0&0&25\end{bmatrix} \right\}$
+
+\end{document}

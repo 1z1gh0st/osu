@@ -1,0 +1,45 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+
+\begin{document}
+
+\title{Taxicab Geometry Chapter 2 Exercise Responses}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{2.2}
+Let the taxicab distance be written as $d = \Sigma d_x + \Sigma d_y$ where $\Sigma d_s$ denotes total distance in the $s$ direction. Given two points $B = (3, 3)$ and $A = (-3, -1)$ we can calculate the distance by taking the distance in the $x$ direction and summing it with the distance in the $y$ direction. In this case, we have $d_x(A, B) = 3 - (-3) = 6$ and $d_y(A,B) = 3 - (-1) = 4$, therefore $d(A,B) = 6 + 4 = 10$. To find a point $C$ to satisfy the requirement that distance $d(A,C) + d(C,B)$ is as small as possible, there are exactly two properties which this point must have: \\
+1.) $C_x$ lies between $A_x$ and $B_x$ \\
+2.) $C_y$ lies between$A_y$ and $B_y$ \\
+\section*{2.3}
+\subsection*{Midpoints}
+Now, we must find all the points which minimize combined distance as in \fbox{2.2} and also make it so that $d(A,C) \leqslant d(C,B)$. Let us find all the points where these distances are equal (find the midpoints), then determine what will cause the less or equal statement to hold. To find a midpoint $C$ we can satisfy the following three requirements: \\
+1.) $C_x$ lies between $A_x$ and $B_x$ \\
+2.) $C_y$ lies between$A_y$ and $B_y$ \\
+3.) $d(A,C) = \frac{d(A,B)}{2}$ or $d(B,C) = \frac{d(A,B)}{2} \iff d(A,C) = d(B,C)$\\\\
+Restated, this means $C_x \in [A_x, B_x]$, $C_y \in [A_y, B_y]$, and $C = (C_x, C_y) : (B_x - C_x) + (B_y - C_y) = \frac{d(A,B)}{2}$. In the case of our specific $A$ and $B$ this means that we have:
+\begin{align*}
+(3 - C_x) + (3 - C_y) & = 5 \\
+6 - C_x - C_y & = 5 \\
+6 - (C_x + C_y) & = 5 \\
+6 - 5 & = (C_x + C_y) \\
+1 & = C_x + C_y
+\end{align*}
+The points that satisfy these requirements are $(-2,3),(2,-1)$ and everything on the Euclidean line between them.
+\subsection*{Favoring Point A}
+Now we need to find all points $D$ such that the distance $d(A,D) + d(D,B)$ is minimized and where $D$ is equidistant or closer to $A$ than it is to $B$.
+By replacing our third requirement we get: \\
+1.) $D_x$ lies between $A_x$ and $B_x$ \\
+2.) $D_y$ lies between$A_y$ and $B_y$ \\
+3.) $d(A,D) \leqslant d(B,D)$\\\\
+The results for point $D$ will be anywhere on or above the line of midpoints that we found while still meeting conditions 1 and 2, where above means a ray going straight in the negative $y$ direction will eventually reach the line. This is the case because requirements 1 and 2 already minimize the sum of distances $d(A,D) + d(D,B)$, and so long as we are on the line of midpoints or closer to A (above the line), the inequality will hold.
+
+\section*{2.5}
+Let us change our desires once again. We must find a set of points $\mathbf{F} = \{$all points that are equidistant from $A$ and $B\}$. The sum of distances $d(A,F) + d(F,B)$ can now be greater than 10. Our line of midpoints is a subset of our new set of points, but our set of points does not simply extend this line. Let us consider a one unit change in each direction from a midpoint on the edge of our line segment, $(-2,3)$. Move one unit in the positive $x$ direction, and we will be closer to $B$ than to $A$. Move one unit in the negative $x$ direction, and it will be the other way around. However, if we move one unit in the poistive $y$ direction to $(-2,4)$, our distances each increase by exactly one. This can be done starting from our new point $(-2,4)$, and the same result can be found. The reason for this is that our last midpoint was on the top edge of the magic rectangle of shortest paths, and its $x$ coordinate was still between $A_x$ and $B_x$. As we move out of our rectangle, we must go upward, because the $y$ coordinate will be greater or equal to both $A_y$ and $B_y$, meaning that distance will be added to both $d(F,A)$ and $d(F,B)$, whereas moving in the $x$ direction would offset this balance. Similarly, from our other edge case midpoint we go downward, as our $y$ coordinate is lesser than both $A_y$ and $B_y$, and we are on the bottom edge of our magic rectangle.
+
+\end{document}

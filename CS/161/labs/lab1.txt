@@ -1,0 +1,29 @@
+1 - PHILIP WARTON
+
+Question 1:
+    There was an error compiling saying that ';' was expected before return.
+    We need to indicate the end of a statement using the semicolon.
+
+Quesiton 2:
+	Cout and endl are not recognized as members of the std library because we did not include iostream (input and output)
+
+Question 3:
+	Nothing happens. In c++ whitespace is ignored unless it is within a string.
+
+Question 4:
+	Since the new line is within the whitespace, there is a warning when compiling, but the program still runs.
+
+Question 5:
+	There is no new line being printed so the shell prompt is displayed on the same line as the Hello, world!
+
+Question 6:
+	Error compiling saying no type named std::cout, its looking for a datatype but instead sees a function.
+
+Quesiton 7:
+	error: invalid operands to binary expression
+	The input gets stored to the variable:
+		input -> variable
+	The other way around would not make sense.
+
+Question 8:
+	You have to allocate a place in memory to store the data. Otherwise the computer doesn't know where to put it.

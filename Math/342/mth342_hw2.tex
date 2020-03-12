@@ -1,0 +1,232 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 342 Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{1.}
+	
+	Let $U, V$ be subspaces of vector space $W$.
+	\subsection*{a.)}
+	
+	Show $U + V$ is a subspace  of $W$.
+	
+	\begin{proof}
+		We must begin by showing $U + V \subseteq W$, and then show closure under vector addition, closure under scalar multiplication, and the presence of the additive identity $\mathbf{0}$. \\
+		
+		Let $u \in U$ and $v \in V$, chosen arbitrarily. Since $U \subseteq W$ and $u \in U$, we have $u \in W$. Similarly, we can say $v \in W$. Because $W$ is a vector space, we know that $W$ is closed under vector addition, and therefore with $u,v \in W$, and therefore $u + v \in W$. Now we have $U + V \subseteq W$.\\
+		
+		Let $x, y \in U + V$. By definition of $U + V$ we know $\exists u_1, u_2 \in U, \ \exists v_1, v_2 \in V : x = u_1 + v_1$ and $y = u_2 + v_2$. We can write 
+		\begin{align*}
+		x + y & = (u_1 + v_1) + (u_2 + v_2) \\
+		& = u_1 + v_1 + u_2 + v_2 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ( \text{by associative addition in } W)\\
+		& = u_1 + u_2 + v_1 + v_2 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\text{by commutative addition in } W)\\
+		& = (u_1 + u_2) + (v_1 + v_2)
+		\end{align*}
+		Withh $u_1, u_2 \in U$, and $U$ being a vector space, we know that $(u_1 + u_2) \in U$. Similarly, we know $(v_1 + v_2) \in V$. Hence, we have $x + y$ is the sum of a vector in $U$ and a vector in $V$, and $U + V$ is closed under vector addition.\\
+		
+		Next, we must show closure under scalar multiplication. Let $c$ be a scalar in the field $F$. Let $t$ be a vector in $U + V$. By the definition of $U + V$, we know $\exists u \in U, \ \exists v \in V : t = u + v$. Multiplying $t$ by our scalar $c$ we get 
+		\begin{align*}
+		c(t) & = c(u+v) \\
+		& = c(u) + c(v) \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ( \text{by distributive scaling in } W)
+		\end{align*}
+		Since $U$ is a vector space and therefore closed under scalar multiplication, and $u \in U$, we know $c(u) \in U$. Similarly, we know that $c(v) \in V$. Thus, $c(t)$ can be expressed as the sum of a vector in $U$ with a vector in $V$, and $U + V$ is closed under scalar multiplication.
+		
+		Finally, we need the additive identity, $\mathbf{0}_{U+V} \in U + V$. Suppose $u, \mathbf{0}_U \in U$. Since $u \in U \subseteq W$, $u \in W$. With $u \in W$ and $u + \mathbf{0}_U = u$, we know that $\mathbf{0}_U = \mathbf{0}_W$ by the uniqueness of the additive identity in $W$. Using the same methods it can be shown that $\mathbf{0}_V = \mathbf{0}_W = \mathbf{0}_U$. Since $\mathbf{0}_U + \mathbf{0}_V = \mathbf{0}_W$ is the sum of a vector in $U$ and a vector in $V$, we have $\mathbf{0}_W \in U + V$. $\mathbf{0}_W$ is the additive identity for all vectors in $W$ including any subset of $W$.
+		
+	\end{proof}
+	
+	\subsection*{b.)}
+	Let $w \in W \setminus V$. Show $w + v \notin V \ \ \forall v \in V$.
+	
+	\begin{proof}
+	Suppose by contradiction that $w + v \in V$. Let $u \in V : u = v + w$. By the existence of an additive inverse we have $v + (-v) = 0$. Therefore we can write
+	\begin{align*}
+	u & = v + w \\
+	u + (-v) & = v + w + (-v) \\
+	& = v + (-v) + w \\
+	& = (v + (-v)) + w \\
+	& = \mathbf{0} + w\\
+	& = w
+	\end{align*}
+	Since both $u ,(-v) \in V$, we know $u + (-v) = w \in V$. Therfore $w \notin W \setminus V$ (contradiction). Thus $w + v \notin V$.
+	
+	\end{proof}
+	
+	\subsection*{c.)}
+	Show that $U \cup V$ is a subspace of $W$ if and only if either $U \subset V$ or $V \subset U$.
+	
+	\begin{proof}
+	We must show that the implication holds in both directions. \\\\
+	"$\Rightarrow$" Assume that $U \cup V$ is a subspace of $W$. We want to show that $U \subset V$ or $V \subset U$. Pick $u \in U$ and $v \in V$ arbitrarily. We have $u,v \in U \cup V$, and since we assume $U \cup V$ to be a vector space, we know $u + v \in U \cup V$. Therefore it must be the case that either $u + v \in U$ or $u + v \in V$. If $u + v \in U$, then we have $v \in V \Longrightarrow v \in U$, and $V \subset U$. In the other case, it can similarly be shown that $U \subset V$. This shows that the forwards implication holds. \\\\
+	"$\Leftarrow$" Assume that either $U \subset V$ or $V \subset U$. If $U \subset V$ then $U \cup V = V$ and is therefore a subspace of $W$. The same holds if $V \subset U$. Thus the implication holds in the backwards direction.
+	
+	\end{proof}
+	
+	\subsection*{d.)}
+		Show that $U + V$ is a direct sum if and only if $U \cap V = \{\mathbf{0} \}$.
+		\begin{proof}
+			To show the double implication we must show that the implication holds going both forwards and backwards.\\\\
+			"$\Rightarrow$" Assume $U + V$ is a direct sum, and therefore $x \in U + V$ has one unique pair of $u,v$ where $u \in U$ and $v \in V$ such that $x = u +v$.
+			Suppose $y \in U$ and $y \in V$.
+			Since $y \in U$ and $U$ is a subspace we also have $-y \in U$.
+			With $-y \in U$ and $y \in V$ we know that $y + (-y) \in U + V$.
+			Since every vector has one unique set of parts, $\mathbf{0_U} \in U, \mathbf{0_V} \in V$, and $\mathbf{0} \in U + V$, it must be the case that $y + (-y) = \mathbf{0_V} + \mathbf{0_U} \Rightarrow y = \mathbf{0}$.
+			Therefore, any vector $y \in U \cap V$ is equal to $\mathbf{0}$, thus $U \cap V = \{ \mathbf{0} \}$. \\\\
+			"$\Leftarrow$" Assume $U \cap V = \{\mathbf{0}\}$.
+			There are three cases for vectors in $U + V$.
+			Either $t \in U \setminus V, \ t \in V \setminus U$, or $t \notin U \cup V$.
+			Suppose we take a vector $u \in U$.
+			To write this as a vector in $U + V$ we must write it as $u + \mathbf{0}$, and thus there is only one solution.
+			Now choose a vector $v \in V$, and it must be written as $\mathbf{0} + v$.
+			Finally let $w \in U + V$ where $w \notin U \cup V$.
+			Suppose $w$ can be written as $u_1 + v_1$ or as $u_2 + v_2$ where $u_1, u_2 \in U$ and $v_1, v_2 \in V$.
+			This gives us $u_1 + v_1 = u_2 + v_2$. By reordering this can be written as $u_1 - u_2 = v_2 - v_1$
+			Since $u_1 - u_2 \in U$ and $v_2 - v_1 \in V$, we can write $u_1 - u_2 = v_2 - v_1 \in U \cap V$.
+			With $U \cap V = \{ \mathbf{0} \}$ this means that $u_1 = u_2$ and $v_1 = v_2$ and therefore $w \in U + V$ has a unique solution.
+		\end{proof}
+
+	
+
+\section*{2.}
+Let A be the set of vectors 
+$ A =
+\left\{
+\begin{bmatrix}
+1 \\ 0 \\ 0 \\ 0
+\end{bmatrix}
+,
+\begin{bmatrix}
+1 \\ x \\ 0 \\ 0
+\end{bmatrix}
+,
+\begin{bmatrix}
+1 \\ x \\ x^2 \\ 0
+\end{bmatrix}
+,
+\begin{bmatrix}
+1 \\ x \\ x^2 \\ x^3
+\end{bmatrix}
+\right\}
+$
+\begin{proof}
+	We want to show that this is a basis for polynomial space $P_3(F)$. To do this we must show that span$(A) = P_3(F)$ and that $A$ is linearly independent. Pick 4 constants arbitrarily $c_1, c_2, c_3, c_4 \in F$ where $F$ is our field. Any linear combination of the basis can be written as: \\\\
+	$
+	\begin{bmatrix}
+	1 & 1 & 1 & 1 \\
+	0 & x & x & x \\
+	0 & 0 & x^2 & x^2 \\
+	0 & 0 & 0 & x^3 \\
+	\end{bmatrix} \times
+	\begin{bmatrix}
+	c_1 \\ c2 \\ c3 \\ c4
+	\end{bmatrix}
+	= (c_1 + c_2 + c_3 + c_4) + x(c_2 + c_3 + c_4) + x^2(c_3 + c_4) + x^3(c_4)$ \\
+	
+	We can say that this set of of vectors spans $P_3(F)$ if we show that each of the standard basis vectors of $P_3(F)$ can be written as a linear combination of $A$. For the vector
+	$\begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \end{bmatrix}$ we can write $c_1 = 1$ and $c_2, c_3, c_4 = 0$. For the vector $\begin{bmatrix} 0 \\ x \\ 0 \\ 0\end{bmatrix}$ we can write $c_1 = -1, c_2 = 1, c_3 = 0, c_4 = 0$. Now for the vector $\begin{bmatrix} 0 \\ 0 \\ x^2 \\ 0\end{bmatrix}$ we write $c_1 = 0, c_2 = -1, c_3 = 1, c_4 = 0$. Finally for  $\begin{bmatrix} 0 \\ 0 \\ 0 \\ x^3\end{bmatrix}$ we have $c_1 = 0, c_2 = 0, c_3 = -1, c_4 = 1$. Since we can write all the standard basis vectors of $P_3(F)$ as linear combinations of vectors in $A$, we have $\text{span}( A )= P_3(F)$. To demonstrate linear independence, we wish to show
+	$
+	\begin{bmatrix}
+	1 & 1 & 1 & 1 \\
+	0 & x & x & x \\
+	0 & 0 & x^2 & x^2 \\
+	0 & 0 & 0 & x^3 \\
+	\end{bmatrix} \times
+	\begin{bmatrix}
+	c_1 \\ c2 \\ c3 \\ c4
+	\end{bmatrix} = \mathbf{0} \Rightarrow c_1, c_2, c_3, c_4 = 0$.
+	Suppose $x = -1$, we get 
+	\begin{align*}
+	(c_1 + c_2 + c_3 + c_4) + (-1)(c_2 + c_3 + c_4) + (1)(c_3 + c_4) + (-1)(c_4) & = 0 \\
+	(c_1 + c_2 + c_3 + c_4 - c_2 - c_3 - c_4) + (c_3 + c_4 - c_4) & = 0 \\
+	(c_1) + (c_3) & = 0\\
+	\Rightarrow c_1 & = -c_3 
+	\end{align*}
+	Now if we choose $x = 0$ we get $(c_1 + c_2 + c_3 + c_4) = 0$, and since we have show that $c_1 = -c_3$ this can be written as $c_2 + c_4 = 0$, therefore $c_2 = -c_4$.
+	Now suppose $x = 1$, this tells us 
+	\begin{align*}
+	c_1 + 2c_2 + 3c_3 + 4c_4 & = 0\\
+	c_1 + 2c_2 + 3(-c_1) + 4(-c_2) & = 0\\
+	-2c_1-4c_2 & = 0
+	\end{align*}
+	By replacing $c_3$ and $c_4$ we get the following: 
+	\begin{align*}
+	c_1 + 2c_2 + 3(-c_1) + 4(-c_2) & = 0 \\
+	-2c_1 -2c_2 & = 0 \\
+	c_1 & = c_2
+	\end{align*} If we have $c_1 = c_2 = -c_3 = -c_4$ then they must all be equal to zero for the previous equations to hold. Replace all coefficients with $c_1$ or $-c_1$ and observe $c_1 + 2c_1 - 3c_1 - 4c_1 = -4c_1 = 0 \Rightarrow c_1 = 0$.
+
+\end{proof}
+
+\section*{3.}
+	Let $U$ and $V$ be vector spaces over a field $F$. Let $f:U \rightarrow V$ be a linear map.
+	\subsection*{a.)}
+		Let $u_1, u_2, ... , u_k \in U$. Show that if $f(u_1), f(u_2), ... ,f(u_k)$ are linearly independent, then their inverse images are also linearly independent.
+		\begin{proof}
+			Let $f(u_1), f(u_2), ... ,f(u_k)$ be a set of independent vectors.
+			By contradiction, suppose $u_1, u_2, ... ,u_k$ are linearly dependent.
+			Then there exist scalars $c_1, c_2, ... , c_k$ not all equal to 0 such that $c_1u_1 + c_2u_2 + ... + c_ku_k = \mathbf{0}$.
+			By taking the transform of this vector we get the following:
+			\begin{align*}
+				f(c_1u_1 + c_2u_2 + ... + c_ku_k) & = f(\mathbf{0}) \\
+				f(c_1u_1 + c_2u_2 + ... + c_ku_k) & = \mathbf{0} \\
+				f(c_1u_1) + f(c_2  u_2) + ... + f(c_k u_k) & = \mathbf{0} \\
+				c_1(f(u_1)) + c_2(f(u_2)) + ... +c_k(f(u_k)) & = \mathbf{0} \\
+			\end{align*}
+			This having non-trivial solutions would imply that $f(u_1), f(u_2), ... ,f(u_k)$ are not linearly independent (contradiction).
+			Therefore $u_1, u_2, ... ,u_k$ are linearly independent.
+
+		\end{proof}
+	\subsection*{b.)}
+		The function $f$ is monomorphic if and only if $\null f = \{ \mathbf{0} \}$.
+		\begin{proof}
+			Let us show that the implication holds in both directions. \\
+
+			"$\Rightarrow$" Assume $f$ is monomorphic. Choose a vector $n \in U$ where $n \in \text{null}(f)$.
+			If we take the image of $n$ we get $f(n) = \mathbf{0}$ by definition of null space.
+			By taking the image of $\mathbf{0} \in U$ we get $f(\mathbf{0}) = \mathbf{0}$.
+			Since $f$ is a monomorphism we have $f(n) =f(\mathbf{0}) \Rightarrow n = \mathbf{0}$.
+			With $n = \mathbf{0}$ for any $n \in \text{null}(U)$, we have shown that $\text{null}(f) = \{ \mathbf{0} \}$.\\
+
+			"$\Leftarrow$" Let us prove the contrapositive of this implication.
+			Suppose $f$ is not monomorphic, we want to show that $\text{null}(f) \neq \{ \mathbf{0} \}$.
+			Since $f$ is not monomorphic, then there exists $x, y \in U$ such that $f(x) = f(y)$ and $x \neq y$.
+			We can write that $x - y \neq \mathbf{0}$, and then we have a non-zero vector, $x-y$, where $f(x-y) = f(x) - f(y) = 0$.
+			Therefore $x - y \neq \mathbf{0} \in \text{null}(f)$.
+
+		\end{proof}
+	\subsection*{c.)}
+		Suppose $f$ is monomorphic. We want to show that linear independence is preserved under the transformation.
+		\begin{proof}
+			Let $X$ be a set of linearly independet vectors where $X = \{ x_1, x_2, ... , x_k \}$.
+			We can write $c_1x_1 + c_2x_2 + ... + c_kx_k = \mathbf{0} \Rightarrow c_1,c_2,...,c_k = 0$.
+			Since we have $\mathbf{0} = c_1x_1 + c_2x_2 +... + c_kx_k$ we know that $f(\mathbf{0}) = f(c_1x_1 +c_2x_2+...+c_kx_k)$.
+			With the zero vector being preserved under linear transformations,  we can say $\mathbf{0}=f(c_1x_1 +c_2x_2+...+c_kx_k)$.
+			We can rewrite  this as follows:
+			\begin{align*}
+				\mathbf{0} & =f(c_1x_1 +c_2x_2+...+c_kx_k) \\
+				& = f(c_1x_1) + f(c_2x_2) + ... + f(c_kx_k) \\
+				& = c_1f(x_1)+c_2f(x_2)+...+c_kf(x_k)
+			\end{align*}
+			Since  this final statement is equivalent to $c_1x_1 + c_2x_2 + ... + c_kx_k = \mathbf{0}$, both imply that $c_1, c_2,...,c_k = 0$.
+			
+		\end{proof}
+\section*{4.}
+	Suppose we have a vector space $V$ over a field $F$ and a linear transform $f:V \rightarrow F$. Let $v \in V \setminus \text{null}(f)$. We can show that $V = \text{null}(f) + \text{span}\{v\}$ and is a direct sum. \\\\
+	This is a direct sum.
+	\begin{proof}
+		Since $\text{null}(f)$ is a vector space and $v \notin \text{null}(f)$, we know that $cv \notin \text{null}(f)$ for any $c \in F$ where $c \neq 0$.
+		Therefore, $\text{null}(f) \cap \text{span}\{v\} = \{ \mathbf{0} \}$, and thus the sum is direct (by the property proven in \fbox{1d.)}.
+
+	\end{proof}
+
+\end{document}

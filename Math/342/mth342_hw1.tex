@@ -1,0 +1,159 @@
+% simple.tex 
+
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+
+\begin{document}
+
+\title{MTH 342 Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{1.}
+\subsection*{a.)}
+
+\begin{proof}
+Let $u_1, u_2, v \in V$, we want to show that $u_1 + v = u_2 + v \Rightarrow u_1 = u_2$. 
+By the axiom that states an additive inverse must exist, given $v \in V$, we have $-v \in V$ such that $v + (-v) = 0$. Therefore we can can add $-v$ to both sides of our equation, giving us $(u_1 + v) + (-v) = (u_2 + v) + (-v)$. From there, we can use the property of additive associativity and say that $u_1 + (v + (-v)) = u_2 + (v + (-v))$. By definition of additive inverse, this is equivalent to stating that $u_1 + \mathbf{0} = u_2 + \mathbf{0}$. By the axiom of the additive identity, we can rewrite the former statement as $u_1 = u_2$, showing that the cancellation law holds.
+
+\end{proof}
+
+\subsection*{b.)}
+
+\begin{proof}
+Suppose that $a$ and $b$ are neutral elements of $V$. Want to show that $a = b$. By definition of the neutral element we have $a + v = v \ \forall v \in V$, and $b + v = v \ \forall v \in V$. Thus, we have $a + v = b + v$, since both are equal to v. Then by the cancellation law shown in \fbox{1a.}, we have $a = b$.
+
+\end{proof}
+
+\subsection*{c.)}
+
+\begin{proof}
+Let $0 \in F$ and $v \in V$, and denote the zero vector by $\mathbf{0}$. Want to show that $0v = \mathbf{0}$. Rewriting $0 \in F$ as $0 + 0$ we can write $0v = (0 + 0)v$. Then, by distributivity of multiplication we have $0v = 0v + 0v$. Also, by the additive identity, we have $0v = 0v + \mathbf{0}$. Since both are equal to $0v$, we can write that $0v + 0v = 0v + \mathbf{0}$. Then, by commutativity of addition this can be written as $0v + 0v = \mathbf{0} + 0v$. Now we invoke \fbox{1a.} once again which implies that $0v = \mathbf{0}$.
+
+\end{proof}
+
+\subsection*{d.)}
+
+\begin{proof}
+Suppose $v, w \in V$ such that $v + w = \mathbf{0}$. We want to show that $w = (-1)v$. Let us take the additive inverse denoted by $(-v)$ and add it to both sides, giving us $v + w + (-v) = \mathbf{0} + (-v)$. By reordering and invoking the axiom of associativity, this can be written as $(v + (-v)) + w = \mathbf{0} + (-v)$. By definition of the additive inverse, this is equivalent to $\mathbf{0} + w = \mathbf{0} + (-v)$. Invoking \fbox{1a.} we get $w = (-v)$.
+
+\end{proof}
+
+\section*{2.}
+
+% do the actual proof dude
+
+\begin{proof}
+We want to show that $V = \mathbb{C}$ is a vector space over $F = \mathbb{C}$, when scalar multiplication is defined as $z*v = \overline{z}v \ \forall{z} \in F, \ \forall{v} \in V$.
+
+ Since we know $\mathbb{C}^n = V$ to be a vector space under normal rules, one can assume that with no changes to how $\mathbb{C}$ operates under vector addition that the axioms for addition are already satisfied.
+
+We must now show that scalar multiplication is associative within our new scaling operation. Let $z_1, z_2 \in \mathbb{C} = F$, and let $v \in \mathbb{C} = V$. Let us write the term $z_1 * (z_2 * v)$ and show that it is equal to $(z_1 z_2) * v$. By our new multiplication operation we have 
+\begin{align*} 
+z_1 * (z_2 * v) & = z_1 * (\overline{z_2}v)\\
+& = \overline{z_1} (\overline{z_2}v)\\
+& = (\overline{z_1} \overline{z_2})v\\
+& = (z_1 z_2) * v\\
+\end{align*}
+For the multiplicative identity, we still have $1 \in \mathbb{C} = F$, since it has no complex part. We can show this by writing $1 = 1 + 0i = 1 - 0i = \overline{1}$. Therefore, presence of a multiplicative identity is not changed by our scalar multiplication defintion.
+
+To show distributivity, we must consider two types. For the first, let $z \in \mathbb{C}=F$ and $v_1, v_2 \in \mathbb{C}=V$. Then, $z *  (v_1 + v_2) = \overline{z} (v_1 + v_2)$. This can be rewritten as $\overline{z}v_1 + \overline{z}v_2 = z * v_1 + z * v_2$. For the second kind of distributivity, now let $z_1, z_2 \in \mathbb{C}=F$ and $v \in \mathbb{C}=V$. We can write the following 
+\begin{align*}
+(z_1 + z_2) * v & = (\overline{z_1 + z_2})v \\
+& = (\overline{z_1} + \overline{z_2})v \\
+& = \overline{z_1}v + \overline{z_2}v \\
+& = z_1 * v + z_2 * v.
+\end{align*}
+Therefore we have shown that even within the redefined scalar multiplication operation $V = \mathbb{C}$ is still a vector space over $F = \mathbb{C}$.
+
+\end{proof}
+
+\section*{3.}
+Let $F$ be a field and $V = \{A \in M_{2 \times 2} (F) : A + A^T = 0\}$.
+z
+\subsection*{a.)}
+\begin{proof}
+Want to show that $V$ is a vector space over $F$. Firstly, we must note that $V \subseteq U$ where $U = \{ M_{2 \times 2} (F) \}$. Therefore we must only show that the properties of subspaces hold for $V$ to show that it is a vector space. Let us show that $V$ is closed under vector addition. Let $v,w \in V$, want to show $v + w \in V$. Let $A$ be a matrix chosen arbitrarily, denoted by
+$\begin{bmatrix}
+a &b \\
+c &d \\
+\end{bmatrix}$
+where $a, b, c, d \in F$. By adding together $A$ and $A^T$ we get \\
+$
+\begin{bmatrix} a &b \\c &d \end{bmatrix}  +
+\begin{bmatrix} a &c \\ b &d \end{bmatrix}  =
+\begin{bmatrix} 2a &b+c \\ b+c &2d \\ \end{bmatrix} = \mathbf{0}
+\Rightarrow a, d = 0$ and $b = -c$
+
+Therefore, any matrix in the space $V$ will be of the form
+$\begin{bmatrix}
+	0	&f \\
+	-f	&0 \\
+\end{bmatrix}$
+$ : f \in F$. Denote $v =$
+$\begin{bmatrix}
+	0	&a \\
+	-a	&0 \\
+\end{bmatrix}$
+, and denote $w =$
+$\begin{bmatrix}
+	0	&b \\
+	-b	&0 \\
+\end{bmatrix}$.
+Given that matrix addition operates entrywise, we can write $v + w =$
+$\begin{bmatrix}
+	0	&a + b \\
+	-a + -b	&0 \\
+\end{bmatrix}$
+. Factoring out the $-1$ from the bottom left entry, we get
+$\begin{bmatrix}
+	0	&a + b \\
+	-(a + b)	&0 \\
+\end{bmatrix}$
+. Which is of the desired form for an matrix chosen arbitrarily in $V$. Therefore $v + w \in V \ \forall v,w \in V$. Let $v =$
+$\begin{bmatrix}
+	0	&a \\
+	-a	&0 \\
+\end{bmatrix}$ where $a \in F$ and suppose we have $f \in F$. By scaling $v$ by a factor of $f$, we get 
+$\begin{bmatrix}
+	0	&af \\
+	-af	&0 \\
+\end{bmatrix}$. Since the matrix is of the form we desire with $af \in F$ we have shown $U$ is closed under scaling. Therefore $U$ is a vector space.
+
+\end{proof}
+
+\subsection*{b.)}
+
+For this space we have dimension $= 1$. This is because all $v \in V$ are scalar multiples of the matrix shown in \fbox{3a.}. We can write the basis for this space as 
+$\begin{bmatrix} 0 &1 \\ -1 &0\\ \end{bmatrix}$.
+
+\section*{4.}
+Let $V = \{ f : \{(1,3) \cap \mathbb{Q}\} \rightarrow \mathbb{Q}\}$. Let our field $F = \mathbb{Q}$.
+\subsection*{a.)}
+\subsubsection*{(i)}
+\begin{proof}
+Suppose we have a function $f(x) = \frac{x}{x-2}$. We want to show that $f(x) \notin V \ \forall x \in \mathbb{Q}$ by counter-example. Let $x = 2$, we have $f(2) = \frac{2}{2-2} = \frac{2}{0}$. Since our denominator cannot be zero we have $f(2) \notin \mathbb{Q}$.
+
+\end{proof}
+
+\subsubsection*{(ii)}
+\begin{proof}
+Suppose we have the function $g(x) = \sqrt{x}$. We want to show that $g(x) \notin V \ \forall x \in \mathbb{Q}$ by counter-example. Let $x = 2$ again, and we have $g(2) = \sqrt{2}$. Since $\sqrt{2}$ is irrational we have $g(2) \notin \mathbb{Q}$.
+
+\end{proof}
+
+\subsection*{b.)}
+\begin{proof}
+We want to show that constants $a, b, c \in \mathbb{Q}$ must be zero in order to satisfy the equation $a f_1(x) + b f_2(x) + c f_3(x) = 0$. Let us choose 3 points $x_1 = \frac{1}{2}, x_2 = 2, x_3 = \frac{3}{2}$. We can then create a system of equations with a corrosponding coefficient matrix 
+$\begin{bmatrix}
+-\frac{1}{2} &\frac{1}{2} &2 \\\\
+1 &2 &\frac{1}{2} \\\\
+\frac{1}{2} &\frac{3}{2} & \frac{2}{3}
+\end{bmatrix}$. By row reducing, we get the $3 \times 3$ identity matrix, which shows that these functions are linearly independent.
+
+\end{proof}
+
+\end{document}

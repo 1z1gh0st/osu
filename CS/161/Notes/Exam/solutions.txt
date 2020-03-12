@@ -1,0 +1,79 @@
+W19 Practice Exam CS161
+
+True/False
+
+1. false, the name of an array stores the address of the first element
+
+2. false, the memory address is passed into the function
+
+3. false, you can make a pointer to anywhere
+
+4. false, you must have at least one, not at most
+
+5. false, there is no need to return a value
+
+6. true
+
+7. true 
+
+8. false, they must be on the right most side of all the arguments
+
+9. true 
+
+10. false, you would have to iterate through and copy each value  
+
+11. true
+
+12. false, it can hold 11 characters and the null character
+
+13. true 
+
+14. false, references are immutable
+
+Multiple Choice
+
+15. B
+
+16. B
+
+17. C
+
+18. D
+
+19. A
+
+20. C
+
+21. A
+
+22. A
+
+23. D
+
+24. B
+
+25. 
+
+26. D
+
+27. C
+
+28. A
+
+29. A
+
+30. C
+
+31. A
+
+32. A
+
+33. C 
+
+34. D 
+
+35.
+
+36.
+
+

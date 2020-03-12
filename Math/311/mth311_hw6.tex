@@ -1,0 +1,71 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}
+
+\begin{document}
+
+\title{MTH 311 HW 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+
+\begin{theorem}
+A point $x$ is a limit point of a set $A$ if and only if $x = lim(a_n)$ for some sequence $(a_n)$ contained in $A$ satisfying $a_n \neq x$ for all $n \in \mathbb{N}$.
+\end{theorem} 
+
+\section*{3.2.5}
+A set $F \subseteq \mathbb{R}$ is closed if and only if every Cauchy sequence contained in $F$ has a limit that is also in $F$.
+\begin{proof}
+''$\Rightarrow$'' Assume $F$ is closed. Then if $x \in \mathbb{R}$ is a limit point for $F$, $x \in F$. Let $(a_n)$ be a Cauchy sequence contained in $F$. By the Cauchy Critereon $(a_n)$ converges to some limit $a \in \mathbb{R}$. \\
+\fbox{Case 1: Limit Point} If there exists a subsequence of $(a_n), (a_{n_k})$ such that  $a_{n_k} \neq x$ for all $k \in \mathbb{N}$, then we can say that $x$ is a limit point of $F$ by \fbox{Theorem 1}. Since $F$ is closed, this means that $x \in F$.\\
+\fbox{Case 2: Isolated Point} If such a subsequence does not exist, it follows that there exists a constant subsequence where $a_{n_k} = x$ for all $k \in \mathbb{N}$. Therefore, this sequence trivially converges to $x$ and since our terms $a_{n_k}$ belong to $F$, so too does $x$. \\
+
+''$\Leftarrow$'' Assume every Cauchy sequence if $F$ has a limit that is also in $F$. Suppose $x$ is a limit point of $F$. By \fbox{Theorem 1}, $x = lim \ a_n$ for some sequence $(a_n)$ contained in $F$ where $a_n \neq x$ for all $n \in \mathbb{N}$. By the Cauchy Critereon $(a_n)$ is a Cauchy sequence. By assumption, $lim \ a_n \in F$.
+\end{proof}
+
+\section*{3.2.7}
+Given $A \subseteq \mathbb{R}$, let $L$ be the set of all limit points of $A$.
+\subsection*{(a)}
+Show $L$ is closed.
+\begin{proof}
+Suppose $x \in \mathbb{R}$ is a limit point for $L$. Then, every $\epsilon$-neighborhood $V_{\epsilon}(x)$ of $x$ intersects $L$ at some point that is not $x$. Let $\dfrac{\epsilon}{2} > 0$, then there exists $l \in L$ such that $0 < |x-l| < \dfrac{\epsilon}{2}$. Since $l \in L$, we know $l$ is a limit point for $A$. Therefore there exists $a \in A$ such that $0 < |l - a| < |x-l| < \dfrac{\epsilon}{2}$. It follows that
+\begin{align*}
+0 & < |x-l| + |l-a| < \epsilon \\
+0 & < |x-l+l-a| \leqslant |x-l| + |l-a| <  \epsilon \\
+0 & < |x - a| <  \epsilon \\
+\end{align*}
+Since $|l - a| < |l-x|$, $x \neq a$. Therefore $x$ is a limit point for $A$, and hencely is contained in $L$.
+
+\end{proof}
+
+\subsection*{(b)}
+If $x$ is a limit point of $A \cup L$, then $x$ is either a limit point of $A$, or it is a limit point of $L$. If $x$ is a limit point for $A$, then we are done. If $x$ is a limit point for $L$, then by \fbox{(a)} $x \in L$ and therefore is a limit point of $A$.
+\begin{proof} If $L$ is the set of limit points of $A$, then it is immediately clear that $\overline{A}$ contains the limit points of $A$. Taking the union of $A \cup L$ produces a closed set that contains all limit points of $A$. Any closed set containing $A$ must contain $L$ as well. Therefore $\overline{A} = A \cup L$ is the smallest closed set containing $A$.
+
+\end{proof}
+
+\begin{theorem}
+A point $s \in \mathbb{R}$ is the supremem of a set $A$ if for any $\epsilon > 0$, there exists some element $a \in A$ such that $s- \epsilon < a$. Similarly a point $t \in \mathbb{R}$ is the infimum of a set $A$ if for any $\epsilon > 0$, there exists some element $a \in A$ such that $s + \epsilon > a$.
+\end{theorem} 
+
+\section*{3.3.1}
+Show that if $K$ is compact and nonempty, the sup$K$ and inf$K$ both exist and are elements of $K$.
+
+\begin{proof}
+Since $K$ is compact, by the Heine-Borel Theorem $K$ is both closed and bounded. Since $K$ is bounded and $K \neq \O$, it has an infimum and a supremem both in $\mathbb{R}$ by the Axiom of Completeness. Denote $s = sup(K)$ and $t = inf(K)$. The set $K$ is closed, and thus it contains its limit points. Let $\epsilon > 0$. By $\fbox{Theorem 2}$, we know that there exists $k_1 = s - \epsilon \in K$, and thus $k _1 \in V_{\epsilon}(s)$. Similarly, there exists $k_2 \neq t \in K$ such that $k_2 \in V_{\epsilon}(t)$. Therefore $s$ and $t$ are limit points of the closed set $K$, and we conclude that $s,t \in K$. 
+
+\end{proof}
+
+\section*{3.3.3}
+Prove the converse fo Theorem 3.3.4 by showing that if a set $K \subseteq \mathbb{R}$ is closed and bounded, then it is compact.
+
+\begin{proof}
+Let $K$ be a set that is closed and bounded. Let $(k_n)$ be an arbitrary sequence in $K$. Then, by the Bolzano Weierstrass Theorem, there exists some subsequence $(k_{n_m})$ that converges to a limit $x \in \mathbb{R}$. By the \fbox{Theorem 1}, since lim$(k_{n_m})=x$, $x$ is a limit point of $K$. Since $K$ is closed, it follows that $x$ is contained in $K$. Therefore every sequence in $K$ has a subsequence that converges to a limit that is also in $K$. By definition, $K$ is compact.
+
+\end{proof}
+\end{document}

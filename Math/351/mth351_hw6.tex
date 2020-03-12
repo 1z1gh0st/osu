@@ -1,0 +1,52 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 351 HW 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{1}
+\subsection*{a}
+We can set this system of equations up as
+\begin{align}
+P(2)&=a(2^3)+b(2^2)+c(2) +d = 1 \\
+P(1) &=a(1^3)+b(1^2)+c(1)+d = 0\\
+P(3) &= a(3^3)+b(3^2)+c(3)+d=-1\\
+P(0) &= d= 2
+\end{align}
+
+Then we can row reduce on the matrix to get 
+\[ rref\left( \begin{bmatrix}8&4&2&1&1\\1&1&1&1&0\\27&9&3&1&-1\\0&0&0&1&2\end{bmatrix}\right) = \begin{bmatrix}1&0&0&0&-1\\0&1&0&0&4.5\\0&0&1&0&-5.5\\0&0&0&1&2\end{bmatrix} \]
+Therefore we can write
+\[ P(x) = -x^3 + \frac{9}{2}x^2-\frac{11}{2}x+2 \]
+
+\subsection*{b}
+For the Lagrange method, we use our Matlab code. We get 
+\[ L_1 = \frac{-(t)(t-1)(t-3)}{2}, L_2 = \frac{(t)(t-2)(t-3)}{2}, L_3 = \frac{(t)(t-1)(t-2)}{6}, L_4 = \frac{-(0.5t-1)(t-1)(t-3)}{3} \]
+Then we once we simplify we get the polynomial 
+\[ P(x) = -x^3 + \frac{9}{2}x^2-\frac{11}{2}x+2 \]
+
+\subsection*{c}
+Using the diagram for the Newton method, we get
+\[ c_0 = 1, c_1 = 1, c_2 = \frac{-3}{2}, c_3 = -1 \]
+Then we have 
+\[ P(x) = 1 + 1(x-2) -\frac{3}{2}(x-2)(x-1) - (x-2)(x-1)(x-3) =-x^3 + \frac{9}{2}x^2-\frac{11}{2}x+2 \]
+
+\section*{2}
+To get the divided difference, we compute 
+\[f[1,2,3] = \frac{f[2,3]-f[1,2]}{3-1} \]
+Then we can compute the two divided differences in the numerator 
+\[f[2,3] = \frac{f[3]-f[2]}{3-2} = -1 \]
+\[f[1,2] = \frac{f[2]-f[1]}{2-1} = -2 \]
+Therefore plugging those back into our original divided difference computation we get 
+\[ f[1,2,3] = \frac{-1 + 2}{2} = \frac{1}{2} \]
+
+\section*{3}
+
+\end{document}

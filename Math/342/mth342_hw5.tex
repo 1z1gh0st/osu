@@ -1,0 +1,113 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 342 HW 5}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{1.}
+We want to determine if $f$ is diagonalizable, then find a basis that diagonalizes the matrix if possible. Let $A \in M_{2\times2}(\mathbb{R})$ such that $A = \begin{bmatrix}a&b\\c&d\end{bmatrix}$. Then, $f(A) = \begin{bmatrix}b-c&a-d\\d-a&c-b\end{bmatrix}$. To find out if $f$ is diagonalizable, we wish to find the sum of dimensions of eigenspaces. Let $f(A) = \lambda A$. Then,
+\[\begin{bmatrix}b-c&a-d\\d-a&c-b\end{bmatrix}=\lambda \begin{bmatrix}a&b\\c&d\end{bmatrix}\]
+Since $\lambda a = b - c$, we have $-\lambda a = c-b = \lambda d$. \\
+\fbox{Case 1: $\lambda = 0$}\\
+If $\lambda = 0$, then $b = c$, and $a = d$, so we have $E_0 = span\left\{\begin{bmatrix}1&0\\0&1\end{bmatrix},\begin{bmatrix}0&1\\1&0\end{bmatrix}\right\}$, since this set is clearly linearly independent, and $b=c$ and $a = d$.\\
+\fbox{Case 2: $\lambda \neq 0$}\\
+Since $\lambda a = -\lambda d$, we know $a = -d$. Similarly, $b = -c$. In this case we write 
+\[ f(A) = \begin{bmatrix}2b&2a\\-2a&-2b\end{bmatrix} = \begin{bmatrix}\lambda a&\lambda b\\\lambda c&\lambda d\end{bmatrix}\]
+Thus, $2b = \lambda a$ and $2a = \lambda b$. From this we have 
+\begin{align*}
+\dfrac{2b}{\lambda} = a & =\dfrac{ \lambda b}{2} \\
+\Rightarrow  \ \ \ \ \ \dfrac{4b}{2 \lambda} &= \dfrac{\lambda^2 b}{2 \lambda} \\
+\Rightarrow \ \ \  \ \ \ \ \ 4 &= \lambda^2
+\end{align*}
+Therefore $\lambda = \pm 2$. If $\lambda = 2$, then $a = b$. Otherwise $a = -b$. Thus, 
+\[ E_2 = span \left \{ \begin{bmatrix}1&1\\-1&-1\end{bmatrix} \right \}, \ \ \ \ \ \text{and} \ \ \ \ \ \  E_{(-2)} = span \left \{ \begin{bmatrix}1&-1\\1&-1\end{bmatrix}\right \}\]
+We know $rank(E_0) + rank(E_2) + rank(E_{(-2)}) =2 + 1 +1 = 4$, hence $f$ is diagonalizable. Let \[ B = \left \{ \begin{bmatrix}1&0\\0&1\end{bmatrix},\begin{bmatrix}0&1\\1&0\end{bmatrix}, \begin{bmatrix}1&1\\-1&-1\end{bmatrix} , \begin{bmatrix}1&-1\\1&-1\end{bmatrix}\right\} \]
+, then $[f]_B$ will be the diagonal matrix $\begin{bmatrix}0&0&0&0\\0&0&0&0\\0&0&2&0\\0&0&0&-2\end{bmatrix}$.
+\section*{2.}
+\subsection{$(x,y) = x_1y_1+2x_2y_2$}
+\subsubsection*{Linearity on $1^{st}$}
+Let $x, y, z \in \mathbb{R}^2$. Then \begin{align*} (x+y, z) &= (x_1 + y_1)z_1 + 2(x_2 + y_2)z_2 \\
+& = x_1z_1 + y_1z_1 + 2x_2z_2 + 2y_2z_2 \\
+& = (x_1z_1 + 2x_2z_2) + (y_1z_1 + 2y_2z_2) \\
+& = (x,z) + (y,z)
+\end{align*}
+Let $x, y \in \mathbb{R}^2$ and $c \in \mathbb{R}$. Then
+\begin{align*} (cx,y) &= (cx_1)y_1 + 2(cx_2)y_2 \\
+& = c(x_1y_1) + c(2x_2y_2) \\
+& =  c(x_1y_1 + 2x_2y_2) \\
+& = c(x,y)
+\end{align*}
+Therefore we have linearity on the first argument.
+\subsubsection*{Conjugate Symmetry}
+Let $x, y \in \mathbb{R}^2$. Then
+\begin{align*}
+(x,y) &= x_1y_1 + 2x_2y_2 \\
+& = y_1x_1 + 2y_2x_2 \\
+& =\overline{ y_1x_1 + 2y_2x_2} \\
+& = \overline{(y,x)}
+\end{align*}
+Thus we have conjugate symmetry.
+\subsubsection*{Positive Definiteness}
+Let $x \in \mathbb{R}^2$. Then
+\[ (x,x) = x_1^2 + 2x_2^2 \geqslant 0 \]
+ Now let $y \in \mathbb{R}^2$ and suppose $(y,y) = 0$. Then
+\[ 0 = y_1^2 + 2y_2^2 \Longrightarrow y = \mathbf{0} \] Therefore we have positive definiteness
+
+\subsection{$(x,y) = x_1x_2 + y_1y_2$}
+Let $x = \begin{bmatrix}1\\-1\end{bmatrix}$. Then,
+\[ \left( \begin{bmatrix}1\\-1\end{bmatrix}, \begin{bmatrix}1\\-1\end{bmatrix}\right) = 1(-1) + 1(-1) = -2 < 0 \] Through this counter-example we have shown that the positive definite axiom is violated.
+
+\subsection{$(x,y) = (x_1 + x_2)(y_1  + y_2)$}
+Let $x = \begin{bmatrix}1\\-1\end{bmatrix}$ Then,
+\[ \left( \begin{bmatrix}1\\-1\end{bmatrix}, \begin{bmatrix}1\\-1\end{bmatrix}\right) = (1-1)(1-1) = 0\] Therefore $(x,x) = 0$ does not imply that $x = \mathbf{0}$.
+
+\section*{3.}
+Let $u_1 = \begin{bmatrix}i\\1\end{bmatrix}$ and  $u_2 = \begin{bmatrix}1\\0\end{bmatrix}$. Define $(.,.)$ such that it satisfies $(u_1,u_2) = i$,   $(u_1,u_1) = 3$,    and $(u_2, u_2) = 1$. Compute $\left (\begin{bmatrix}i + 1\\2i\end{bmatrix},\begin{bmatrix}1\\i\end{bmatrix}\right)$.
+We can write
+
+\begin{align*}
+\left (\begin{bmatrix}i + 1\\2i\end{bmatrix},\begin{bmatrix}1\\i\end{bmatrix}\right)
+ &= \bigg(2i(u_1) + 3(u_2) +i(u_2), i(u_1) + 2(u_2)\bigg) \\
+ &= \bigg(2i(u_1),i(u_1)+2(u_2)\bigg)+\bigg(3(u_2),i(u_1)+2(u_2)\bigg)+\bigg(i(u_2),i(u_1) + 2(u_2)\bigg) \\
+& = \bigg(2i(u_1),i(u_1)\bigg)+\bigg(2i(u_1),2(u_2)\bigg)+\bigg(3(u_2),i(u_1)\bigg)+\bigg(3(u_2),2(u_2)\bigg) + \bigg(i(u_2),i(u_1)\bigg) + \bigg(i(u_2),2(u_2)\bigg)\\
+& = -2i^2\bigg(u_1,u_1\bigg) + 4i\bigg(u_1,u_2\bigg) -3i\bigg(u_2, u_1\bigg) + 6\bigg(u_2,u_2\bigg) - i^2\bigg(u_2,u_1\bigg) + 2i\bigg(u_2,u_2\bigg) \\
+& = 2\bigg(u_1,u_1\bigg)+4i\bigg(u_1,u_2\bigg)-3i\overline{\bigg(u_1,u_2\bigg)} + 6\bigg(u_2,u_2\bigg) + \overline{\bigg(u_1,u_2\bigg)} + 2i\bigg(u_2,u_2\bigg) \\
+ &= 2(3) + 4i(i) -3 + 6 - i + 2i(1) \\
+ &= 5 + i
+\end{align*}
+Thus we have $\left (\begin{bmatrix}i + 1\\2i\end{bmatrix},\begin{bmatrix}1\\i\end{bmatrix}\right) = 5+i$.
+
+\section*{4.}
+Define a product as $(u,v) = c_1\overline{d_1} + c_2\overline{d_2} + ... + c_n\overline{d_n}$ where $[u]_B = \begin{bmatrix}c_1\\ \vdots \\c_n\end{bmatrix}$ and $[v]_B = \begin{bmatrix}d_1\\ \vdots \\d_n\end{bmatrix}$. We want to show that this product (denote $(\star)$) is an inner product space. We wish to show three different things:
+\begin{align*}
+\text{  (i)} &  \text{   linearity on the first argument}\\
+\text{ (ii)} & \text{   conjugate symmetry}\\
+\text{(iii)} & \text{   positive definite}
+\end{align*}
+To show (i), let $u,v \in V$ and $z \in F$ where $F$ is a field. Then 
+\begin{align*}
+((z)u,v)&=zc_1\overline{d_1} + zc_2\overline{d_2} + \dots + zc_n\overline{d_n}\\
+&=z(c_1\overline{d_1} + c_2\overline{d_2} + \dots + c_n\overline{d_n})\\
+&=z(u,v)
+\end{align*}
+Now let $u,v,w \in V$. Then, $(u+v),w) = (c_1+d_1)\overline{e_1} + (c_2+d_2)\overline{e_2} +\dots + (c_n+d_n)\overline{e_n}$ where $w = \begin{bmatrix}e_1\\ \vdots \\e_n\end{bmatrix}$. It follows that
+\begin{align*}
+(u+v, w) & = c_1\overline{e_1}+d_1\overline{e_1} + c_2\overline{e_2}+d_2\overline{e_2} + \dots + c_n\overline{e_n}+d_n\overline{e_n}\\
+& = (c_1\overline{e_1} + c_2\overline{e_2} + \vdots + c_n\overline{e_n}) + (d_1\overline{e_1} + d_2\overline{e_2} + \vdots + d_n\overline{e_n})  \\
+& = (u,w) + (v,w)
+\end{align*}
+Therefore we have (i). For (ii), let $u,v \in V$. Then $(u,v) = c_1\overline{d_1} + c_2\overline{d_2} + \dots + c_n\overline{d_n}$. We can write this as $(u,v) = \overline{\overline{c_1}d_1} + \overline{\overline{c_2}d_2} + \dots + \overline{\overline{c_n}d_n}$. Thus 
+\[ (u,v) = \overline{\overline{c_1}d_1 +\overline{c_2}d_2+ \dots +\overline{c_n}d_n} = \overline{(v,u)} \] Therefore we have (ii). To show (iii) for $(\star)$, let $u \in V$. Then
+\[ (u,u) = c_1\overline{c_1} +  c_2\overline{c_2} + \dots +  c_n\overline{c_n}\] Since $z\overline{z} \geqslant 0 \ \forall z \in \mathbb{C}$, we have $(u,u) \geqslant 0$. Let $u \in V$ such that $(u,u) = 0$. We have
+\[c_1\overline{c_1} +  c_2\overline{c_2} + \dots +  c_n\overline{c_n} = 0\] Since all terms $c_k\overline{c_k}$ are non-negative, it follows trivially that $u = \mathbf{0}$.
+\section*{5.}
+Let $x,y \in \mathbb{R}^2$ such that $x = \begin{bmatrix}x_1\\x_2\end{bmatrix}$ and $y = \begin{bmatrix}y_1\\y_2\end{bmatrix}$. Define the inner product as $(u,v) = 2x_1y_1 + x_2y_2$. Then,
+\[ \left(\begin{bmatrix}1\\2\end{bmatrix}, \begin{bmatrix}-1\\1\end{bmatrix}\right) =2(1)(-1) + (2)(1) = 0 \] Therefore, $\begin{bmatrix}1\\2\end{bmatrix}$ and $ \begin{bmatrix}-1\\1\end{bmatrix}$ are perpendicular. To show this to be an inner product see the proof \fbox{2.1} as the two products are nearly identical.
+\end{document}
