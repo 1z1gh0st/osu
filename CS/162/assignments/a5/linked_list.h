@@ -11,11 +11,11 @@ class Linked_List {
 	   unsigned int length; // the number of nodes contained in the list
 	   Node *head; // a pointer to the first node in the list
 	   // anything else you need...
-	   void merge_sort_asc(Linked_List &);
-	   void merge_sort_des(Linked_List &);
-	   void split(Linked_List &, Linked_List &);
-	   void merge_asc(Linked_List &, Linked_List &, Linked_List &);
-	   void merge_des(Linked_List &, Linked_List &, Linked_List &);
+	   void merge_sort_asc(Node *);
+	   void merge_sort_des(Node *);
+	   void split(Node*, Node**, Node**);
+	   Node* merge_asc(Node*, Node*);
+	   Node* merge_des(Node*, Node*);
 	public:
 	   Linked_List();
 
@@ -36,6 +36,7 @@ class Linked_List {
 	   void sort_descending(); // sort the nodes in descending order
 	   // you can add extra member variables or functions as desired
 	   int get_value_at(unsigned int) const;
+	   void print_from_nodes(Node *);
 };
 
 #endif

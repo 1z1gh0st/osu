@@ -6,17 +6,17 @@ using namespace std;
 int main() {
 	// Testing the list
 	Linked_List l;
-	l.push_front(1);
-	l.insert(3, 1);
-	l.push_back(5);
-	l.push_front(7);
+	for (int i = 0; i < 5; i++) {
+		l.push_front(i);
+	}
 	l.print();
 	l.sort_ascending();
-	Linked_List assign;
+	l.print();
+	/*Linked_List assign;
 	assign = l;
 	assign.print();
 	l.sort_descending();
 	Linked_List copy = l;
-	copy.print();
+	copy.print();*/
 	return 0;
 }

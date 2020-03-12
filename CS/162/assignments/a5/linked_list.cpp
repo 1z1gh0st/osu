@@ -1,4 +1,5 @@
 #include "linked_list.h"
+
 #include <cstdlib>
 #include <iostream>
 
@@ -104,107 +105,79 @@ unsigned int Linked_List::insert(int val, unsigned int index) {
 }
 
 void Linked_List::sort_ascending() {
-	merge_sort_asc(*head);
-	// Recurse
-	// Merge back together
+	merge_sort_asc(head);
 }
 
 void Linked_List::sort_descending() {
-	merge_sort_des(*this);
+	merge_sort_des(head);
 }
 
-void Linked_List::merge_sort_asc(Node **head) {
-	if (head == NULL || head->next == NULL) {
+void Linked_List::merge_sort_asc(Node *h) {
+	if (h == NULL || h->next == NULL) {
 		return;
 	} else {
-		Node *left;
-		Node *right;
-		split(head, *left, *right);
-		merge_sort_asc(left);
-		merge_sort_asc(right);
-		merge_asc(list, left, right);
-	}
-	
-}
-
-void Linked_List::split(Node *head, Node **left, Node **right) {
-	Node *curr = head;
-	unsigned int current_length = 0;
-	while (curr != NULL) {
-		curr = curr->next;
-		current_length++;
-	}
-	(*left)->val = head->val;
-	curr = head->next;
-	int i = 0;
-	for (i = 1; i < current_length / 2; i++) {
-		left->next = curr;
-		left = left->next;
-		curr = curr->next;
-	}
-	i = length / 2;
-	while (i < length) {
-		right.push_back(curr->val);
-		curr = curr->next;
-		i++;
+		Node *l;
+		Node *r;
+		split(h, &l, &r);
+		merge_sort_asc(l);
+		merge_sort_asc(r);
+		h = merge_asc(l, r);
 	}
 }
 
-void Linked_List::merge_sort_des(Linked_List &list) {
-	if (list.get_length() < 2) {
+void Linked_List::merge_sort_des(Node *h) {
+	if (h == NULL || h->next == NULL) {
 		return;
 	} else {
-		Linked_List left;
-		Linked_List right;
-		list.split(left, right);
-		merge_sort_des(left);
-		merge_sort_des(right);
-		merge_des(list, left, right);
+		Node *l;
+		Node *r;
+		split(h, &l, &r);
+		/*cout << "{LEFT}" << endl;
+		print_from_nodes(l);
+		cout << "{RIGHT}" << endl;
+		print_from_nodes(r);*/
+		merge_sort_des(l);
+		merge_sort_des(r);
+		h = merge_des(l, r);
+		print_from_nodes(h);
 	}
 }
 
-
-void Linked_List::merge_asc(Linked_List &list, Linked_List &left, Linked_List &right) {
-	list.clear();
-	int ln = left.get_length(), rn = right.get_length();
-	for (int i = 0, j = 0; i < ln || j < rn; ) {
-		if (i < ln && j < rn) {
-			if (left.get_value_at(i) < right.get_value_at(j)) {
-				list.push_back(left.get_value_at(i));
-				i++;
-			} else {
-				list.push_back(right.get_value_at(j));
-				j++;
-			}
-		} else if (i < ln) {
-			list.push_back(left.get_value_at(i));
-			i++;
-		} else {
-			list.push_back(right.get_value_at(j));
-			j++;
+void Linked_List::split(Node *h, Node **l, Node **r) {
+	if (*l == *r) {
+		return;
+	}
+	Node *curr_1 = h;
+	Node *curr_2 = h->next;
+	while (curr_2 != NULL) {
+		curr_2 = curr_2->next;
+		if (curr_2 != NULL) {
+			curr_1 = curr_1->next;
+			curr_2 = curr_2->next;
 		}
 	}
+	*l = h;
+	*r = curr_1->next;
+	curr_1->next = NULL;
 }
 
-void Linked_List::merge_des(Linked_List &list, Linked_List &left, Linked_List &right) {
-	list.clear();
-	int ln = left.get_length(), rn = right.get_length();
-	for (int i = 0, j = 0; i < ln || j < rn; ) {
-		if (i < ln && j < rn) {
-			if (left.get_value_at(i) < right.get_value_at(j)) {
-				list.push_back(right.get_value_at(j));
-				j++;
-			} else {
-				list.push_back(left.get_value_at(i));
-				i++;
-			}
-		} else if (i < ln) {
-			list.push_back(left.get_value_at(i));
-			i++;
-		} else {
-			list.push_back(right.get_value_at(j));
-			j++;
-		}
+Node* Linked_List::merge_asc(Node *l, Node *r) {
+
+}
+
+Node* Linked_List::merge_des(Node *l, Node *r) {
+	if (l == NULL) {
+		return r;
+	}
+	if (r == NULL) {
+		return l;
+	}
+	if (l->val < r->val) {
+		l->next = merge_asc(l->next, r);
+		return l;
+	} else {
+		r->next = merge_asc(l, r->next);
+		return r;
 	}
 }
 
@@ -214,4 +187,14 @@ int Linked_List::get_value_at(unsigned int i) const {
 		curr = curr->next;
 	}
 	return curr->val;
+}
+
+void Linked_List::print_from_nodes(Node *h) {
+	cout << "Calling print_from_nodes()" << endl;
+	Node *curr = h;
+	int i = 0;
+	while (curr != NULL) {
+		cout << "[" << i++ << "] " << curr->val << endl;
+		curr = curr->next;
+	}
 }
