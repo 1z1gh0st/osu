@@ -34,21 +34,30 @@ Since $\sqrt{n}$ is not bounded we say that the function is not Lipschitz.
 \begin{proof}
 We continue this proof from where the book left off. We have an interval $I_1 = [a_1, b_1]$ such that $f(a_1) < 0$ and $f(b_1) \geqslant 0$. We generalize the process by taking $z_n = \frac{a_n + b_n}{2}$, and then if $f(z_n) > 0$ then $b_{n+1} = z_n$. If $f(z_n) < 0$ then $a_{n+1} = z_n$. Otherwise, $z_n \in [a,b]$ and $f(z_n) = 0$, and we are done. By the inductive step, we assume that we have $I_n = [a_n, b_n]$, where $f(a_n) < 0$ and $f(b_n) > 0$. Then, we can find a midpoint $z_n$ and create the interval $I_{n+1}$ such that $f(a_{n+1}) < 0$ and $f(b_{n+1}) > 0$. \\\\
 We say that the length of this interval is equal to $\frac{a-b}{2^n}$, since each time $n$ increases by one we cut the interval in half. Then we take the sequence of intervals $I_n$ for all $n \in \mathbb{N}$, and it follows that the length of $I_n$ approaches 0. Since the length of $I_n$ approaches zero, and by the Nested Interval Property the infinite intersection of $I_n$ is non-empty, we say that there is exactly one number $c$ such that $\bigcap_{n \in \mathbb{N}}I_n = \{c\}$. \\\\
-Suppose that $f(c) > 0$. Then there would be some $n \in \mathbb{N}$ such that $f(I_n) > 0$ i.e. $f(a_n) > 0$ and $f(b_n) > 0$. This is not possible by the process in which we chose $f(a_n)$, therefore $c \leqslant 0$. Now suppose $f(c) < 0$. Then, similarly there must be some interval where $f(b_n) < 0$, which again is not possible. Thus $f(c )\geqslant 0$. Since we have shown $f(c)$ not to be strictly positive or strictly negative, it follows that $f(c) = 0$.
+Suppose that $f(c) > 0$. Then there would be some $n \in \mathbb{N}$ such that $f(I_n) > 0$ i.e. $f(a_n) > 0$ and $f(b_n) > 0$. This is not possible by the process in which we chose $a_n$, therefore $f(c) \leqslant 0$. Now suppose $f(c) < 0$. Then, similarly there must be some interval where $f(b_n) < 0$, which again is not possible. Thus $f(c )\geqslant 0$. Since we have shown $f(c)$ not to be strictly positive or strictly negative, it follows that $f(c) = 0$.
 \end{proof}
 
 \section*{5.2.5}
 \subsection*{(a)}
-The function $f$ is continuous at 0 for $|a| \geqslant 1$.
+The function $f$ is continuous at 0 for $a > 0$.
 \begin{proof}
-0 is a limit point of $[0, \infty)$. Thus, we can use the functional limit characterization of continuity and say that if $lim_{x \rightarrow 0}f(x) = f(0)$ then $f$ is continuous at 0. Suppose $|a| <1$. Then for all $a \neq 0$, this limit is undefined. For $a=0$, the limit is equal to $1 \neq 0$. Therefore $a$ must be greater than or equal to 1. Assume that $a \geqslant 1$, then $lim_{x \rightarrow 0}x^a = 0 = f(0)$. Therefore the function is continuos at $0$ assuming $a \geqslant 1$.
+0 is a limit point of $\mathbb{R}$. Thus, we can use the functional limit characterization of continuity and say that if $lim_{x \rightarrow 0}f(x) = f(0)$ then $f$ is continuous at 0. Suppose $a < 0$. Then, this limit is undefined as it diverges. For $a=0$, the limit is equal to $1 \neq 0$. Therefore $a$ must be greater than 0. Assume that $a > 0$, then $lim_{x \rightarrow 0}x^a = 0 = f(0)$. Therefore the function is continuos at $0$ assuming $a > 0$.
 \end{proof}
 
 \subsection*{(b)}
-$a >1$.
+The function $f$ is differentiable at 0 for all $a >1$.
+\begin{proof}
+We say that $f$ is differentiable at 0 if $\lim_{x \rightarrow 0} \frac{f(x) - f(0)}{x - 0}$ exists. This can be rewritten as
+\[  \lim_{x \rightarrow 0^-}\frac{0}{x}= \lim_{x \rightarrow 0^+} x^{a-1} \]
+Suppose $a < 1$, then the right hand side of this limit diverges. Suppose $a = 1$, then the right hand side is zero, and the left hand side equals 1, therefore the limit does not exist, and $f_1$ is not differentiable at 0. Thus $a$ must be strictly greater than 1. For any $a > 1$ it is clear that both sides will be equal to zero, and therefore the limit does exist for such values of $a$.
+\end{proof}
+
+\subsection*{(c)}
+The function $f$ is twice differentiable at 0 if $a>2$.
 
 \section*{5.2.7}
 \begin{proof}
+
 \end{proof}
 
 \section*{5.3.1 a}
