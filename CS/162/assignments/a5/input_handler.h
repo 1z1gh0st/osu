@@ -18,6 +18,8 @@ class Input_Handler {
     private:
     public:
         static int get_integer();
+        static unsigned int get_uint();
+        static bool is_uint(string);
         static bool is_int(string);
         static char get_specific_char(char*);
         static bool is_specific_char(char*, string);

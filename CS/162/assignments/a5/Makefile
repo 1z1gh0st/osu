@@ -4,11 +4,8 @@ EXE_FILE=linked_list
 
 all: $(EXE_FILE)
 
-$(EXE_FILE): linked_list.o input_handler.o test.cpp
-	$(CC) $(FLAGS) linked_list.o input_handler.o test.cpp -o $(EXE_FILE)
-
-linked_list.o: linked_list.h linked_list.cpp
-	$(CC) $(FLAGS) -c linked_list.cpp
+$(EXE_FILE): input_handler.o test.cpp
+	$(CC) $(FLAGS) input_handler.o test.cpp -o $(EXE_FILE)
 
 input_handler.o: input_handler.h input_handler.cpp
 	$(CC) $(FLAGS) -c input_handler.cpp

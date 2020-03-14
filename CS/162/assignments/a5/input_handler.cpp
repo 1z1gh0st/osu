@@ -30,6 +30,21 @@ int Input_Handler::get_integer() {
 }
 
 /********************************************************************* 
+ ** Function: get_uint()
+ ** Description: Demands integer input from user
+ ** Parameters: none
+ ** Pre-Conditions: none
+ ** Post-Conditions: Should return an integer based on user input
+ *********************************************************************/ 
+unsigned int Input_Handler::get_uint() {
+    string input;
+    do {
+        getline(cin, input);
+    } while (!is_uint(input));
+    return stoul(input);
+}
+
+/********************************************************************* 
  ** Function: is_int(string)
  ** Description: Checks if a c++ string is an integer
  ** Parameters: string s
@@ -41,6 +56,22 @@ bool Input_Handler::is_int(string s) {
         return false;
     }
     for (int i = 1; i < s.length(); i++) {
+        if (s[i] > 57 || s[i] < 48) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/********************************************************************* 
+ ** Function: is_uint(string)
+ ** Description: Checks if a c++ string is an integer
+ ** Parameters: string s
+ ** Pre-Conditions: Assumes s is a valid string
+ ** Post-Conditions: Should return true if s is an integer, false otherwise
+ *********************************************************************/ 
+bool Input_Handler::is_uint(string s) {
+    for (int i = 0; i < s.length(); i++) {
         if (s[i] > 57 || s[i] < 48) {
             return false;
         }
