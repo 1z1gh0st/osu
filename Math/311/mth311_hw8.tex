@@ -54,12 +54,29 @@ Suppose $a < 1$, then the right hand side of this limit diverges. Suppose $a = 1
 
 \subsection*{(c)}
 The function $f$ is twice differentiable at 0 if $a>2$.
-
-\section*{5.2.7}
 \begin{proof}
-
+We say that $f$ is twice differentiable at 0 if $f'$ is differentaible at 0. We know from part b that $f_a'(0) = 0$ for all $a>1$, so by the power rule, given that $a>1$, we write
+   \[ \displaystyle f_a'(x) = \begin{cases}
+     ax^{a-1} & \text{if $x >0$} \\ 
+     0& \text{if $x \leqslant 0$} 
+     \end{cases}\]
+And by the left-right property of functional limits we say that $f_a'(x)$ is differentiable at 0 if 
+\[  \lim_{x \rightarrow 0^-}\frac{0}{x}= \lim_{x \rightarrow 0^+} \frac{ax^{a-1}}{x} =\lim_{x \rightarrow 0^+} ax^{a-2}   = 0 \Longrightarrow a > 2 \]
 \end{proof}
 
+\section*{5.2.7}
+\subsection*{(a)}
+We choose $a =3$. Since $a >2$, we know from recitation that this means $g_a$ will be differentiable at 0, and thus on all of $\mathbb{R}$. By the power rule and the chain rule, we say that 
+\[ g_3'(x) = x \left(ax \sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right)\right)\]
+We know that $\cos\left(\frac{1}{x}\right)$ is a function that is not differentiable at 0 as we saw in recitation, and by the Algebraic Differentiability Theorem one can show that the sum of a differentiable function and a non-differentiable function will be non-differentiable. Therefore we say that the function $ax \sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right)$ is non-differentiable, and thus $g_3'(x)$ has no derivative at 0. Since it is an infinite discontinuity we say the derivative is unbounded.
+\subsection*{(b)}
+We use our proof from part \fbox{a} as a sufficient answer for this part.
+\subsection*{(c)}
+Choose $a = 4$. This guarentees that $g'$ is continuous and differentiable, since we have 
+\[ g_4'(x) = x^2 \left(ax \sin\left(\frac{1}{x}\right) - \cos\left(\frac{1}{x}\right)\right)\]
+Which we can show to be continuous by the squeeze theorem, and differentiable by the algebraic differentiability theorems. However, if we take the second derivative we get
+\[ lim_{x \rightarrow 0}x(ax\sin{\frac{1}{x}}-\cos{\frac{1}{x}}) \]
+We can show that this limit does not exist via methods from recitation.
 \section*{5.3.1 a}
 \begin{proof}
 Suppose $f$ is differentiable on $[a,b]$ and $f'$ is continuous on $[a,b]$. Without loss of generality, let $x < y \in [a,b]$. Then choose the interval $[x,y] \subset [a,b]$. Then by the mean value theorem there exists $c \in [x,y]$ such that $f'(c) = \dfrac{f(x)-f(y)}{x-y}$. Since $f'$ is continuous on the compact set $[a,b]$ we say that there exists $M>0$ such that $f'(x) \leqslant M$. Therefore we have
