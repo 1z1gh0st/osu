@@ -1,0 +1,94 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+
+\begin{document}
+
+\title{MTH 351 Homework 8}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{1}
+We want to solve the integral 
+\[ I = \int_0^1\frac{1}{1+4x^2}dx\]
+To solve this, we use $u$ substitution. Let $u = 2x$, then if we differentiate both sides we have $du = 2dx$. We can now rewrite the integral as
+\[ I = \frac{1}{2}\int_0^2\frac{1}{1+u^2}du = \frac{1}{2}\left(\tan^{-1}(u)\bigg|_0^2\right) = \frac{\tan^{-1}(2)-\tan^{-1}(0)}{2}=\frac{\tan^{-1}(2)}{2}\]
+
+\section*{2}
+Let $f = \frac{1}{1+4x^2}$. We want to write the formula for the Riemann sum of $I$ for the left, right, middle, and trapezoidal rules using sigma notation.
+\[ L_n = \sum_{k=0}^{n-1}\frac{f(x_k)}{n}\]
+\[ R_n = \sum_{k=1}^n\frac{f(x_k)}{n}\]
+\[ M_n = \sum_{k=1}^n\frac{f\left(\dfrac{x_k + x_{k-1}}{2}\right)}{n}\]
+\[ T_n = \sum_{k=1}^n\frac{f(x_{k-1}) + f(x_k)}{2n}\]
+
+\section*{3}
+We can start by writing
+\[ x_0 = 0, \ \ \ \ x_1 = 0.25, \ \ \ \ x_2 = 0.5,\ \ \ \  x_3 = 0.75,\ \ \ \ x_4 = 1\]
+Then we can take the image of each value $x$, which gives us
+\[f(x_0)=1, \ \ \ \ f(x_1)=0.8,\ \ \ \ f(x_2)=0.5,\ \ \ \ f(x_3)=\frac{4}{13}=0.3076923077,\ \ \ \ f(x_4)=0.2\]
+Computing each sum we get
+\[ L_4 = 0.651923076 \]
+\[ R_4 = 0.4519230769\]
+\[ M_4 = 0.5543935547\]
+\[ T_4 =  0.5519230769\]
+
+\section*{4}
+See Matlab code attached on Canvas.
+\section*{5}
+We begin by getting $K$ and $K_0$. The derivatives $f'(x)$ and $f''(x)$ are
+\[ f'(x) = -32x^3 - 8x \ \ \ \ \ \ \ \ f''(x) = -96x^2 - 8 \]
+Then,
+\[ K = 1.3 \ \ \ \  \ \ \ \  K_0= 8\]
+With these values, our errors are bounded by
+\[ e_n^L, e_n^R \leqslant \frac{1.3(1)^2}{n} = \frac{1.3}{n} \ \ \ \ \ \ \ \ e_n^M \leqslant \frac{8(1)^3}{24n^2} = \frac{1}{3n^2} \ \ \ \ \ \ \ \ \ e_n^T \leqslant \frac{8}{12n^2} = \frac{2}{3n^2} \]
+Let $\epsilon = 0.0001$. We wish to compute a value $n$ such that the error is bounded by $\epsilon$.
+\[ e_n^L, e_n^R \leqslant \epsilon \Rightarrow n > 13000, \ \ \ \ \ \ \ \ e_n^M \leqslant \epsilon \Rightarrow n > 57, \ \ \ \ \ \ \ \ e_n^T \leqslant \epsilon \Rightarrow 81 \]
+% 0.2352941176 + .15 + 0.0975609756 + 0.0615384615 = 0.5543935547
+\newpage
+\begin{verbatim}
+%% MTH 351 HW 8 -- PHILIP WARTON
+
+%% - Question 4
+
+f = @(t) 1 ./ (1 + 4 .* t.^2);
+
+n = 4;
+%n = 8;
+%n = 16;
+%n = 32;
+%n = 64;
+
+x = [0:(1/n):1]
+y = f(x)
+
+% - L
+L = 0;
+for i=1:n
+    L = L + (y(i) / n);
+end
+L
+
+% - R
+R = 0;
+for i=1:n
+    R = R + (y(i + 1) / n);
+end
+R
+
+% - M
+M = 0;
+for i=1:n
+    M = M + (f(((x(i) + x(i+1) / 2))) / n);
+end
+M
+
+% - T
+T = 0;
+for i=1:n
+    T = T + ((f(x(i)) + f(x(i + 1))) / (2 * n));
+end
+T
+\end{verbatim}
+\end{document}
