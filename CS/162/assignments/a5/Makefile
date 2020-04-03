@@ -11,7 +11,7 @@ input_handler.o: input_handler.h input_handler.cpp
 	$(CC) $(FLAGS) -c input_handler.cpp
 
 clean:
-	rm -r –f *.out *.o *.dSYM *.tar.gz $(EXE_FILE)
+	rm -r –f *.out *.o *.dSYM *.tar $(EXE_FILE)
 
 tar:
-	tar -cvf $(EXE_FILE).tar.gz .
+	tar -cvf $(EXE_FILE).tar .

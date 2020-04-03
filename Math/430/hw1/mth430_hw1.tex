@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{MTH 430 Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{Problem 1}
+Let $f:X\rightarrow Y$ be a function.
+\subsection*{(a)}
+Show that for all $A_1, A_2 \subset X, \ \ \ \ f(A_1 \cup A_2) = f(A_1) \cup f(A_2)$.
+\begin{proof}
+    Let $A_1, A_2 \subset X$.
+    Then $A_1 \cup A_2 \subset X$.
+    \\\\
+    Let $y \in Y$ such that $y \in f(A_1 \cup A_2)$.
+    Then $f^{-1}(y) \in A_1 \cup A_2$ and either $f^{-1}(y) \in A_1$ or $f^{-1}(y) \in A_2$.
+    If $f^{-1}(y) \in A_1$, then $y \in f(A_1)$ and thus $y \in f(A_1) \cup f(A_2)$.
+    Similarly if $f^{-1}(y) \in A_2$, it follows that $y \in f(A_1) \cup f(A_2)$.
+    Therefore $f(A_1 \cup A_2) \subset f(A_1) \cup f(A_2)$.
+    \\\\
+    Now, let $y \in Y$ such that $y \in f(A_1) \cup f(A_2)$.
+    Then either $y \in f(A_1)$ or $y \in f(A_2)$.
+    If $y \in f(A_1)$ then $f^{-1}(y) \in A_1 \subset A_1 \cup A_2$ thus $y \in f(A_1 \cup A_2)$.
+    Similarly if $y \in f(A_2)$ it follows that $y \in f(A_1 \cup A_2)$.
+\end{proof}
+\subsection*{(b)}
+Show that for all $A_1, A_2 \subset X, \ \ \ \ f(A_1 \cap A_2) \subset f(A_1) \cap f(A_2)$.
+\begin{proof}
+    Let $A_1, A_2 \subset X$.
+    Then $A_1 \cap A_2 \subset X$.
+    \\\\
+    Let $y \in Y$ such that $y \in f(A_1 \cap A_2)$.
+    Since $y \in f(A_1 \cap A_2), f^{-1}(y) \in A_1 \cap A_2$.
+    Thus $f^{-1}(y) \in A_1$ and $y \in f(A_1)$.
+    Similarly, $f^{-1}(y) \in A_1$ and $y \in f(A_2)$.
+    Therefore $y \in f(A_1) \cap f(A_2)$ and $f(A_1 \cap A_2) \subset f(A_1) \cap f(A_2)$.
+\end{proof}
+\end{document}
