@@ -17,29 +17,150 @@ Let $f:X\rightarrow Y$ be a function.
 Show that for all $A_1, A_2 \subset X, \ \ \ \ f(A_1 \cup A_2) = f(A_1) \cup f(A_2)$.
 \begin{proof}
     Let $A_1, A_2 \subset X$.
-    Then $A_1 \cup A_2 \subset X$.
     \\\\
+    \fbox{$\subset$}
     Let $y \in Y$ such that $y \in f(A_1 \cup A_2)$.
-    Then $f^{-1}(y) \in A_1 \cup A_2$ and either $f^{-1}(y) \in A_1$ or $f^{-1}(y) \in A_2$.
-    If $f^{-1}(y) \in A_1$, then $y \in f(A_1)$ and thus $y \in f(A_1) \cup f(A_2)$.
-    Similarly if $f^{-1}(y) \in A_2$, it follows that $y \in f(A_1) \cup f(A_2)$.
-    Therefore $f(A_1 \cup A_2) \subset f(A_1) \cup f(A_2)$.
+    Then $\exists x \in A_1 \cup A_2$ such that $f(x) = y$.
+    If $x \in A_1$, then $f(x) = y \in f(A_1) \subset f(A_1) \cup f(A_2)$.
+    If $x \notin A_1$ then $x \in A_2$, and similarly it follows that $y \in f(A_1) \cup f(A_2)$.
     \\\\
+    \fbox{$\supset$}
     Now, let $y \in Y$ such that $y \in f(A_1) \cup f(A_2)$.
     Then either $y \in f(A_1)$ or $y \in f(A_2)$.
-    If $y \in f(A_1)$ then $f^{-1}(y) \in A_1 \subset A_1 \cup A_2$ thus $y \in f(A_1 \cup A_2)$.
-    Similarly if $y \in f(A_2)$ it follows that $y \in f(A_1 \cup A_2)$.
+    If $y \in f(A_1)$ then $\exists a_1 \in A_1$ such that $f(a_1) = y$.
+    Thus, $a_1 \in A_1 \cup A_2$ and $f(a_1) = y \in f(A_1 \cup A_2)$
+    Otherwise, $y \in f(A_2)$, and then $\exists a_2 \in A_2 : f(a_2) = y$, and thus $f(a_2) = y \in f(A_1 \cup A_2)$.
 \end{proof}
 \subsection*{(b)}
 Show that for all $A_1, A_2 \subset X, \ \ \ \ f(A_1 \cap A_2) \subset f(A_1) \cap f(A_2)$.
 \begin{proof}
-    Let $A_1, A_2 \subset X$.
-    Then $A_1 \cap A_2 \subset X$.
-    \\\\
+    Let $A_1, A_2 \subset X$ be arbitrary.
     Let $y \in Y$ such that $y \in f(A_1 \cap A_2)$.
-    Since $y \in f(A_1 \cap A_2), f^{-1}(y) \in A_1 \cap A_2$.
-    Thus $f^{-1}(y) \in A_1$ and $y \in f(A_1)$.
-    Similarly, $f^{-1}(y) \in A_1$ and $y \in f(A_2)$.
-    Therefore $y \in f(A_1) \cap f(A_2)$ and $f(A_1 \cap A_2) \subset f(A_1) \cap f(A_2)$.
+    Then, there exists $a \in A_1 \cap A_2$ such that $f(a) = y$.
+    Since $a \in A_1, f(a) \in f(A_1)$, and similarly $f(a) \in f(A_2)$.
+    Thus $f(a) = y \in f(A_1) \cap f(A_2)$.
+\end{proof}
+
+\section*{Problem 2}
+\subsection*{(a)}
+Show that for all $B_1, B_2 \in Y, \ \ \ \ f^{-1}(B_1 \cup B_2) = f^{-1}(B_1) \cup f^{-1}(B_2)$
+\begin{proof}
+    Let $B_1, B_2 \subset Y$.
+    \\\\
+    \fbox{$\subset$}
+    Let $x \in X$ such that $x \in f^{-1}(B_1 \cup B_2)$.
+    Then $f(x) \in B_1 \cup B_2$.
+    If $f(x) \in B_1$ then $x \in f^{-1}(B_1) \subset f^{-1}(B_1) \cup f^{-1}(B_2)$.
+    Otherwise, $f(x) \in B_2$ thus $x \in f^{-1}(B_2) \subset f^{-1}(B_1) \cup f^{-1}(B_2)$.
+    \\\\
+    \fbox{$\supset$}
+    Let $x \in X$ such that $x \in f^{-1}(B_1) \cup f^{-1}(B_2)$.
+    If $x \in f^{-1}(B_1)$, then $f(x) \in B_1 \subset B_1 \cup B_2$, thus $x \in f^{-1}(B_1 \cup B_2)$.
+    Otherwise, $x \in f^{-1}(B_2)$, and it follows that $f(x) \in B_2 \subset B_1 \cup B_2$ so $x \in f^{-1}(B_1 \cup B_2)$.
+\end{proof}
+\subsection*{(b)}
+Show that for all $B_1, B_2 \in Y, \ \ \ \ f^{-1}(B_1 \cap B_2) = f^{-1}(B_1) \cap f^{-1}(B_2)$
+\begin{proof}
+    Let $B_1, B_2 \subset Y$.
+    \\\\
+    \fbox{$\subset$}
+    Let $x \in X$ such that $x \in f^{-1}(B_1 \cap B_2)$.
+    Then $f(x) \in B_1 \cap B_2$, thus $f(x) \in B_1$ and $f(x) \in B_2$.
+    Since $f(x) \in B_1, x \in f^{-1}(B_1)$, and similarly $x \in f^{-1}(B_2)$.
+    Therefore $x \in f^{-1}(B_1) \cap f^{-1}(B_2)$.
+    \\\\
+    \fbox{$\supset$}
+    Let $x \in X$ such that $x \in f^{-1}(B_1) \cap f^{-1}(B_2)$.
+    Since $x \in f^{-1}(B_1), f(x) \in B_1$, and since $x \in f^{-1}(B_2), f(x) \in B_2$.
+    Since $f(x) \in B_1$ and $f(x) \in B_2$ and thus $f(x) \in B_1 \cap B_2$, it follows that $x \in f^{-1}(B_1 \cap B_2)$.
+\end{proof}
+\section*{Problem 3}
+\subsection*{(b)}
+We wish to show that $(a)$ and $(b)$ are equivalent.
+\begin{proof}
+    Let $A \subset X$ be arbitrary.
+    \\\\
+    "$\Rightarrow$" Assume $f$ is injective.
+    Let $a \in A$, then $f(a) \in f(A)$.
+    Since $f(a) \in f(A)$, by definition $a \in f^{-1}(f(A))$.
+    Thus $\forall a \in A, a \in f^{-1}(f(A))$ and we say $A \subset f^{-1}(f(A))$.
+    Now let $a \in f^{-1}(f(A))$ be arbitrary, then $f(a) \in f(A)$.
+    Since $f(a) \in f(A)$, then $\exists a_0 \in A$ such that $f(a_0) = f(a)$.
+    We know that $f$ is injective therefore $a = a_0 \in A$.
+    Thus $f^{-1}(f(A)) \subset A$, and $f^{-1}(f(A)) \supset A$, so $f^{-1}(f(A)) = A$.
+    \\\\
+    "$\Leftarrow$" Assume that $f^{-1}(f(A)) = A \ \ \forall A \subset X$.
+    Let $a,b \in X$ such that $f(a) = f(b)$ and let $A = \{a\}$.
+    Then $f(A) = \{f(a)\}$ and since $f(a) = f(b)$ it follows that $f(b) \in f^{-1}(f(A))$.
+    Therefore by our assumption that $f^{-1}(f(A))=A$, we have $b \in A$, and thus $b=a$.
+\end{proof}
+
+\subsection*{(c)}
+We wish to show that $(a)$ and $(c)$ are equivalent.
+\begin{proof}
+    A function $f$ is injective if and only if $f(A \cap B) = f(A) \cap f(B)$.
+    \\\\
+    "$\Rightarrow$" Assume that $f$ is injective.
+    We wish to show that $f(A \cap B) = f(A) \cap f(B)$.
+    Let $y \in f(A \cap B)$, then $\exists x \in A \cap B$ such that $f(x) = y$.
+    Since $x \in A, f(x) = y \in f(A)$.
+    Similarly $y \in f(B)$, thus $y \in f(A) \cap f(B)$, and we say $f(A \cap B) \subset f(A) \cap f(B)$.
+    \\\\
+    Now let $y \in f(A) \cap f(B)$, then $\exists x_1 \in A : f(x_1) = y$.
+    Similarly $\exists x_2 \in B : f(x_2) = y$.
+    Since $f$ is an injection we can say $x_1 = x_2 = x$.
+    Thus $x \in A$ and $x \in B$ so $x \in A \cap B$ and it follows that $y = f(x) \in f(A \cap B)$.
+    \\\\
+    "$\Leftarrow$" Assume that $f(A \cap B) = f(A) \cap f(B) \ \ \ \ \forall A,B \subset X$.
+    Let $a,b \in X$ such that $f(a) = y = f(b)$.
+    Let $A = \{a\}$ and $B = \{b\}$, then $f(A) = \{y\} = f(B) = f(A) \cap f(B) = f(A \cap B)$.
+    Since $y \in f(A \cap B)$, then there must exist some $x \in A \cap B$ such that $f(x) = y$.
+    Therefore $x \in \{a\} \cap \{b\}$ and $a = x = b$.
+\end{proof}
+
+\subsection*{(d)}
+We wish to show that $(c)$ and $(d)$ are equivalent.
+\begin{proof}
+    We want to show $f(A \cap B) = f(A) \cap f(B)$ if and only if $A \cap B = \O \Rightarrow f(A) \cap f(B) = \O$.
+    \\\\
+    "$\Rightarrow$" Assume that for all $A,B \subset X$ that $f(A \cap B) = f(A) \cap f(B)$.
+    Let $A,B \subset X$ such that $A \cap B = \O$.
+    Then $f(A \cap B) = \O = f(A) \cap f(B)$, and the desired implication holds.
+    \\\\
+    "$\Leftarrow$" Assume that for all $A,B\subset X$ that $A \cap B = \O \Rightarrow f(A) \cap f(B) = \O$.
+    Let $a \in \{a\} = A \subset X$ and $b \in \{b\} = B \subset X$, and suppose $a \neq b$.
+    Then $A \cap B = \O = f(A) \cap f(B)$, which means that $f(a) \neq f(b)$.
+    Since $a \neq b \Rightarrow f(a) \neq f(b)$, it follows that $f$ is injective, which is equivalent to $f(A \cap B) = f(A) \cap f(B)$ for all $A,B \subset X$.
+\end{proof}
+
+\subsection*{(e)}
+We wish to show that $f$ is injective if and only if $\forall B\subset A \subset X, f(A \setminus B) = f(A) \setminus f(B)$.
+\begin{proof}
+    "$\Rightarrow$" Assume that $f$ is injective. Let $B \subset A \subset X$ be arbitrary.
+    We want to show that $f(A \setminus B) = f(A) \setminus f(B)$.
+    \\\\
+    \fbox{$\subset$}
+    Let $y \in Y : y \in f(A \setminus B)$.
+    Since $f$ is injective, there exists a unique $x \in A \setminus B$ such that $f(x) = y$.
+    Since $x \in A, f(x) = y \in f(A)$.
+    We know that for all $b \in B, f(b) \neq y$, because our unique solution $x \notin B$.
+    Since $\nexists b \in B : f(b) = y, y \notin f(B)$.
+    Then with $y \in f(A)$ and $y \notin f(B)$, $y \in f(A) \setminus f(B)$.
+    \\\\
+    \fbox{$\supset$}
+    Let $y \in Y$ such that $y \in f(A) \setminus f(B)$.
+    Then $\nexists b \in B : f(b) = y$, and $\exists x \in A : f(x) = y$.
+    It follows that if $x \in A$ and $f(x) = y$ that $x \in A \setminus B$.
+    Therefore $f(x) = y \in f(A \setminus B)$.
+    \\\\
+    "$\Leftarrow$" Assume that for all $B \subset A \subset X \ \ \ \ f(A \setminus B) = f(A) \setminus f(B)$.
+    Let $a, b \in X$ such that $f(a) = y = f(b)$.
+    We want to show that $a = b$.
+    Suppose by contradiction that $a \neq b$.
+    Let $B = \{b\} \subset A = \{a, b\} \subset X$.
+    Then $A \setminus B= \{a\}$, and then $f(A \setminus B) = \{f(a)\} = \{y\}$.
+    However, we also know that $f(A) = \{y\}$ and $f(B) = \{y\}$ so then $f(A) \setminus f(B) = \O$.
+    By assumption $f(A \setminus B) = f(A) \setminus f(B)$, therefore $\{y\} = \O$ (contradiction).
+    It must then be the case that $a = b$.
 \end{proof}
 \end{document}

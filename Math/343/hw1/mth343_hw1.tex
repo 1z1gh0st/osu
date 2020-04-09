@@ -7,15 +7,157 @@
 
 \begin{document}
 
-\title{MTH 312 Homework 1}
+\title{MTH 343 Homework 1}
 \author{Philip Warton}
 \date{\today}
 \maketitle
 
-\section*{Problem 1}
-Show that $1 = 1$.
+\section*{1.3}
+\subsection*{13}
 \begin{proof}
-    \[1 = 1\]
+    \fbox{$A \setminus (B \cup C) \subset (A \setminus B) \cap (A \setminus C)$}
+    \\\\
+    Let $x \in A \setminus (B \cup C)$.
+    We know that $x \in A$ and $x \notin B \cup C$, thus $x \notin B$ and $x \notin C$.
+    Since $x \in A$ and $x \notin B$, $x \in A \setminus B$.
+    Similarly since $x \notin C, x \in A \setminus C$, thus $x \in (A \setminus B) \cap (A \setminus C)$, and thus $A \setminus (B \cup C) \subset (A \setminus B) \cap (A \setminus C)$.
+    \\\\
+    \fbox{$A \setminus (B \cup C) \supset (A \setminus B) \cap (A \setminus C)$}
+    \\\\
+    Let $x \in (A \setminus B) \cap (A \setminus C)$.
+    Then $x \in A$ and $x \notin B$ and $x \notin C$. Thus $x \notin B \cup C$, and it follows that $x \in A \setminus (B \cup C)$.
+    Therefore $A \setminus (B \cup C) \supset (A \setminus B) \cap (A \setminus C)$.
+    And we say that the two sets are equal.
 \end{proof}
+
+\subsection*{18}
+\subsubsection*{(a)}
+Let $f$ be a function $f : \mathbb{R} \rightarrow \mathbb{R}$ where $f(x) = e^x$.
+\\\\
+\fbox{1 : 1}
+Let $x, y \in \mathbb{R}$ such that $f(x) = f(y)$.
+Then $e^x = e^y$, and we can take the natural log of both sides which gives $x = y$.
+Thus $f$ is one-to-one.
+\\\\
+\fbox{Onto}
+For $f$ to be onto, for all $y \in \mathbb{R}$ there must exist some $x \in \mathbb{R}$ such that $f(x) = y$.
+Let $y = -1$, then there should be some $x$ such that $f(x) = e^x = -1$.
+Since this equation has no solutions, $f$ is not onto.
+If $y > 0$ then $\exists x : f(x) = y$, so we say that the range of $f$ is $(0, \infty)$.
+\subsubsection*{(b)}
+Let $f$ be a function $f : \mathbb{Z} \rightarrow \mathbb{Z}$ where $f(n) = n^2 + 3$.
+\\\\
+\fbox{1 : 1}
+Let $m,n \in \mathbb{N}$ such that $f(m) = f(n)$.
+Then we say that $m^2 + 3 = n^2 + 3$, which is equivalent to saying that $m^2 = n^2$.
+This does not guarentee that $m = n$, because the case where $m = -n$ is a also a solution, therefore $f$ is not one-to-one.
+\\\\
+\fbox{Onto}
+Let $f(n) = 0 \in \mathbb{Z}$, then 
+\begin{align*}
+    n^2 + 3 & = 0 \\
+    n^2 & = -3 \\
+    n & = \sqrt{-3}
+\end{align*}
+Since this has no solutions, $f$ is not onto.
+The range of $f$ is $[3, \infty) \cap \mathbb{Z}$.
+\subsubsection*{(c)}
+Let $f$ be a function $f : \mathbb{R} \rightarrow \mathbb{R}$ where $f(x) = \sin(x)$.
+\\\\
+\fbox{1 : 1}
+Let $x = 0$ and $y = 2 \pi$, then $f(x) = f(y) = 0$, but $x \neq y$.
+Therefore $f$ is not one-to-one.
+\\\\
+\fbox{Onto}
+Since $-1 \leqslant \sin(x) \leqslant 1$, $f$ is not onto and its range is $[-1, 1]$.
+\subsubsection*{(d)}
+Let $f$ be a function $f : \mathbb{Z} \rightarrow \mathbb{Z}$ where $f(n) = n^2$.
+\\\\
+\fbox{1 : 1}
+Choose $m = 1, n = -1$, then $f(m) = f(n)$ but $m \neq n$, so $f$ is not one-to-one.
+\\\\
+\fbox{Onto}
+We know that $n^2 \geqslant 0$ for all $n \in \mathbb{Z}$, so $f$ is not onto and its range is $\{n \in \mathbb{Z} \ \ | \ \ \sqrt{n} \in \mathbb{Z} \}$
+
+\subsection*{22}
+Let $f: A \rightarrow B$ and $g: B \rightarrow C$.
+\subsubsection*{(a)}
+Suppose $f$ and $g$ are one-to-one.
+Show $g \circ f$ is one-to-one.
+\begin{proof}
+    Let $a_1, a_2 \in A$ such that $g \circ f (a_1) = g \circ f (a_2)$.
+    Since $g$ is one-to-one, we know that $f(a_1) = f(a_2)$.
+    Since $f$ is one-to-one, it follows that $a_1 = a_2$, therefore $g \circ f$ is one-to-one as well
+\end{proof}
+
+\subsubsection*{(b)}
+Show that $g \circ f$ is onto $\Longrightarrow g$ is onto.
+\begin{proof}
+    Suppose that $g \circ f$ is onto.
+    Then for all $c \in C$ there exists some $a \in A$ such that $g \circ f (a) = c$.
+    Let $c \in C$ be arbirtrary.
+    Then, there $\exists a \in A$ such that $c=g(f(a))$.
+    We know that $f : A \rightarrow B$, so $f(a) \in B$.
+    Thus, there exists $b = f(a) \in B$ such that $g(b) = c$, therefore $g$ is onto.
+\end{proof}
+\subsubsection*{(c)}
+Show that $g \circ f$ is one-to-one $\Longrightarrow f$ is one-to-one.
+\begin{proof}
+    Assume that $g \circ f$ is one-to-one.
+    If $g(f(a_1)) = g(f(a_2))$ then $a_1 = a_2$ for any $a_1, a_2 \in A$.
+    We want to show that $x \neq y \Longrightarrow f(x) \neq f(y)$.
+    Let $x,y \in A$ such that $x \neq y$.
+    Then, by assumption, $g(f(x)) \neq g(f(y))$.
+    Suppose by contradiction that $f(x) = f(y)$, then since $g$ is a function it follows that $g(f(x)) = g(f(y))$ (contradiction).
+    Therefore $f(x)$ must not equal $f(y)$, and we say that $f$ is one-to-one.
+\end{proof}
+\subsubsection*{(d)}
+Show that $g \circ f$ is one-to-one and $f$ is onto $\Longrightarrow g$ is one-to-one.
+\begin{proof}
+    Assume that $g \circ f$ is one-to-one and that $f$ is onto.
+    We want to show that $g(b_1) = g(b_2) \Longrightarrow b_1 = b_2 \ \ \forall b_1, b_2 \in B$.
+    Let $b_1, b_2 \in B$ such that $g(b_1) = g(b_2)$ without loss of generality.
+    Then since $f$ is onto, we know that $\exists a_1, a_2 \in A$ such that $f(a_1) = b_1$ and $f(a_2) = b_2$.
+    Therefore, $g(f(a_1)) = g(f(a_2))$, and since $g \circ f$ is one-to-one, it follows that $a_1 = a_2$.
+    Since $g$ is well-defined and $a_1 = a_2$, $b_1 = b_2$ therefore $g$ is one-to-one.
+\end{proof}
+\subsubsection*{(e)}
+Show that $g \circ f$ is onto and $g$ is one-to-one $\Longrightarrow f$ is onto.
+\begin{proof}
+    Assume that $g \circ f$ is onto and $g$ is one-to-one.
+    We want to show that for all $b \in B$, there exists $a \in A$ such that $f(a) = b$.
+    Let $b \in B$ be arbitrary, thus $g(b) \in C$.
+    Since $g \circ f$ is onto, this means that there exists $a \in A$ such that $g(f(a)) = c$.
+    Since $g$ is one-to-one and $c = g(f(a)) = g(b)$, this means that $f(a) = b$.
+    Thus for all $b \in B$, there exists $a \in A$ such that $f(a) = b$.
+\end{proof}
+\section*{2.3}
+\subsection*{1}
+Prove that
+\[ 1^2 + 2^2 + \cdots + n^2 = \frac{n(n+1)(2n+1)}{6}  \ \ \ \ \ \ \ \  
+\ \ \ \ \ \ \ \ \forall n \in \mathbb{N}\]
+\begin{proof}
+    We must show the base case and the inductive step in order to show that the statement holds for all natural numbers.
+    \\\\
+    \fbox{Base Case}
+    Let $n = 1$, then
+    \[ 1^2 = \frac{1(1+1)(2(1)+1)}{6} \]
+    This holds.
+    \\\\
+    \fbox{Inductive Step}
+    We want to show that if the equation holds for $n$, then it will hold for $n + 1$.
+    Assume that \[ 1^2 + 2^2 + \cdots + n^2 = \dfrac{n(n+1)(2n+1)}{6} \]
+    Then, adding $(n+1)^2$ to both sides we get
+    \begin{align*}
+        1^2 + 2^2 + \cdots + n^2 + (n+1)^2 & = \frac{n(n+1)(2n+1)}{6} + (n+1) ^2 \\
+        & = \frac{n(n+1)(2n+1) + 6(n+1)^2}{6} \\
+        & = \frac{(2n^3 + 3n^2 + n) + (6n^2 + 12n + 6)}{6} \\
+        & = \frac{2n^3 + 9n^2 +11n + 6}{6} \\
+        & = \frac{(n+1)(n+2)(2(n+1)+1)}{6}
+    \end{align*}
+    Thus, the statement is true for all $n \in \mathbb{N}$.
+\end{proof}
+
+\subsection*{18}
 
 \end{document}
