@@ -163,4 +163,68 @@ We wish to show that $f$ is injective if and only if $\forall B\subset A \subset
     By assumption $f(A \setminus B) = f(A) \setminus f(B)$, therefore $\{y\} = \O$ (contradiction).
     It must then be the case that $a = b$.
 \end{proof}
+
+\section*{Problem 4}
+\begin{proof}
+    To show that this set, denote $\tau$ is a topology on $X$, we must check 3 things.
+    \\\\
+    \fbox{$(i)$ : $\O$ and $x \in \tau$}
+    By construction we know that $\O \in \tau$.
+    Since $\forall p \in X, \exists B \in \beta : p \in B$, the union of all $B \in \beta$ must be equal to $X$, thus $X \in \beta$.
+    \\\\
+    \fbox{$(ii)$ : $\forall T_1, T_2 \in \tau, T_1 \cup T_2 \in \tau$}
+    Let $T_1, T_2 \in \tau$ be arbitrary.
+    If $T_1 = \O$ or $T_2 = \O$, the $T_1 \cup T_2 \in \tau$ trivially.
+    Otherwise, we can denote
+    \[ T_1 = B_{1_1} \cup B_{1_2} \cup \cdots, \ \ \ \ \ \ T_2 = B_{2_1} \cup B_{2_2} \cup \cdots \]
+    Then $T_1 \cup T_2 = B_{1_1} \cup B_{2_1} \cup B_{2_1} \cup B_{2_2} \cup \cdots$ which will be an element of $\tau$.
+    \\\\
+    \fbox{$(iii)$ : Any intersection of a finite subcollection of members of $\tau$ is in $\tau$}
+    We want to show that $\forall T_1, T_2 , \cdots T_k \in \tau, \ \ \ \ \ \ T_1 \cap T_2 \cap \cdots \cap T_k \in \tau$.
+    If $T_1 \cap T_2 \in \tau$ it follows that any finite intersection $\bigcap_{i = 1}^kT_i \in \tau$.
+    So let $T_1, T_2 \in \tau$ be arbitrary, we wish to show that $T_1 \cap T_2 \in \tau$.
+    If either $T_1 = \O$ or $T_2 = \O$, the intersection is empty and thus in $\tau$.
+    Otherwise, we can denote
+    \begin{align*}
+        T_1 \cap T_2 
+        & = (B_{1_1} \cup B_{1_2} \cup B_{1_3} \cdots ) \cap (B_{2_1} \cup B_{2_2} \cup B_{2_3} \cdots ) \\ 
+        & = \bigcup_{i \in \mathbb{N}} \bigcup_{j \in \mathbb{N}}(B_{1_i} \cap B_{2_j})
+    \end{align*}
+    Thus if for all $B_1, B_2 \in \beta, B_1 \cap B_2 \in \tau$, then by $(ii)$ their union will be in $\tau$, and we are done.
+    Let $B_1, B_2 \in \beta$ arbitrarily.
+    Then, since for all $p \in B_1 \cap B_2$, there exists $B_p \subset B_1 \cap B_2 : p \in B_p$, it follows that
+    \[ \bigcup_{p \in B_1 \cap B_2}B_p \ \ = \ \  B_1 \cap B_2\]
+    Since this is a union of elements of $\beta$, we say that $B_1 \cap B_2 \in \tau$, thus any $T_1 \cap T_2 \in \tau$.
+    It follows from logic before that there intersection any finite subcollection of in $\tau$ will be a member of $\tau$.
+\end{proof}
+
+\section*{Problem 5}
+\subsection*{(a)}
+The function $f$ is continuous.
+Let $O$ be an arbitrary open set in $\mathbb{R}_{\tau} : O = \{ [a, b) | a < b\}$.
+Then we write
+\begin{align*}
+    f^{-1}(O)
+    & = \{ x \in \mathbb{R} | f(x) \in O \} \\
+    & = \{ x \in \mathbb{R} | a \leqslant f(x) < b \} \\
+    & = \{ x \in \mathbb{R} | a \leqslant 2x - 5 < b \} \\
+    & = \left\{ x \in \mathbb{R} \bigg| \frac{a + 5}{2} \leqslant x < \frac{a+5}{2}\right\}
+\end{align*}
+Choose $a_0 = \dfrac{a + 5}{2}$ and $b_0 = \dfrac{a+5}{2}$, and then $f^{-1}(O)$ is in $\mathbb{R}_{\tau}$, thus $f$ is continuous.
+\subsection*{(b)}
+The function $f(x) = -x$ is not continuous.
+\\\\
+\fbox{Counterexample}
+Let $O = \{[0,1)\}$.
+Then, $f^{-1}(O) = \{x \in \mathbb{R} | x \in O\} = \{ (-1, 0]\}$.
+Since the interval is open on the left and closed on the right, it is not in $\mathbb{R}_{\tau}$.
+
+\subsection*{(c)}
+The function $f(x) = x^2$ is not continuous.
+\\\\
+\fbox{Counterexample} Let $O = \{[0, 1)\}$.
+Then, $f^{-1}(O) = \{x \in \mathbb{R} | x \in O\} = \{x \in \mathbb{R} | x^2 \in O\}$.
+For $x^2 \in O$, we must have $0 \leqslant x^2 < 1$, which holds for any $x$ in $(-1,1)$.
+Since this interval is open on the left, it is not in $\mathbb{R}_{\tau}$, therefore $f$ is not continuous.
+
 \end{document}

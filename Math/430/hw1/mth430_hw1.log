@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  9 APR 2020 12:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2019.5.8)  9 APR 2020 21:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -359,20 +359,68 @@ Underfull \hbox (badness 10000) in paragraph at lines 139--165
 
  []
 
-[3] (/Users/philip/Documents/OSU/Math/430/hw1/mth430_hw1.aux) ) 
+
+LaTeX Warning: Command \O invalid in math mode on input line 171.
+
+
+LaTeX Warning: Command \O invalid in math mode on input line 172.
+
+
+LaTeX Warning: Command \O invalid in math mode on input line 177.
+
+
+LaTeX Warning: Command \O invalid in math mode on input line 177.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--179
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 169--179
+
+ []
+
+
+LaTeX Warning: Command \O invalid in math mode on input line 186.
+
+
+LaTeX Warning: Command \O invalid in math mode on input line 186.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 179--188
+
+ []
+
+
+Overfull \hbox (19.37408pt too wide) in paragraph at lines 179--188
+[] \OT1/ptm/m/n/10 We want to show that $\OMS/cmsy/m/n/10 8\OML/cmm/m/it/10 T[]; T[]; [] T[] \OMS/cmsy/m/n/10 2 \OML/cmm/m/it/10 ^^\;       T[] \OMS/cmsy/m/n/10 \
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 215--221
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 223--229
+
+ []
+
+[4] (/Users/philip/Documents/OSU/Math/430/hw1/mth430_hw1.aux) ) 
 Here is how much of TeX's memory you used:
  2941 strings out of 492616
  40176 string characters out of 6129482
- 118746 words of memory out of 5000000
+ 121746 words of memory out of 5000000
  6806 multiletter control sequences out of 15000+600000
  20182 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,8n,32p,318b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on /Users/philip/Documents/OSU/Math/430/hw1/mth430_hw1.pdf (3 pages, 85110 bytes).
+ 41i,13n,32p,318b,200s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2019/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2019/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on /Users/philip/Documents/OSU/Math/430/hw1/mth430_hw1.pdf (4 pages, 135976 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 36 compressed objects within 1 object stream
+ 78 PDF objects out of 1000 (max. 8388607)
+ 56 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
