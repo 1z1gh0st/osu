@@ -1,0 +1,77 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{MTH 312 Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{Problem 1 (6.4.2)}
+\subsection*{(a)}
+If $\sum_{n=1}^\infty g_n$ converges uniformly then $(g_n)$ converges to 0.
+\begin{proof}
+    Let $\frac{\epsilon}{2} > 0$ be arbitrary.
+    Then $\exists N \in \mathbb{N}$ such that $\forall n \geqslant N$ and $\forall x \in A$ where $A$ is the domain of $g$
+    \begin{align*}
+        |s_n(x) - s(x)| & < \frac{\epsilon}{2} \\
+        \left| \sum_{k=1}^n g_k(x) - \sum_{k=1}^\infty g_k(x)\right| & < \frac{\epsilon}{2} \\
+        \left| \sum_{k=n+1}^\infty g_k(x) \right| & < \frac{\epsilon}{2}
+    \end{align*}
+    Let $n > N$ and it follows that $n + 1 > N$, so we can say that
+    \[
+        \left|\sum_{k=n+2}^\infty g_k(x)\right| < \frac{\epsilon}{2}
+    \]
+    Then, we can add these two inequalities giving the result
+    \[
+        |g_{n+1}(x) - 0| = \left|\sum_{k = n+1}^\infty g_k(x) - \sum_{k=n+2}^\infty g_k(x)\right| \leqslant \left| \sum_{k=n+1}^\infty g_k(x)\right| + \left|-\sum_{k=n+2}^\infty g_k(x)\right| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+    \]
+    Let $N_\epsilon = N + 1$, and we have $\exists N_\epsilon \in \mathbb{N}$ such that forall $n \geqslant N_\epsilon$
+    \[|g_n(x) - 0 | < \epsilon\]
+    So we say that the sequence of functions converges uniformly to 0.
+\end{proof}
+
+\subsection*{(b)}
+If $0 \leqslant f_n(x) \leqslant g_n(x)$ and $\sum_{k=1}^\infty g_n(x)$ converges uniformly, then $\sum_{k=1}^\infty f_n(x)$ converges uniformly.
+\begin{proof}
+    I proved it.
+\end{proof}
+
+\section*{Problem 3 (6.4.7)}
+Let $f(x) = \sum_{k=1}^\infty \dfrac{sin(kx)}{k^3}$.
+\subsection*{(a)}
+Show that $f(x)$ is differentiable and that $f'(x)$ is continuous.
+\begin{proof}
+    Let us take the derivative of the inside of the series
+    \[
+        \frac{d}{dx}\left(\frac{\sin(kx)}{k^3}\right) = \frac{(k)\cos(kx)}{k^3} = \frac{\cos(kx)}{k^2}
+    \]
+    Then we can look at the series $\sum_{k=1}^\infty \frac{\cos(kx)}{k^2}$, and notice that it can be bounded by $\frac{1}{k^2}$.
+    Since $|\cos(kx)| \leqslant 1$, it follows that $\left|\frac{\cos(kx)}{k^2}\right| \leqslant \frac{1}{k^2}$.
+    The series $\sum_{k=1}^\infty \frac{1}{k^2}$ converges, therefore by the Weierstrass M-test the series $\sum_{k=1}^\infty \frac{\cos(kx)}{k^2}$ converges uniformly on $\mathbb{R}$.
+    Let $x_0 = 0$, and then $\frac{\sin(k(0))}{k^3} = 0 \ \ \forall k \in \mathbb{N}$.
+    So we say that $f(0) = 0$.
+    Since we have converges at some $x_0$ and uniform convergence of the series of derivatives, we have uniform convergence of $f(x)$.
+    Also, we have $f'(x) = \sum_{k=1}^\infty \frac{\cos(kx)}{k^2}$.
+    Since $\forall k \in \mathbb{N}$ the function $\frac{\cos(kx)}{k^2}$ is continuous, and continuity is preserved when adding two functions, each partial sum is also continuous.
+    Uniform convergence preserves continuity so the series $f'(x) = \sum_{k=1}^\infty \frac{\cos(kx)}{k^2}$ is continuous.
+\end{proof}
+\subsection*{(b)}
+Can we check if $f(x)$ is twice differentiable?
+\begin{proof}
+    Let $g(x) = f'(x) = \sum_{k=1}^\infty \frac{\cos(kx)}{k^2}$.
+    We will check if term by term differentiation gives us a convergent series.
+    Taking the derivative of the inside of the sum we have
+    \[
+        \frac{d}{dx}\left(\frac{\cos(kx)}{k^2}\right) = \frac{-\sin(kx)}{k}
+    \]
+\end{proof}
+
+
+
+\end{document}

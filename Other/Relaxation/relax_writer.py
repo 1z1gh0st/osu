@@ -1,0 +1,2 @@
+def paragraph(i):
+    print()

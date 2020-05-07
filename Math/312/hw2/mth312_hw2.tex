@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{MTH 312 Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{(1) 6.3.2}
+Let $h_n(x) = \sqrt{x^2 + \frac{1}{n}}$.
+\subsection*{(a)}
+Find the pointwise limit of $h_n$ and prove that it converges uniformly.
+\\\\
+\[ \lim_{n \rightarrow \infty} h_n(x) = h(x) = \sqrt{x^2} \]
+Before proving uniform convergence let us do some scratch work.
+Let $a$ and $b$ be real non-negative numbers.
+We know that $\sqrt{a + b} \leqslant \sqrt{a} + \sqrt{b}$ by the triangle inequality.
+Since $\sqrt{a} \leqslant \sqrt{a + b}$, and of course $-\sqrt{b} \leqslant 0$, it follows that
+\[ \sqrt{a} - \sqrt{b} \leqslant \sqrt{a+b} \leqslant \sqrt{a} + \sqrt{b} \]
+Which is equivalent to the statement 
+\[ \left|\sqrt{a+b} -\sqrt{a}\right| \leqslant \left|\sqrt{b}\right|\]
+\begin{proof}
+    Let $\epsilon > 0$ be arbitrary.
+    Then let $N > \frac{1}{\epsilon^2}$.
+    Then for all $n \geqslant N$, $\sqrt{\frac{1}{n}} < \epsilon$.
+    \[ |h_n(x) - h(x)| = \left|\sqrt{x^2 + \frac{1}{n}} - \sqrt{x^2}\right| \leqslant \sqrt{\frac{1}{n}} < \epsilon\]
+\end{proof}
+\subsection*{(b)}
+Take the derivative of $h_n(x)$ and we get
+\[ h_n'(x) = \frac{x}{2\sqrt{x^2+\frac{1}{n}}} \]
+Note that $h_n'(0) = \frac{0}{2\sqrt{\frac{1}{n}}}$ for every natural number $n$.
+Since $\lim_{n \rightarrow \infty} \frac{1}{n} = 0$, we say that
+\[\lim_{n \rightarrow \infty}h_n'(x) = g(x) = \begin{cases}
+    \frac{x}{2\sqrt{x^2}}, & x \neq 0 \\
+    0, & x = 0
+\end{cases}\]
+Since the pointwise limit $g(x)$ is not continuous at 0, it follows that $h_n'(x)$ cannot converge uniformly on any neighborhood of 0.
+This is the case because continuity is preserved under uniform convergence, yet each $h_n'$ is continuous while $g$ is not.
+\section*{(2) 6.3.5}
+Let $g_n(x) = \dfrac{nx+x^2}{2n}$.
+\subsection*{(a)}
+We can take the limit of $g_n(x)$ to be 
+\begin{align*}
+    \lim_{n \in \mathbb{N}} g_n(x) & = \lim_{n \in \mathbb{N}} \frac{nx + x^2}{2n} \\
+    & = \lim_{n \in \mathbb{N}} \frac{nx}{2n} + \lim_{n \in \mathbb{N}}\frac{x^2}{2n} \\
+    & = \lim_{n \in \mathbb{N}}\frac{x}{2} + x^2\lim_{n \in \mathbb{N}}\frac{1}{2n}\\
+    & = \frac{x}{2} + x^2 (0) \\
+    & = \frac{1}{2} x
+\end{align*} 
+And thus we say,
+\[\lim g_n(x) =  g(x) = \frac{1}{2}x \]
+Then we can use the power rule to compute the derivative
+\[ g'(x) = \frac{1}{2}\]
+\subsection*{(b)}
+We want to show that $g'_n(x)$ converges uniformly on every interval $[-M, M]$.
+\begin{proof}
+    Let us first compute what $g_n'$ is.
+    We know $g_n(x) = \dfrac{nx+x^2}{2n}$.
+    Then since the function is continuous and differentiable on all of $\mathbb{R}$ we can use familiar rules such as the seperation and the power rules.
+    We determine that $g_n'(x) = \dfrac{n + x}{2n}$.
+    Now taking the pointwise limit we get $g(x) = \frac{1}{2}$.
+    Let $M > 0, \epsilon > 0$ be arbitrary.
+    Choose $N > \dfrac{M}{2\epsilon}$.
+    Then for all $n \geqslant N$,    $ \ \ \ \dfrac{M}{2n} < \epsilon \ \ \ $ hence,
+    \[ \left|g_n'(x) - g(x)\right|=\left|\frac{n+x}{2n} - \frac{1}{2}\right| = \left|\frac{1}{2} + \frac{x}{2n} - \frac{1}{2}\right| = \left|\frac{x}{2n}\right| \leqslant \left|\frac{M}{2n}\right| < \epsilon \]
+    This is true so long as $|x| \leqslant M$. Therefore on the interval $[-M,M], g_n'$ converges uniformly.
+    \\\\
+    Choose the point $x = 0$, then $x \in [-M, M]$.
+    Also for all $n \in \mathbb{N}$, $g_n(0) = \dfrac{n(0) + (0)^2}{2n} = 0$.
+    This of course converges to $g(0) = 0$.
+    By \fbox{Theorem 6.3.3} $(f_n)$ converges uniformly and the limit function $f = \lim f_n$ is differentiable.
+    Also by this theorem we conclude that $g' = \lim g_n'$.
+\end{proof}
+
+\end{document}

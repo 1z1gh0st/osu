@@ -1,0 +1,263 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{MTH 430 Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{Problem 1}
+$X = \mathbb{R} \cup \{p\}$
+\\
+$\beta = \{ \text{open intervals in $\mathbb{R}$ and neighborhoods of p} \}$
+\\
+$V(p) = (a, 0) \cup \{p \} \cup (0, b) : a < 0 < b$
+\subsection*{(a)}
+
+Show that $\beta$ is a basis for a topology.
+\begin{proof}
+    To prove that $\beta$ is a basis, there are two requirements.
+    \begin{align*}
+        (\text{i}) & \ \ \ \ \forall x \in X \ \ \ \ \exists B \in \beta : x \in B \\
+        (\text{ii}) & \ \ \ \ \forall B_1,B_2 \in \beta, \forall x \in B_1 \cap B_2 \ \ \exists B \in \beta : x \in B \subset B_1 \cap B_2
+    \end{align*}
+    We want to show that $\forall sx \in X, \exists B \in \beta : x \in B$.
+    Let $x \in \mathbb{R}$ be arbitrary.
+    If $x = p$, then any neighborhood of $p$ is automatically in $\beta$.
+    Otherwise, $x \neq p \Longrightarrow x \in \mathbb{R}$.
+    Choose a real open interval $(a,b) \subset \mathbb{R} : a < x < b.$
+    \\\\
+    Now let $B_1, B_2 \in \beta$.
+    We want to show that $\forall x \in B_1 \cap B_2, \ \ \exists B \in \beta$ such that $x \in B \subset B_1 \cap B_2$.
+    Let $x \in B_1 \cap B_2$.
+    If $x = p$, then $p \in B_1$ and $p \in B_2$, and we can write
+    \[
+        B_1 = (a_1, 0) \cup \{p\} \cup (0, b_1) \ \ \ \ \ \ \ 
+        B_2 = (a_2, 0) \cup \{p\} \cup (0, b_2)
+    \]
+    Then let $a = \max \{a_1,a_2\}$ and $b = \min \{b_1,b_2\}$ and we have a neighborhood around $p$, $B = (a,0) \cup \{p\} \cup (0,b)$ where $B \subset B_1 \cap B_2$.
+    \\\\
+    If $x \neq p$, then $x \in \mathbb{R}$.
+    Denote our intervals as
+    \[
+        B_1 = (a_1, b_1) \ \ \ \ \ \ \ B_2 = (a_2, b_2)
+    \]
+    Take $a$ and $b$ as done previously and we have $a \geqslant a_1,a_2$ and $b \leqslant b_1,b_2$, which gives us $(a,b) = B \subset B_1$ and $B \subset B_2$ so then $B \subset B_1 \cap B_2$.
+\end{proof}
+\subsection*{(b)}
+Show that $\forall U,V \subset X$ such that $0 \in U, p \in V$ and both sets are open, that $U \cap V \neq \O$.
+\begin{proof}
+    Let $U \subset X$ be an open set containing $0$.
+    Let $V \subset X$ be an open set containing $p$.
+    We say $\exists U' \subset U : 0 \in U'$ where $U'$ is of the form 
+    \[
+        U' = (-a,a) = (-a,0) \cup \{0\} \cup (0,a) : a > 0
+    \]
+    Similarly there exists $V' \subset V$ such that
+    \[
+        V' = (-b,0) \cup \{p\} \cup (0,b) : b > 0
+    \]
+    If such subsets do not exist, then either $U$ or $V$ is not an open set containing the point $0$ or $p$ respectively.
+    Let $c = \min \{a,b\}$ then $V' \cap U' = (-c, 0) \cup (0,c)$ and then $\O \neq V' \cap U' \subset V \cap U$.
+\end{proof}
+\subsection*{(c)}
+Show that $\mathbb{Q} \subset \mathbb{R}$ is dense in $X$.
+\begin{proof}
+    We say that $\mathbb{Q}$ is dense in $X$ if $\overline{\mathbb{Q}} = X$.
+    Note that $\overline{\mathbb{Q}} = \mathbb{Q} \cup \mathbb{Q}'$ where $\mathbb{Q}' = \{\text{all limit points of } Q\}$.
+    We know that each irrational is a limit point of $\mathbb{Q}$, and so it is in the closure of $\mathbb{Q}$.
+    This leaves us with only the point $p$.
+    Let $V(p)$ be a neighborhood of $p$ arbitrarily.
+    We say $V(p) = (a,0) \cup \{p\} \cup (0,b)$.
+    Since there exists a rational number between any two real numbers, $\exists c \in \mathbb{Q} : a < c < 0$.
+    Therefore $V(p) \cap \mathbb{Q} \neq \O$ and so the set $\mathbb{Q}$ is dense in $X$.
+\end{proof}
+\subsection*{(d)}
+Let $f: X \rightarrow \mathbb{R}$ be a function such that $f(x) = x$ if $x \in \mathbb{R}$, otherwise $f(x) = 0$.
+Show that $f$ is continuous on $X$.
+\begin{proof}
+    Let $O \subset \mathbb{R}$ be and open set in $\mathbb{R}$.
+    We want to show that $f^{-1}(O)$ is open in $X$.
+    \\\\
+    \fbox{Case 1: $0 \in O$} If $0 \in O$ then $f^{-1}(O) = O \cup \{p\}$.
+    Since $O$ is an open set containing $0$, there exists $a \in mathbb{R}$ and $A_1, A_2 \subset O$ such that 
+    \[
+        A_1 = (-a, 0), \ \ \ \ \ \ A_2 = (0, a)
+    \]
+    Then since $O= O \cup A_1 \cup A_2$, we can rewrite 
+    \[f^{-1}(O) = O \cup \{p\} = (O \cup A_1 \cup A_2) \cup \{p\} = O \cup (A_1 \cup \{p\} \cup A_2)\]
+    Then we have the union of the open set $O$ and the $a$-neighborhood of $p$.
+    Since the union of two open sets is open, $f^{-1}(O)$ is open in $X$.
+    \\\\
+    \fbox{Case 2: $0 \notin O$} If $0 \notin O$, then it follows that $f^{-1}(O) = O$, and is open in $X$.
+\end{proof}
+\section*{Problem 2}
+\subsection*{(a)}
+Let $T_1, T_2$ be topologies on $X$, show that the intersection $T_1 \cap T_2$ is also a topology on $X$.
+\begin{proof}
+    We want to show that $\O, X \in T_1 \cap T_2$.
+    Since $T_1, T_2$ are both topologies $\O \in T_1$ and $\O \in T_2$, so $\O \in T_1 \cap T_2$.
+    Similarly, since both are topologies on $X$, the set $X$ must be in both, and we say $X \in T_1 \cap T_2$.s
+    \\\\
+    Now we want to show that $\bigcup_{\alpha \in A}O_\alpha \in T_1 \cap T_2$.
+    We know that for each open set in our intersection, $O_\alpha \in T_1$ and $O_\alpha \in T_2$.
+    Since $T_1$ is a topology on $X$, we know that any union of sets in $T_1$ will also be in $T_1$, so $\bigcup_{\alpha \in A}O_\alpha \in T_1$.
+    Similarly, all open sets in our intersection are sets in $T_2$, and we can say that $\bigcup_{\alpha \in A}O_\alpha \in T_2$.
+    If this arbitrary union is a set in both $T_1$ and $T_2$ it must be the case that $\bigcup_{\alpha \in A}O_\alpha \in T_1 \cap T_2$.
+    \\\\
+    Finally we must show that any finite intersection of sets in $T_1 \cap T_2$ is also a set in $T_1 \cap T_2$.
+    The argument is very similar to that regarding unions.
+    For every $\alpha \in A$, $O_\alpha \in T_1$.
+    Since $T_1$ is a topology on $X$, any finite intersection of sets in $T_1$ is also in $T_1$, so $\bigcap_{k=1}^n O_k \in T_1$.
+    Similarly we say $\bigcap_{k=1}^n O_k \in T_2$.
+    With our finite intersection being a set in both $T_1$ and $T_2$, it must be in the intersection $T_1 \cap T_2$.
+\end{proof}
+\subsection*{(b)}
+This argument is similar to that of the construction of the closure of a set.
+Take the collection of all topologies that contain the collection $\beta$, if we take the intersection of all of these, then we have a smallest topology.
+This is the smallest topology because for every toplogy $\tau_0$ containing $\beta, \tau \subset \tau_0$.
+As we have shown in part $(a)$, the intersection of two topologies on $X$ is also a topology on $X$, and for this reason the arugment holds.
+\subsection*{(c)}
+\begin{proof}
+    Let $A = \{\text{every finite intersection of sets in $\beta$, and every set in $\beta$}\}$.
+    Then let $\tau = \{\text{every union of sets in $A$}\} \cup \{\O\}$.
+    From part $(b)$ we know that this is the smallest topology on $X$ containing $\beta$ if $\tau = $ the intersection of all topologies containing $\beta$.
+    If we can show that for every topology containing $\beta, \tau$ is a subset of it, then it is the smallest one.
+    \\\\
+    \fbox{$\tau$ is a topology on $X$}
+    By construction we have $\O$ and $\bigcup_{i \in I} B_i = X \in \tau$.
+    Since our topology is constructed only from unions of sets in $A$, it follows that unions of sets in $\tau$
+    will simply be unions of sets in $A$ which are in $\tau$ by construction.
+    For intersections, let $G,H \in \tau$.
+    Then $\exists G_0 \subset A$ and $H_0 \subset A$ such that
+    \[
+        G = \left\{\bigcup G_0 \right\} \ \ \ \ \ \ H = \left\{\bigcup H_0\right\}
+    \]
+    Then their intersection can be written as 
+    \[
+        G \cap H = \left\{\bigcup G_0\right\} \cap \left\{\bigcup H_0\right\} = \bigcup \left(G_0 \cap H_0\right)
+    \]
+    Recall that $G_0, H_0 \subset A$, which means that they are finite intersections of sets in $\beta$.
+    For this reason, their intersection is also a finite intersection and $G_0 \cap H_0 = \{ B_{1_g} \cap B_{2_g} \cap \cdots \cap B_{n_g} \} \cap \{B_{1_h} \cap B_{2_h} \cap \cdots \cap B_{m_h}\}$.
+    Thus $G_0 \cap H_0 \subset A$, and so the union of elements in this intersection will be in the topology by construction.
+    It follows that by induction any finite intersection will be in $\tau$.
+\\\\
+    \fbox{$\tau$ is the smallest topology containing $\beta$}
+    Since topologies must be closed under finite intersections, the smallest one must contain every set in $A$.
+    Since topologies must also be closed under infinite unions, any topology containing $\beta$ must contain at least every element in $\tau$, and we conclude that
+    for any topology $\tau_0$ such that $B \in \beta \Rightarrow B \in \tau_0$, $\tau \subset \tau_0$.
+\end{proof}
+\section*{Problem 3}
+\subsection*{(a)}
+Let $X = \mathbb{R}$ with $\tau$ consisting of all subsets $B \subset \mathbb{R}$ such that $B^c$ contains finitely many elements or $B^c = \mathbb{R}$.
+Show that $\tau$ is a topology on $X$.
+\begin{proof}
+    First we want to show that the empty set and the entire set are in the topology.
+    Since $\O \subset X$, and $\O^c = \mathbb{R}, \O \in \tau$.
+    For $X$ we have $X \subset X$, and also $X^c = \O$, and we say that the empty set has finitely many elements therefore $X \in \tau$.
+    \\\\
+    Now we wish to prove that any union of sets in $\tau$ is also a set in $\tau$.
+    For any set $B \in \tau$, we say there is some natural number $n$ for which $B^c = \{x_1, x_2, \cdots, x_n\}$.
+    Take the complement of the union $\left(\bigcup_{i\in I}B_i\right)^c$ and if it has finitely many elements, the union must be a set in $\tau$.
+    Let $x \in \left(\bigcup_{i\in I}B_i\right)^c$.
+    Then $\forall i \in I, x \notin B_i$ which is equivalent to saying $\forall i \in I, x \in B_i^c$.
+    Then since $x$ is in the complement of each $B_i$, $x \in \bigcap_{i \in I}B_i^c$.
+    This gives us the result $\left(\bigcup_{i\in I}B_i\right)^c \subset \bigcap_{i \in I}B_i^c$ (both sets are in fact equal but we need not prove this here).
+    Since each $B_i^c$ has finitely many terms, it follows logically that $\bigcap_{i \in I}B_i^c$ must have at most finitely many terms.
+    Since $\left(\bigcup_{i\in I}B_i\right)^c \subset \bigcap_{i \in I}B_i^c$ and the superset has finitely many terms, the subset must also have finitely many terms.
+    With the complement having finitely many terms, $\bigcup_{i\in I}B_i \in \tau$.
+    \\\\
+    Finally we must show that any finite intersection of sets in $\tau$ is also in $\tau$.
+    Take the complement of the union $\left(\bigcap_{k=1}^nB_k\right)^c$.
+    Let $x \in \left(\bigcap_{k=1}^nB_k\right)^c$.
+    Then $x$ is not in every $B_k$, which means that $\exists k : x \in B_k^c$.
+    Since there is some set where $x$ is in the complement, we say that $x \in \bigcup_{k=1}^n B_k^c$.
+    This gives us the result $\left(\bigcap_{k=1}^nB_k\right)^c \subset \bigcup_{k=1}^n B_k^c$.
+    Now we have a finite union from $1$ to $n$ of sets with finitely many elements (the complements of $B \in \tau$).
+    It follows that this union must have finitely many elements, and since it is a superset of the complement of $\bigcap_{k=1}^nB_k$, the complement of said set has finitely many elements so the set is in $\tau$.
+\end{proof}
+\subsection*{(b)}
+Let $X = \{a,b,c\}$ and $\tau = \{\O, \{c\}, \{a,c\}, \{b,c\}, \{a,b,c\}\}$.
+Show that $\tau$ is a topology on $X$.
+\begin{proof}
+    We know that $\O, X \in \tau$ by construction.
+    Let us check if the union of each pair of nonempty sets in $\tau$ is also in $\tau$.
+    \begin{align*}
+        \{c\}\cup \{a,c\} & = \{a,c\} \\
+        \{c\} \cup \{b,c\} & = \{b,c\} \\
+        \{c\} \cup \{a,b,c\} & = \{a,b,c\} \\
+        \{a,c\} \cup \{b,c\} & = \{a,b,c\} \\
+        \{a,c\} \cup \{a,b,c\} & = \{a,b,c\} \\
+        \{b,c\} \cup \{a,b,c\} & = \{a,b,c\}      
+    \end{align*}
+    Any finite union can be broken up by associativity to unions of pairs of sets and every pair of sets in $\tau$ has a union in $\tau$ therefore any finite union of sets in $\tau$ is a set in $\tau$.
+    \\\\
+    We make a similar argument for a finite intersection of sets in $\tau$, and we look at the intersection of every pair of non-empty sets.
+    \begin{align*}
+        \{c\}\cap \{a,c\} & = \{c\} \\
+        \{c\} \cap \{b,c\} & = \{c\} \\
+        \{c\} \cap \{a,b,c\} & = \{c\} \\
+        \{a,c\} \cap \{b,c\} & = \{c\} \\
+        \{a,c\} \cap \{a,b,c\} & = \{a,c\} \\
+        \{b,c\} \cap \{a,b,c\} & = \{b,c\}
+    \end{align*}
+    And since all pairs result in sets that belong to $\tau$ we say that any finite intersection of sets in $\tau$ belongs to $\tau$.
+    No infinite cases exist since our topology is a finite set.
+\end{proof}
+\section*{Problem 4}
+Show that $\overline{A} = A^\circ \cup A^b$.
+\begin{proof}
+    \fbox{$A^\circ \cup A^b \subset \overline{A}$} If a point $p$ is in $A^\circ \subset A \subset \overline{A}$, then it is in $\overline{A}$.
+    Otherwise, suppose $p \in A^b$.
+    Assume by contradiction that the closed set $\overline{A}$ did not contain $p$.
+    Then the complement of $\overline{A}$ would both contain $p$.
+    Since $(\overline{A})^c$ is the complement of a closed set, it is open.
+    Since $A \subset \overline{A}$ we say that $(\overline{A})^c \cap A = \O$.
+    Therefore there exists a nieghborhood of $p$ that does not intersect $A$, and $p$ is not a boundary point (contradiciton).
+    So $p \in A^b \Longrightarrow p \in \overline{A}$.
+    \\\\
+    \fbox{$\overline{A}\subset A^\circ \cup A^b$}
+    Let $p \in \overline{A}$.
+    Suppose by contradiction that $p \notin A^\circ \cup A^b$.
+    Then both $p \notin A$ and $p$ is not a limit point of $A$.
+    Therefore there exists a neighborhood of $p$, $O(p)$ that does not intersect $A$.
+    The complement of $O(p)$ would then be a closed set containing $A$ that did not contain $p \Longrightarrow p \notin \overline{A}$ (contradiction).
+\end{proof}
+\section*{Problem 5}
+Show that $Cl(Int(Cl(Int(A)))) = Cl(Int(A))$.
+\begin{proof}
+    Note that $Cl(A)$ is closed set, so it must be equal to its closure, i.e $Cl(A) = Cl(Cl(A))$.
+    Similarly an interior $Int(A)$ is an open set, and therefore must be equal to its interior which means $Int(A) = Int(Int(A))$.
+    Also recall that $Int(A) \subset A \subset Cl(A)$.
+    \\\\
+    \fbox{$\subset$} Let $A''$ be a set.
+    We can say 
+    \begin{align*}
+        Int(A'') & \subset A'' \\
+        Cl(Int(A'')) & \subset Cl(A'')
+    \end{align*}
+    Now let $A'' = Cl(A')$ and it follows that
+    \[        Cl(Int(Cl(A'))) \subset Cl(Cl(A')) = Cl(A')
+    \]
+    Finally let $A' = Int(A)$ and we get
+    \[
+        Cl(Int(Cl(Int(A)))) \subset Cl(Int(A))
+    \]
+    \fbox{$\supset$}
+    \begin{align*}
+        A' & \subset Cl(A') \\
+        \Longrightarrow Int(A') & \subset Int(Cl(A'))
+    \end{align*}
+    Let $A' = Int(A)$, then
+    \begin{align*}
+        Int(Int(A)) = Int(A) & \subset Int(Cl(Int(A)))\\
+        Cl(Int(A)) & \subset Cl(Int(Cl(Int(A))))
+    \end{align*}
+\end{proof}
+\end{document}
