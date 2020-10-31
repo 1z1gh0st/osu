@@ -19,9 +19,9 @@ using std::string;
 
 class Matrix {
     private:
-        unsigned num_rows;
-        unsigned num_cols;
-        vector<vector<double>> matrix;
+        unsigned m_numRows;
+        unsigned m_numCols;
+        vector<vector<double>> m_matrix;
     public:
         /* --- CONSTRUCTORS --- */
         Matrix(unsigned, unsigned, double); // Constructor
@@ -29,32 +29,39 @@ class Matrix {
         Matrix(unsigned, unsigned, vector<double>);
         Matrix(const Matrix &); // Copy constructor
 
-        /* --- OPERATORS --- */
+        /* --- ASSIGNMENT AND INDEX OPERATORS --- */
+		vector<double> operator[](unsigned);
         Matrix operator=(const Matrix &); // Assignment operator overload
 
-        // Scalar Algebra
+        /* --- SCALING ALGEBRA OPERATORS --- */
         Matrix operator+(double);
         Matrix operator-(double);
         Matrix operator*(double);
         Matrix operator/(double);
 
-        // Matrix Algebra
+        /* --- MATRIX ALGEBRA OPERATORS --- */
         Matrix operator+(const Matrix &);
         Matrix operator-(const Matrix &);
         Matrix operator*(const Matrix &);
 
+        /* --- MATRIX CALCULATIONS --- */
         void transpose();
         float determinant();
-        void hadamard_mult(const Matrix &); // TODO
-        void kroenecker_mult(const Matrix &); // TODO
+        void hadamardProduct(const Matrix &); 
+        void kroeneckerProduct(const Matrix &); 
 
         /* --- DEBUGGING --- */
         void print() const;
-        double get_value_at(unsigned i, unsigned j) const;
+        double getValueAt(unsigned i, unsigned j) const;
 
-        /* --- OTHER --- */
-        Matrix remove_row_at(unsigned);
-        Matrix remove_col_at(unsigned);
+        /* --- BASIC MANIPULATION --- */
+        Matrix removeRowAt(unsigned);
+        Matrix removeColAt(unsigned);
+
+		void appendLeft(const Matrix &);
+		void appendRight(const Matrix &);
+		void appendTop(const Matrix &);
+		void appendBottom(const Matrix &);
 };
 
 #endif

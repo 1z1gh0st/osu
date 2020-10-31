@@ -1,0 +1,17 @@
+// Week 3 Worksheet 4
+// Philip Warton
+
+int linkedListIteratorHasNext (struct linkedListIterator *itr) {
+	return (itr->currentLink->next != itr->lst->backSentinel);
+}
+
+TYPE linkedListIteratorNext (struct linkedListIterator *itr) {
+	return itr->currentLink->next->value;
+}
+
+void linkedListIteratorRemove (struct linkedListIterator *itr) {
+	struct dlink* linkToRemove = itr->currentLink;
+	itr->currentLink = itr->currentLink->next;
+	free(linkToRemove);
+}
+

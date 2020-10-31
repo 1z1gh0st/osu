@@ -1,0 +1,60 @@
+// Worksheet 0 
+// Philip Warton
+// CS 261
+
+/* Bag Implementation */
+
+void initBag(struct arrayBagStack * b) {
+	struct arrayBagStack* result = (arrayBagStack*)malloc(sizeof(arrayBagStack*));
+	TYPE dataArray[MAX_SIZE];
+	result->data = dataArray;
+	result->count = 0;
+}
+
+void addBag(struct arrayBagStack * b, TYPE v) {
+	b->data[b->count++] = v;
+}
+
+int containsBag (struct arrayBagStack * b, TYPE v) {
+	int result = 0;
+	int i;
+	for (i = 0; i < b->count; i++) {
+		if (myBag->values[i] == v)
+			result = 1;
+	}
+	return result;
+}
+
+void removeBag(struct arrayBagStack * b, TYPE v) {
+	int i;
+	int passedCount = 0;
+	for (i = 0; i < b->count; i++) {
+		passedCount += (b->values[i] == v
+		b->data[i] = v->data[i + passedCount];
+	}
+	b->count -= passedCount;
+}
+
+int sizeBag(struct arrayBagStack * b) {
+	return b->count;
+}
+
+
+/* Stack Implementation */
+
+void pushStack(struct arrayBagStack * b, TYPE v) {
+	b->data[b->count++] = v;
+}
+
+TYPE topStack(struct arrayBagStack * b) {
+	return b->data[b->size - 1];
+}
+
+
+void popStack(struct arrayBagStack * b) {
+	b->size--;
+}
+
+int isEmptyStack(struct arrayBagStack * b) {
+	return (b->size == 0);
+}

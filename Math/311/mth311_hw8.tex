@@ -12,6 +12,14 @@
 \date{\today}
 \maketitle
 
+\begin{proof}
+Let $f: X \rightarrow Y$. Wts that for any metric space the topological definition of continuity is equivalent to the $\epsilon$-$\delta$ definition. \\
+"$\Rightarrow$" Assume $f^{-1}(U)$ is open for every open set $U \subset Y$. Let $\epsilon > 0$, and let $x \in X$. Then let $y = f(x)$. It follows that $f^{-1}(V_\epsilon(f(x)))$ is open in $X$. Then since $x$ must be in the set $f^{-1}(V_\epsilon(f(x)))$ there must exist some $\delta$-neighborhood of $x$ such that $V_\delta(x) \subset f^{-1}(V_\epsilon(f(x)))$. Hence $f(V_\delta(x) \subset V_\epsilon(f(x))$. \\
+"$\Leftarrow$" Assume that for every $\epsilon$-neighborhood of $f(x)$ there is some $V_\delta(x)$ whose image is contained in it. Let $O \subset Y$ be an open set in $Y$. Then for every point $y\in Y$ there is some neighborhood of $y$ contained in $O$. It follows that $O = \bigcup_{y \in O}V_{\epsilon_y}(y)$. If $f^{-1}(y) = \O$, we need not worry about this point. Otherwise there exists some $x \in X | f(x) = y$. Hence by assumption we can write \[
+f^{-1}\left(\bigcup_{y \in O}V_{\epsilon_y}(y)\right) = \bigcup_{x \in f^{-1}(O)}V_{\delta_x}(x) \]
+Since this is a union of open sets in $X$, we have $f^{-1}(O)$ is open and $f$ is continuous.
+\end{proof}
+
 \section*{4.4.9}
 \subsection*{(a)}
 Show that a Lipschitz function is uniformly continuous.

@@ -1,0 +1,27 @@
+// Week 5 Worksheet 2 Philip Warton
+
+Step 1: O(n * log(n))
+
+Step 2: O(n * log(n))
+
+Independent of input distribution.
+
+void treeSort (TYPE[ ] data, int n) { 
+	/* sort values in array data */
+	AVLtree tree;
+	AVLtreeInit (&tree);
+
+	// Step 1: array -> tree
+	int i;
+	for (i = 0; i < n; i++) {
+		AVLinsert(tree, data[i]);
+	}
+
+	// Step 2: tree -> array
+	TYPE x;
+	i = 0;
+	for(x = AVL_first(tree); !AVL_done(tree, x); x = AVL_next(tree, x)) {
+		data[i] = x;
+		i++;
+	}
+}

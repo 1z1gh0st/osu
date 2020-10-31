@@ -1,0 +1,66 @@
+// Week 4 Worksheet 3 Philip Warton
+
+struct node * BSTnodeAdd (struct node *current, TYPE newValue) { 
+	struct node* tmp = current;
+	while (tmp != NULL) {
+		if (tmp->value < newValue) { 
+			tmp = tmp->left;	
+		} else if (tmp->value > newValue) {
+			tmp = tmp->right;
+		} else {
+			break;
+		}
+	}
+	if (tmp == NULL) {
+		struct node* newNode = (struct node*)malloc(sizeof(struct node));
+		newNode->value = newValue;
+		tmp = newNode;
+	}
+	return current;
+}
+
+int BSTcontains (struct binarySearchTree *tree, TYPE d) {
+	struct node* tmp = tree->root;
+	while (tmp != NULL) {
+		if (tmp->value < d) { 
+			tmp = tmp->left;
+		} else if (tmp->value > d) {
+			tmp = tmp->right;
+		} else {
+			return 1;
+		}
+	}
+	return 0;
+}
+
+TYPE leftMostChild(struct node* current) {
+	while (current->left != NULL) {
+		current = current->left;
+	}
+	return current->value;
+}
+
+struct node * removeLeftmostChild (struct node *current) { 
+	struct node* nodeToDelete, tmp = current;
+	while (tmp->left->left != NULL) {
+		tmp = tmp->left;
+	}
+	nodeToDelete = tmp->left;
+	free(nodeToDelete);
+	tmp->left = NULL;
+	return current;
+}
+
+void BSTnodeRemove(struct node * current, TYPE d) {
+	while (current != NULL) {
+		if (current->value == d) {
+			current->value = leftMostChild(current);
+			current = removeLeftmostChild(current);
+		} else if (current->value > d){
+			current = current->left;	
+		} else {
+			current = current->right;
+		}
+	}
+}
+

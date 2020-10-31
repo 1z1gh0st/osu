@@ -1,6 +1,7 @@
 #include "matrix.h"
 #include <iostream>
 #include <iomanip>
+#include <random>
 
 using std::cout;
 using std::endl;
@@ -8,38 +9,43 @@ using std::setw;
 using std::max;
 using std::cin;
 
-/* Constructors */
-
-Matrix::Matrix(unsigned _num_rows_, unsigned _num_cols_, double _init_val_) {
-   num_rows = _num_rows_;
-   num_cols = _num_cols_;
-   matrix.resize(num_rows);
-   for (unsigned i = 0; i < num_rows; i++) {
-       matrix[i].resize(num_cols, _init_val_);
+Matrix::Matrix(unsigned m_numRows, unsigned m_numCols, double initialValue) {
+   this->m_numRows = m_numRows;
+   this->m_numCols = m_numCols;
+   m_matrix.resize(m_numRows);
+   for (unsigned i = 0; i < m_numRows; i++) {
+       m_matrix[i].resize(m_numCols, initialValue);
    }
 }
 
-Matrix::Matrix(unsigned _num_rows_, unsigned _num_cols_, string _s_) {
+Matrix::Matrix(unsigned numRows, unsigned numCols, string type) {
    string input = "";
-   num_rows = _num_rows_;
-   num_cols = _num_cols_;
-   matrix.resize(num_rows);
-   for (unsigned i = 0; i < num_rows; i++) {
-       matrix[i].resize(num_cols, 0);
+   m_numRows = numRows;
+   m_numCols = numCols;
+   m_matrix.resize(m_numRows);
+   for (unsigned i = 0; i < m_numRows; i++) {
+       m_matrix[i].resize(m_numCols, 0);
    }
-    if (_s_ == "man") { // manually enter values
-        for (unsigned i = 0; i < num_rows; i++) {
-            for (unsigned j = 0; j < num_cols; j++) {
+    if (type == "man") { // manually enter values
+        for (unsigned i = 0; i < m_numRows; i++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
                 cout << i << " " << j << " : ";
                 getline(cin, input);
-                matrix[i][j] = stod(input);
+                m_matrix[i][j] = stod(input);
                 print();
             }
         }
-    } else if (_s_ == "id") { // identity matrix
-        for (unsigned i = 0; i < num_rows; i++) {
-            for (unsigned j = 0; j < num_cols; j++) {
-                matrix[i][j] = (i == j);
+    } else if (type == "id") { // identity matrix
+        for (unsigned i = 0; i < m_numRows; i++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
+                m_matrix[i][j] = (i == j);
+            }
+        }
+	} else if (type == "rand") { // random value matrix
+		srand(time(NULL));
+        for (unsigned i = 0; i < m_numRows; i++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
+                m_matrix[i][j] = 1.0 / ((float)rand() / (float)RAND_MAX);
             }
         }
     } else {
@@ -47,46 +53,49 @@ Matrix::Matrix(unsigned _num_rows_, unsigned _num_cols_, string _s_) {
     }
 }
 
-Matrix::Matrix(unsigned _num_rows_, unsigned _num_cols_, vector<double> _values_) {
-    if ((_num_rows_ * _num_cols_) != _values_.size()) {
+Matrix::Matrix(unsigned numRows, unsigned numCols, vector<double> values) {
+    if ((numRows * numCols) != values.size()) {
         cout << "ERROR: called constructor that accepts vector: vector passed was of incorrect length" << endl;
         throw("Constructor recieved vector of incorrect length (should be n by m)");
     } else {
-        num_rows = _num_rows_;
-        num_cols = _num_cols_;
+        m_numRows = numRows;
+        m_numCols = numCols;
         unsigned k = 0;
-        matrix.resize(num_rows);
-        for (unsigned i = 0; i < num_rows; i++) {
-            matrix[i].resize(num_cols);
-            for (unsigned j = 0; j < num_cols; j++) {
-                matrix[i][j] = _values_[k];
+        m_matrix.resize(m_numRows);
+        for (unsigned i = 0; i < m_numRows; i++) {
+            m_matrix[i].resize(m_numCols);
+            for (unsigned j = 0; j < m_numCols; j++) {
+                m_matrix[i][j] = values[k];
                 k++;
             }
         }
     }
 }
 
-Matrix::Matrix(const Matrix &_m_) {
-    num_rows = _m_.num_rows;
-    num_cols = _m_.num_cols;
-    matrix = _m_.matrix;
+Matrix::Matrix(const Matrix &A) {
+    m_numRows = A.m_numRows;
+    m_numCols = A.m_numCols;
+    m_matrix = A.m_matrix;
 }
 
-/* Operators */
+// Subscript operator
+vector<double> Matrix::operator[](unsigned i) {
+	return m_matrix[i];
+}
 
 // Assignment
-Matrix Matrix::operator=(const Matrix &_m_) {
-    num_rows = _m_.num_rows;
-    num_cols = _m_.num_cols;
-    matrix = _m_.matrix;
+Matrix Matrix::operator=(const Matrix &A) {
+    m_numRows = A.m_numRows;
+    m_numCols = A.m_numCols;
+    m_matrix = A.m_matrix;
     return *this;
 }
 
 // Scalar addition
 Matrix Matrix::operator+(double _c_) {
-    for (unsigned i = 0; i < num_rows; i++) {
-        for (unsigned j = 0; j < num_cols; j++) {
-            matrix[i][j] += _c_;
+    for (unsigned i = 0; i < m_numRows; i++) {
+        for (unsigned j = 0; j < m_numCols; j++) {
+            m_matrix[i][j] += _c_;
         }
     }
     return *this;
@@ -94,9 +103,9 @@ Matrix Matrix::operator+(double _c_) {
 
 // Scalar subtraction
 Matrix Matrix::operator-(double _c_) {
-    for (unsigned i = 0; i < num_rows; i++) {
-        for (unsigned j = 0; j < num_cols; j++) {
-            matrix[i][j] -= _c_;
+    for (unsigned i = 0; i < m_numRows; i++) {
+        for (unsigned j = 0; j < m_numCols; j++) {
+            m_matrix[i][j] -= _c_;
         }
     }
     return *this;
@@ -104,9 +113,9 @@ Matrix Matrix::operator-(double _c_) {
 
 // Scalar multiplication
 Matrix Matrix::operator*(double _c_) {
-    for (unsigned i = 0; i < num_rows; i++) {
-        for (unsigned j = 0; j < num_cols; j++) {
-            matrix[i][j] *= _c_;
+    for (unsigned i = 0; i < m_numRows; i++) {
+        for (unsigned j = 0; j < m_numCols; j++) {
+            m_matrix[i][j] *= _c_;
         }
     }
     return *this;
@@ -114,24 +123,24 @@ Matrix Matrix::operator*(double _c_) {
 
 // Scalar division
 Matrix Matrix::operator/(double _c_) {
-    for (unsigned i = 0; i < num_rows; i++) {
-        for (unsigned j = 0; j < num_cols; j++) {
-            matrix[i][j] /= _c_;
+    for (unsigned i = 0; i < m_numRows; i++) {
+        for (unsigned j = 0; j < m_numCols; j++) {
+            m_matrix[i][j] /= _c_;
         }
     }
     return *this;
 }
 
 // Entrywise addition
-Matrix Matrix::operator+(const Matrix &_m_) {
-    if (num_rows != _m_.num_rows || num_cols != _m_.num_cols) {
+Matrix Matrix::operator+(const Matrix &A) {
+    if (m_numRows != A.m_numRows || m_numCols != A.m_numCols) {
         cout << "ERROR: matrix subtraction of invalid dimension" << endl;
         throw("Matrix subtraction invalid dimension");
     } else {
-        for (unsigned i = 0; i < num_rows; i++) {
-            for (unsigned j = 0; j < num_cols; j++) {
-                if (i < _m_.num_rows && j < _m_.num_cols) {
-                    matrix[i][j] += _m_.matrix[i][j];
+        for (unsigned i = 0; i < m_numRows; i++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
+                if (i < A.m_numRows && j < A.m_numCols) {
+                    m_matrix[i][j] += A.m_matrix[i][j];
                 }
             }
         }
@@ -140,15 +149,15 @@ Matrix Matrix::operator+(const Matrix &_m_) {
 }
 
 // Entrywise subtraction
-Matrix Matrix::operator-(const Matrix &_m_) {
-    if (num_rows != _m_.num_rows || num_cols != _m_.num_cols) {
+Matrix Matrix::operator-(const Matrix &A) {
+    if (m_numRows != A.m_numRows || m_numCols != A.m_numCols) {
         cout << "ERROR: matrix subtraction of invalid dimension" << endl;
         throw("Matrix subtraction invalid dimension");
     } else {
-        for (unsigned i = 0; i < num_rows; i++) {
-            for (unsigned j = 0; j < num_cols; j++) {
-                if (i < _m_.num_rows && j < _m_.num_cols) {
-                    matrix[i][j] -= _m_.matrix[i][j];
+        for (unsigned i = 0; i < m_numRows; i++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
+                if (i < A.m_numRows && j < A.m_numCols) {
+                    m_matrix[i][j] -= A.m_matrix[i][j];
                 }
             }
         }
@@ -157,22 +166,22 @@ Matrix Matrix::operator-(const Matrix &_m_) {
 }
 
 // Matrix multiplication
-Matrix Matrix::operator*(const Matrix &_m_) {
-    if (num_cols != _m_.num_rows) {
+Matrix Matrix::operator*(const Matrix &A) {
+    if (m_numCols != A.m_numRows) {
         cout << "ERROR: matrix multiplication of invalid dimension" << endl;
         throw("Matrix multiplication: invalid dimensions");
     } else {
-        unsigned p = num_cols;
-        vector<vector<double>> result (num_rows, vector<double> (_m_.num_cols, 0));
+        unsigned p = m_numCols;
+        vector<vector<double>> result (m_numRows, vector<double> (A.m_numCols, 0));
         for (unsigned i = 0; i < result.size(); i++) {
             for (unsigned j = 0; j < result[0].size(); j++) {
                 for (unsigned k = 0; k < p; k++) {
-                    result[i][j] += (matrix[i][k] * _m_.matrix[k][j]); 
+                    result[i][j] += (m_matrix[i][k] * A.m_matrix[k][j]); 
                 }
             }
         }
-        num_cols = _m_.num_cols;
-        matrix = result;
+        m_numCols = A.m_numCols;
+        m_matrix = result;
     }
     return *this;
 }
@@ -180,22 +189,22 @@ Matrix Matrix::operator*(const Matrix &_m_) {
 // Determinant
 float Matrix::determinant() {
     float det = 0;
-    if (num_cols != num_rows) {
+    if (m_numCols != m_numRows) {
         cout << "ERROR: determinant invalid dimension" << endl;
         throw("Matrix determinant: invalid dimensions");
     } else {
         // Calculate the determinant
-        if (num_rows == 2) {
-            det = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]); 
+        if (m_numRows == 2) {
+            det = (m_matrix[0][0] * m_matrix[1][1]) - (m_matrix[0][1] * m_matrix[1][0]); 
         } else {
-            for (unsigned j = 0; j < num_cols; j++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
                 Matrix submatrix = *this;
-                submatrix.remove_row_at(0);
-                submatrix.remove_col_at(j);
+                submatrix.removeRowAt(0);
+                submatrix.removeColAt(j);
                 if (j % 2 == 0) {
-                    det += matrix[0][j] * submatrix.determinant();
+                    det += m_matrix[0][j] * submatrix.determinant();
                 } else {
-                    det -= matrix[0][j] * submatrix.determinant();
+                    det -= m_matrix[0][j] * submatrix.determinant();
                 }
             }
         }
@@ -205,66 +214,174 @@ float Matrix::determinant() {
 
 // Transpose
 void Matrix::transpose() {
-    vector<vector<double>> result (num_cols, vector<double> (num_rows, 0));
-    for (unsigned i = 0; i < num_rows; i++) {
-        for (unsigned j = 0; j < num_cols; j++) {
-            result[j][i] = matrix[i][j];
+    vector<vector<double>> result (m_numCols, vector<double> (m_numRows, 0));
+    for (unsigned i = 0; i < m_numRows; i++) {
+        for (unsigned j = 0; j < m_numCols; j++) {
+            result[j][i] = m_matrix[i][j];
         }
     }
-    matrix = result;
-    unsigned swap = num_rows;
-    num_rows = num_cols;
-    num_cols = swap;
+    m_matrix = result;
+    unsigned swap = m_numRows;
+    m_numRows = m_numCols;
+    m_numCols = swap;
 }
 
 // Entrywise multiplication
-void Matrix::hadamard_mult(const Matrix &_m_) {
-    if (num_rows != _m_.num_rows || num_cols != _m_.num_cols) {
+void Matrix::hadamardProduct(const Matrix &A) {
+    if (m_numRows != A.m_numRows || m_numCols != A.m_numCols) {
         cout << "error: hadamard mult. attempted on matrix of unequal dim" << endl;
         throw("dimension error");
     } else {
-        for (unsigned i = 0; i < num_rows; i++) {
-            for (unsigned j = 0; j < num_cols; j++) {
-                matrix[i][j] *= _m_.matrix[i][j];
+        for (unsigned i = 0; i < m_numRows; i++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
+                m_matrix[i][j] *= A.m_matrix[i][j];
             }
         }
     }
 }
 
-/* Debugging */
+// Kronecker product
+void Matrix::kroeneckerProduct(const Matrix &A) {
+	Matrix result(0, A.m_numCols * m_numCols, 0);
+    for (unsigned i = 0; i < m_numRows; i++) {
+        Matrix row(A.m_numRows, 0, 0);
+        for (unsigned j = 0; j < m_numCols; j++) {
+            Matrix B = A;
+            row.appendRight(B * m_matrix[i][j]);
+        }
+        result.appendBottom(row);
+    }
+    m_numRows *= A.m_numRows;
+    m_numCols *= A.m_numCols;
+    m_matrix = result.m_matrix;
+}
+
+void Matrix::appendLeft(const Matrix &A) {
+	if (m_numRows != A.m_numRows) {
+		cout << "ERROR: append left - invalid dimensions" << endl;
+		throw ("append dimension error");
+	} else {
+		Matrix result(m_numRows, m_numCols + A.m_numCols, 0);
+		// Copy current matrix in on right
+		for (unsigned i = 0; i < m_numRows; i++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
+                result.m_matrix[i][j + A.m_numRows] = m_matrix[i][j];
+            }
+        }
+		// Copy other matrix in on left
+		for (unsigned i = 0; i < A.m_numRows; i++) {
+			for (unsigned j = 0; j < A.m_numCols; j++) {
+				result.m_matrix[i][j] = A.m_matrix[i][j];
+			}
+		}
+        m_numCols += A.m_numCols;
+        m_matrix = result.m_matrix;
+	}
+}
+
+void Matrix::appendRight(const Matrix &A) {
+	if (m_numRows != A.m_numRows) {
+		cout << "ERROR: append right - invalid dimensions" << endl;
+		throw ("append dimension error");
+	} else {
+		Matrix result(m_numRows, m_numCols + A.m_numCols, 0);
+		// Copy current matrix in on left
+		for (unsigned i = 0; i < m_numRows; i++) {
+            for (unsigned j = 0; j < m_numCols; j++) {
+                result.m_matrix[i][j] = m_matrix[i][j];
+            }
+        }
+		// Copy other matrix in on right
+		for (unsigned i = 0; i < A.m_numRows; i++) {
+			for (unsigned j = 0; j < A.m_numCols; j++) {
+				result.m_matrix[i][j + m_numCols] = A.m_matrix[i][j];
+			}
+		}
+        m_numCols += A.m_numCols;
+        m_matrix = result.m_matrix;
+	}
+}
+
+void Matrix::appendTop(const Matrix &A) {
+	if (m_numCols != A.m_numCols) {
+		cout << "ERROR: append top - invalid dimensions" << endl;
+		throw ("append dimension error");
+	} else {
+		Matrix result(m_numRows + A.m_numRows, m_numCols, 0);
+		// Copy current matrix on bottom
+		for (unsigned i = 0; i < m_numRows; i++) {
+			for (unsigned j = 0; j < m_numCols; j++) {
+				result.m_matrix[i + A.m_numRows][j] = m_matrix[i][j];
+			}
+		}
+        // Copy other matrix on top
+        for (unsigned i = 0; i < A.m_numRows; i++) {
+            for (unsigned j = 0; j < A.m_numCols; j++) {
+                result.m_matrix[i][j] = A.m_matrix[i][j];
+            }
+        }
+        m_numRows += A.m_numRows;
+        m_matrix = result.m_matrix;
+	}
+}
+
+void Matrix::appendBottom(const Matrix &A) {
+	if (m_numCols != A.m_numCols) {
+		cout << "ERROR: append bottom - invalid dimensions" << endl;
+		throw ("append dimension error");
+	} else {
+		Matrix result(m_numRows + A.m_numRows, m_numCols, 0);
+		// Copy current matrix on bottom
+		for (unsigned i = 0; i < m_numRows; i++) {
+			for (unsigned j = 0; j < m_numCols; j++) {
+				result.m_matrix[i][j] = m_matrix[i][j];
+			}
+		}
+        // Copy other matrix on top
+        for (unsigned i = 0; i < A.m_numRows; i++) {
+            for (unsigned j = 0; j < A.m_numCols; j++) {
+                result.m_matrix[i + m_numRows][j] = A.m_matrix[i][j];
+            }
+        }
+        m_numRows += A.m_numRows;
+        m_matrix = result.m_matrix;
+	}
+}
 
 void Matrix::print() const {
-    cout << ":" << endl;
-    for (unsigned i = 0; i < num_rows; i++) {
-        for (unsigned j = 0; j < num_cols; j++) {
-            cout << setw(10) << matrix[i][j];
+    for (unsigned i = 0; i < m_numRows; i++) {
+		cout << "[ ";
+        for (unsigned j = 0; j < m_numCols; j++) {
+            cout << setw(9) << m_matrix[i][j];
+			(j == m_numCols - 1) ? cout << "" : cout << ",";
         }
+		cout << "]";
         cout << endl;
     }
 }
 
-double Matrix::get_value_at(unsigned _i_, unsigned _j_) const {
-    return matrix[_i_][_j_];
+double Matrix::getValueAt(unsigned i, unsigned j) const {
+    return m_matrix[i][j];
 }
 
-Matrix Matrix::remove_row_at(unsigned _i_) {
-    if (_i_ >= num_rows) {
+Matrix Matrix::removeRowAt(unsigned i) {
+    if (i >= m_numRows) {
         cout << "error; out of range" << endl;
     } else {
-        matrix.erase(matrix.begin() + _i_);
-        num_rows--;
+        m_matrix.erase(m_matrix.begin() + i);
+        m_numRows--;
     }
     return *this;
 }
 
-Matrix Matrix::remove_col_at(unsigned _j_) {
-    if (_j_ >= num_cols) {
+Matrix Matrix::removeColAt(unsigned j) {
+    if (j >= m_numCols) {
         cout << "error; out of range" << endl;
     } else {
-        for (unsigned i = 0; i < num_rows; i++) {
-            matrix[i].erase(matrix[i].begin() + _j_);
+        for (unsigned i = 0; i < m_numRows; i++) {
+            m_matrix[i].erase(m_matrix[i].begin() + j);
         }
-        num_cols--;
+        m_numCols--;
     }
     return *this;
 }

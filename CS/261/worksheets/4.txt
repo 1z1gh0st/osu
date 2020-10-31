@@ -1,0 +1,18 @@
+// Worksheet 4
+// CS 162
+// Philip Warton
+
+EleType linkedListStackTop (struct linkedListStack* s) {
+	return s->firstLink->value;
+}
+
+void linkedListStackPop (struct linkedListStack* s) {
+	link* linkToDelete = s->firstLink;
+	s->firstLink = s->firstLink->next;
+	free(linkToDelete);
+}
+
+int linkedListStackIsEmpty (struct linkedListStack* s) {
+	return (s->firstLink == NULL);
+}
+

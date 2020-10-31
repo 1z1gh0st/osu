@@ -1,0 +1,40 @@
+// Week 3 Worksheet 1
+// CS 261
+// Philip Warton
+
+Write the following functions.
+
+int linkedListContains (struct linkedlist lst, TYPE e) {
+	int i;
+	struct dlink* curr = lst->frontSentinel;
+	for (i = 0; i < lst->size; i++) {
+		if (curr->value == e) {
+			return 1;
+		}
+		curr = curr->next;
+	}
+	return 0;
+}
+
+void linkedListRemove (struct linkedList *lst, TYPE e) {
+	int i;
+	struct dlink* curr = lst->frontSentinel;
+	struct dlink* prev = curr;
+	struct dlink* sentinalToDelete;
+	for (i = 0; i < lst->size; i++) {
+		if (curr->value == e) {
+			sentinalToDelete = curr;
+			if (curr == lst->frontSentinal) {		
+				lst->frontSentinal = curr->next;
+			} else if (curr == lst->backSentinal) {
+				lst->backSentinal = prev;
+			} else {
+				prev->next = curr->next;
+			}
+			free(sentinalToDelete);
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+}
+

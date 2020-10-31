@@ -1,0 +1,26 @@
+// Week 3 Worksheet 2
+// Philip Warton
+
+void listQueueAddBack (struct listQueue *q, TYPE e) {
+	struct link* newLink = (struct link*)malloc(sizeof(struct link));
+	newLink->value = e;
+	newLink->next = NULL;
+	struct link* curr = q->firstLink;
+	q->lastLink->next = newLink;
+	q->lastLink = newLink;
+}
+
+TYPE listQueueFront(struct listQueue *q) {
+	return q->firstLink->value;
+}
+
+void listQueueRemoveFront (struct listQueue *q) {
+	struct link* oldFront = q->firstLink;
+	q->firstLink = q->firstLink->next;
+	free(oldFront);
+}
+
+int listQueueIsEmpty (struct listQueue *q) {
+	return (q->firstLink != NULL);
+}
+

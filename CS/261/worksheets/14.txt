@@ -1,0 +1,48 @@
+// Philip Warton
+// CS 261
+// Worksheet 14
+
+void _dynArraySetCapacity(struct dynArr *v, int newCap) {
+	TYPE newArray[newCap];
+	int i;
+	for (i = 0; i < v->size; i++) {
+		newArray[i] = v->data[i];
+	}
+	if (v->data != 0) {	
+		free(v->data);
+	}
+	v->data = newArray;
+	v->capacity = newCap;
+}
+
+TYPE dynArrayGet(struct dynArr* da, int position) {
+	return da->data[position];
+}
+
+void dynArrayPut(struct dynArr* da, int idx, TYPE val) {
+	da->data[idx] = val;
+}
+
+void dynArraySwap(struct dynArr* da, int idx1, int idx2) {
+	TYPE temp = da->data[idx1];
+	da->data[idx1] = da->data[idx2];
+	da->data[idx2] = temp;
+}
+
+void dynArrayRemoveAt(struct dynArr* da, int idx) {
+	int i;
+	TYPE newArray[da->capacity];
+	for (i = 0; i < da->size - 1; i++) {
+		if (i < idx) {	
+			newArray[i] = da->data[i];
+		} else {
+			newArray[i] = da->data[i + 1];
+		}
+	}
+	if (da->data != 0) {	
+		free(da->data);
+	}
+	da->data = newArray;	
+	da->size--;
+}
+

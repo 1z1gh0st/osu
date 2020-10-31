@@ -1,0 +1,80 @@
+// Week 7 Worksheet 2 Philip Warton
+
+Hash Tables Using Buckets
+
+We will just complete the functions that are listed out in the worksheet.
+
+void initHashTable (struct hashTable * ht, int size) {
+    ht->tablesize = size;
+    ht->count = 0;
+    ht->table = malloc(sizeof(struct hlink*) * size);
+    for (int i = 0; i < size; i++) {
+        ht->table[i] = NULL;
+    }
+}
+
+One thing that is a little odd is that we do not seem to have a key and a value,
+we seem to do hashing based on value...
+
+int hashTableContians (struct hashTable * ht, TYPE testelement) {
+    int index = HASH(testelement) % ht->tablesize;
+	hlink* curr = ht->table[index];
+	while (curr != NULL)
+	{
+		if (curr->value == testelement)) { return 1; }
+		curr = curr->next;
+	}
+	return 0;
+}
+
+void hashTableRemove(hashTable* ht, TYPE testElement) {
+	int index = HASH(testElement) % ht->tablesize;
+	HashLink* curr = ht->table[index], *prev;
+	while (curr != NULL) {
+		if (curr->value == testElement)) {
+			if (curr == ht->table[index]) {
+				ht->table[index] = curr->next;
+			} else {
+				prev->next = curr->next;
+			}
+			hashLinkDelete(curr);
+			ht->count--;
+			break;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+}
+
+void resizeTable(hashTable* ht) {
+    int n = ht->tableSize * 2;
+	HashLink** newTable = malloc(sizeof(HashLink*) *n);
+	for (int i = 0; i < n; i++) {
+		newTable[i] = NULL;
+	}
+	for (int i = 0; i < ht->tableSize; i++) {
+		if (ht->table[i] != NULL) {
+			hlink* curr = ht->table[i];
+			while (curr != NULL) {
+				int index = HASH(curr->value) % n;
+				if (newTable[index] == NULL) {
+					newTable[index] = curr;
+					curr = curr->next;
+					newTable[index]->next = NULL;
+				} else {
+					hlink* lastLink = newTable[index];
+					while (lastLink->next != NULL)
+					{
+						lastLink = lastLink->next;
+					}
+					lastLink->next = curr;
+					curr = curr->next;
+					lastLink->next->next = NULL;
+				}
+			}
+		}
+	}
+	free(ht->table);
+	ht->table = newTable;
+    ht->tableSize = n;
+}

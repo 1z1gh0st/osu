@@ -1,0 +1,45 @@
+// Week 3 Worksheet 3
+// Philip Warton
+
+void _addLink (struct linkedList *q, struct dlink *lnk, TYPE e) {
+	struct dlink* curr = q->frontSentinel;
+	struct dlink* newLink = (struct dlink*)malloc(sizeof(struct dlink));
+	newLink->value = e;
+	while (curr != q->backSentinel) {
+		if (curr->next == lnk) {
+			newLink->next = curr->next;
+			curr->next = newLink;
+			break;
+		}
+		curr = curr->next;
+	}
+}
+
+void _removeLink (struct linkedList *q, struct dlink *lnk) {
+	struct dlink* linkToFree;
+	struct dlink* curr = q->frontSentinel;
+	struct dlink* prev;
+	while (curr != q->backSentinel) {
+		if (curr == lnk) {
+			prev->next = curr->next;
+			linkToFree = curr;
+			free(linkToFree);
+			break;
+		}
+		prev = curr;
+		curr = curr->next;
+	}
+}
+
+TYPE LinkedListFront (struct linkedList *q) {
+	return q->frontSentinel->next;
+}
+
+TYPE LinkedListBack (struct linkedList *q) {
+	struct dlink* curr = q->frontSentinel;
+	while (curr->next != q->backSentinel) {
+		curr = curr->next;
+	}
+	return curr->value;
+}
+

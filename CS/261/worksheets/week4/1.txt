@@ -1,0 +1,36 @@
+// Week 4 Worksheet 1
+// Philip Warton
+
+Fill in the chart for big-Oh execution times.
+
+            Dynamic Array Bag   Linked List Bag   Ordered Array Bag
+Add			O(n)                O(1)              O(1)
+Contains    O(n)                O(n)              O(log(n))
+Remove      O(n)                O(n)              O(n)
+
+
+Short Answers
+1. The time complexity of binary search is O(log(n))
+
+2. The time complexity for contains will just execute binary search and be O(log(n))
+
+3. To add at an index in the worst case scenario we must copy the entire array so we have O(n).
+
+4. To add a value we must find the index [O(log(n))] then add the element [O(n)] so
+we have a time complexity of [O(log(n)) + O(n) = O(n)].
+
+5. Removing at a given index will be the same as it is for a dynamic array, which will be
+the worst case scenario in which we copy the whole array so O(n). To remove a specific value
+we have O(n) + O(log(n)) = O(n).
+
+
+Complete the following code:
+int orderedArrayContains(struct dyArray* dy, TYPE testElement) {
+	return (dyArrayBinarySearch(dy, testElement) == x); // x is whatever dyArrayBinarySearch is supposed to return when the value is not found
+}
+
+void orderedArrayRemove(struct dyArray* dy, TYPE testElement) {
+	int i = dyArrayBinarySearch(dy, testElement);
+	dyArrayRemoveAt(dy, i);
+}
+

@@ -1,0 +1,37 @@
+// Week 5 Worksheet 1 Philip Warton
+
+struct AVLnode * rotateLeft (struct AVLnode * current) {
+	struct AVLnode* result = current->right;
+	struct AVLnode* temp = current->right->left;
+	current->right->left = current;
+	currrent->right = temp;
+	current->height--;
+	current->left->height--;
+	result->right->height++;
+	result->height++;
+	return result;
+}
+
+struct AVLnode * rotateRight (struct AVLnode * current) {
+	struct AVLnode* result = current->left;
+	struct AVLnode* temp = current->left->right;
+	current->left->right = current;
+	currrent->left = temp;
+	current->height--;
+	current->right->height--;
+	result->left->height++;
+	result->height++;
+	return result;
+}
+
+struct AVLnode *_removeNode(struct AVLNode *cur, TYPE val) {
+	if (curr->value > val) {
+		return _removeNode(curr->left, val);	
+	} else if (curr->value < val) {
+		return _removeNode(curr->right, val);
+	} else {
+		cur->value = _leftMost(cur);
+		return _removeLeftMost(cur);
+	}
+}
+
