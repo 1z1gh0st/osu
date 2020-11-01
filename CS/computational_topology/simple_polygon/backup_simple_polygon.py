@@ -9,11 +9,6 @@ class Point:
         self.x = x
         self.y = y
 
-    def __eq__(self, other):
-        if isinstance(other, Point):
-            return self.x == other.x and self.y == other.y
-        else:
-            return False
 
 class Line:
 
@@ -85,13 +80,31 @@ def colinear(a, b, c):
 def draw_line(line, color):
     pygame.draw.line(screen, color, (line.a.x * width, line.a.y * height), (line.b.x * width, line.b.y * height), 2)
 
-def draw_point(point, color):
-    pygame.draw.circle(screen, color, (point.x * width, point.y * height), 5)
+def smallest_radius(a, b, c):
+    r = 0
+    while not intersecting(a, b, c, r):
+        r += 0.1
+    return r
 
-'''
+def intersecting(seg_start, seg_end, center, radius):
+    if distance(seg_start, center) < distance(seg_end, center):
+        if distance(seg_start, center) < radius < distance(seg_end, center):
+            return True
+        else:
+            return False
+    else:
+        if distance(seg_end, center) < radius < distance(seg_start, center):
+            return True
+        else:
+            return False
+
 points = []
 
 n = 10
+visited = dict()
+
+for point in points:
+    visited[point] = False
 
 for i in range(0, n):
     point = Point(random.random(), random.random())
@@ -110,11 +123,31 @@ red = (255, 0, 0)
 for point in points:
     pygame.draw.circle(screen, white, (int(point.x * width), int(point.y * height)), 5)
 
+lines = []
+'''
+a = points[0]
+b = points[1]
+for c in points:
+    if not colinear(a, b, c):
+        lines.append(Line(a, b))
+        lines.append(Line(b, c))
+        lines.append(Line(c, a))
+        # draw_triangle(a, b, c)
+        break
+        '''
+for p in points:
+    for q in points:
+        lines.append(Line(p,q))
+
+for line in lines:
+    draw_line(line, red)
+    print(line.a.x, line.a.y, line.b.x, line.b.y)
+
 running = True
 while running:
     for event in pygame.event.get():
         pygame.display.update()
         if event.type == pygame.QUIT:
             running = False
-'''
+
 
