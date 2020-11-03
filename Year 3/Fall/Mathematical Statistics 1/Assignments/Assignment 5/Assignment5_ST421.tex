@@ -1,0 +1,115 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\begin{document}
+
+\title{ST 421 Assignment 5}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 3.148}
+    We know that $E(Y) = \mu = \mu_1' = m^{(1)}(0)$. Then we know that $m(t) = \frac{pe^t}{1-qe^t}$. So we take the first derivative of $m(t)$ which gives us the following:
+    \begin{align*}
+        \frac{d}{dt}\left(\frac{pe^t}{1-qe^t}\right) &= \frac{(1-qe^t)pe^t-(pe^t)(-qe^t)}{(1-qe^t)^2}\\
+        &=\frac{pe^t-pqe^te^t+qpe^te^t}{(1-qe^t)^2}\\
+        &=\frac{pe^t}{(1-qe^t)^2}
+    \end{align*}
+    Now when $t = 0$ we know that $m'(t) = \frac{p}{(1-q)^2} = \frac{1}{p} = E(Y)$.\\\\
+    To find $E(Y^2)$ we take the second derivative of the moment generating function at 0. So we say:
+    \begin{align*}
+        \frac{d}{dt}\left(\frac{pe^t}{(1-qe^t)^2}\right)&=\frac{(1-qe^t)^2pe^t-pe^t(2)(1-qe^t)(-qe^t)}{(1-qe^t)^4}\\
+    \end{align*}
+    So we can look at $m''(0) = \frac{(1-q)^2p-p(2)(1-q)(-q)}{(q-q)^4} = \frac{p^3+2p^2q}{p^4} = \frac{2-p}{p^2} = \mu_2' = E(Y^2)$.
+    Then simply take $V(Y) = E(Y^2) - E(Y)^2 = \frac{2-p}{p^2} - \frac{1}{p^2} = \frac{1-p}{p^2}$.
+\section*{Problem 3.154}
+    \subsection*{$m(t) = \left(\frac{e^t+2}{3}\right)^5$}
+        We take the derivative of the moment generative funciton, giving us
+        \[
+            m'(t) = 5\left(\frac{e^t +2}{3}\right)^4\left(\frac{e^t}{3}\right)
+        \]
+        Then evaluated at 0 we have $m'(0) = 5(1)^4(\frac{1}{3}) = \frac{5}{3}$. Now we take the second derivative to be
+        \[
+            m''(t) = 5\left[\left(\frac{e^t+2}{3}\right)^4\left(\frac{e^t}{3}\right) + 4\left(\frac{e^t+2}{3}\right)^3\left(\frac{e^t}{3}\right)\left(\frac{e^t}{3}\right)\right]
+        \]
+        Then we compute $m''(0) = \frac{35}{9}$.
+        From here we simple state that the mean is $\frac{5}{3}$, and that the variance is $\frac{35}{9} - \frac{25}{9} = \frac{10}{9}$.
+    \subsection*{$m(t) = \frac{e^t}{2-e^t}$}
+        \[
+            m'(t) = \frac{(2-e^t)(e^t)-e^t(-e^t)}{(2-e^t)^2} = \frac{2e^t-e^{2t}+e^{2t}}{(2-e^t)^2} = \frac{2e^t}{(2-e^t)^2}
+        \]
+        We evaluate $m'(0) = 2$.
+        \[
+            m''(t) = \frac{2e^t(2-e^t)^2 - 2e^t(2)(2-e^t)(-e^t)}{(2-e^t)^4}
+        \]
+        We write $m''(0) = 0=6$.
+        Our mean will simply be $\mu = 2$ and our variance will be $\sigma^2 = 6 - 4 = 2$.
+    \subsection*{$m(t) = e^{2(e^t-1)}$}
+    We do the same process once again, yielding the following:
+    \[
+        m'(t) = e^{2(e^t-1)}(2e^t)
+    \]
+    Which we evaluate at 0 and get $m'(0) = 2 = \mu$. Then we do the same for the second derivative.
+    \[
+        m''(t) = e^{2(e^t-1)}(2e^t)+2e^t(e^{2(e^t-1)}(2e^t))
+    \]
+    This evaluated at 0 is $m''(0) = 2 + 4 = 6$.
+    So we say that the mean is $\mu = 2$, and our variance is $\sigma^2 = 6 - 2^2 = 2$.
+\section*{Problem 3.158}
+    \begin{proof}
+        Let $m_Y(t) = E(e^{t Y})$, $m_W(t) = E(e^{t W})$, and $W = a Y + B$.
+        We wish to show that $m_W(t) = e^{tb}m_Y(ta)$.
+        \begin{align*}
+            m_W(t) &= E(e^{t W})\\
+            &=E(e^{t(a Y+b)})\\
+            &=E(e^{t a Y + tb})\\
+            &=E(e^{t a Y}e^{tb})\\
+            &=e^{t b}E(e^{t a Y})\\
+            &=e^{t b}m_Y(t a)
+        \end{align*}
+    \end{proof}
+\section*{Problem 3.160}
+    Suppose that $Y$ is a binomial random variable based on $n$ trials with success probability
+    $p$ and let $Y^* = n - Y$.
+    \subsection*{(a)}
+        Show that $E(Y^*) = nq$ and $V(Y^*) = npq$ where $q = 1 - p$.
+        \begin{proof}
+            We begin by writing $E(Y^*) = E(n - Y) = E(n) - E(Y)$. Then using the result from
+            \fbox{Problem 3.159}  that $E(n) - E(Y) = n - np = n(1-p) = nq$. 
+            Then we say 
+            \begin{align*}
+                V(Y^*) &= V(n - Y) \\
+                &= V((-1)Y + n) \\
+                &= (-1)^2V(Y) & \text{(Problem 3.159)}\\
+                &= npq
+            \end{align*}
+        \end{proof}
+    \subsection*{(b)}
+        We want to show that $m^*(t) = (qe^t+p)^n$ is the moment generating function of $Y^*$.
+        \begin{proof}
+            We use the result from \fbox{3.158} and state that $m^*(t) = e^{t n} m(-t) = e^{t n}(q+pe^{-t})^n$.
+            Then we put rewrite as
+            \begin{align*}
+                m^*(t) &= e^t(q+pe^{-t}) \\
+                &= (e^t(q+pe^{-t}))^n \\
+                &= (e^t q + p) ^n
+            \end{align*}
+            And we have the desired result.
+        \end{proof} 
+    \subsection*{(c)}
+        After computing the mean, variance, and moment generating function for $Y^*$, we see the similarities
+        between $Y$ and $Y^*$.
+        The distribution of $Y^*$ is clearly a binomial distribution with a probability of $q$ 
+        for success of every trial.
+    \subsection*{(d)}
+        We can interpret $Y^*$ as the number of failed trials given a success probability $p$,
+        given $n$ trials.
+    \subsection*{(e)}
+        These answers are now "obvious" because the probability of failure is simply $q = 1 - p$,
+        so we can count the number of failures as the number of successes with the $q$ probability
+        rather than the $p$ probability.
+\end{document}

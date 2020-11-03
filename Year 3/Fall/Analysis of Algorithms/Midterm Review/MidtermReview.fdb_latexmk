@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1604373998 "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.pdf" "MidtermReview" 1604376843
-  "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.aux" 1604373998 32 044b7f8fc9779af7531264e0c5c84b6d ""
-  "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.tex" 1604376843 2310 e818201a74fbce1920d9b42be64b6d9e ""
+["pdflatex"] 1604393042 "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.pdf" "MidtermReview" 1604393167
+  "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.aux" 1604393043 32 044b7f8fc9779af7531264e0c5c84b6d ""
+  "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.tex" 1604393167 2311 103880c91f0f7f631eede72ce13d2894 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -55,11 +55,11 @@
   "/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1604348000 5022058 744aaa57babb7b0780e2d4c19c2ff31b ""
   "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1604348489 2549326 414af182f0399eecc7d401eee4945cf3 ""
   "/usr/local/texlive/2020/texmf.cnf" 1586288231 577 d60164b4589a341208aff7a667fbbdcb ""
-  "MidtermReview.aux" 1604373998 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
-  "MidtermReview.tex" 1604376843 2310 e818201a74fbce1920d9b42be64b6d9e ""
+  "MidtermReview.aux" 1604393043 32 044b7f8fc9779af7531264e0c5c84b6d "pdflatex"
+  "MidtermReview.tex" 1604393167 2311 103880c91f0f7f631eede72ce13d2894 ""
   (generated)
   "MidtermReview.pdf"
-  "MidtermReview.log"
+  "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.log"
   "MidtermReview.aux"
   "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.pdf"
-  "/Users/philip/Documents/OSU/Year 3/Fall/Analysis of Algorithms/Midterm Review/MidtermReview.log"
+  "MidtermReview.log"
