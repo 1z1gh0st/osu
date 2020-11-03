@@ -1,0 +1,76 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+First we have to put our data in a model.
+
+```{r}
+library(Sleuth3)
+library(ggplot2)
+head(ex0824)
+baby.data = ex0824
+model1 <- lm(Rate~Age,baby.data)
+summary(model1)
+```
+
+Then we make a residual plot:
+
+```{r}
+ggplot(data = baby.data, aes(model1$fitted.values, model1$residuals)) + 
+  geom_point() + 
+  theme_linedraw() +
+  geom_hline(yintercept = 0, lty = 2, color="red")
+```
+
+Constant variance has been violated.
+
+Let's check for normality:
+
+```{r}
+ggplot(baby.data, aes(sample=model1$residuals)) +
+  stat_qq() +
+  theme_linedraw()
+```
+
+So, lets do a log transformation on the 'Rate' variable.
+
+```{r}
+model2 <- lm(log(Rate)~Age,baby.data)
+summary(model1)
+```
+
+```{r}
+ggplot(data = baby.data, aes(model2$fitted.values, model2$residuals)) + 
+  geom_point() + 
+  theme_linedraw() +
+  geom_hline(yintercept = 0, lty = 2, color="red")
+```
+
+```{r}
+ggplot(baby.data, aes(sample=model2$residuals)) + 
+  stat_qq() +
+  theme_linedraw()
+```
+
+Lets do a log transformation on both variables.
+
+```{r}
+model3 <- lm(log(Rate)~log(Age),baby.data)
+summary(model3)
+```
+
+```{r}
+ggplot(data = baby.data, aes(model3$fitted.values, model3$residuals)) + 
+  geom_point() + 
+  theme_linedraw() +
+  geom_hline(yintercept = 0, lty = 2, color="red")
+```
+
+```{r}
+ggplot(baby.data, aes(sample=model3$residuals)) + 
+  stat_qq() +
+  theme_linedraw()
+```
+
+

@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Probability 1 - Lecture Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Markov Inequality}
+    Suppose there is a distribution for which we don't know the probability mass function, and we do not know the variance, but we do know it's expectation, $E[x]$.
+    What can we say about that probability?
+    Can we bound it? \\\\
+    \fbox{Theorem: Markov Inequality} If $X$ is a random variable that takes only non-negative values, then for any $\alpha > 0$,
+    \[
+        P(X \leq \alpha) \leqslant \frac{E[x]}{\alpha}
+    \]
+    \begin{proof}
+    \[
+    P(X \geq \alpha) = \sum_{k : k \geq \alpha} p(\alpha) \leq \sum_{k : k \geq \alpha}\frac{k}{\alpha}p(k) = \frac{1}{\alpha}\sum_{k : k \geq \alpha}k\cdot p(k) \leq \frac{1}{\alpha} \sum_{k : k \geq 0}k \cdot p(k) = \frac{E[X]}{\alpha}
+    \]
+    \end{proof}
+    Note that this would likely work under integration for a continuous random variable.\\\\
+    \fbox{Theorem: Chebyshev Inequality} If $X$ is a random variable with a finite mean $\mu$ and variance, then for any $\kappa > 0$,
+    \[
+        P(|X- \mu | \geq \kappa \sigma) \leq \frac{1}{\kappa^2}
+    \]
+\end{document}

@@ -1,0 +1,143 @@
+---
+title: "HW 4"
+output:
+html_document:
+df_print: paged
+---
+Philip Warton 933328296
+
+```{r echo=FALSE}
+library(ggplot2)
+library(Sleuth3)
+```
+
+## Problem 1
+
+### A
+
+```{r echo=TRUE}
+head(ex1123)
+```
+
+```{r echo=TRUE}
+ggplot(ex1123, aes(NOX, Mort)) +
+  geom_point() +
+  ggtitle("Nitrous Oxides vs Mortality")
+```
+
+Looking at this scatterplot it does not appear that there is a linear relationship, and there are several possible outliers, these being cities with extremely high amounts of nitrous oxides.
+
+```{r echo=TRUE}
+ggplot(ex1123, aes(SO2, Mort)) +
+  geom_point() +
+  ggtitle("Sulfer Dioxides vs Mortality")
+```
+
+Looking at this scatter plot it looks like a linear relation might be plausible, and the value in the top left with an extremely high mortality rate with almost no sulfer dioxides might be an outlier.
+
+### B
+
+```{r echo=TRUE}
+modelB <- lm(data=ex1123, Mort ~ Precip + Educ + NonWhite + SO2)
+summary(modelB)
+```
+
+```{r echo=TRUE}
+modelBnox <- lm(data=ex1123, Mort ~ Precip + Educ + NonWhite + NOX + SO2)
+summary(modelBnox)
+```
+
+It appears that the model did not change very much at all with the addition of the nitrous oxide explanatory variable. This term also has a low p-value, meaning it is very possible that the coefficient could be zero. The R squared and adjusted R squared both were not affected by the inclusion of this explanatory variable.
+
+### C
+
+```{r}
+modelC <- modelBnox
+resid <- residuals(modelC)
+fitted <- fitted(modelC)
+plot(fitted,resid);abline(0,0,lty=2)
+```
+
+The residual plot appears good, it would seem as though there is a constant variance, and a somewhat normal distribution throughout.
+
+### D
+
+```{r echo=TRUE}
+modelD <- lm(data=ex1123, Mort ~ Precip + Educ + NonWhite + log(NOX) + log(SO2))
+summary(modelD)
+```
+
+```{r echo=TRUE}
+anova(modelD, modelC, test="F")
+```
+
+It would appear that the difference between the two models is not significant.
+
+### E
+
+```{r echo=TRUE}
+modelE <- modelD
+
+data <- fortify(modelE, ex1123)
+data$obs_num <- 1:nrow(data)
+qplot(obs_num, .hat, data  = data) + ggtitle("Leverage")
+qplot(obs_num, .cooksd, data  = data)  + ggtitle("Cook’s distance")
+qplot(obs_num, .stdresid, data  = data)  + ggtitle("Studentized residual")
+```
+
+Observation number 60 does appear to be very influential, especially when compared to the other points.
+
+### F
+
+```{r echo=TRUE}
+modelF <- lm(data=ex1123, Mort ~ Precip + Educ + NonWhite + NOX + SO2)
+data <- fortify(modelF, ex1123)
+data$obs_num <- 1:nrow(data)
+qplot(obs_num, .hat, data  = data) + ggtitle("Leverage")
+qplot(obs_num, .cooksd, data  = data)  + ggtitle("Cook’s distance")
+qplot(obs_num, .stdresid, data  = data)  + ggtitle("Studentized residual")
+```
+
+Observation number eight has extremely high leverage compared to the other observations. Observations eight at sixty both have an unusually high values for Cook's distance.
+
+```{r echo=TRUE}
+data2 <- data[-c(8,60),]
+modelF2 <- lm(data=data2, Mort ~ Precip + Educ + NonWhite + NOX + SO2)
+summary(modelF2)
+```
+
+Many of the estimates have decreased somewhat, and the coefficient for education no longer appears significant with a significance level of $\alpha = 0.05$.
+
+### G
+
+```{r echo=TRUE}
+modelG <- modelF2
+partialResid <- residuals(modelG, type="partial")
+colnames(partialResid) <- paste("resid", colnames(partialResid), sep = "")
+dataResid <- cbind(data2, partialResid)
+head(dataResid)
+```
+
+```{r echo=TRUE}
+qplot(NOX, residNOX, data = dataResid)
+```
+
+```{r echo=TRUE}
+qplot(NOX, Mort, data = dataResid)
+```
+
+```{r echo=TRUE}
+qplot(SO2, residSO2, data = dataResid)
+```
+
+```{r echo=TRUE}
+qplot(SO2, Mort, data = dataResid)
+```
+
+Since the relationship between response (Mortality) and explanatory (Nitrous Oxide) variable does not change significantly from the scatterplot to the partial residual plot, so we can say that the relationship between response and explanatory variable is not significantly affected by the other explanatory variables. The same is true for the (Sulfur Dioxide) explanatory variable.
+
+### H
+
+There does not appear to be a relationship between the (NOX) explanatory variable and the response (Mortality). When accounting for the effect of other explanatory variables the relationship does not significantly change.
+
+There does appear to be a relationship between the (SO2) explanatory variable and the response (Mortality). When accounting for the effect of other explanatory variables the relationship does not significantly change.

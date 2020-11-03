@@ -1,0 +1,87 @@
+---
+title: "HW 5"
+output:
+html_document:
+df_print: paged
+---
+Philip Warton 933328296
+
+```{r echo=FALSE}
+library(ggplot2)
+library(Sleuth3)
+```
+
+## Problem 1
+
+### A
+
+```{r}
+head(ex1320)
+```
+
+```{r}
+ggplot (data = ex1320, mapping = aes(x=Sex, y=Score)) +
+  geom_boxplot()
+```
+
+```{r}
+ggplot(data = ex1320, mapping = aes(x=Background, y=Score)) +
+  geom_boxplot()
+```
+
+It appears that there may be a slight difference for gender, but it is possible that this difference is negligible. For background, it is evident that there definitely is the possibility of a background effect on the scores. The range and the median is very different between group a and group c.
+
+### B
+
+```{r}
+sampleAverages <- aggregate(Score ~ Sex + Background, data = ex1320, FUN = mean)
+xtabs(Score ~ Sex + Background, sampleAverages)
+```
+
+The difference between male and female is fairly similar between groups a b and c.
+
+### C
+
+```{r}
+modelAdditive <- lm(Score ~ Sex + Background, data = ex1320)
+summary(modelAdditive)
+```
+
+Looking at this model, it appears that every factor has a significant effect on score.
+
+### D
+
+```{r}
+modelSaturated <- lm(Score ~ Sex + Background + (Sex*Background), data=ex1320)
+anova(modelSaturated)
+```
+
+Based on this anova, the interactive term between background and sex is not significant, given the f-value of .77 and the p-value of .46. This means that the additive model should be sufficient.
+
+### E
+
+```{r}
+anova(modelSaturated, modelAdditive)
+```
+
+Here we see the same result with the p-value of 0.46. This means that the saturated is not significantlt different from the additive model, so once again it would appear that the additive model is sufficient. There is not evidence against the additive model.
+
+### F
+
+```{r}
+testDataAdditiveModel <- fortify(modelAdditive, ex1320)
+
+testDataAdditiveModel$Predict <- predict(modelAdditive, newdata =testDataAdditiveModel)
+
+qplot(reorder(Background, Predict), Predict, data = testDataAdditiveModel, colour = Sex, geom = "line", group = Sex)
+```
+
+```{r}
+testDataSaturatedModel <- fortify(modelSaturated, ex1320)
+
+testDataSaturatedModel$Predict <- predict(modelSaturated, newdata =testDataSaturatedModel)
+
+qplot(reorder(Background, Predict), Predict, data = testDataSaturatedModel, colour = Sex, geom = "line", group = Sex)
+```
+
+Looking at both of these, I can see why the extra sum of squares test said that there was not a significant difference between the two models.  It does seem clear that there is a difference between the different backgrounds and between the male and female as well.

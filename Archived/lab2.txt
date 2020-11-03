@@ -1,0 +1,60 @@
+PHILIP WARTON CS161 LAB 2
+
+Calculate the size of things
+	What does x represent?
+		X represents the number of bits in your variable or datatype.
+
+	Why do we subtract 1 in the exponent?
+		One bit is allocated to indicating the positive or negative sign of a number in signed datatypes.
+
+	Why do we subtract 1 in the expression?
+		We subtract 1 in order to save room for 0.
+
+	When adding 1 to a maximum sized signed int, it becomes the largest possible negative number.
+	When adding 1 to a maximum sized unsigned int, it becomes 0.
+
+	When subtracting 1 from the largest possible negative number, it becomes the largest possible positive number.
+	When subtracting 1 from an unsigned int = 0, it becomes the largest possible number.
+
+Rand() and conditional statements
+	Results:
+
+		flip2 ~/labs/lab2 136$ ./a.out
+		516107199
+		1924654587
+
+		flip2 ~/labs/lab2 137$ ./a.out
+		2056817127
+		477593301
+
+		flip2 ~/labs/lab2 137$ ./a.out
+		2056817127
+		477593301
+
+	After commenting out the srand time seed:
+
+		flip2 ~/labs/lab2 141$ ./a.out
+		1804289383
+		846930886
+
+		flip2 ~/labs/lab2 142$ ./a.out
+		1804289383
+		846930886
+
+		flip2 ~/labs/lab2 142$ ./a.out
+		1804289383
+		846930886
+
+	After adding srand before each cout call:
+
+		flip2 ~/labs/lab2 148$ ./a.out
+		1002667993
+		1002667993
+
+		flip2 ~/labs/lab2 149$ ./a.out
+		1774715572
+		1774715572
+
+		flip2 ~/labs/lab2 149$ ./a.out
+		1474174657
+		1474174657

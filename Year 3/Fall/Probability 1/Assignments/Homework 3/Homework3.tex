@@ -1,0 +1,147 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\begin{document}
+
+\title{MTH 463 Assignment 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+    Expectation and variance of a discrete probability mass function.
+    Let $p_X(0)=\frac{1}{3}, p_X(2)=\frac{1}{2}, p_X(3)=\frac{1}{6}$.
+    Compute the following:
+    \subsection*{$E(X)$}
+        To compute the expectation, we say $E(X) = \sum xp_X(x)$.
+        \[(0)\frac{1}{3}+(2)\frac{1}{2} + (3)\frac{1}{6} = \frac{3}{2}=1.5\]
+    \subsection*{$Var(X)$}
+        We know that to compute the variance we simply need to compute $E(X^2)-E(X)^2$.
+        \[
+            (0^2)\frac{1}{3}+(2^2)\frac{1}{2} + (3^2)\frac{1}{6} - \frac{3}{2}^2 = \frac{7}{2}-\frac{9}{4}=\frac{5}{4}=1.25    
+        \]
+    \subsection*{$E(|X-E(X)|)$}
+        First note that for the expectation of a constant value $c, E(c) = c$. Since expectation is distributive over addition, we have two cases.\\
+        \fbox{Case 1: $X-E(X) > 0$} In this case we say
+        \[
+            E(|X-E(X)|) = E(X-E(X)) = E(X) - E(E(X)) = E(X) - E(X) = 0
+        \]
+        \fbox{Case 2: $X-E(X) \leqslant 0$} In this case the subtraction is reversed when we remove the absolute value, and the difference is still 0.
+    \subsection*{$E(2^X)$}
+        By the Law of the Unconscious Statistician, we say $E(f(X)) = \sum p_X(x) f(x)$.
+        This gives us the following result:
+        \[
+            E(2^X) = \sum 2^x p_X(x) = (2^0)\frac{1}{3} + (2^2)\frac{1}{2} + (2^3)\frac{1}{6} = \frac{1}{3} + 2 + \frac{4}{3} = \frac{11}{3} = 3.67
+        \]
+\section*{Problem 2}
+    Compute $E(\frac{1}{X+1})$ for a Poisson distribution with $\lambda > 0$.
+    \begin{align*}
+        E\left(\frac{1}{X+1}\right) &= \sum_{i=0}^\infty\frac{1}{i+1}e^{-\lambda}\frac{\lambda^i}{i!}\\
+        &=e^{-\lambda}\left(\sum_{i=0}^\infty\frac{1}{i+1}\frac{\lambda^i}{i!}\right)\\
+        &=e^{-\lambda}\left(\sum_{i=0}^\infty\frac{\lambda^i}{(i+1)!}\right)\\
+        &=e^{-\lambda}\left(\frac{e^\lambda-1}{\lambda}\right) && \text{(by Taylor expansion of exponential)}\\
+        &=e^{-\lambda}\frac{e^\lambda}{\lambda} - e^{-\lambda}\frac{1}{\lambda}\\
+        &=\frac{1}{\lambda}(1-\frac{1}{e^\lambda})
+    \end{align*}
+\section*{Problem 3}
+    \begin{proof}
+        Let $q = (1 - p)$ for readability.
+        \begin{align*}
+            E(\frac{1}{X+1})&=\sum{i=0}^n\frac{1}{i+1}{n \choose i}p^iq^{n-1}\\
+            &=\sum{i=0}^n{n+1 \choose i+1} \frac{1}{n+1}p^iq^{n-i}\\
+            &=\frac{1}{n+1}\sum_{i=0}^n{n+1\choose i+1}p^iq^{n-i}\\
+            &=\frac{1}{p(n+1)}\sum_{i=0}^n{n+1\choose i+1}p^{i+1}q^{n-i}\\
+            &=\frac{1}{p(n+1)}\sum_{i=1}^{n+1}{n+1\choose i}p^iq^{n-i+1}\\
+            &=\frac{1}{p(n+1)}\left[\left(\sum_{i=0}^{n+1}{n+1\choose i}p^iq^{n-i+1}\right)-{n+1 \choose 0}p^0q^{n-0+1}\right]\\
+            &=\frac{1}{p(n+1)}\left[\left((p+q)^{n+1}\right)-q^{n+1}\right]\\
+            &=\frac{1}{p(n+1)}\left[1-(1-p)^{n+1}\right]
+        \end{align*} 
+    \end{proof}
+\section*{Problem 4}
+    \begin{proof}
+        We write the following
+        \begin{align*}
+            \sum_{j=1}^\infty P(X\geqslant j)&=\sum_{j=1}^\infty \sum_{k=j}^\infty P(X = k)\\
+            &=P(X = 1) + P(X = 2) + P(X = 3) + \cdots\\
+            & \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + P(X = 2) + P(X = 3) + \cdots \\
+            & \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ + P(X = 3) + \cdots \\
+            &=P(X = 1) + P(X = 2) + P(X = 2) + P(X = 3) + P(X = 3) + P(X = 3) + \cdots\\
+            &=(1)P(X=1)+(2)P(X=2)+(3)P(X=3) + \cdots\\
+            &=\sum_{j=1}^\infty j P(X=j)\\
+            &=E(X)
+        \end{align*}
+    \end{proof}
+\section*{Problem 5}
+    \begin{proof}
+        Let us compute $P(W > j)$ first.
+        We write
+        \begin{align*}
+            P(W>j)&=P(W=j+1)+P(W=j+2)+\cdots\\
+            &=\sum_{n=j+1}^\infty P(W=n)\\
+            &=\sum_{n=j+1}^\infty p(1-p)^{n-1}\\
+            &=p\sum_{n=j+1}^\infty (1-p)^{n-1}\\
+            &=p\sum_{n=j}^\infty(1-p)^n\\
+            &=p\left[\frac{1}{1-(1-p)}-\sum_{n=0}^{j-1}(1-p)^n\right]\\
+            &=p\left[\frac{1}{p} - \frac{1-(1-p)^j}{1-(1-p)}\right]\\
+            &=1- (1-(1-p)^j)\\
+            &=(1-p)^j
+        \end{align*}
+        Now we use our result from \fbox{Problem 4} to say that
+        \[ E(W) = \sum_{j=0}^\infty (1-p)^j = \frac{1}{1-(1-p)} = \frac{1}{p} \]
+    \end{proof}
+\section*{Problem 6}
+    Let $X$ be a random variable such that $P(X = 1) = p$ and $P(X = -1) = 1 - p$. Find $a \neq 1$ such that $E[a^x] = 1$.
+    We can rewrite $E[a^x]$ as $E[a^x] = p(a^1) + (1-p)(a^{-1})$, since those are the only two events in this sample space.
+    We want to solve for values of $a$ such that this equation is equal to 1,
+    so we set the equation equal to 1 and solve for $a$.
+    \begin{align*}
+        (p)a^1 + (1-p)a^{-1} & = 1 \\
+        (p)a^2 + (1-p) & = a \\
+        (p)a^2 - a + (1-p) & = 0
+    \end{align*}
+    From here we can say that by the quadratic formula, $a = \frac{1 +- \sqrt{1 - 4(p)(1-p)}}{2p} = \frac{1+-\sqrt{1-4p+4p^2}}{2p}$.
+\section*{Problem 7}
+    We wish to show that $E(X^2) \geq E(X)^2$.
+    \begin{proof}
+        We have $E(X^2) - E(X)^2 = E(X^2) - 2E(X)^2 + E(X)^2$.
+        Then we can replace $E(X)$ with $\mu$ for some of the terms giving us $E[X^2 - 2E(X)^2 + E(X)^2] = E(X^2) - 2E(X) \mu + (\mu)^2$.
+        By the distributive property of expectation, this is equal to $E[X^2-2X\mu + \mu^2] = E[(x-\mu)^2]$.
+        Then we write
+        \[
+            E[(x-\mu)^2] = \sum_{1 \leq j \leq \infty}p(x_j)(x_j - \mu)^2
+        \]
+        It is clear that since our probability is non-negative and that $(a-b)^2$ is non-negative that $E[(x - \mu)^2] \geqslant 0$.
+        So we have $E(X^2) - E(X)^2 = E[(X - \mu)^2] \geqslant 0 \Longrightarrow E(X^2) \geqslant E(X)^2$.
+    \end{proof}
+\section*{Problem 8}
+    Let $X$ be a random variable, and $Y = \frac{X - \mu}{\sigma}$.
+    We write
+    \begin{align*}
+        E[Y] &= E[\frac{X -\mu}{\sigma}]\\
+        &=E[\frac{X}{\sigma}] - E[\frac{\mu}{\sigma}]\\
+        &=\frac{1}{\sigma}E[X] - \frac{1}{\sigma}E[\mu]\\
+        &=\frac{1}{\sigma}\mu - \frac{1}{\sigma}E[\mu]\\
+        &= 0
+    \end{align*}
+    And thus our answer is 0.
+\section*{Problem 9}
+We wish to find what values of $p$ would cause a 3-engine rocket to be more reliable than a
+5-engine rocket, where each engine fails with a probability of $p$.
+The success of each rocket will be a simple binomial distribution.
+For the three engine rocket we have the probability 
+\[ S_3 = p^3 {3 \choose 0} + p^2(1-p) {3 \choose 1} \]
+We omit the terms where we have fewer than 2 rockets that work.
+For the 5-engine rocket we have the probability 
+\[ S_5 = p^5 {5 \choose 0} + p^4(1-p) {5 \choose 1} + p^3(1-p)^2 {5 \choose 2} \]
+From here, we wish to find p such that the value of the first sum is greater than that of the second.
+We want to find $p \in [0,1] : S_3 > S_5$.
+\begin{align*}
+    p^3 {3 \choose 0} + p^2(1-p) {3 \choose 1} & > p^5 {5 \choose 0} + p^4(1-p) {5 \choose 1} + p^3(1-p)^2 {5 \choose 2}\\
+    p^3 + 3 p^2 (1-p) & > p^5 + 5 p^4 (1-p) + 10 p^3 (1-p)^2
+\end{align*} 
+This is true for $p \in (0, \frac{1}{2})$.
+\end{document}

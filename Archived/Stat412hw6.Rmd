@@ -1,0 +1,58 @@
+---
+title: "HW 6"
+output:
+html_document:
+df_print: paged
+---
+Philip Warton 933328296
+
+```{r echo=FALSE}
+library(ggplot2)
+library(Sleuth3)
+library(Rmisc)
+library(graphics)
+library(leaps)
+```
+
+## Problem 1
+```{r echo=TRUE}
+modelComparison <- data.frame("Model Variables"=c("None","x1","x2","x3","x1,x2","x1,x3","x2,x3","x1,x2,x3"), "SSR"=c(8100,6240,5980,6760,5500,5250,5750,5160), "df"=c(27,26,26,26,25,25,25,24))
+modelComparison$EstimateVariance <- modelComparison$SSR/modelComparison$df
+fullEstimateVariance <- 215
+modelComparison$p <- c(0,1,1,1,2,2,2,3)
+n <- 28
+modelComparison$Cp <- ((modelComparison$SSR/fullEstimateVariance)-n)+(2*(modelComparison$p+1))
+modelComparison$AIC <- n*(log(modelComparison$SSR/fullEstimateVariance))+ 2*(modelComparison$p+2)
+modelComparison$BIC <- n*(log(modelComparison$SSR/fullEstimateVariance))+ log(n)*(modelComparison$p+2)
+modelComparison
+```
+
+The model with $X_1$ and $X_3$ has the lowest $C_p$ (2.418605).
+
+The model with $X_1$ and $X_3$ has the lowest $BIC$ (102.7985).
+
+The model with $X_1$ and $X_3$ has the lowest $AIC$ (97.46967).
+
+## Problem 2
+
+### A
+
+```{r}
+head(ex1217)
+```
+The R output shows that the model with the smallest Cp is one with explanatory variables as follows: Precip, Educ, NonWhite.
+
+
+### B
+```{r}
+model2bSimplified <- lm(Mortality ~ Precip + Educ + NonWhite, data = ex1217)
+
+model2bFull <- lm(Mortality ~ Precip + Educ + NonWhite + log(HC) + log(NOX) + log(SO2), data = ex1217)
+
+anova(model2bFull, model2bSimplified)
+```
+
+The addition of the three log(pollution) terms is significant.
+
+### C
+

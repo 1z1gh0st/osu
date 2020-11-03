@@ -1,0 +1,133 @@
+---
+title: "HW 3"
+output:
+  html_document:
+    df_print: paged
+---
+Philip Warton 933328296
+
+```{r echo=FALSE}
+library(ggplot2)
+library(Sleuth3)
+```
+
+## Problem 1
+
+### A
+
+```{r echo=TRUE}
+myData <- ex1027
+myData$Size_Num <- (as.numeric(myData$Size)-1)
+myData$Status_Num <- (as.numeric(myData$Status)-1)
+head(myData)
+```
+
+```{r echo=TRUE}
+modelParallelLines <- lm(Time ~ Pairs + Size_Num + Status_Num, myData)
+summary(modelParallelLines)
+```
+
+$H_0: \beta_2 = 0$, The null hypothesis states that the mean time of extinction is not affected by the size of the species.
+
+$H_A: \beta_2 \neq 0$, The alternative hypothesis states that the mean time of extinction is affected by the size of the species.
+
+Estimate of $\beta_2 = -3.9269$
+
+Standard error $= 2.3435$
+
+T-Ratio $=-1.676$
+
+P-value: $p=0.09919$
+
+At a significance level of $\alpha = 0.05$ we fail to reject the null hypothesis. We cannot rule out the possibility that size of species alone has no effect on time of extinction.
+
+### B
+
+$H_0: \beta_3 = 0$, The null hypothesis states that the mean time of extinction is not affected by the migratory status of the species. 
+
+$H_A: \beta_3 \neq 0$, The alternative hypothesis states that the mean time of extinction is affected by the migratory status of the species.
+
+Estimate of $\beta_3 = 3.5300$
+
+Standard error $= 2.5679$
+
+T-Ratio $=1.375$
+
+P-value: $p=0.17453$
+
+At a significance level of $\alpha = 0.05$ we fail to reject the null hypothesis. We cannot rule out the possibility that the migratory status of species alone has no effect on time of extinction.
+
+### C
+
+```{r echo=TRUE}
+confint(modelParallelLines, level = .9)
+```
+
+With 90% confidence, the difference of mean time of extinction for the two different levels of species size is captured by the interval: (-7.8441829, -0.00960805).
+
+```{r echo=TRUE}
+confint(modelParallelLines, level = .99)
+```
+
+With 99% confidence, the difference of mean time of extinction for the two different migratory statuses is captured by the interval: (-3.3090992, 10.369072).
+
+### D
+
+```{r echo=TRUE}
+modelSeperateLines <- lm(Time ~ Pairs + Size_Num + Status_Num + (Pairs * Size_Num) + (Pairs * Status_Num) + (Size_Num * Status_Num) + (Pairs * Size_Num * Status_Num), myData)
+
+modelSeperateSimplified <- lm(Time ~ Pairs + Size_Num + Status_Num + (Pairs * Size_Num) + (Pairs * Status_Num), myData)
+```
+
+```{r echo=TRUE}
+anova(modelSeperateSimplified, modelSeperateLines)
+```
+
+Looking at this ANOVA it would seem that our simpler model would be better than our model with all interactive parameters.
+
+### E
+
+```{r}
+summary(modelSeperateSimplified)
+```
+We want to find out if the interactive parameter Pairs times Size is necessary.
+
+$H_0: \beta_4 = 0$ The null hypothesis states that the relationship between nesting pairs and extinction time is not affected by species size.
+
+$H_A: \beta_4 \neq 0$ The alternative hypothesis states that the relationship between nesting pairs and extinction time is affected by species size.
+
+Estimate = 0.5781
+
+Standard Error = 1.0839
+
+T-Ratio = 0.533
+
+P-value = 0.596
+
+With a significance level of $\alpha = 0.05$ we fail to reject the null hypothesis. There is not convincing evidence that that the relationship between nesting pairs and extinction time is affected by species size.
+
+Now, we want to find out if the interactive parameter Pairs times Status is necessary.
+
+$H_0: \beta_4 = 0$ The null hypothesis states that the relationship between nesting pairs and extinction time is not affected by migratory status
+
+$H_A: \beta_4 \neq 0$ The alternative hypothesis states that the relationship between nesting pairs and extinction time is affected by migratory status
+
+Estimate = 1.7888
+
+Standard Error = 1.3146
+
+T-Ratio = 1.361
+
+P-value = 0.179
+
+With a significance level of $\alpha = 0.05$ we fail to reject the null hypothesis. There is not convincing evidence that that the relationship between nesting pairs and extinction time is affected by migratory status.
+
+### F
+
+```{r echo=TRUE}
+anova(modelSeperateSimplified)
+```
+
+This ANOVA table tells us the sum of squares between and within for all of our explanatory parameters. The values on the far right are the p-values for all these parameters, and it would appear that only the "pairs" explanatory variable has a significant effect on mean time of extinction for each species.
+
+There is a significant relationship between the amount of nesting pairs and the time of extinction, but there is no affect of species size or migratory status on the mean time of extinction or on the relationship between amount of nesting pairs and time of extinction.
