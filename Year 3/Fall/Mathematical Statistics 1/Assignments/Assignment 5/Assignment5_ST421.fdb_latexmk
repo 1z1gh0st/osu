@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1604388102 "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.pdf" "Assignment5_ST421" 1604388125
+["pdflatex"] 1604388102 "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.pdf" "Assignment5_ST421" 1604443585
   "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.aux" 1604388103 32 ab05033ccbb38b00a31b200ccedf8001 ""
-  "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.tex" 1604388101 5291 b8e0a69c3eca877a5894ca58c8e16d01 ""
+  "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.tex" 1604443584 5291 b8e0a69c3eca877a5894ca58c8e16d01 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -146,10 +146,10 @@
   "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1604348489 2549326 414af182f0399eecc7d401eee4945cf3 ""
   "/usr/local/texlive/2020/texmf.cnf" 1586288231 577 d60164b4589a341208aff7a667fbbdcb ""
   "Assignment5_ST421.aux" 1604388103 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
-  "Assignment5_ST421.tex" 1604388101 5291 b8e0a69c3eca877a5894ca58c8e16d01 ""
+  "Assignment5_ST421.tex" 1604443584 5291 b8e0a69c3eca877a5894ca58c8e16d01 ""
   (generated)
+  "Assignment5_ST421.aux"
   "Assignment5_ST421.pdf"
+  "Assignment5_ST421.log"
   "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.log"
   "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 5/Assignment5_ST421.pdf"
-  "Assignment5_ST421.aux"
-  "Assignment5_ST421.log"
