@@ -1,0 +1,85 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Mathematical Statistics - Assignment 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 4.8}
+    Suppose that $Y$ has a density function
+    \[
+        f(y) = 
+        \begin{cases}
+            k y (1-y), & 0 \leq y \leq 1\\
+            0, & \text{otherwise}
+        \end{cases}
+    \]
+    \subsection*{(a)} 
+        Find some $k \in \mathbb{R}$ such that $f(y)$ is a probability
+        density function. Notice that $\forall y \in [0,1],\ \ \ \ y(1-y) > 0$. This indicates
+        that $k \geq 0$. The integral $\int_{-\infty}^0 f(y)dy + \int_1^\infty f(y)dy = 0$ since we know that
+        the function is constantly zero on these open intervals. Then $P(-\infty, \infty) = P(0 \leq X \leq 1) = \int_0^1 f(y) dy$.
+        Thus we want to find some $k$ such that $\int_0^1 k y (y-1) dy = 1$. Let us use rules of algebra and
+        integration to derive the following
+        \begin{align*}
+            1 & = \int_0^1 ky(1-y)dy\\
+            &= k \int_0^1 y-y^2 dy\\
+            &= k \left(\frac{y^2}{2} - \frac{y^3}{3}\right)\bigg|_0^1\\
+            &= \frac{k}{6}
+        \end{align*}
+        Since we must have $\frac{k}{6} = 1$, of course our answer will be $k = 6$.
+    \subsection*{(b)-(e)}
+        Compute various probabilities using this value of $k$ and the normalized density function $f(y)$. First
+        we must find $P(.4 \leq Y \leq 1)$.
+        \begin{align*}
+            P(.4 \leq Y \leq 1) &= \int_{0.4}^1 6y(1-y)dy\\
+            &= 6 \int_{.4}^1y - y^2dy\\
+            &= 6\left[\frac{y^2}{2} - \frac{y^3}{3}\right]_{.4}^1\\
+            &= 6 \left[ \frac{1}{6} - \left(\frac{2}{25} - \frac{2^3}{(3) 5^3}\right)   \right]\\
+            &= .648
+        \end{align*}
+        The next probability to compute is $P(.4 \leq Y < 1)$. However, this probability will be the
+        same as the one we just computed because $P(.4 \leq Y \leq 1) = P(.4 \leq Y < 1) + P(Y = 1)$.
+        Since $P(Y = 1) = \int_1^1 f(y)dy = 0$, both probabilities must be equal. \\\\
+        To compute $P(Y \leq .4 | Y \leq .8)$ by definition the probability equals 
+        \[
+            \frac{P(Y \leq .4 \text { and } Y \leq .8)}{P(Y \leq .8)}
+        \]
+        The probability in the numberator will simply be $P(Y \leq .4)$ since this event is a subset of $Y \leq .8$.
+        Since the probability $P(.4 \leq Y \leq 1)$ is already known, $P(Y \leq .4) = 1 - P(Y > .4) = 1 - P(.4 \leq Y \leq 1) = .352$.
+        For the denominator, the integral must be computed.
+        \[
+            6 \int_0^{.8} f(y) dy = 6\left[\frac{y^2}{2} - \frac{y^3}{3}\right]_0^{.8} = 6\left[\frac{4^2}{(2)5^2} - \frac{4^3}{(3)5^3}\right] = .896
+        \]
+        Knowing both the numerator and denominator we say $P(Y \leq .4 | Y \leq .8) = \frac{.352}{.896} = .393$.
+\section*{Problem 4.14}
+\section*{Problem 4.18}
+\section*{Problem 4.28}
+\section*{Problem 4.32}
+\section*{Problem 4.40}
+\section*{Problem 4.48}
+\section*{Problem 4.50}
+\end{document}
