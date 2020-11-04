@@ -1,0 +1,102 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage[linewidth=1pt]{mdframed}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{MTH 411 Post Midterm Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Midterm Solutions and Review}
+    \subsection{Let $(M,d)$ be a metric space with the discrete metric. Show that any convergent sequence is eventually constant.}
+        \begin{proof}
+            Let $(x_n)$ be a convergent sequence in the space.
+            Choose $\epsilon = 1$.
+            Our sequence will eventually be in the epsilon ball of its limit, and therefore it will be eventually constant.
+        \end{proof}
+    \subsection{The set $A = \{y \in M : d(x,y) \leqslant r \}$ is called the closed ball with radius $r$ about $x$.}
+        \subsubsection{Show that $A$ is closed.}
+            \begin{proof}
+                Assume that $(y_n)$ is a convergent sequence in $A$.
+                We will show that its limit is in $A$.
+                Let $\epsilon > 0$ be arbitrary.
+                Then,
+                \[
+                    d(x,y) \leqslant d(x, y_n) + d(y_n, y) \leqslant r + \epsilon
+                \]
+                Since this is true for any $\epsilon > 0$ we say that $d(x,y) \leqslant r$, and $y \in A$.
+            \end{proof}
+        \subsubsection{Give an example where $A$ is not the closure of the open ball.}
+            Choose the space of integers, with an open ball radius 1 around 0.
+            Then $B_1(0) = \{0\}$ is already closed, and is a proper subset of $A$.
+    \subsection{If $x_n \rightarrow x$ in a metric space, show that $d(x_n,y) \rightarrow d(x,y)$.}
+        \begin{proof}
+            By the reverse triangle inequality and the squeeze theorem, the result follows trivially.
+        \end{proof}
+    \subsection{Show that the collection of polynomials with integer coefficients is countable.}
+        \begin{proof}
+            Let $\mathcal{P}$ be the set of all polynomials with integer coefficients, $\mathcal{P}_n$ be the set of polynomials $p(x) = \sum_{k=0}^na_kx^k$ with integer coefficients and degree at most $n$. Then
+            \[
+                \mathcal{P} = \bigcup_{n=0}^\infty \mathcal{P}_n
+            \]
+            To show that $\mathcal{P}_n$ are countable, map $\mathcal{P}_{n-1}$ onto $Z^n$ with the bijection:
+            \[
+                f(z_1, z_2, \cdots, z_3) = \sum_{k=1}^n z_k x^k
+            \]
+            Then we assume that $\mathbb{Q}^n$ is countable, and $\mathbb{Z}^n \subset \mathbb{Q}^n$ and we say that $\mathcal{P}$ must be countable.
+        \end{proof}
+\section{Continuity}
+\section{Homeomorphisms}
+\section{Completeness}
+    \begin{mdframed}
+        \begin{definition}[Totally Bounded]
+            We define total boundedness to be the following: a set $A$ in a metric space $(M,d)$ is totally bounded $\Leftrightarrow$
+            \[
+                \forall \epsilon > 0, \exists n \in \mathbb{N}, x_1, \cdots , x_n \in M : A \subset \bigcup_{j=1}^n B_\epsilon(x_j)
+            \]
+        \end{definition}
+    \end{mdframed}
+    If we look at $B_1(0) \in l_1$, we find that although this set is bounded, it is not totally bounded.
+    \begin{mdframed}
+        \begin{theorem}
+            We can characterize total boundedness by: $\forall \epsilon > 0 \exists n \in \mathbb{N}, A_1, \cdots, A_n \subset A$ such that diam$(A_j) < \epsilon, j = 1, \cdots, n$ and $A \subset \bigcup_{j=1}^n A_j$.
+        \end{theorem}
+    \end{mdframed}
+    The property of total boundedness can be considered as a generalization of compactness.
+    \begin{definition}[Bounded]
+        We say that a set $A \subset M$ is bounded if there exists some ball of finite
+        radius such that $A$ is contained in this ball.
+    \end{definition}
+    \begin{lemma} Let $(x_n)$ be a sequence in $(M,d)$ and $A = \{x_n | n \in \mathbb{N}\}$ its range.
+        \begin{align*}
+            (i) & \text{ if $(x_n)$ is Cauchy, then $A$ is totally bounded}\\
+            (ii) & \text{ if $A$ is totally bounded, then $x_n$ has a Cauchy subsequence}
+        \end{align*}
+    \end{lemma}
+    \begin{proof}
+        \fbox{(i)} Let $\epsilon > 0$ be arbitrary. Since $(x_n)$ is Cauchy,
+        we say that for some $N \in \mathbb{N}$, for every $m,n \geq N, d(x_m, x_n) < \epsilon$.
+        So we say that $\bigcup_{n=1}^N B_\epsilon(x_n) \supset A$ and is a finite union of open
+        balls, and is therefore open.\\\\
+        \fbox{(ii)}
+        If $A$ is finite, then every sequence $(x_n) \in A$ has a constant subsequence. Otherwise,
+        $A$ will be infinite.
+    \end{proof}
+    \begin{definition}
+        A metric space $(M,d)$ is complete if every Cauchy sequence in $M$ converges to a point in $M$.
+    \end{definition}
+    Of course the set of real numbers will be complete, however the set of rational numbers will not be complete.
+    The Lebesgue space $\ell_2$ is complete. To prove this is fairly difficult.
+\end{document}

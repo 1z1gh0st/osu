@@ -1,0 +1,187 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\begin{document}
+
+\title{Real Analysis Assignment 5}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Preamble}
+\subsection*{Characterization of the Closure}
+    Let $A$ be a set, and $\mathcal{L}$ be the set of limit points of $A$, that is,
+    \[ \mathcal{L} = \{l \in M : \forall \epsilon > 0, \ \ \ \ B_\epsilon(l) \setminus \{l\} \cap A \neq \O \} \]
+    We claim that $A \cup \mathcal{L} = \overline{A}$.
+    \begin{proof}
+        In order to show this we wish to show that both $A \cup \mathcal{L} \subset \overline{A}$ and $A \cup \mathcal{L} \supset \overline{A}$.\\\\
+        \fbox{$\subset$} Let $x \in A \cup \mathcal{L}$ be arbitrary. If $x \in A$, then $x \in \overline{A}$ since we know that $A \subset \overline{A}$
+        by definition. Otherwise we know that $x \in \mathcal{L} \setminus A$. Suppose by contradiction that $x \in \left(\overline{A}\right)^c$. Since $\overline{A}$ is closed, its complement is open.
+        Then if $x$ is in the open set $ \left(\overline{A}\right)^c$, it follows that $\exists \epsilon > 0$ such that $B_\epsilon(x) \subset \left(\overline{A}\right)^c$.
+        However since $x$ is a limit point of $A$, we know that every $\epsilon$-ball of $x$ intersects $A$ at some point other than $x$ and we have a
+        contradiction. Therefore $x \notin \left(\overline{A}\right)^c$, and $x \in \overline{A} \Longrightarrow A \cup \mathcal{L} \subset \overline{A}$. \\\\
+        \fbox{$\supset$} Let $x \in \overline{A}$ be arbitrary. Then we know that every closed set containing $A$ contains $x$. If $x \in A$, then trivially
+        $x \in A \cup \mathcal{L}$. Suppose that $x \notin A$, then by contradiction suppose $x \notin \mathcal{L}$. Then $\exists \epsilon > 0$ such that
+        $B_\epsilon(x) \cap A = \O$. We can exclude the possibility of having an isolated point since $x \notin A$ by assumption. Then we know that $B_\epsilon(x)^c$
+        is going to be a closed set containing $A$. Since there exists a closed set containing $A$ such that $x$ does not belong to it, we say $x \notin \overline{A}$
+        (contradiction).\\\\
+        Having shown both inclusions, it follows that $A \cup \mathcal{L} = \overline{A}$.
+    \end{proof}
+\subsection*{Problem 4.46 (Characterizations of Dense Sets)}
+    A set $A$ is dense in $M$ if and only if the following conditions hold:
+    \begin{align*} 
+        (a) & \text{ Every point in $M$ is the limit of a sequence in $A$.}\\
+        (b) & \text{ For every point in $M$, every $\epsilon$-neighborhood intersects $A$.}\\
+        (c) & \text{ Every non-empty open set intersects $A$. }\\
+        (d) & \text{ The interior of the complement of $A$ is empty. }
+    \end{align*}
+    \begin{proof}
+        \fbox{Dense $\Rightarrow (a)$} To show this, assume that $A$ is dense in $M$, that is, $\overline{A} = M$. Let $x \in M$ be arbitrary.
+        Then $x \in \overline{A}$. Then we know that either $x \in A$ or $x \in \mathcal{L}$ where $\mathcal{L}$ is the set of limit points of $A$.
+        If $x$ is a limit point of $A$, simply construct a sequence $(x_n)$ where for every $x_n$ choose some element $y \in B_{\frac{1}{n}}(x) \setminus \{x\} \cap A$
+        which we know to exist by the definition of limit point. Then $\forall n \in \mathbb{N}, x_n \in A$ and $(x_n) \rightarrow A$. So if $x$ is not a 
+        limit point of $A$, then $x \in A$. Simply choose the constant sequence $(x_n)$ such that $x_n = x \forall n \in \mathbb{N}$ and trivially $(x_n) \rightarrow x$
+        and the sequence is contained in $A$.\\\\
+        \fbox{$(a) \Rightarrow (b)$} Assume that every point in $M$ is the limit of a sequence contained in $A$.
+        Let $x \in M$ be arbitrary, and let $\epsilon > 0$ be arbitrary. Since there exists a sequence in $A$
+        that converges to $x$, call this sequence $x_n$, we know that this sequence is eventually in $B_\epsilon(x)$
+        and therefore $B_\epsilon(x) \cap A$ is not empty.\\\\
+        \fbox{$(b) \Rightarrow (c)$} Assume that $\forall x \in M, \forall \epsilon > 0,\ \ B_\epsilon(x) \cap A \neq \O$.
+        Let $U \subset M$ be an open set that is non-empty. Then we know that there exists some $\epsilon$-neighborhood of
+        some point $x \in M$ such that $B_\epsilon(x) \subset U$. By assumption this ball intersects $A$, therefore
+        $U$ also intersects $A$.\\\\
+        \fbox{$(c) \Rightarrow (d)$} Assume that every non-empty open set in $M$ intersects $A$. Suppose by contradiciton
+        there exists some $x$ that belongs to the interior of $A^c$. Since the interior must be open, there exists some
+        $\epsilon$-neighborhood of $x$ that is contained within the interior of $A^c$. However since this is a non-empty
+        open set in $M$, it follows that $B_\epsilon(x)$ intersects $A$, and therefore cannot be contained in $int(A^c) \subset A^c$ (contradiciton).
+        Since supposing that $\exists x \in int(A^c)$ leads to a contradiction, $int(A^c)$ must be empty.
+        \\\\
+        \fbox{$(d) \Rightarrow $ Dense} Assume that $int(A^c)$ is empty. We wish to show that $\overline{A} = M$. Since $M$ is 
+        our unviersal set, we say that $\overline{A} \subset M$ by definition. To show that $\overline{A} \supset M$, let $x \in M$
+        be arbitrary. Suppose by contradiction that $x \notin \overline{A}$. Then since we know the closure of $A$ is closed, its complement must be open.
+        This means that $\exists B_\epsilon(x) \subset \left(\overline{A}\right)^c \subset A^c$. However this would imply that 
+        $int(A^c)$ is non-empty (contradiction). Thus $\overline{A} = M$.\\\\
+        Having shown each implication, we can now characterize a set as being totally dense by any one of these conditions.
+    \end{proof}
+\section*{Problem 5.7}
+    \subsection*{Question (a)}
+        If $f:M \rightarrow \mathbb{R}$ is continuous and $a \in \mathbb{R}$, show that the sets $A = \{x : f(x) > a\}$
+        and $B = \{x : f(x) < a\}$ are open subsets of $M$. 
+        \begin{proof}
+            Since $f$ is a continuous function, we say that for any open set in $\mathbb{R}$, its pre-image
+            must be open in $M$. We can write
+            \[
+                A = \{x \in M : f(x) \in (a, \inf)\} = f^{-1}(a,\inf) \ \ \ \ \ \ \ \ \ \ \ \ \ B = \{x \in M : f(x) \in (-\inf, a)\} = f^{-1}(-\inf,a)
+            \]
+            Since both intervals are open sets in $\mathbb{R}$, $A$ and $B$ are open
+            in $M$.
+        \end{proof}
+    \subsection*{Question (b)}
+        Now we must show the converse. That is, show that if $f^{-1}(-\inf, a)$ and $f^{-1}(a, \inf)$ are open in $M$
+        for every $a \in \mathbb{R}$, then $f$ is continuous.
+        \begin{proof}
+            Let $B(a)$ denote $f^{-1}(-\inf, a)$ and $A(a)$ denote $f^{-1}(a, \inf)$. Let $U \in \mathbb{R}$ be
+            an open set, we wish to show that $f^{-1}(U)$ is open in $M$. Notice that we can write any interval in $\mathbb{R}$
+            as
+            \[
+                (x,y) = (-\inf, y) \cap (x, \inf) = B(y) \cap A(x)
+            \]
+            This means that $f^{-1}(x,y) = f^{-1}(B(y)) \cap f^{-1}(A(x))$. This means that the pre-image
+            of the interval $(x,y)$ is a finite intersection of open sets, and therefore is open. Since any
+            open set in $\mathbb{R}$ can be written as a union of open intervals (we have shown that the set
+            of such intervals with rational endpoints is a valid basis for the standard topology on $\mathbb{R}$ in a previous homework,
+            so it would follow that the set of all open intervals would be as well), we say
+            \[
+                U = \bigcup_{x \in X, y \in Y} (x, y) \ \ \ \ \ \ \ \text{and} \ \ \ \ \ \ \ \ f^{-1}(U) = f^{-1}\left(\bigcup_{x \in X, y \in Y}(x,y)\right) = \bigcup_{x \in X, y \in Y} (f^{-1}(x,y))
+            \]
+            Then since every set $f^{-1}(x,y)$ is open in $M$, a union of such sets must also be open. Thus
+            $f^{-1}(U)$ is open in $M$ for an arbitrary open set $U \subset \mathbb{R}$, and we say that $f$ is continuous.
+        \end{proof}
+    \subsection*{Question (c)}
+        Show that $f$ is continuous even if we take the sets $A(a)$ and $B(a)$ upon rational numbers.
+        \begin{proof}
+            The proof is the same, except we say that any rational interval $(p,a) = A(p) \cap B(q)$. Then it follows
+            that any interval of this form will be an open set in $M$ since $f^{-1}(p,a) = f^{-1}A(p) \cap f^{-1}B(q)$.
+            Then since we know
+            that the set of all rational intervals form a basis for the standard topology on $\mathbb{R}$. We write
+            for any $U \in \mathbb{R}$,
+            \[
+                U = \bigcup_{p \in P, q \in Q}(p,q)
+            \]
+            And the pre-image of $U$ is equal to the union of the all the pre-images of intervals of the form $(p,q)$,
+            thus $f^{-1}(U)$ is a union of open sets in $M$ and is therefore open.
+        \end{proof}
+\section*{Problem 5.17}
+    Let $f,g:(M,d) \rightarrow (N, \rho)$ be continuous, and let $D$ be a dense subset of $M$.
+    If $f(x) = g(x)$ for every $x \in D$, show that $f(x) = g(x)$ for all $x \in M$. If $f$ is onto,
+    show that $f(D)$ is dense in $N$.
+    \begin{proof}
+        Assume that $f(x) = g(x)$ for every $x \in D$. We wish to show that for every $x \notin D$,
+        we still have $f(x) = g(x)$. Let $x \notin D$ be arbitrary. Then by our characterization of 
+        dense sets, we know that there exists some sequence $(x_n) \in D$ such that $(x_n)\rightarrow x$.
+        Since $f$ and $g$ are both continuous we have both
+        \[
+            f(x_n) \rightarrow f(x), \ \ \ \ \ \ \ \ \ \ g(x_n) \rightarrow g(x)
+        \]
+        Then we know that for every element of $D$, its image under $f$ and $g$ is the same, so we say that
+        for every natural number $n$ we have $f(x_n) = g(x_n)$. We have two convergent sequences that are equal 
+        to each other,
+        so it must be the case that their limits are equal, thus $f(x) = g(x)$.
+    \end{proof}
+    Now that we have proved that $f(x) = g(x)$ for every point $x \in M$, we must prove that if $f$
+    is onto, then $f(D)$ is dense in $N$.
+    \begin{proof}
+        Assume that $f$ is onto. Let $x \notin f(D)$, we wish to show that any neighborhood of $x$ intersects
+        $f(D)$. Let $B_\epsilon(x)$ be arbitrary. Since $f$ is continuous, we know that $f^{-1}(B_\epsilon(x))$
+        is an open set in $M$. Since $f$ is onto we know that this set is non-empty. Then since we have a
+        non-empty open set in $M$ we say $f^{-1}(B_\epsilon(x)) \cap D \neq \O$. Let $y$ be an element of this intersection.
+        Then $f(y) \in f(D) \cap B_\epsilon(x)$, and we say that $f(D)$ is dense in $N$.
+    \end{proof}
+\section*{Problem 5.56}
+    Let $f:(M,d) \rightarrow (N, \rho)$.
+    \subsection*{(i)}
+        Provide examples that show that continuity does not imply an open map, and the converse. Let
+        $f: (\mathbb{Q},d) \rightarrow (\mathbb{R},d)$ such that $f(x) = x$ (identity map). Then we say
+        that $f$ is continuous but $f$ is not an open map. Since both metric spaces share the same metric,
+        and $f(x) = x$, it follows that if $d(x_n,x) \rightarrow 0$ in $(\mathbb{Q}, d)$ then it would do the
+        same in $(\mathbb{R}, d)$. Thus $f$ is continuous. Let $U$ be a non-empty open set in $(\mathbb{Q}, d)$.
+        The image of this set $f(U)$ will be a set of rational points in $\mathbb{R}$. Since $\mathbb{Q}^c$ is 
+        dense in $\mathbb{R}$, it follows that the interior of $\mathbb{Q}$ is empty, and therefore no subset
+        of $\mathbb{Q}$ can be open in $\mathbb{R}$.\\\\
+        To show that the converse does not hold let $g: (\mathbb{R}, d) \rightarrow (\mathbb{Z}, d')$ where
+        $d$ is the standard metric on the real numbers, and $d'$ is the discrete metric. We give a formula for $g$
+        as
+        \[
+            g(x) = \begin{cases}
+                1, & \text{ if }x = 1\\
+                0 & \text{otherwise}
+            \end{cases}  
+        \]
+        Then since every set in $(\mathbb{Z},d')$ is both open and closed, we say $g$ must be an open map.
+        However, we say that $g$ can not be continuous because there exists an open set in $(\mathbb{Z},d')$ such
+        that its pre-image is closed in $(\mathbb{R},d)$. The open ball $B_\frac{1}{2}(1)$ is open in $(\mathbb{Z},d')$,
+        but its pre-image $\{1\}$ is closed in $(\mathbb{R},d)$. Thus $f$ is not
+    \subsection*{(ii)}
+\section*{Qualifying Exam Problem 2}
+    \subsection*{(a)} 
+        Given $a \in \mathbb{R}$ denote by $\{a\}$ the 
+        fractional part of $a$; that is,
+        \[ 
+            \{a\} = \min \{a-n:n\in\mathbb{Z},n\leq a\}    
+        \]
+        Suppose that $\alpha$ is a real irrational number. Prove that the set 
+        \[
+            A_\alpha = \{ \{n\alpha\} : n \in \mathbb{Z}\}
+        \]
+        is dense in $[0,1]$.
+        \begin{proof}
+            To show that $A_\alpha$ is dense in the closed unit interval, we can use our characterizations of
+            dense sets. Let $x \in A_\alpha^c$, let $\epsilon > 0$, we wish to show that $B_\epsilon(x)$ itersects the set
+            $A_\alpha$. We can write the $\epsilon$-ball about $x$ as $(x - \epsilon, x + \epsilon)$. Then we
+            claim that for some $y$ in this interval, $y = n \alpha$ for some integer number $n$.
+        \end{proof}
+\end{document}
