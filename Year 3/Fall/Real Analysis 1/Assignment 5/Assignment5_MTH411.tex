@@ -6,6 +6,16 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
 \begin{document}
 
 \title{Real Analysis Assignment 5}
@@ -179,9 +189,19 @@
         \]
         is dense in $[0,1]$.
         \begin{proof}
-            To show that $A_\alpha$ is dense in the closed unit interval, we can use our characterizations of
-            dense sets. Let $x \in A_\alpha^c$, let $\epsilon > 0$, we wish to show that $B_\epsilon(x)$ itersects the set
-            $A_\alpha$. We can write the $\epsilon$-ball about $x$ as $(x - \epsilon, x + \epsilon)$. Then we
-            claim that for some $y$ in this interval, $y = n \alpha$ for some integer number $n$.
+            Suppose $\exists t \in A_\alpha$ such that $0 < t \leq \epsilon$ for any arbitrary $\epsilon$. Then $2t \in (\epsilon, 2\epsilon], \ 3t \in (2\epsilon, 3\epsilon]$ etc...
+            Since $nt \in A_\alpha$ we know that for each of those intervals $(z\epsilon, (1+z)\epsilon]$.
+            The interval $[0,1]$ can be partitioned into a union of such sets for any $\epsilon > 0$. Now choose 
+            $x \in [0,1] \cap A_\alpha^c$ and let $\epsilon > 0$ be arbitrary. Then $B_\epsilon(x)$ intersects $A_\alpha$.
+            This is the case because we can choose some $\delta < \frac{\epsilon}{2}$. Then $\exists z \in \mathbb{Z}$ such that 
+            $(z\epsilon, (z+1)\epsilon] \subset B_\epsilon(x)$. Then it follows that if $t \in (0, \epsilon]$ then $zt \in B_\epsilon(x)$.
+            Since $zt \in A_\alpha$ and $zt \in B_\epsilon(x)$, the intersection of these two sets is nonempty.
+            \begin{figure}[ht]
+                \centering
+                \def\svgwidth{.5\linewidth}
+                \import{./figures/}{delta-partition.pdf_tex}
+                \caption{Delta Partition of the Closed Unit Interval}
+                \label{fig:delta-partition}
+            \end{figure}
         \end{proof}
 \end{document}
