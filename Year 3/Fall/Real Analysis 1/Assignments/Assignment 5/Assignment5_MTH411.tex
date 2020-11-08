@@ -115,15 +115,15 @@
         Show that $f$ is continuous even if we take the sets $A(a)$ and $B(a)$ upon rational numbers.
         \begin{proof}
             The proof is the same, except we say that any rational interval $(p,a) = A(p) \cap B(q)$. Then it follows
-            that any interval of this form will be an open set in $M$ since $f^{-1}(p,a) = f^{-1}A(p) \cap f^{-1}B(q)$.
+            that the pre-image any interval of this form will be an open set in $M$ since $f^{-1}(p,a) = f^{-1}A(p) \cap f^{-1}B(q)$.
             Then since we know
             that the set of all rational intervals form a basis for the standard topology on $\mathbb{R}$. We write
-            for any $U \in \mathbb{R}$,
+            for any $U \subset \mathbb{R}$,
             \[
                 U = \bigcup_{p \in P, q \in Q}(p,q)
             \]
             And the pre-image of $U$ is equal to the union of the all the pre-images of intervals of the form $(p,q)$,
-            thus $f^{-1}(U)$ is a union of open sets in $M$ and is therefore open.
+            thus $f^{-1}(U)$ is a union of open sets in $M$ and is therefore open. Hence-ly, $f$ is continuous.
         \end{proof}
 \section*{Problem 5.17}
     Let $f,g:(M,d) \rightarrow (N, \rho)$ be continuous, and let $D$ be a dense subset of $M$.
@@ -161,21 +161,23 @@
         same in $(\mathbb{R}, d)$. Thus $f$ is continuous. Let $U$ be a non-empty open set in $(\mathbb{Q}, d)$.
         The image of this set $f(U)$ will be a set of rational points in $\mathbb{R}$. Since $\mathbb{Q}^c$ is 
         dense in $\mathbb{R}$, it follows that the interior of $\mathbb{Q}$ is empty, and therefore no subset
-        of $\mathbb{Q}$ can be open in $\mathbb{R}$.\\\\
-        To show that the converse does not hold let $g: (\mathbb{R}, d) \rightarrow (\mathbb{Z}, d')$ where
-        $d$ is the standard metric on the real numbers, and $d'$ is the discrete metric. We give a formula for $g$
-        as
+        of $\mathbb{Q}$ can be open in $\mathbb{R}$ and $f$ is not an open map.\\\\
+        For an open map that fails to be continuous, let $g: (\mathbb{R},d) \rightarrow (\{0,1\},d')$ where
+        $d$ is the standard metric $|x - y|$, and $d'$ is the discrete metric. Define $g$ by the rule
         \[
-            g(x) = \begin{cases}
-                1, & \text{ if }x = 1\\
-                0 & \text{otherwise}
-            \end{cases}  
+            g(x) =
+            \begin{cases}
+                0 & x \leq 0\\
+                1 & x > 0
+            \end{cases}
         \]
-        Then since every set in $(\mathbb{Z},d')$ is both open and closed, we say $g$ must be an open map.
-        However, we say that $g$ can not be continuous because there exists an open set in $(\mathbb{Z},d')$ such
-        that its pre-image is closed in $(\mathbb{R},d)$. The open ball $B_\frac{1}{2}(1)$ is open in $(\mathbb{Z},d')$,
-        but its pre-image $\{1\}$ is closed in $(\mathbb{R},d)$. Thus $f$ is not
+        One can show easily that this function is not continuous $\frac{1}{n} \rightarrow 0$ but $f(\frac{1}{n}) \rightarrow 1 \neq f(0)$.
+        However, since $(\{0,1\}, d')$ bears the discrete metric, every set is simultaneosly open and closed, so we are
+        guaranteed an open map.
     \subsection*{(ii)}
+        Our previous example $g:\mathbb{R} \rightarrow \{0,1\}$ will serve as an example of a discontinous closed map.
+        Since every subset of $\{0,1\}$ is both open and closed under the discrete metric, given a closed set $U \subset \mathbb{R}$,
+         $g(U)$ is closed trivially.
 \section*{Qualifying Exam Problem 2}
     \subsection*{(a)} 
         Given $a \in \mathbb{R}$ denote by $\{a\}$ the 
@@ -183,25 +185,75 @@
         \[ 
             \{a\} = \min \{a-n:n\in\mathbb{Z},n\leq a\}    
         \]
+        Our first claim is that $\{a\} = a - \lfloor a \rfloor $. This proven instantly by the fact that $\lfloor a \rfloor = \max\{n \in \mathbb{Z} : n \leq a\}$.
+        By subtracting the maximal such integer, we take the minimal total. Our next claim about this function is that $\{a + b\} = \{\{a\} + \{b\}\}$.
+        This can be shown by noticing that the fractional part function will be integer periodic. That is, $\{n + a\} = \{a\}$ for any integer $n$. Then
+        we write
+        \[
+            \{a + b\} = \{ \lfloor a \rfloor + \{a\} + \lfloor b \rfloor + \{b\} \} = \{\{a\} + \{b\}\} \ \ \ \ \ \ \ \ \ \ \text{since $\lfloor x \rfloor$ is an integer for any $x \in \mathbb{R}$}
+        \]
+        Our third claim is that for any integer $n, \{na\} = \{n\{a\}\}$. We show this with the following:
+        \[
+            \{n\{a\}\} = \{n (a - \lfloor a \rfloor )\} = \{na - n \lfloor a \rfloor \} = \{na\} \ \ \ \ \ \ \ \ \text{since $-n \lfloor a \rfloor$ is an integer}
+        \]
         Suppose that $\alpha$ is a real irrational number. Prove that the set 
         \[
             A_\alpha = \{ \{n\alpha\} : n \in \mathbb{Z}\}
         \]
         is dense in $[0,1]$.
+
         \begin{proof}
-            Suppose $\exists t \in A_\alpha$ such that $0 < t \leq \epsilon$ for any arbitrary $\epsilon$. Then $2t \in (\epsilon, 2\epsilon], \ 3t \in (2\epsilon, 3\epsilon]$ etc...
-            Since $nt \in A_\alpha$ we know that for each of those intervals $(z\epsilon, (1+z)\epsilon]$.
-            The interval $[0,1]$ can be partitioned into a union of such sets for any $\epsilon > 0$. Now choose 
-            $x \in [0,1] \cap A_\alpha^c$ and let $\epsilon > 0$ be arbitrary. Then $B_\epsilon(x)$ intersects $A_\alpha$.
-            This is the case because we can choose some $\delta < \frac{\epsilon}{2}$. Then $\exists z \in \mathbb{Z}$ such that 
-            $(z\epsilon, (z+1)\epsilon] \subset B_\epsilon(x)$. Then it follows that if $t \in (0, \epsilon]$ then $zt \in B_\epsilon(x)$.
-            Since $zt \in A_\alpha$ and $zt \in B_\epsilon(x)$, the intersection of these two sets is nonempty.
-            \begin{figure}[ht]
+            This proof will come in two parts. Firstly we show that $\forall \epsilon > 0$, there exists some $t = \{n \alpha \} \in A_\alpha$ such that 
+            $0 < t < \epsilon$. Secondly we will show that any arbitrary open set intersecting $[0,1]$ will contain some element of $A_\alpha$.\\\\
+            \fbox{$\exists t < \epsilon$} Let $\alpha \in \mathbb{R} \setminus \mathbb{Q}, \epsilon > 0$ be arbitrary.
+            We know by the archimedean property that there exists some natural number $y$ such that $\frac{1}{y} < \epsilon$.
+            Then rewrite the closed unit interval as follows:
+            \[
+                [0,1] = \left[\frac{0}{y}, \frac{1}{y}\right] \cup \left(\frac{1}{y}, \frac{2}{y}\right] \cup \cdots \cup \left(\frac{y-1}{y}, \frac{y}{y}\right]
+            \]
+            We have a partition of $[0,1]$ resulting in $y$ disjoint intervals, each of which has a length that is at most $\frac{1}{y} < \epsilon$.
+            Given this fact, we know that for any $n, \{n \alpha\}$ will be contained in exactly one of these intervals. So observe the set
+            \[
+                \{\alpha, 2 \alpha, 3 \alpha , \cdots , y \alpha, [y+1] \alpha\}
+            \]
+            In particular, notice that there are $y+1$ objects, and we have only $y$ possible choices for intervals. It is guaranteed by the 
+            pidgeonhole principle that there exists some interval such that the fractional part of at least two elements from the above set belong to it.
+            Call these elements $y_1 \alpha, y_2 \alpha$. Since their fractional parts belong to the same interval, we say
+            \begin{align*}
+                \{y_1 \alpha\}, \{y_2 \alpha\} &\in \left(\frac{k}{y}, \frac{k+1}{y}\right) & \text{(we can exclude endpoints since $\alpha$ is irrational)}\\
+                \Rightarrow |\{y_1 \alpha\} - \{y_2 \alpha\}| &< \frac{1}{y}\\
+                |\{(y_1 - y_2) \alpha \}| = \{(y_1 - y_2) \alpha \} & < \frac{1}{y}
+            \end{align*}
+            Because we know that $y_1 - y_2 \in \mathbb{Z}$, it follows that $A_\alpha \ni \{(y_1 - y_2) \alpha \} < \frac{1}{y} < \epsilon$. \\\\
+            \fbox{$A_\alpha$ is dense in $[0,1]$} Let $x \in [0,1], \epsilon > 0$ be arbitrary. We want to show that $B_\epsilon(x) \cap A_\alpha$ is non-empty.
+            Let $0 < \delta < \frac{\epsilon}{3}$. Then it is guaranteed that there exists some interval $[(a) \delta, (a+1)\delta]$ where $a \in \{0,1,2\cdots\}$
+            such that $[(a)\delta, (a+1)\delta] \subset B_\epsilon(x)$. Let $t \in A_\alpha$ such that $0 < t < \delta$.
+            It follows that there exists some whole number $n$ such that $nt \in [(a)\delta, (a+1)\delta] \subset B_\epsilon(x)$. Then 
+            \[
+                nt = n\{m\alpha\} = \{ n m \alpha\} \in A_\alpha \cap B_\epsilon(x)
+            \]
+            Hence, $A_\alpha$ is dense in $[0,1]$.
+            \begin{figure}[hbt!]
                 \centering
                 \def\svgwidth{.5\linewidth}
                 \import{./figures/}{delta-partition.pdf_tex}
-                \caption{Delta Partition of the Closed Unit Interval}
+                \caption{$\delta$-partition of the Closed Unit Interval}
                 \label{fig:delta-partition}
             \end{figure}
         \end{proof}
+    \subsection*{(b)}
+        A function $f: \mathbb{R} \rightarrow \mathbb{R}$ is called $p$-periodic if $f(x+p) = f(x)$ for every
+        $x \in \mathbb{R}$. Prove that any continuous function that is both $1$-periodic and $\alpha$-periodic for
+        some irrational $\alpha$ must be a constant function.
+        \begin{proof}
+            Let $f$ be a real valued continuous function that is both $\alpha$-periodic and $1$-periodic. First, notice that since 
+            $f$ is $1$-periodic, $f(x) = f(nx) = f(\{x\})$ since $n$ can be any integer and there of course exists some integer $n$ such
+            that $nx = \{x\}$ by definition. Then since $f$ is $\alpha$-periodic, $f(n\alpha) = f(\alpha)$ for any $n \in \mathbb{Z}$.
+            Finally since $f$ is continuous, $x_n \rightarrow x \Rightarrow f(x_n) \rightarrow f(x)$.
+            Let $x \in \mathbb{R}$ be arbitrary.
+            By \fbox{Part (a)} we know that $\exists (x_n) \rightarrow \{x\}$ such that $x_n \in A_\alpha$ for every $n$.
+            Then, since $f$ is $\alpha$-periodic, $f(x_n) = f(m_{x_n}\alpha) = f(\alpha)$ for every $n$. Thus the limit of our constant sequence will be $f(\{x\}) = f(x) = f(\alpha)$.
+            Since $f(\alpha) \in \mathbb{R}$ is defined as a real constant number, and for any $x \in \mathbb{R}, f(x) = f(\alpha)$, the function $f$ is constant.
+        \end{proof}
+
 \end{document}

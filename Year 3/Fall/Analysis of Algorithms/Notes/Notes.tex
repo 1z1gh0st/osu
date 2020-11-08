@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{listings}
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Analysis of Algorithms - Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Graph Search Algorithms}
+We begin with this simple example of the ``whatever first search''. This is an algorithm that will brute force find some
+path from $v \rightarrow s$ for any $s$-reachble vertex $v$.
+\begin{mdframed}
+    Whatever-first-search algorithm with path rememberance:
+    \begin{lstlisting}[mathescape=true]
+WFS(G,s) {
+    Parent(s) = $\O$
+    Bag = $\{(s, \O)\}$
+    while Bag $\neq \O$ {
+        $(v,p)$ = any vertex from Bag
+            (remove $v$ from Bag)
+        if $v$ is not marked {
+            mark $v$
+            Parent(v) = p
+            for all $(v,w) \in E$ {
+                add $(w,v)$ to Bag
+            }
+        }
+    }
+}
+    \end{lstlisting}
+\end{mdframed}
+\begin{figure}[ht]
+    \centering
+    \incfig{wfs}
+    \caption{Whatever First Search For $v_8 \rightarrow s$}
+    \label{fig:wfs}
+\end{figure}
+Once the bag is eventually empty, we can find the path from 
+$v$ to $s$ by
+\[
+    v \rightarrow \text{parent}(v) \rightarrow \text{parent}(\text{parent}(v)) \rightarrow \cdots \rightarrow s
+\]
+The WFS algorithm marks all vertices reachable from $s$.
+\begin{proof}
+    Let $s$ be our initial point. We use induction that is based on the shortest path $s$ to $v$. \\\\
+    \fbox{Base Case:} Our vertex $v = s$, and ShortestPathLength$(v\rightarrow s) = 0$, and WFS marks it on the first iteration.\\\\
+    \fbox{Inductive Step:} For any point $v$ for which the shortest path $s \leftarrow v$ is smaller than $k \in \mathbb{N}$,
+    we assume that WFS has already marked $v$. Let $v$ be a point for which its minimum distance from $s$ is $k$.
+    Then let $u$ be the neighbor of $v$ that lies on 
+    a shortest path from $v$ to $s$. Then the length of $u \rightarrow s$ is $k-1$, and by assumption $u$ is marked.
+    Since $v$ is a neighbor of $u$, $v$ will be marked as well.
+\end{proof}
+What kind of data structures would be good to use for Bag? If 
+we use a stack, then this algorithm becomes a depth first search algorithm (DFS).
+If we use a queue, then we have a breadth first search (BFS) algorithm.
+If there is a weighted graph, one can use a priority queue based on edge weight,
+resulting in Dijkstra's shortest path algorithm.
+\end{document}

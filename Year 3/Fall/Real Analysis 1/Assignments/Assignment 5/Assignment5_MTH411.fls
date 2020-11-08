@@ -1,9 +1,9 @@
-PWD /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5
+PWD /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5
 INPUT /usr/local/texlive/2020/texmf.cnf
 INPUT /usr/local/texlive/2020/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.tex
-OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.log
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.tex
+OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.log
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
@@ -499,10 +499,10 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdftex.de
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.aux
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.aux
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.aux
-OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.aux
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.aux
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.aux
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.aux
+OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.aux
 INPUT /usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -583,7 +583,7 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
-OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.pdf
+OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.pdf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map
@@ -597,26 +597,41 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures/delta-partition.pdf_tex
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures/delta-partition.pdf_tex
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures/delta-partition.pdf_tex
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures/delta-partition.pdf_tex
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.aux
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures/delta-partition.pdf_tex
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures/delta-partition.pdf_tex
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures/delta-partition.pdf_tex
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures/delta-partition.pdf_tex
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.aux
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb

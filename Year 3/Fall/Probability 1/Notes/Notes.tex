@@ -68,11 +68,11 @@
     \begin{figure}[ht]
         \centering
         \incfig{probability-density-function}
-        \caption{Probability Density Funciton}
+        \caption{Probability Density Function}
         \label{fig:probability-density-function}
     \end{figure}
     First notice that the prboability density function must be non-negative, because it is impossible
-    to have a negative probability by definition axiomatically. There are some properties of these functions that we wish
+    to have a negative probability by definition axiomatically. There are some properties of these functions that we will
     enumerate now:
     \begin{align*}
         \text{(i) } & \int_{-\infty}^\infty f(x)dx = P(-\infty < X < \infty ) = 1 \\
@@ -84,19 +84,86 @@
     Even though $P(X = a) = 0$ for every real number $a$, since the real numbers are uncountable,
     we do not violate any of our axioms of probability. Since $P(S) = 1$ for any sample space $S$,
     it follows that $P(-\inf \leq X \leq \inf) = 1$.\\\\
-    Let us take the example of the following function:
+    \begin{mdframed}
+        \begin{definition}
+            Let $X$ be a continuous random variable with density function $f(x)$. Then its expectation is
+            \[
+                E[X] = \int_{-\infty}^\infty x f(x) dx
+            \]
+        \end{definition}
+    \end{mdframed}
+    We carry some similar properties over from discrete expectation. Firstly,
     \[
-        f(x) = \begin{cases}
-            e^{-x} & x \geq 0\\
-            0 & x < 0
-        \end{cases}
+        E[g(X)] = \int_{-\infty}^\infty g(x)f(x) dx    
     \]
-    We know that this function will integrate to $1$ over $\mathbb{R}$.
-    Scaling, this function by $\lambda$ we get another probability density function.
-    \[ f(x) = \begin{cases}\lambda e^{-\lambda x} & x \geq 0\\ 0 & x < 0 \end{cases}\]
-    We obtain the same exact area, so we still have a valid probability density function so
-    long as $\lambda > 0$.
-    This is called an exponential random variable.
-    It is a continuous analogue to the geometric random variable in the discrete case. Then
-    it also carries the property of memorylessness, which means that $P(X > a + b | X > a) = P(X > b)$.
+    The \fbox{Markov Inequality} also will hold for continuous random variables. That is,
+    \[
+        P(X \geq \alpha) \leq \frac{E[X]}{\alpha}    
+    \]
+    \begin{proof}
+        Let $\alpha > 0$. For every $\alpha \leq x < \infty, 1 \leq \frac{x}{\alpha}$. Then we say 
+        \[
+            P(X \geq \alpha) = \int_\alpha^\infty f(x) dx \leq \int_\alpha^\infty \frac{x}{\alpha}f(x)dx
+        \]
+        The right hand side is bounded by $\frac{1}{\alpha} \int_0^\infty x f(x) dx = \frac{1}{\alpha} E[X]$.
+    \end{proof}
+    Finally the \fbox{Chebyshev Inequality} also will hold:
+    \[
+        P(|X - \mu| \geq \kappa) \leq \frac{Var(x)}{\kappa}
+    \]
+    The proof of the Chebyshev Inequality does not change from the proof in the discrete case.
+    \subsection{Exponential Random Variable}
+        Let us take the example of the following function:
+        \[
+            f(x) = \begin{cases}
+                e^{-x} & x \geq 0\\
+                0 & x < 0
+            \end{cases}
+        \]
+        We know that this function will integrate to $1$ over $\mathbb{R}$.
+        Scaling, this function by $\lambda$ we get another probability density function.
+        \[ f(x) = \begin{cases}\lambda e^{-\lambda x} & x \geq 0\\ 0 & x < 0 \end{cases}\]
+        We obtain the same exact area, so we still have a valid probability density function so
+        long as $\lambda > 0$.
+        This is called an exponential random variable.
+        It is a continuous analogue to the geometric random variable in the discrete case. Then
+        it also carries the property of memorylessness, which means that $P(X > a + b | X > a) = P(X > b)$,
+        for any $a,b \geq 0$. Generally this is because after shifting our start point to $a$, and normalizing the distribution,
+        we simply get the same function again. However, we must prove this more rigorously.
+        \begin{proof}
+            For any $a > 0$, we can first compute the probability that $X > a$.
+            \[
+                P(X > a) = \int_a^{\inf} \lambda e^{- \lambda x} dx = (-e^{-\lambda x})_a^{\inf} = e^{-\lambda a}
+            \]
+            Then the conditional probability can be computed as follows:
+            \[
+                P(X > a + b | X > a) = \frac{P(X > a + b)}{P(X > a)} = \frac{e^{-\lambda (a + b)}}{e^{-\lambda a}} = e^{-\lambda b}
+            \]
+        \end{proof}
+        We proved in class that memorylessness is unique to the exponential random variable.
+    \subsection{Uniform Random Variable}
+        Consider a real interval $[\alpha, \beta] : \alpha < \beta$. Let $X$ be a continuous random variable with density funciton 
+        \[
+            f(x) =
+            \begin{cases}
+                \frac{1}{\beta - \alpha} & \alpha \leq x \leq \beta\\
+                0 & \text{otherwise}
+            \end{cases}
+        \]
+        With this funciton $X$ is a uniform random variable over the interval $[\alpha, beta]$.
+        \[
+            \int_{-\infty}^\infty f(x) dx = \int_{-\infty} ^ a 0 \cdot dx + \int_\alpha^\beta \frac{dx}{\beta - \alpha} + \int_\beta^\infty 0 \cdot dx = \left[\frac{x}{\beta - \alpha}\right]_\alpha^\beta = 1
+        \]
+    \subsection{Normal (Gaussian) Random Variable}
+    $X$ is a normal random variable with parameters $\mu$ and $\sigma^2$ if its density function its
+    \[
+        f(x) = \frac{1}{\sqrt{2\pi \sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}, \ \ \ \ \ -\infty < x < \infty
+    \]
+    Let $\mathcal{N}(\mu, \sigma^2)$ denote a normal distribution with parameters $\mu$ and $\sigma^2$.
+    \begin{figure}[ht]
+        \centering
+        \incfig{normal}
+        \caption{Probability Density Function of Normal Distribution}
+        \label{fig:normal}
+    \end{figure}
 \end{document}

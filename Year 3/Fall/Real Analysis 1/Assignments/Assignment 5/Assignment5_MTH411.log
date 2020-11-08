@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  4 NOV 2020 21:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  6 NOV 2020 17:53
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.tex"
-(/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.tex
+**"/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.tex"
+(/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.tex
 LaTeX2e <2020-10-01> patch level 2
 L3 programming layer <2020-10-27> xparse <2020-03-03> (/usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
@@ -379,7 +379,7 @@ File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count290
 \l__pdf_internal_box=\box62
-) (/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.aux)
+) (/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.aux)
 \openout1 = `Assignment5_MTH411.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
@@ -520,46 +520,80 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--79
 LaTeX Warning: Command \O invalid in math mode on input line 151.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--168
+Underfull \hbox (badness 10000) in paragraph at lines 157--167
 
  []
 
-(/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures/delta-partition.pdf_tex
-<./figures//delta-partition.pdf, id=25, page=1, 360.6446pt x 82.60345pt>
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 206--211
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 226--232
+
+ []
+
+(/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures/delta-partition.pdf_tex
+<./figures//delta-partition.pdf, id=28, page=1, 360.6446pt x 102.10788pt>
 File: ./figures//delta-partition.pdf Graphic file (type pdf)
 <use ./figures//delta-partition.pdf, page 1>
 Package pdftex.def Info: ./figures//delta-partition.pdf , page1 used on input line 56.
-(pdftex.def)             Requested size: 271.0125pt x 62.07594pt.
-<./figures//delta-partition.pdf, id=26, page=2, 360.6446pt x 82.60345pt>
+(pdftex.def)             Requested size: 271.0125pt x 76.7334pt.
+<./figures//delta-partition.pdf, id=29, page=2, 360.6446pt x 102.10788pt>
 File: ./figures//delta-partition.pdf Graphic file (type pdf)
 <use ./figures//delta-partition.pdf, page 2>
 Package pdftex.def Info: ./figures//delta-partition.pdf , page2 used on input line 62.
-(pdftex.def)             Requested size: 271.0125pt x 62.07594pt.
-<./figures//delta-partition.pdf, id=27, page=3, 360.6446pt x 82.60345pt>
+(pdftex.def)             Requested size: 271.0125pt x 76.7334pt.
+<./figures//delta-partition.pdf, id=30, page=3, 360.6446pt x 102.10788pt>
 File: ./figures//delta-partition.pdf Graphic file (type pdf)
 <use ./figures//delta-partition.pdf, page 3>
 Package pdftex.def Info: ./figures//delta-partition.pdf , page3 used on input line 65.
-(pdftex.def)             Requested size: 271.0125pt x 62.07594pt.
-) [3] [4 </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf> </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
+(pdftex.def)             Requested size: 271.0125pt x 76.7334pt.
+<./figures//delta-partition.pdf, id=31, page=4, 360.6446pt x 102.10788pt>
+File: ./figures//delta-partition.pdf Graphic file (type pdf)
+<use ./figures//delta-partition.pdf, page 4>
+Package pdftex.def Info: ./figures//delta-partition.pdf , page4 used on input line 70.
+(pdftex.def)             Requested size: 271.0125pt x 76.7334pt.
+<./figures//delta-partition.pdf, id=32, page=5, 360.6446pt x 102.10788pt>
+File: ./figures//delta-partition.pdf Graphic file (type pdf)
+<use ./figures//delta-partition.pdf, page 5>
+Package pdftex.def Info: ./figures//delta-partition.pdf , page5 used on input line 72.
+(pdftex.def)             Requested size: 271.0125pt x 76.7334pt.
+<./figures//delta-partition.pdf, id=33, page=6, 360.6446pt x 102.10788pt>
+File: ./figures//delta-partition.pdf Graphic file (type pdf)
+<use ./figures//delta-partition.pdf, page 6>
+Package pdftex.def Info: ./figures//delta-partition.pdf , page6 used on input line 74.
+(pdftex.def)             Requested size: 271.0125pt x 76.7334pt.
+) [4 </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf> </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
 
-pdfTeX warning: pdflatex (file /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf): PDF inclusion: multiple pdfs with page group included in a single page
-> </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf
+pdfTeX warning: pdflatex (file /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
 
-pdfTeX warning: pdflatex (file /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/./figures//delta-partition.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->] (/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.aux) ) 
+pdfTeX warning: pdflatex (file /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+
+pdfTeX warning: pdflatex (file /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+
+pdfTeX warning: pdflatex (file /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+> </Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf
+
+pdfTeX warning: pdflatex (file /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/./figures//delta-partition.pdf): PDF inclusion: multiple pdfs with page group included in a single page
+>] (/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.aux) ) 
 Here is how much of TeX's memory you used:
- 14266 strings out of 479485
- 280240 string characters out of 5871978
- 551710 words of memory out of 5000000
- 30980 multiletter control sequences out of 15000+600000
+ 14275 strings out of 479485
+ 280810 string characters out of 5871978
+ 553710 words of memory out of 5000000
+ 30989 multiletter control sequences out of 15000+600000
  552644 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 85i,16n,96p,470b,457s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,16n,96p,482b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignment 5/Assignment5_MTH411.pdf" (4 pages, 138399 bytes).
+Output written on "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 5/Assignment5_MTH411.pdf" (4 pages, 147180 bytes).
 PDF statistics:
- 78 PDF objects out of 1000 (max. 8388607)
+ 81 PDF objects out of 1000 (max. 8388607)
  55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 28 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 43 words of extra memory for PDF output out of 10000 (max. 10000000)
 
