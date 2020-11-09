@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  2 NOV 2020 14:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  9 NOV 2020 14:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -226,18 +226,18 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Notes/Notes.aux) ) 
 Here is how much of TeX's memory you used:
- 2949 strings out of 479485
- 40426 string characters out of 5871978
- 314440 words of memory out of 5000000
- 19937 multiletter control sequences out of 15000+600000
- 546621 words of font info for 56 fonts, out of 8000000 for 9000
+ 2959 strings out of 479485
+ 40532 string characters out of 5871978
+ 315440 words of memory out of 5000000
+ 19945 multiletter control sequences out of 15000+600000
+ 548320 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,6n,72p,309b,216s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Notes/Notes.pdf" (1 page, 15103 bytes).
+{/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Notes/Notes.pdf" (1 page, 74129 bytes).
 PDF statistics:
- 17 PDF objects out of 1000 (max. 8388607)
- 11 compressed objects within 1 object stream
+ 45 PDF objects out of 1000 (max. 8388607)
+ 32 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

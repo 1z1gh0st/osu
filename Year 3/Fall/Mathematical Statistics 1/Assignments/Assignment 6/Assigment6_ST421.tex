@@ -69,17 +69,163 @@
             \frac{P(Y \leq .4 \text { and } Y \leq .8)}{P(Y \leq .8)}
         \]
         The probability in the numberator will simply be $P(Y \leq .4)$ since this event is a subset of $Y \leq .8$.
-        Since the probability $P(.4 \leq Y \leq 1)$ is already known, $P(Y \leq .4) = 1 - P(Y > .4) = 1 - P(.4 \leq Y \leq 1) = .352$.
         For the denominator, the integral must be computed.
         \[
             6 \int_0^{.8} f(y) dy = 6\left[\frac{y^2}{2} - \frac{y^3}{3}\right]_0^{.8} = 6\left[\frac{4^2}{(2)5^2} - \frac{4^3}{(3)5^3}\right] = .896
         \]
         Knowing both the numerator and denominator we say $P(Y \leq .4 | Y \leq .8) = \frac{.352}{.896} = .393$.
 \section*{Problem 4.14}
+    We have the following probability density function
+    \[
+        f(y) =
+        \begin{cases}
+            y, & 0  < y < 1\\
+            2-y, & 1 \leq y < 2\\
+            0, & \text{otherwise}
+        \end{cases}
+    \]
+    \subsection*{(a)}
+        We sketch the function $f(y)$.
+        \begin{figure}[ht]
+            \centering
+            \def\svgwidth{.5\linewidth}
+            \import{./figures/}{pdf-4.14.pdf_tex}
+            \caption{Probability Density Function $f(y)$}
+            \label{fig:pdf-4.14}
+        \end{figure}
+    \subsection*{(b)}
+        \[
+            F(y) =
+            \begin{cases}
+                \int_{-\infty}^y 0 dt = 0, & y \leq 0\\
+                \int_{-\infty}^0 0 dt + \int_0^y t dt = \frac{t^2}{2}\bigg|_0^y = \frac{y^2}{2}, & 0 < y < 1\\
+                \int_{-\infty}^0 0 dt + \int_0^y t dt + \int_1^y 2 - t dt = \frac{1}{2} + \left[2t - \frac{t^2}{2}\right]_1^y = \frac{1}{2} + \left[2y - \frac{y^2}{2} - (2 - \frac{1}{2})\right] = -\frac{y^2}{2} +2y - 1, & 1 \leq y \leq 2\\
+                1, & y > 2
+            \end{cases}
+        \]
+        \begin{figure}[ht]
+            \centering
+            \def\svgwidth{.5\linewidth}
+            \import{./figures/}{pdf-4.14b.pdf_tex}
+            \caption{The Anti-Derivative $F(y)$}
+            \label{fig:pdf-4.14b}
+        \end{figure}
+    \subsection*{(c)}
+        To find the probability that the station pumps between 8000 and 12000 gallons of gas, we say
+        $P(.8 < Y < 1.2) = F(1.2) - F(.8) = -\frac{1.2^2}{2} + 2(1.2) - 1 - [\frac{.8^2}{2}] = .36$
+    \subsection*{(d)}
+        $P(Y > 1.5 | Y > 1) = \frac{P(Y > 1.5)}{P(Y > 1)}$. We must compute each of these in order to find the conditional probability.
+        \begin{align*}
+            P(Y > 1.5) &= (.5)\int_{1.5}^\infty f(y)dy = (.5)\frac{(.5)^2}{2} = (.5)\frac{.25}{2} = (.5).128 = .064\\
+            P(Y > 1) &= (.5)\int_1^\infty f(y)dy = (.5) \frac{1}{2} = .25
+        \end{align*}
+        This is clear by the geometric argument where we are simply taking the area of square right triangles. Finally our conditional probability is going to 
+        be $\frac{.064}{.25} = .256$.
 \section*{Problem 4.18}
+    For this problem we have the density function
+    \[
+        f(y) =
+        \begin{cases}
+            .2, & -1 < y \leq 0\\
+            .2 + cy, & 0 < y \leq 1\\
+            0, & \text{otherwise}
+        \end{cases}
+    \]
+    \subsection*{(a)}
+        Find the value of $c$ such that $f$ is a proper probability density function. We know that the integral
+        up to $0$ will be $.2$ (area of a rectangle), which means the integral from 0 onward must be $.8$.
+        We say that $.2 + \frac{c}{2} = .8 \Leftrightarrow c = 1.2$
+    \subsection*{(b)}
+        \[
+            F(y) = 
+            \begin{cases}
+                0, & y \leq -1\\
+                .2y|_{-1}^y = .2y + .2, & -1 < y \leq 0\\
+                .2(0) + .2 + \left[.2y + \frac{1.4y^2}{2}\right]_0^y = .2 + .2y + \frac{1.2y^2}{2}, & 0 < y \leq 1\\
+                1, & y > 1
+            \end{cases}
+        \]
+    \subsection*{(c)}
+        Graph $f(y), F(y)$. See \fbox{Figure 3}.
+        \begin{figure}[ht]
+            \centering
+            \def\svgwidth{.5\linewidth}
+            \import{./figures/}{pdf-4.18b.pdf_tex}
+            \caption{Graphs of $f(x)$ and $F(x)$}
+            \label{fig:pdf-4.18b}
+        \end{figure}
+    \subsection*{(d)}
+        $F(-1) = 0, F(0) = .2, F(1) = 1$
+    \subsection*{(e)}
+        $P(0 \leq Y \leq .5) = F(.5) - F(0) = .2 + .2(.5) + \frac{1.2(.5)^2}{2} - [.2] = .25$
+    \subsection*{(f)}
+        $P(Y > .5 | Y > .1) = \frac{P(Y > .5)}{P(Y > .1)} = \frac{1 - P(Y < .5)}{1 - P(Y < .1)} = \frac{1 - .45}{1 -.2 + .2(.1) + \frac{1.2(.1)^2}{2}} = .67$.
 \section*{Problem 4.28}
+    \[
+        f(y) =
+        \begin{cases}
+            cy^2 (1-y)^4, & 0 \leq y \leq 1\\
+            0, & \text{otherwise}
+        \end{cases}
+    \]
+    \section*{(a)}
+        Find $c$ such that $f(y)$ is a probability density function.
+        \[
+            \int_0^1 cy^2 (1-y)^4 dy = \frac{c}{105} \Longrightarrow c = 105
+        \]
+    \section*{(b)}
+        Find $E(Y)$.
+        \[
+            E(Y) = \int_{-\infty}^\infty yf(y)dy = 105 \int_{0}^1 y^3(1-y)^4dy = \frac{3}{8} = .375
+        \]
 \section*{Problem 4.32}
+    \[
+        f(y) =
+        \begin{cases}
+            \frac{3}{64}y^2(4-y), & 0 \leq y \leq 4\\
+            0, & \text{otherwise}
+        \end{cases}
+    \]
+    \subsection*{(a)}
+        Find $E(Y)$ and $V(Y)$.
+        \begin{align*}
+            E(Y) &= \int_{-\infty}^\infty y f(y) dy\\
+            &= \int_0^4 y f(y) dy \\
+            &= \int_0^4 y\frac{3y^2(4-y)}{64} dy \\
+            &= \int_0^4 \frac{3y^3(4-y)}{64} dy \\
+            &= \int_0^4 \frac{12y^3 - 3y^4}{64} dy \\
+            &= \frac{12y^4}{4 \cdot 64} - \frac{3y^5}{5 \cdot 64} \bigg|_0^4\\
+            &= \frac{12}{5} = 2.4
+        \end{align*}
+        \begin{align*}
+            V(Y) &= E(Y^2) - E(Y)^2\\
+            &= \int_0^4 \frac{12y^4 - 3y^5}{64} dy - 2.4^2 \\
+            &= .64
+        \end{align*}
+    \subsection*{(b)}
+        If $Y$ is our weekly CPU time in hours, and the cost is \$200 dollars per hour, we cna find
+        the expected value and variance of CPU cost by multiplying $V(Y)$ and $E(Y)$ by 200.
+        The expected weekly cost is $200 \cdot 2.4 = 480$ dollars. The variance will be $128$ dollars.
+    \subsection*{(c)}
+        We expect this to occur somewhat often. For this to occur we must use at least 3 hours of CPU.
+        $P(Y > 3) = \int_3^4 \frac{3}{64}y^2(4-y)dy = \frac{3}{64}\int_3^4(4y^2 - y^3)dy = \frac{67}{256} = .263$.
+        This means our probability of this occurring will be more than $\frac{1}{4}$, which depending on how often is 
+        defined is a fairly reasonable chance.
 \section*{Problem 4.40}
+    Here we have a continuous uniform distribution, which must have a constant function between the endpoints $A,B$ and must integrate to $1$ so we say,
+    $P(x_i \in (A,B) \text{ for some } i \in \{1,2,3\}) = 1 - P(x_i \notin (A,B) \forall i = 1,2,3) = 1 - \left(\frac{1}{2}\right)^3 = 1 - \frac{1}{8} = \frac{7}{8} = .875$
 \section*{Problem 4.48}
+    \subsection*{(a)}
+        Here we have another continuous uniform distribution on the interval $[0,500]$. It must be the case that
+        $f(y)$ is constant and that $\int_0^{500}f(y)dy = 1$ so $f(y) = \frac{1}{500}$.
+        $\frac{1}{500} \int_{475}^{500} 1 dy = \frac{1}{500}[500 - 475] = \frac{25}{500} = .05$
+    \subsection*{(b)}
+        We have the same probability except we are integrating over $(0, 25)$ but since the length is still 25, we get the same value.
+        $.05$
+    \subsection*{(c)}
+        $P(Y > 250) = \int_{250}^{500} \frac{1}{500} dy = \frac{250}{500} = .5$.
 \section*{Problem 4.50}
+    We have success from 12:00-1:00, failure from 1:00-3:00, success from 3:00-4:00, and failure from 4:00-5:00. Our total probability is 1 distributed 
+    evenly over the 5 hour period. Since $\frac{2}{5}$ of the possible time lies within the windows of success, we say the probability of success is
+    $\frac{2}{5} = .4$.
 \end{document}

@@ -99,4 +99,88 @@
     \end{definition}
     Of course the set of real numbers will be complete, however the set of rational numbers will not be complete.
     The Lebesgue space $\ell_2$ is complete. To prove this is fairly difficult.
+    \begin{mdframed}
+        \begin{theorem}
+            For any metric space $M$, the following are equivalent
+            \begin{align*}
+                (i) & \text{ $M$ is complete}\\
+                (ii) & \text{ The Nested Set Property holds}\\
+                (iii) & \text{ The Bolzano Weirstrass Property holds. 
+                That is, every totally bounded set has a limit point}\\
+            \end{align*}
+        \end{theorem}
+    \end{mdframed}
+    This is another way to characterize completeness, this time for a normed vector space.
+    \begin{mdframed}
+        \begin{theorem}
+            A normed vector space $V$ is complete if and only If
+            \[
+                \sum_{n=1}^\infty ||x_n|| < \infty \Rightarrow \sum_{n=1}^\infty x_n \text { converges in $V$}    
+            \]
+            Every absolutely summable series in $V$ is summable.
+        \end{theorem}
+    \end{mdframed}
+    \begin{proof}
+        \fbox{$\Rightarrow$} Assume $V$ is complete, and let $(x_n) \subset V$ be such that $\sum_{n=1}^\infty ||x_n|| < \infty$.
+        Let $S_n$ be the sequence of partial sums. We wish to show that $S_n$ is a cauchy sequence.
+        \[
+            ||S_n-S_m|| = ||\sum{k = m+1}^n x_k|| \leq \sum_{k = m + 1}^n || x_k|| \rightarrow 0
+        \]
+        Thus $(S_n)$ is a Cauchy sequence in $V$. Since $V$ is complete $(S_n)$ converges to $S = \sum_{k=1}^\infty x_k$.\\\\
+        \fbox{$\Leftarrow$} Now assume that  $\sum ||x_n|| < \infty \Rightarrow \sum x_n$ converges in $v$ and let 
+        $(x_n)$ be a Cauchy sequence in $V$. For $k = 1,2, \cdots $ let $N_k$ be such that $\forall n > m \geq N_k : d(x_n, x_m) < 2^{-k}$.
+        Then let $m = N_k \Rightarrow x_n \in B_{2^{-k}}(x_{N_k}) \forall n > N_k$.
+        Consider the subsequence $y_k = x_{N_k}, k \in \mathbb{N}$.
+        Then $y_{k+1} = x_{N_{k+1}} \in B_{2^{-k}}(x_{N_k}) = B_{2^{-k}}(y_k)$. And $||y_{k+1} - y_k|| < 2^{-k}$.
+        Hence $\sum_{k=1}^\infty ||y_{k+1} - y_k||$ converges and therefore also $\sum_{k=1}^\infty y_{k+1} - y_k$ converges.
+        The partial sums for this series are $S_n = \sum_{k=1}^n y_{k+1} - y_k = y_{nn} - y_1$. Therefore the sequence 
+        $(y_k) = (x_{N_k})$ converges. Thus there exists some $x \in M : x = \lim_{k\rightarrow \infty}x_{N_k}$ and $(x_n)$ is Cauchy.
+    \end{proof}
+    Note: Banach Space is a complete normed vector space $V$.
+
+    \begin{definition}
+        A function $f:(M,d) \rightarrow (N,s)$ is called Lipschitz if there is a constant $k < \infty$ such that
+        $s(f(x), f(y)) \leq k d(x,y)$ for every $x,y \in M$.
+    \end{definition}
+
+    Immediately it should be clear that a Lipschitz mapping will be continuous.
+    \begin{proof}
+        Let $x_n \rightarrow x$ in $M$. Then $d(x, x_n) \rightarrow 0$. So $s(f(x), f(x_n)) < k d(x, x_n) \rightarrow 0$.
+        Thus $s(f(x), f(x_n)) \rightarrow 0$ and $f$ is continuous.
+    \end{proof}
+
+    \begin{definition}
+        A map $f: M \rightarrow M$ on a metric space $(M,d)$ is called a contraction if there is $0 \leq \alpha <1$ such that 
+        $d(f(x), f(y)) \leq \alpha d(x,y)$.
+    \end{definition}
+    Since a contraction is Lipschitz with $k = \alpha$ it is continuous.
+
+
+    \begin{definition}
+        Let $f: M \rightarrow M$. Any $x \in M$ such that $f(x) = x$ is called a fixed point of $f$.
+    \end{definition}
+
+    \begin{mdframed}
+        \begin{theorem}
+            (Contraction Mapping Theorem, Banach Fixed Point Theorem) Let $(M,d)$ be a complete metric space and let 
+            $f: M \rightarrow M$ be a contraction. Then, $f$ has a unique fixed point. For any $x_0 \in M$, the iteration $x_{n+1} = f(x_n)$ converges to $x$.
+            One has $d(x_n, x) \leq d(x_1, x_0) \frac{\alpha^n}{1-\alpha}$.
+        \end{theorem}
+    \end{mdframed}
+    \begin{definition}
+        Let $f'(x) = f(x), f^{n+1}(x) = f(f^n(x))$, i.e. $f^n$ is the $n$-fold composition of $f$ with itself.
+    \end{definition}
+    \begin{proof}
+        The sequence $x_n$ can be written as $x_n = f^n(x_0)$. Let $x_0 \in M$ be arbitrary.
+        \begin{align*}
+            d(x_{n+1}, x_n) &= d(f(x_n), f(x_{n-1}))\\
+            & \leq \alpha d(x_n, x_{n-1}) = \alpha d(f(x_{n-1}), f(x_{n-2}))\\
+            & \leq \alpha^2 d(x_{n-1},x_{n-2})\\
+            & \vdots\\
+            & \leq \alpha^n d(x_1, x_0) = c \alpha^n & c = d(x_1, x_0)
+        \end{align*}
+    \end{proof}
 \end{document}
+\begin{definition}
+    
+\end{definition}
