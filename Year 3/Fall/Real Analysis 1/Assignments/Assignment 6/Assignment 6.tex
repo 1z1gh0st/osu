@@ -1,0 +1,105 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+
+\title{Real Analysis - Assignmennt 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+    \section*{Problem 6.9}
+        If $A \subset B \subset \overline{A} \subset M$, and if $A$ is connected, show that $B$ is connected. In particular, $\overline{A}$ is connected.
+        \begin{proof}
+            Suppose that $A \subset B \subset \overline{A} \subset M$, and that $A$ is connected. We want to show that there does not exist some disjoint union of open sets
+            such that $U \dot \cup V = \overline{A}$ where $U$ and $V$ are non-empty. By contradiction, suppose that such a disconnection does exist. Then it follows that $A \subset U \dot \cup V = 
+            \overline{A}$. Since $A$ is connected, it must be the case that either $A \cap U = \O$ or $A \cap V = \O$. Otherwise, $A$ yields the disconnection $A = (A \cap U) \dot \cup (A \cap V)$.
+            Without loss of generality, choose $U$ and $V$ such that $A \cap U$ is nonempty and $A \cap V$ is empty.\\\\
+            Choose $x \in V \subset \overline{A}$. Since $V$ is open, there exists some $\epsilon$-neighborhood $B_\epsilon(x) \subset V \subset \overline{A}$. However, since $x$ has some $\epsilon$-neighborhood
+            contained in $\overline{A}$, $x$ must lie in the interior of $A$. Thus, $V$ intersects $A$, and a contradiction arises. Therefore $\overline{A}$ must be connected and so too must $B$ be connected
+        \end{proof}
+
+    \section*{Problem 7.19}
+        Define $c_0 \subset \ell_\infty$ by the set of all sequences converging to 0.
+        Prove that $c_0$ is complete by showing that $c_0$ is closed in $l_\infty$.
+        \begin{proof}
+            Let $f \in \ell_\infty$ be a limit point of $c_0$. Then let $(f_n)$ be a squence in $c_0$ converging to $f \in \ell_\infty$.
+            Let $\frac{\epsilon}{2} > 0$ be arbitrary. Then we say 
+            \[
+                |f(k)| \leq |f(k) - f_n(k)| + |f_n(k)|
+            \]
+            As n grows large, the right hand side is eventually smaller than $\frac{\epsilon}{2} + |fn(k)|$, and as $k$ grows large each $|f_n(k)|$ is eventually less than $\frac{\epsilon}{2}$. At this point we say
+            \[
+                |f(k)| \leq |f(k) - f_n(k)| + |f_n(k)| < \epsilon
+            \]
+            Thus $f(k) \rightarrow 0$, and we say $f \in c_0$. Since an arbitrary limit point 
+            $f$ belongs to $c_0$, we say that $c_0$ contains its limit points, and is therefore closed in $\ell_\infty$.
+            Because this is this case, $c_0$ is complete.
+        \end{proof}
+
+    \section*{Problem 7.35}
+        Prove that a normed vector space is complete if and only if its closed unit ball is complete.
+        \begin{proof}
+            Let $X$ be a normed vector space. We must show that the bidirectional implication holds in both directions. \\\\
+            \fbox{$\Rightarrow$}
+            First, assume that $X$ is complete. Then we wish to show that $B=\{x \in X \ : \ ||x|| \leq 1 \}$ is complete. We will show that $B$ is closed in $X$,
+            and therefore is complete. Let $x \in B^c$. We know that $||x|| > 1$, and for any $y \in B, ||y|| \leq 1$. By the reverse triangle inequality, we know that
+            $||x-y|| \geq ||x||-||y|| \geq ||x|| - 1 > 0$. Let $\epsilon = \frac{||x|| - 1}{2}$, and let $y \in B$. For every $y' \in B_\epsilon(x), ||y'|| < \epsilon$.
+            \[
+                ||y'-y|| \geq ||y' - x|| - ||y - x|| > \epsilon - 0 > 0
+            \]
+            Since $x \in B^c$ has some $\epsilon$-neighborhood contained in $B^c$, $B$ is closed. Since $B$ is closed in a complete space, the space $(B,d)$ is also complete.
+            \\\\
+            \fbox{$\Leftarrow$} Now assume that $B = \{x \in X \ : \ ||x|| \leq 1\}$ is a complete subspace of $X$. We wish to show that the space $X$ is complete. Let $(x_n)$ be
+            a Cauchy sequence in $M$. Let $\epsilon = \frac{1}{2}$. Then $\exists N \in \mathbb{N}$ such that $\forall n > N, ||x_N - x_n|| < \frac{1}{2}$. Let $y_n$ be a series defined by
+            $y_n = x_n - x_N$. Then $y_N = 0$ and we say that $B_\epsilon(y_N) = B_{\frac{1}{2}}(0)\subset B$. Since $x_n$ is Cauchy, so too is $y_n$. Then since the limit of $x_n$ must be a limit point of $B_\epsilon(x_N)$, the limit $y = \lim y_n$
+            must be a limit point of $B_\epsilon(0)$ and therefore must lie in $B$ and be some point $y \in M$. Then since we have closure under vector addition, it follows that $y + x_N \in M$, and that this the limit $x = \lim x_n = y + x_N = \lim y_n + x_N$.
+        \end{proof}
+    \section*{Problem 7.41}
+        Let $M$ be complete and let $f: M \rightarrow M$ be continuous. If $f^k$ is a strict contraction for some integer $k > 1$, show that $f$ has a unique fixed point.
+        \begin{proof}
+            Since $f^k$ is a strict contraction on a complete space it admits some unique fixed point $x$.
+            Since $f^k(x) = x$, we can write
+            \begin{align*}
+                f^k (f (x)) & = (f^k \circ f) (x)\\ 
+                & = (f \circ f \circ \cdots \circ f)(x)\\
+                &= (f \circ f^k) (x)\\
+                &= f(f^k(x))\\
+                &= f (x)
+            \end{align*}
+            Since $f^k(f(x)) = f(x)$, we say that $f(x)$ is a fixed point for $f^k$. Then since our fixed point 
+            must be unique, we say that it must be the case that $f(x) = x$. Thus $x$ is a fixed point under $f$.
+            To show that this point $x$ is unique, let $x' \in M$ such that $x'$ is a fixed point under $f$.
+            Then, $f(x') = x'$. However, this means
+            \begin{align*}
+                f^k(x') &= f^{k-1}(f(x')) = f^{k-1}(x')\\
+                &= f^{k-2}(f(x')) = f^{k-2}(x')\\
+                & \ \ \ \ \ \ \ \ \vdots\\
+                & = f(f(x')) = f(x') = x'
+            \end{align*}
+            Thus $x'$ is a fixed point under $f^k$, and since this function has exactly one unique fixed point $x$,
+            it follows that $x' = x$. Therefore $f$ has a unique fixed point $x$. 
+        \end{proof}
+\end{document}

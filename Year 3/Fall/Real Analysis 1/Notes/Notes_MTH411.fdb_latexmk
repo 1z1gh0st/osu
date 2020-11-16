@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1604944206 "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.pdf" "Notes_MTH411" 1604944218
-  "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.aux" 1604944207 1511 75d1aebc8794de428339d7ef1d8a876c ""
-  "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.tex" 1604944218 9623 3102875d948f3292db39d2293f294644 ""
+["pdflatex"] 1604966920 "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.pdf" "Notes_MTH411" 1605061889
+  "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.aux" 1604966921 1612 06a34a537df3f6c593358f61d8e46c86 ""
+  "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.tex" 1605061888 10014 54b58e9352d7ef0bdccc4103cdd6f09a ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -164,11 +164,11 @@
   "/usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1604348000 5022058 744aaa57babb7b0780e2d4c19c2ff31b ""
   "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1604348489 2549326 414af182f0399eecc7d401eee4945cf3 ""
   "/usr/local/texlive/2020/texmf.cnf" 1586288231 577 d60164b4589a341208aff7a667fbbdcb ""
-  "Notes_MTH411.aux" 1604944207 1511 75d1aebc8794de428339d7ef1d8a876c "pdflatex"
-  "Notes_MTH411.tex" 1604944218 9623 3102875d948f3292db39d2293f294644 ""
+  "Notes_MTH411.aux" 1604966921 1612 06a34a537df3f6c593358f61d8e46c86 "pdflatex"
+  "Notes_MTH411.tex" 1605061888 10014 54b58e9352d7ef0bdccc4103cdd6f09a ""
   (generated)
-  "Notes_MTH411.pdf"
-  "Notes_MTH411.aux"
-  "Notes_MTH411.log"
   "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.log"
+  "Notes_MTH411.aux"
   "/Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Notes/Notes_MTH411.pdf"
+  "Notes_MTH411.pdf"
+  "Notes_MTH411.log"

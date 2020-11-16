@@ -141,6 +141,11 @@
             \]
         \end{proof}
         We proved in class that memorylessness is unique to the exponential random variable.
+        To find the expectation of such an exponential variable let $\lambda > 0$. We say that 
+        \[
+            E[X] = \int_{-\infty}^\infty x \cdot f(x) dx = \int_0^\infty \lambda x \cdot e^{-\lambda x}dx
+        \]
+        Then we must use integration by parts, which gives us $-xe^{-\lambda x}\bigg|_0^\infty - \int_0^\infty \lambda e^{-\lambda x} = \frac{1}{\lambda}$.
     \subsection{Uniform Random Variable}
         Consider a real interval $[\alpha, \beta] : \alpha < \beta$. Let $X$ be a continuous random variable with density funciton 
         \[
@@ -166,4 +171,5 @@
         \caption{Probability Density Function of Normal Distribution}
         \label{fig:normal}
     \end{figure}
+    The expectation of the Normal Random Variable is $\sigma$, this can be shown by computing the integral $\int_{-\infty}^\infty x \cdot f(x) dx$.
 \end{document}

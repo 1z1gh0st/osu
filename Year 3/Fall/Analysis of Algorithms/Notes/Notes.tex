@@ -44,7 +44,7 @@ WFS(G,s) {
             mark $v$
             Parent(v) = p
             for all $(v,w) \in E$ {
-                add $(w,v)$ to Bag
+              `'  add $(w,v)$ to Bag
             }
         }
     }
@@ -76,5 +76,47 @@ What kind of data structures would be good to use for Bag? If
 we use a stack, then this algorithm becomes a depth first search algorithm (DFS).
 If we use a queue, then we have a breadth first search (BFS) algorithm.
 If there is a weighted graph, one can use a priority queue based on edge weight,
-resulting in Dijkstra's shortest path algorithm.
+resulting in Dijkstra's shortest path algorithm.\\\\
+\begin{lstlisting}[mathescape=true]
+Serach(G,s):
+    Insert $s$ into Bag
+    while Bag $\neq \O$:
+        $v$: any vertex from Bag
+        if $v$ is not marked:
+            mark $v$
+            $\forall v \rightarrow w \in E$
+                insert $w$ into Bag
+\end{lstlisting}
+If we use a stack, we have DFS, if we use queue we have BFS, if we have priority queue/heap, we have
+either Dijkstra's or Prim's algorithm.
+\subsection*{Dijkstra's Algorithm}
+This algorithm utilizes a priority queue in order to find the shortest path from $s$
+to any vertex $v$.
+\begin{lstlisting}[mathescape=true]
+Dijkstra(G,s):
+    priQ = $\{(s,0)\}$
+    while priQ $\neq \O$:
+        $(v,d) \leftarrow$ priQ.ExtractMin
+        if $v$ is not marked:
+            mark $v$
+            $\forall v \rightarrow w \in E$:
+                priQ.Insert$(w, d + l(v \rightarrow w))$
+\end{lstlisting}
+The shortes path problem takes some directed graph $G = (V,E)$ where we have a length function $l: E \rightarrow \mathbb{R}^+$,
+$s \in V$. Then we output the shortest path from $s$ to $v$ for every vertex $v \in V$.
+\begin{figure}[ht]
+    \centering
+    \incfig{dijkstras}
+    \caption{Dijkstra's Algorithm on $G = (V,E)$}
+    \label{fig:dijkstras}
+\end{figure}
+The running time of this algorithm is $O(E \log V)$ since our priority queue insert function runs in $O(\log V)$ time.
+A graph with negative weights does not work, especially so if it is cyclic, because the shortest Dijkstra path may not be 
+the shortest actual path, and if it is cyclic, there may not even exist a shortest path.
+\begin{figure}[ht]
+    \centering
+    \incfig{negativecycle}
+    \caption{A Negative Cyclic Graph}
+    \label{fig:negativecycle}
+\end{figure}
 \end{document}

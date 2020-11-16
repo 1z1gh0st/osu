@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1604954430 "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.pdf" "Assigment6_ST421" 1604954434
+["pdflatex"] 1604954430 "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.pdf" "Assigment6_ST421" 1605511272
   "./figures//pdf-4.14.pdf" 1604892908 1976 5d6468ff81e8069b110d53a74fada611 ""
   "./figures//pdf-4.14b.pdf" 1604895156 2567 97727c2b8ee8d7d3026c4f80cf514aff ""
   "./figures//pdf-4.18b.pdf" 1604954430 2283 83b967839b1280a1f7d78416d043cffa ""
@@ -7,7 +7,7 @@
   "./figures/pdf-4.14b.pdf_tex" 1604895156 2566 5efa1402fe754889bcfc371d89272dfe ""
   "./figures/pdf-4.18b.pdf_tex" 1604954430 2383 53d854e5a28ae829dd694087e778feb3 ""
   "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.aux" 1604954431 601 83ae2838fa0a3a1f121d4aab8a5fde2c ""
-  "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.tex" 1604954433 10332 69b3176d425a2bbe1b970b112f0f793e ""
+  "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.tex" 1605511271 10332 69b3176d425a2bbe1b970b112f0f793e ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -113,7 +113,7 @@
   "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1604348489 2549326 414af182f0399eecc7d401eee4945cf3 ""
   "/usr/local/texlive/2020/texmf.cnf" 1586288231 577 d60164b4589a341208aff7a667fbbdcb ""
   "Assigment6_ST421.aux" 1604954431 601 83ae2838fa0a3a1f121d4aab8a5fde2c "pdflatex"
-  "Assigment6_ST421.tex" 1604954433 10332 69b3176d425a2bbe1b970b112f0f793e ""
+  "Assigment6_ST421.tex" 1605511271 10332 69b3176d425a2bbe1b970b112f0f793e ""
   "figures//pdf-4.14.pdf" 1604892908 1976 5d6468ff81e8069b110d53a74fada611 ""
   "figures//pdf-4.14b.pdf" 1604895156 2567 97727c2b8ee8d7d3026c4f80cf514aff ""
   "figures//pdf-4.18b.pdf" 1604954430 2283 83b967839b1280a1f7d78416d043cffa ""
@@ -121,8 +121,8 @@
   "figures/pdf-4.14b.pdf_tex" 1604895156 2566 5efa1402fe754889bcfc371d89272dfe ""
   "figures/pdf-4.18b.pdf_tex" 1604954430 2383 53d854e5a28ae829dd694087e778feb3 ""
   (generated)
-  "Assigment6_ST421.aux"
-  "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.log"
+  "Assigment6_ST421.log"
   "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.pdf"
   "Assigment6_ST421.pdf"
-  "Assigment6_ST421.log"
+  "Assigment6_ST421.aux"
+  "/Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 6/Assigment6_ST421.log"
