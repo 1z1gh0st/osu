@@ -1,0 +1,134 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Real Analysis - Assignment 7}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{Problem 8.17}
+    \begin{mdframed}[align=center]
+        If $M$ is compact, then $M$ is seperable.
+    \end{mdframed}
+
+    \begin{proof}
+        Since $M$ is compact, it is totally bounded. For any $n \in \mathbb{N}$ there exists a finite
+        collection of $(\frac{1}{n})$-balls such that $$M = \bigcup_{y\in Y_n} B_{(\frac{1}{n})}(y)$$
+        Let $Y = \bigcup_{n \in \mathbb{N}} Y_n$, be the set of all points that are the center of our $(\frac{1}{n})$-balls for each $n$.
+        The set $Y$ is a countable union of finite sets, and must therefore be countable. This set is dense in $M$.
+        To show this, let $x \in M$ be arbitrary. For every $n \in \mathbb{N}$, $x$ must lie within at least one of our $\frac{1}{n}$-balls,
+        therefore let $$y_n \in \{y \in Y_n \ | \ x \in B_{(\frac{1}{n})}(y)\}$$ It follows that $y_n \in Y$ for every natural number $n$, and that
+        $(y_n) \rightarrow x$ since $d(y_n,x) < \frac{1}{n}$ for every $n$. Thus $Y$ is a countable dense set in $M$, and $M$ is seprable.
+    \end{proof}
+    
+\section*{Problem 8.23}
+    \begin{mdframed}
+        Let $M$ be be a compact space. Let $f: M \rightarrow N$ be a continuous bijection.
+        Then $f$ is a homeomorphism.
+    \end{mdframed}
+
+    \begin{proof}
+        To show that $f$ is a homeomorphism we must show that $f^{-1}$ is a continuous function.
+        Since $f$ is a bijection, $f^{-1}$ is also a bijective function.
+        Let $(y_n) \rightarrow y$ in the space $N$. Let $(x_n)$ be a sequence in $M$ that corresponds to $(y_n)$,
+        that is, $x_n = f^{-1}(y_n)$ for each $n$. \\\\
+        Suppose that $x_n$ does not converge to $x = f^{-1}(y)$.
+        Then $\exists \epsilon > 0$ such that for every $N \in \mathbb{N}$ there exists some $n \geqslant N$ where $x_n \notin B_\epsilon(x)$.
+        Choose $(x_{n_k})$ to a be a subsequence of $x_n$ such that no point $x_{n_k}$ lies in $B_\epsilon(x)$.
+        Since $(x_{n_k})$ is a sequence in a compact space $M$, it must have some subsequence $(x_{n_{k_m}})$ that converges to a point $x' \in M$.
+        We know that $x' \neq x$ because each $x_{n_{k_m}} \notin B_\epsilon(x)$. Since $f$ is continuous and bijective,
+        \[
+            x_{n_{k_m}} \rightarrow x' \ \ \ \ \ \Longrightarrow \ \ \ \ \ y_{n_{k_m}} \rightarrow f(x') \neq f(x) = y
+        \]
+        However, this means that a subsequence of $y_n$ converges to a point other than $y$, which contradicts our assumption.
+        If follows that it must be the case that $x_n \rightarrow x$, or rather, $f^{-1}(y_n) \rightarrow f^{-1}(y)$. Hence $f^{-1}$
+        is continuous. This makes $f$ a continuous, bijective, open map, and therefore a homeomorphism.
+    \end{proof}
+
+\section*{Problem 8.48}
+    First we prove the following:
+    
+    \begin{mdframed}
+        A sequence is Cauchy if and only if it is eventually in an arbitrary $\epsilon$-neighborhood of some 
+        point in the sequence. Alternatively,
+        \[
+            (x_n) \text{ is Cauchy } \ \ \ \ \ \Longleftrightarrow \ \ \ \ \ \forall \epsilon > 0, \ \exists N \in \mathbb{N} \ | \ \forall n \geqslant N, x_n \in B_\epsilon(x_N)
+        \]  
+    \end{mdframed}
+
+    \begin{proof}
+        \fbox{$\Rightarrow$} Let $(x_n) \subset M$ be a Cauchy sequence in some metric space $M$. Then let $\epsilon > 0$ be arbitrary,
+        it follows that $\exists N \in \mathbb{N}$ such that $\forall m,n \geqslant N, \ d(x_m,x_n) < \epsilon$.
+        Fix $m = N$, and then we have $d(x_N, x_n) < \epsilon \ \forall n \geqslant N$. Then for every $n \geqslant N$, clearly $x_n \in B_\epsilon(x_N)$.\\\\
+        \fbox{$\Leftarrow$} Let $(x_n)$ be a sequence such that $\forall \epsilon > 0, \exists N \in \mathbb{N}$ such that for every $n \geqslant N, x_n \in B_\epsilon(x_N)$.
+        Let $\epsilon > 0$ be arbitrary and choose $\delta = \frac{\epsilon}{2}$. Then there is some $N$ such that every point at or beyond this index belongs to $B_{\frac{\epsilon}{2}}(x_N)$.
+        Then it clearly follows that for any two such points at indices $m,n \geqslant N$, $d(x_m,x_n)$ must be less than $\epsilon$. Thus the sequence is Cauchy.
+    \end{proof}
+
+    \begin{mdframed}
+        Let $(M,d), (N, \rho)$ be metric spaces, and let $f:M\rightarrow N$ be uniformly continuous.
+        Then the image of a Cauchy sequence $(x_n) \subset M$ is Cauchy in $N$.
+    \end{mdframed}
+    
+    \begin{proof}
+        Let $\epsilon > 0$ be arbitrary, since $f$ is uniformly continuous there will exist some $\delta > 0$ such that
+        $f(B_\delta^d(x)) \subset B_\epsilon^\rho(f(x))$. Now let $(x_n) \subset M$ be a Cauchy sequence. It follows that 
+        there exists some natural number $N_\delta$ such that $\forall m,n \geqslant N_\delta, d(x_m,x_n) < \delta$.
+        Equivalently, we can say that $\forall n \geqslant N_\delta, x_n \in B_\delta^d(x_N)$. Since $f$ is uniformly continuous
+        it follows that $f(x_n) \in B_\epsilon^\rho(f(x_N))$ for every natural number $n \geqslant N$. This is equivalent to $(f(x_n))$
+        beign Cauchy.
+    \end{proof}
+
+\section*{Problem 8.54}
+    \begin{mdframed}
+        For every bounded, non-compact subset $E \subset \mathbb{R}$, there exists some continuous function $f:E \rightarrow \mathbb{R}$
+        that is not uniformly continuous.
+    \end{mdframed}
+
+    \begin{proof}
+        Since $E$ is not compact, and it is bounded, it must not be closed (Heine-Borel Theorem).
+        Therefore there exists some point $a \in \mathbb{R}$ such that $a$ is a limit point of $E$ but
+        is not contained in $E$. Define the function
+        \[
+            f(x) = \frac{1}{x-a}    
+        \]
+        Since $f$ is clearly continuous on $\mathbb{R} \setminus \{a\}$, it is also continuous on $E$. 
+        This function is not, however, uniformly continuous.
+        For every $\epsilon > 0$, there should exist some $\delta > 0$ such that 
+        \[
+            |x - y| < \delta \Longrightarrow \left|\frac{1}{x-a} - \frac{1}{y-a}\right| < \epsilon
+        \]
+        The right hand side of this implication can be written as 
+        \[
+            \left|\frac{(y-a) - (x - a)}{(x-a)(y-a)}\right| = \left|\frac{y-x}{(x-a)(y-a)}\right|
+             < \epsilon
+        \]
+        However, for any $\delta > 0$, we can simply fix some $y \in B_{\frac{\delta}{2}}(a) \cap E$ which must exist 
+        since $a$ is a limit point of $E$. We can choose $x$ arbitrarily close to $a$. Then since $a \notin E$ we know that $y - a$, will be fixed.
+        Thus the numerator will approach this fixed value, while the the denominator will become arbitrarily small as $x$ becomes arbitrarily close to $a$.
+        Hence, the quantity is unbounded for every $\delta > 0$, and the implication can never hold; so $f$ is not uniformly continuous.
+    \end{proof}
+\end{document}

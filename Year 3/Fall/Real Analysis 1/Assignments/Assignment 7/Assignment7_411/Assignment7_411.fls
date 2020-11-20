@@ -1,9 +1,9 @@
-PWD /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7
+PWD /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411
 INPUT /usr/local/texlive/2020/texmf.cnf
 INPUT /usr/local/texlive/2020/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/Assigment7_ST421.tex
-OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/Assigment7_ST421.log
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411/Assignment7_411.tex
+OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411/Assignment7_411.log
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/base/article.cls
@@ -472,10 +472,10 @@ INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 INPUT /usr/local/texlive/2020/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/Assigment7_ST421.aux
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/Assigment7_ST421.aux
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/Assigment7_ST421.aux
-OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/Assigment7_ST421.aux
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411/Assignment7_411.aux
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411/Assignment7_411.aux
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411/Assignment7_411.aux
+OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411/Assignment7_411.aux
 INPUT /usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 INPUT /usr/local/texlive/2020/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
@@ -552,29 +552,22 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam5
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
-OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/Assigment7_ST421.pdf
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+OUTPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411/Assignment7_411.pdf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmb7t.vf
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/graph1.png
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/graph1.png
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/graph1.png
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/graph1.png
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/vf/adobe/times/ptmri7t.vf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
-INPUT /Users/philip/Documents/OSU/Year 3/Fall/Mathematical Statistics 1/Assignments/Assignment 7/Assigment7_ST421.aux
+INPUT /Users/philip/Documents/OSU/Year 3/Fall/Real Analysis 1/Assignments/Assignment 7/Assignment7_411/Assignment7_411.aux
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
@@ -584,8 +577,10 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pf
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
-INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
+INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmri8a.pfb

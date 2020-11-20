@@ -12,7 +12,7 @@
 \usepackage{transparent}
 
 \newcommand{\incfig}[1]{%
-    \def\svgwidth{\columnwidth}
+    \def\svgwidth{.5\linewidth}
     \import{./figures/}{#1.pdf_tex}
 }
 
@@ -76,7 +76,7 @@ What kind of data structures would be good to use for Bag? If
 we use a stack, then this algorithm becomes a depth first search algorithm (DFS).
 If we use a queue, then we have a breadth first search (BFS) algorithm.
 If there is a weighted graph, one can use a priority queue based on edge weight,
-resulting in Dijkstra's shortest path algorithm.\\\\
+resulting in Dijkstra's shortest path algorithm.
 \begin{lstlisting}[mathescape=true]
 Serach(G,s):
     Insert $s$ into Bag
@@ -119,4 +119,50 @@ the shortest actual path, and if it is cyclic, there may not even exist a shorte
     \caption{A Negative Cyclic Graph}
     \label{fig:negativecycle}
 \end{figure}
+
+\section{Minimum Spanning Tees}
+
+\section{Greedy Algorithms}
+    Our first example is a job scheduling algorithm. Each shift has a start time and an end time.
+    The inputs for this algorithm are a list of start and end times, $S[1,2,\cdots,n], F[1,2,\cdots,n]$.
+    The output will be the maximum number of disjoint shifts. The greedy algorithm solution, involves taking
+    the largest start time, and go from there.
+    \begin{mdframed}
+        Greedy Algorithm to Solve the Job Scheduling Problem
+        \begin{lstlisting}[mathescape=true]
+JobScheduling$(S,F)$
+    Sort $F$, Permute $S$ accordingly
+    endTime $= -\infty$
+    todoList = {}
+    for $i \leftarrow 1$ to n
+        if $S[i] >$ endTime
+            Add $i$ to todoList
+            endtime = $F[i]$
+    return todoList
+        \end{lstlisting}
+    \end{mdframed}
+    \begin{figure}[ht]
+        \centering
+        \incfig{jobsched}
+        \caption{Job Scheduling Algorithm : Smallest Endpoint}
+        \label{fig:jobsched}
+    \end{figure}
+    The above algorithm does in fact return the maximum number of possible disjoint shifts.
+    \begin{proof}
+        Denote $g_1,g_2,\cdots,g_t$ as the output of our greedy algorithm, and denote $opt_1,opt_2,\cdots,opt_k$
+        to be the optimal solution with max shared prefix to our soluion.
+        If $k \leqslant t$, then clearly $g$ is optimal. Otherwise, $k > t$.
+        Suppose that there exists $i \in 1,2,\cdots t$ such that $g_i \neq opt_i$. Choose the first such $i$.
+        Then for $n < i, g_i \cap g_n = \O$. Then $F[g_i] \leqslant F[opt_i]$, and since $opt_i$ is disjoint from
+        all $opt_{i+1},\cdots,opt_n$, it follows that  $g_i$ is disjoint with $opt_{i+1},\cdots,opt_n$.
+        Then $opt_1,\cdots, opt_{i-1},g_i,opt_{i+1},\cdots,opt_k$ is a valid scheduling and is optimal.
+        Thus there exists some optimal solution with a prefix more similar to $g$ than $opt$ is, contradicting our 
+        definition of $opt$.
+    \end{proof}
+    Our next example will be the Huffman Coding problem. We want to make our file as small as possible. We must make 
+    the encoding prefix free, or if we think of it as a binary tree, every encoding must be a leaf node.
+    Our input is the fequency of symbols, our output is the best possible prefix free code.\\\\
+    To do this, we can merge the two least frequent items $(x,f[x]),(y,f[y]) \rightarrow(`xy', f[x] + f[y])$. Then we
+    compute the optimal tree with $n-1$ symbols. Then we add the childred $x,y$ to the leaf `$xy$'.
+    
 \end{document}

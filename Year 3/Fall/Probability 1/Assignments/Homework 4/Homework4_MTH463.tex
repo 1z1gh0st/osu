@@ -1,0 +1,254 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{tikz}
+
+\begin{document}
+
+\title{MTH 463 Assignment 4}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+    Let $X$ be a continuous random variable with probability density function
+    \[
+        f(x) = 
+        \begin{cases}
+            \frac{8}{x^3}, & x \geq 2\\
+            0, & \text{otherwise}
+        \end{cases}
+    \]
+    First we check that $f(x)$ is non-negative. We have $x > 0 \Rightarrow x^3 > 0 \Rightarrow \frac{8}{x^3} > 0$ so 
+    our probability is strictly positive for $x \geq 2$, and 0 otherwise. Next
+    we check that $\int_{-\infty}^\infty f(x) dx = 1$.
+    \begin{align*}
+        \int_{-\infty}^\infty f(x) dx & = \int_2^\infty f(x) dx\\
+        &= \int_2^\infty \frac{8}{x^3} dx\\
+        &= \frac{-4}{x^2}\bigg|_2^\infty\\
+        &= \lim_{n \rightarrow \infty} \frac{-4}{x^2}\bigg|_2^n\\
+        & = \lim_{n \rightarrow \infty} \frac{-4}{n^2} - \frac{-4}{4}\\
+        & = 1 - \lim_{n \rightarrow \infty} \frac{4}{n^2}\\
+        & = 1
+    \end{align*}
+    The integral is equal to 1 so we have a probability density function.
+    \[
+        P(X > 5) = 1 - P(X < 5) = 1 - \int_2^5 f(x)dx = 1 - \left[\frac{-4}{25} - \frac{-4}{4}\right] = \frac{4}{25} = .16
+    \]
+    \begin{align*}
+        E[X] &= \int_2^\infty \frac{8}{x^2} dx\\
+        &= \frac{-8}{x}\bigg|_2^\infty \\
+        &= \lim_{n \rightarrow \infty} \left[\frac{-8}{n} - \frac{-8}{2}\right]\\
+        &= 4 - \lim_{n \rightarrow \infty} \frac{8}{n}\\
+        &= 4
+    \end{align*}
+
+\section*{Problem 2}
+    Find $c$ and $E[X]$.
+    To find $c$ we make sure the function integrates to 1 over $\mathbb{R}$.
+    \begin{align*}
+        \int_{-\infty}^\infty f(x)dx &= \int_1^2 c(x-1)^4 dx\\
+        &= \int_1^2 c(x^4 - 4x^3 + 6x^2 - 4x + 1) dx \\
+        &= c(\frac{x^5}{4} - x^4 + 2x^3 - 2x^2 + x)_1^2\\
+        &= c[(\frac{2^5}{4} - 2^4 + 2 \cdot 2^3 - 2\cdot 2^2 + 2)-(\frac{1}{4} - 1 + 2\cdot 1 - 2\cdot 1 + 1)]\\
+        &= c \frac{7}{4}
+    \end{align*}
+    To make this equal 1, let $c = \frac{4}{7}$. To find $E[X]$ we do the following:
+    \begin{align*}
+        E[X] &= \int_1^2 \frac{4}{7}x(x^4 - 4x^3 + 6x^2 - 4x + 1) dx \\
+        &= \frac{4}{7} \int_1^2 (x^5 - 4x^4 + 6x^3 - 4x^2 + x) dx \\
+        &= \frac{4}{7} \left[\frac{x^6}{6} - \frac{4x^5}{5} + \frac{3x^4}{2} - \frac{4x^3}{3} + \frac{x^2}{2}\right]_1^2\\
+        &= \frac{4}{7} \left[\left(\frac{2^6}{6} - \frac{4 \cdot 2^5}{5} + \frac{3 \cdot 2^4}{2} - \frac{4 \cdot 2^3}{3} + \frac{2^2}{2}\right)
+        - \left( \frac{1}{6} - \frac{4}{5} + \frac{3}{2} - \frac{4}{3} + \frac{1}{2} \right)\right]\\
+        &= \frac{22}{105} = .2095
+    \end{align*}
+
+\section*{Problem 3}
+    We have a system of equations and we want to solve for $a$ and $b$.
+    First we have $\int_{-\infty}^\infty f(x) dx = 1$, second we have $\int_{-\infty}^\infty x f(x) dx = .75$.
+    \begin{align*}
+        1 &= \int_0^1 ax^2 + bx dx \\
+        1&= \frac{ax^3}{3} + \frac{bx^2}{2}\bigg|_0^1\\
+        1&= \frac{a}{3} + \frac{b}{2}
+    \end{align*}
+    Then we have
+    \begin{align*}
+        .75 &= \int_0^1 a x^3 + bx^2 dx\\
+        .75&= \frac{a x^4}{4} + \frac{b x^3}{3} \bigg|_0^1 \\
+        .75&= \frac{a}{4} + \frac{b}{3}
+    \end{align*}
+    With these two equations we can simply solve for $a$ and $b$.
+    \begin{align*}
+        1&= \frac{a}{3} + \frac{b}{2}\\
+        \Longrightarrow b &= 2 - \frac{2a}{3}\\\\
+        .75 &= \frac{a}{4} + \frac{b}{3}\\
+        .75 &= \frac{a}{4} + \frac{2 - \frac{2a}{3}}{3}\\
+        9 &= 3a + 4(2 - \frac{2a}{3})\\
+        9 &= 3a + 8 - \frac{8a}{3}\\
+        1 &= a(3 -\frac{8}{3})\\
+        \frac{1}{3- \frac{8}{3}} &= a = 3 \Rightarrow b = 0
+    \end{align*}
+    Then to compute $E[X^2]$ and $Var(x)$ we must integrate for the expecation of $X^2$.
+    \begin{align*}
+        E[X^2] &= \int_0^1 x^2 3x^2 dx\\
+        &= \int_0^1 3x^4 dx \\
+        &= \frac{3x^5}{5} \bigg|_0^1\\
+        &= \frac{3}{5} = .6
+    \end{align*}
+    Then we say that $Var(X) = E[X^2] - E[X]^2 = .6 - (.75^2) = .0375$.
+
+\section*{Problem 4}
+    Find $P(1 < X < 4)$ and $E[X]$.
+    \[
+        P(1 < X < 4) = F(4) - F(1) = 1 - (4 + 1)^{-2} - [1 - (1+1)^{-2}] = .21
+    \]
+    To find the expectation, we will take the derivative of our CDF to get our PDF, then compute expectation from there.
+    \[
+        F'(x) = f(x) =
+        \begin{cases}
+            2(x+1)^{-3}, & x > 0\\
+            0, & \text{otherwise}
+        \end{cases}
+    \]
+    Then we can compute the expectation
+    \begin{align*}
+        E[X] &= \int_0^\infty 2x(x+1)^{-3} dx \\
+        &= 2 \int_0^\infty x(x+1)^{-3}dx\\
+        &= 2 (\frac{1}{2})\\
+        &= 1
+    \end{align*}
+
+\section*{Problem 5}
+    \[
+        x = \frac{-4Y \pm \sqrt{4^2 Y^2 - 4(4)(6 - Y)}}{8}
+    \]
+    This will be real valued if the inside of the square root is non-negative, which
+    is the case when
+    \begin{align*}
+        0 &\leq 4^2 Y^2 - 4(4)(6 - Y)\\
+        0 &\leq  Y^2 - 6 + Y \\
+        0 &\leq Y^2 + Y - 6\\
+        \Longrightarrow Y &\geq 2
+    \end{align*}
+    So to compute the probability of this being the case we want $P(Y > 2)$, for an exponential with $\lambda = 3$.
+    This will be equal to the following: 
+    \begin{align*}
+        P(Y > 2) &= 1 - \int_0^2 3e^{-3x} dx\\
+        &= 1 - \left[-3\frac{1}{3}e^{-3x}\right]_0^2 \\
+        &= 1 - \left[-e^{-6} + e^0\right]\\
+        &= e^{-6} = .00248
+    \end{align*}
+    The result is the probability that the polynomial $4x^2 +4xY - Y + 6 = 0$ has real solutions.
+
+\section*{Problem 6}
+    Show that $\Gamma(\alpha + 1) = \alpha \Gamma(\alpha)$.
+    \begin{proof}
+        We write
+        \begin{align*}
+            \alpha \Gamma(\alpha) &= \alpha\left(
+                \int_0^\infty e^{-y} y^{\alpha - 1}
+            \right)\\
+            &= \alpha\left(
+                \frac{y^\alpha}{e^y \alpha}\bigg|_0^\infty - \int_0^\infty \frac{y^\alpha}{\alpha}(-e^{-y})dy
+            \right)\\
+            &= \frac{y^\alpha}{e^y}\bigg|_0^\infty + \int_0^\infty e^{-y}{y^\alpha}dy\\
+            &= \frac{y^\alpha}{e^y}\bigg|_0^\infty + \Gamma(\alpha + 1)\\
+            &= \lim_{n \rightarrow \infty} \frac{n^\alpha}{e^n} + \Gamma(\alpha + 1)\\
+            &= 0 + \Gamma(\alpha + 1) = \Gamma(\alpha + 1)
+        \end{align*}
+    \end{proof}
+    Compute $\Gamma(1)$.
+    \[
+        \Gamma(1) = \int_0^\infty e^{-y}y^{\alpha - 1}dy = \int_0^\infty e^{-y}dy = 1
+    \]
+    We know that the integral at the end of that chain must compute to 1 because it is
+    the same as the total probability of an exponential density function with $\lambda = 1$.\\\\
+    Show that $\Gamma(k) = (k-1)!$ for all $k \in \mathbb{N}$.
+    \begin{proof}
+        We do proof by induction, for the base case $k = 1$ we know $\Gamma(1) = 1 = 0! = (1 - 1)!$.
+        By induction assume that $\Gamma(k) = (k-1)!$, then it follows that
+        \[\Gamma(k+1) = k\Gamma(k) = k(k-1)! = k!\]
+    \end{proof}
+
+\section*{Problem 7}
+    Show that if $X$ is an exponential random variable with $\lambda > 0$,
+    \[
+        E[X^k] = \frac{k!}{\lambda^k}
+    \]
+    For all positive integer $k = 1,2,\cdots$.
+    \begin{proof}
+        We begin by writing
+        \begin{align*}
+            E[X^k] &= \int_0^\infty x^k f(x) dx\\
+            &= \int_0^\infty x^k \lambda e^{-\lambda x} dx\\
+            &= \int_0^\infty x^k \frac{\lambda^k}{\lambda^{k-1}} e^{-\lambda x} dx\\
+            &= \frac{1}{\lambda^{k-1}} \int_0^\infty (x\lambda)^k e^{-\lambda x} dx\\
+            &= \frac{1}{\lambda^{k-1}} \Gamma(k+1) \frac{1}{\lambda}\\
+            &= \frac{k!}{\lambda^{k}}
+        \end{align*}
+    \end{proof}
+
+\section*{Problem 8}
+    Let $X$ be a gamma distributed random variable with $\alpha > 0, \lambda > 0$.
+    Compute $E[e^{-X}]$.
+    \begin{align*}
+        E[e^{-X}] &= \int_0^\infty e^{-x} \frac{1}{\Gamma(\alpha)}\lambda e^{-\lambda x}(\lambda x)^{\alpha - 1}dx\\
+        &=\frac{1}{\Gamma(\alpha)} \int_0^\infty \lambda e^{-x - \lambda x} ( \lambda x)^{\alpha - 1} dx\\
+        &=\frac{1}{\Gamma(\alpha)} \int_0^\infty \lambda^\alpha e^{-x(1 + \lambda)}x^{\alpha - 1} dx
+    \end{align*}
+    Now let $y = x(\lambda + 1), dy = dx(\lambda + 1)$, and we make the following substitution
+    \begin{align*}
+        \frac{1}{\Gamma(\alpha)} \int_0^\infty \lambda^\alpha e^{-x(1 + \lambda)}x^{\alpha - 1} dx &= 
+        \frac{1}{\Gamma(\alpha)} \int_0^\infty \lambda^\alpha e^{-y}(\frac{y}{\lambda+1})^{\alpha - 1} \frac{1}{\lambda+1} dy\\
+        &= \frac{\lambda^\alpha}{\Gamma(\alpha)(\lambda+1)^\alpha} \int_0^\infty e^{-y}y^{\alpha - 1}dy\\
+        &= \frac{\lambda^\alpha}{\Gamma(\alpha)(\lambda+1)^\alpha} \cdot \Gamma(\alpha)\\
+        &= \frac{\lambda^\alpha}{(\lambda+1)^\alpha}\\
+        & = \left(\frac{\lambda}{\lambda+1}\right)^\alpha
+    \end{align*}
+
+\section*{Problem 9}
+    Let $X$ be an exponential random variable, show that its hazard funciton $h(t)$ will be constant.
+    \begin{proof}
+        We wish to show that 
+        \[
+            h(t) = \frac{f(t)}{1- F(t)} = x, \ \ \ \forall t
+        \]
+        Let us first write out $f(t)$ and $F(t)$ explicitly,
+        \[
+            f(t) =
+            \begin{cases}
+                \lambda e^{- \lambda t}, & 0 \leq t < \infty\\
+                0, & \text{otherwise}
+            \end{cases}
+        \]
+        Then if $y \leq 0, F(y) = 0$, and otherwise
+        \begin{align*}
+            F(t) &= \int_{-\infty}^t f(y) dy\\
+            &= \int_0^t \lambda e^{- \lambda y} dy\\
+            &= \lambda \int_0^t e^{- \lambda y} dy\\
+            &= \lambda \int_0^{- \lambda t} -\frac{1}{\lambda} e^u du\\
+            &= -\int_0^{- \lambda t} e^u du\\
+            &= -[e^{- \lambda t} - e^0]\\
+            &= -[e^{- \lambda t} - 1]\\
+            &= 1 - e^{- \lambda t}
+        \end{align*}
+        So we say
+        \[
+            F(t) = 
+            \begin{cases}
+                0 & t < 0\\
+                1 - e^{- \lambda t} & t \geq 0
+            \end{cases}
+        \]
+        For any non-negative value of $t$, we have
+        \begin{align*}
+            h(t) &= \frac{\lambda e^{-\lambda t}}{1- [1 - e^{-\lambda t}]}\\
+            &= \lambda \frac{e^{-\lambda t}}{e^{-\lambda t}}\\
+            &= \lambda  e^{- \lambda t + \lambda t}\\
+            & = \lambda 
+        \end{align*}
+        And we say that $h(t)$ is constant.
+    \end{proof}
+\end{document}

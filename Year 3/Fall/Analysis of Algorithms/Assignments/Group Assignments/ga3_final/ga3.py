@@ -137,10 +137,3 @@ def in_range(x, n):
     else:
         return False
 
-
-vidrach_itky_leda("test1.in", "test1.out")
-vidrach_itky_leda("test2.in", "test2.out")
-vidrach_itky_leda("test3.in", "test3.out")
-vidrach_itky_leda("test4.in", "test4.out")
-vidrach_itky_leda("test5.in", "test5.out")
-

@@ -139,29 +139,33 @@ The magnitude of earthquakes recorded in a region of North America can be modele
     \begin{align*}
         E(C) &= E(100 + 40Y + 3Y^2)\\
         &= 100 + 40 E(Y) + 3 E(Y^2)\\
-        &= 100 + 40 (10) + 3 \left(\int_0^\infty y^2 \frac{1}{10} e^{-\frac{y}{10}} dy\right)\\
-        &= 100 + 40 (10) + 3 \left(-y^2 e^{-\frac{y}{10}} - \int-2y e^{-\frac{y}{10}}\right)_0^\infty dy & \text{(integration by parts)}\\
-        &= 100 + 400 + 3 \left( -20e^{-\frac{y}{10}} y - e ^{-\frac{y}{10}}y^2 + \int 20 e^{-\frac{y}{10}} dy \right)_0^\infty & \text{(integration by parts)}\\
-        &= 500 + 3 \left( -e^{-\frac{y}{10}} y^2 - 20 e^{-\frac{y}{10}} y - 200 e^{-\frac{y}{10}}\right)_0^\infty\\
-        &= 500 + 3 \left( \frac{1}{10}e^{-\frac{y}{10}}(-10y^2 - 200y - 2000) \right)_0^\infty\\
-        &= 500 + 3 \lim_{n \rightarrow \infty} \left(\frac{1}{10}e^{-\frac{y}{10}}(-10y^2 - 200y - 2000)\right)_0^n\\
-        &= 500 + 3 \lim_{n \rightarrow \infty} \left( \left[ \frac{1}{10}e^{-\frac{n}{10}}(-10n^2 - 200n - 2000) \right] - \left[\frac{1}{10}e^0 (-2000)\right]\right)\\
-        &= 500 + 3 \lim_{n \rightarrow \infty} \left( \left[ \frac{1}{10}e^{-\frac{n}{10}}(-10n^2 - 200n - 2000) \right] + 200 \right)
-        &= 500 + 3 ([0] + 200)\\
-        &= 500 + 600\\
+        &= 100 + 40 (10) + 3 (2(10^2)) & \text{(see proof for mean and variance of Gamma distribution)}\\
+        &= 100 + 400 + 3(200)\\
         &= 1100
     \end{align*}
-    And thus we have the expectation of $C$.\\\\
+    And thus we have the expectation of $C, 1100$.\\\\
 
-    To compute the variance of $C$ we say
+    To compute the variance of $C$. First we wish to compute $E(Y^k)$ generally.
+    \[
+        E(Y^4) = \int_0^\infty y^k \left( \frac{y^{\alpha - 1} e ^{-y / \beta}}{\beta^\alpha \Gamma ( \alpha)}\right)dy
+        = \frac{1}{\beta^\alpha \Gamma(\alpha)} \int_0^\infty y^{\alpha - 1 + k} e^{-y / \beta} dy = 
+        \frac{1}{\beta^\alpha \Gamma(\alpha)}[\beta^{\alpha + k}\Gamma(\alpha + k)] = 
+        \frac{\beta^k \frac{(\alpha + k)!}{\alpha !} \Gamma(\alpha)}{\Gamma(\alpha)}
+    \]
+    When $k = 4$, this will equal $\beta^4 (\alpha + 3)(\alpha + 2)(\alpha + 1)(\alpha)$. So since we have $Y$ is exponential,
+    we say that $\alpha = 1, \beta = 10$, and finally $E(Y^4) = 10^4 (4)(3)(2)(1) = 10^4 \cdot 4!$. Also $E(Y^3) = \beta^3 3! = 10^3 6$.
+    Notice that $C^2 = 9Y^4 + 240Y^3 + 2200Y^2 + 8000Y + 10000$.
+    Then we say
     \begin{align*}
-        V(C) &= V(100 + 40Y + 3Y^2)\\
-        &= 0 + V(40Y) + V(3Y^2)\\
-        &= 40^2 V(Y) + 3^2 V(Y^2)\\
-        &= 40^2 (10^2) + 3^2[E(Y^4) - E(Y^2)^2]\\
-        &= 
+        V(C) &= E(C^2) - E(C)^2\\
+        &=E(C^2) - 1100^2\\
+        &=E(9Y^4 + 240Y^3 + 2200Y^2 + 8000Y + 10000) - 1100^2\\
+        &=9E(Y^4) + 240 E(Y^3) + 2200 E(Y^2) + 8000 E(Y) + 10000) - 1100^2\\
+        &=9(10^4 24) + 240 (10^3 6) + 2200 (10^2 2) + 8000 (10) + 10000) - 1100^2\\
+        &=24 (10^4)
     \end{align*}
-    
+    So we have found both the expectattion and varaiance of $C$.
+
 \section*{Problem 4.96}
 
     \subsection*{(a)}
@@ -182,9 +186,156 @@ The magnitude of earthquakes recorded in a region of North America can be modele
 \section*{Problem 4.126}
 
     \subsection*{(a)}
-    $F(y) = \int_{-\infty}^y f(y) dy$.
-\section*{Problem 4.134}
-\section*{Problem 4.142}
-\section*{Problem 4.190}
+        If $1 \geq y \geq 0$ then,
+        \begin{align*}
+            F(y) &= \int_{-\infty}^y f(y) dy\\
+            &= \int_0^y f(y) dy \\
+            &= \int_0^y 6y(1-y) dy \\
+            &= \int_0^y 6y - 6y^2 dy\\
+            &= \left[3y^2 - 2y^3\right]_0^y\\
+            &= [3y^2 - 2y^3] - [0]\\
+            &= 3y^2 - 2y^3\\
+            &= y^2(3 - 2y)
+        \end{align*}
+        Otherwise $F(y) = 0$, thus 
+        \[
+            F(y) = 
+            \begin{cases}
+                0 & y < 0\\
+                y^2(3-2y) & 0 \leq y \leq 1\\
+                1 & \text{otherwise}
+            \end{cases}
+        \]
+    \subsection*{(b)}
+    \includegraphics[width=6cm]{graph1}\\
+    The red is $f(y)$ and the blue is $F(y)$. For values outside of the range, $[0,1]$, 
+    the graph of $f(y)$ should be simply 0, and the graph of $F(y)$ should be 0 if $y < 0$ or 1 if $y > 1$.
 
+\section*{Problem 4.134}
+    
+    \subsection*{(a)}
+        In relation to the binomial distribution we have a probability $p = .7$, and $n = 10$,
+        and we want the probability of at least $4$ successes. We get a probability of $1 - .011 = .989$.
+    
+    \subsection*{(b)}
+            We do the same thing again, except this time we have $p = .6, n = 25$, and we want
+            the probability of achieving at least 12 successes. This gives us $1 - .078 = .922$.
+
+\section*{Problem 4.142}
+
+    \subsection*{(a)}
+        \begin{align*}
+            m(t) &= E(e^{t Y})\\
+            &= \int_0^1 e^{t y} f(y)dy\\
+            &= \int_0^1 e^{t y} (1) dy\\
+            &= \frac{1}{t} \int_0^t e^u du\\
+            &= \frac{1}{t} [e^t - e^0]\\
+            &= \frac{e^t - 1}{t}
+        \end{align*}
+
+    \subsection*{(b)}
+        For the moment generating function for $W$.
+        \begin{align*}
+            m(t) &= E(e^{t W}) \\
+            &= E(e^{t a Y})\\
+            &= \int_0^1 e^{t a y} (1) dy \\
+            &= \frac{1}{t a} \int_0^{t a} e^u du\\
+            &= \frac{e^{ta} - 1}{ta}
+        \end{align*}
+        The distribution is still a uniform distribution because it is simply the same distribution except
+        we are looking at the interval $(0, a)$.
+
+    \subsection*{(c)}
+        \begin{align*}
+            m(t) &= E(e^{t X})\\
+            &= E(e^{-t a Y})\\
+            &= \int_0^1 e^{-t a y} dy\\
+            &= \frac{1}{-ta} \int_0^{-ta} e^u du\\
+            &= \frac{1}{ta} \int_{-ta}^0 e^u du\\
+            &= \frac{1}{ta} [e^0 - e^{-ta}]\\
+            &= \frac{1 - e^{-ta}}{ta}
+        \end{align*}
+        This will be a uniform distribution on the interval $(-a, 0)$.
+
+    \subsection*{(d)}
+        \begin{align*}
+            m(t) &= E(e^{t V})\\
+            &= E(e^{t(aY + b)})\\
+            &= E(e^{t a Y}e^{t b})\\
+            &= e^{t b} E(e^{t a Y})\\
+            &= e^{t b} \frac{e^{ta} - 1}{ta}
+        \end{align*}
+        This will be a uniform distribution over the interval $(b, a+b)$ since the relationship between 
+        $V$ and $Y$ transforms our unit interval to this interval.
+
+\section*{Problem 4.190}
+    
+    \subsection*{(a)}
+        Show that for an exponential density function, $r(t)$ is constant.
+        \begin{proof}
+            We wish to show that 
+            \[
+                r(t) = \frac{f(t)}{1- F(t)} = x, \ \ \ \forall t
+            \]
+            Let us first write out $f(t)$ and $F(t)$ explicitly,
+            \[
+                f(t) =
+                \begin{cases}
+                    \frac{1}{\beta}e^{-t / \beta}, & 0 \leq t < \infty\\
+                    0, & \text{otherwise}
+                \end{cases}
+            \]
+            Then if $y \leq 0, F(y) = 0$, and otherwise
+            \begin{align*}
+                F(t) &= \int_{-\infty}^t f(y) dy\\
+                &= \int_0^t \frac{1}{\beta}e^{-y / \beta} dy\\
+                &= \frac{1}{\beta} \int_0^t e^{-y / \beta} dy\\
+                &= \frac{1}{\beta} \int_0^{- t / \beta} -\beta e^u du\\
+                &= -\int_0^{- t / \beta} e^u du\\
+                &= -[e^{- t / \beta} - e^0]\\
+                &= -[e^{- t / \beta} - 1]\\
+                &= 1 - e^{- t / \beta}
+            \end{align*}
+            So we say
+            \[
+                F(t) = 
+                \begin{cases}
+                    0 & t < 0\\
+                    1 - e^{-t / \beta} & t \geq 0
+                \end{cases}
+            \]
+            For any non-negative value of $t$, we have
+            \begin{align*}
+                r(t) &= \frac{\frac{1}{\beta}e^{-t / \beta}}{1- [1 - e^{-t / \beta}]}\\
+                &= \frac{1}{\beta}\frac{e^{-t / \beta}}{e^{- t / \beta}}\\
+                &= \frac{1}{\beta} e^{-t / \beta + t / \beta}\\
+                & = \frac{1}{\beta}
+            \end{align*}
+            And we say that $r(t)$ is constant.
+        \end{proof}
+
+    \subsection*{(b)}
+        Show that $r(t)$ is increasing.
+        \begin{proof}
+            First note that 
+            \[
+                f(y) = \frac{my^{m-1}}{\alpha}e^{-y^m / \alpha}, \ \ \ \ \ \ \ \ 0 \leq y < \infty, \alpha, m > 1
+            \]
+            Then we must compute $F(y)$.
+            \begin{align*}
+                F(y) &= \int_0^y f(t) dt\\
+                &= \int_0^y \frac{mt^{m-1}}{\alpha}e^{-t^m / \alpha}dt \\
+                &= \frac{m}{\alpha} \int_0^y t^{m - 1} e^{-t^m / \alpha} dt \\
+                & = 1 - e^{-(y / \alpha)^m}\\
+            \end{align*}
+            Then we say that 
+            \begin{align*}
+                r(t) &= \frac{f(t)}{1- F(t)}\\
+                &= \frac{\frac{mt^{m-1}}{\alpha}e^{-t^m / \alpha}}{1 - F(t)}\\
+                &= \frac{\frac{mt^{m-1}}{\alpha}e^{-t^m / \alpha}}{1 - [1 - e^{-(t / \alpha)^m}]}\\
+                &= \frac{\frac{mt^{m-1}}{\alpha}e^{-t^m / \alpha}}{e^{-(t / \alpha)^m}}\\
+                &= \frac{mt^{m-1}}{\alpha} \cdot e^{(-t ^ m / \alpha) + (t / \alpha)^m}\\
+                r'(t) &\geq 0 \ \ \forall m > 1 \Longrightarrow r(t) \text{ is increasing} 
+            \end{align*}
+        \end{proof}
 \end{document}

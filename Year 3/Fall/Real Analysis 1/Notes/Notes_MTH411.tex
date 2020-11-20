@@ -186,7 +186,34 @@
             & \leq \alpha^n d(x_1, x_0) = c \alpha^n & c = d(x_1, x_0)
         \end{align*}
     \end{proof}
-\end{document}
-\begin{definition}
+
+\section{Compactness}
+    \begin{mdframed}
+        \begin{definition}
+            A metric space $(M,d)$ is said to be compact if it is both complete and totally bounded.
+        \end{definition}
+    \end{mdframed}
+
+    \begin{theorem}
+        $(M,d)$ is compact if and only if every seuqence has a Cauchy subsequence that converges to a point in $M$.
+    \end{theorem}
+
+    \begin{theorem}
+        The image of a compact set under a continuous function is compact in metric spaces.
+    \end{theorem}
+
+    \begin{theorem}
+        Let $(V, ||.||)$ and $(W, |||.|||)$ be normed vector spaces and let $T:V \rightarrow W$ be a linear map. Then the 
+        following are equivalent:
+        \begin{align*}
+            \text{(i)} & \text{$T$ is Lipschitz} \\
+            \text{(ii)} & \text{$T$ is uniformly continuous}\\
+            \text{(iii)} & \text{$T$ is everywhere continuous}\\
+            \text{(iv)} & \text{$T$ is continuous at $0 \in V$}\\
+            \text{(v)} & \text{there is a constant $C < \infty$ such that $|||T(x)||| \leqslant C||x||$ for all $x \in V$}
+        \end{align*}
+
+    \end{theorem}
+
     
-\end{definition}
+\end{document}

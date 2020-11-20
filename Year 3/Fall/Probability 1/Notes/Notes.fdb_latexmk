@@ -1,11 +1,11 @@
 # Fdb version 3
-["pdflatex"] 1605295816 "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.pdf" "Notes" 1605296091
+["pdflatex"] 1605295816 "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.tex" "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.pdf" "Notes" 1605898542
   "./figures//normal.pdf" 1604692353 1259 2ebd05be21a45921ce16c238da712d92 ""
   "./figures//probability-density-function.pdf" 1604521544 2675 931d5723b46736732802c2df36f82b90 ""
   "./figures/normal.pdf_tex" 1604692353 2675 bf46bb6b7b3bfe413925f7bf22698fee ""
   "./figures/probability-density-function.pdf_tex" 1604521544 2834 c9bc4d13a06097b54f0b0bd6b556f974 ""
   "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.aux" 1605295817 1055 6c09c6daaca132597b50d5abcfbf4374 ""
-  "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.tex" 1605296090 8234 6397f4314eade44c576e3410478bae2b ""
+  "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.tex" 1605898542 8234 6397f4314eade44c576e3410478bae2b ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -114,7 +114,7 @@
   "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1604348489 2549326 414af182f0399eecc7d401eee4945cf3 ""
   "/usr/local/texlive/2020/texmf.cnf" 1586288231 577 d60164b4589a341208aff7a667fbbdcb ""
   "Notes.aux" 1605295817 1055 6c09c6daaca132597b50d5abcfbf4374 "pdflatex"
-  "Notes.tex" 1605296090 8234 6397f4314eade44c576e3410478bae2b ""
+  "Notes.tex" 1605898542 8234 6397f4314eade44c576e3410478bae2b ""
   "figures//normal.pdf" 1604692353 1259 2ebd05be21a45921ce16c238da712d92 ""
   "figures//probability-density-function.pdf" 1604521544 2675 931d5723b46736732802c2df36f82b90 ""
   "figures/normal.pdf_tex" 1604692353 2675 bf46bb6b7b3bfe413925f7bf22698fee ""
@@ -123,5 +123,5 @@
   "Notes.log"
   "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.pdf"
   "Notes.pdf"
-  "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.log"
   "Notes.aux"
+  "/Users/philip/Documents/OSU/Year 3/Fall/Probability 1/Notes/Notes.log"
