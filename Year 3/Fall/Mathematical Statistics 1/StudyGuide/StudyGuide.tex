@@ -24,8 +24,60 @@
 
 \begin{document}
 
-\title{Title}
+\title{Stuff}
 \author{Philip Warton}
 \date{\today}
 \maketitle
+\section{Chapter 6 Solutions}
+\subsection*{Moment Generating Function Method}
+\subsubsection*{6.37}
+Let $Y_1, Y_2, \cdots ,Y_n$ be independent and identiacally distributed 
+random variables such that for $0 < p < 1, P(Y_i = 1) = p$ and $P(Y_i = 0) = q = 1-p$.\\\\
+(a) Find the moment generating function for the Bernoulli random variable $Y_1$.
+The moment generating function can be found by computing $E[e^{tY_1}]$. We do so now:
+\begin{align*}
+    E[e^{tY_1}] & = e^{t(0)} q + e^{t(1)} p
+    = q + e^t p
+\end{align*}
+(b) Find the moment-generating function for $W = Y_1 + Y_2 + \cdots + Y_n$.
+We use the fact that they are independent to say that
+\[
+    m_W(t) = m_{Y_1}(t) \cdot m_{Y_2}(t) \cdot \cdots \cdot m_{Y_n}(t) = (q + e^t p)^n
+\]
+(c) This is the same moment generating function as that of the binomial distribution with $n$ Bernoulli trials.
+Thus the distribution of $W \sim Binom(n,p)$.
+\subsubsection*{6.38}
+Let $Y_1$ and $Y_2$ be independent random variables with moment-generating functions
+$m_{Y_1}(t)$ and $m_{Y_2}(t)$ respectively. If $a_1$ and $a_2$ are constants and $U = a_1Y_1 + a_1Y_2$ show that the 
+moment-generating function for $U$ is $m_U(t) = m_{Y_1}(a_1 t) \times m_{Y_2}(a_2 t)$.\\\\
+\[
+    E[e^{tU}] = E[e^{t(a_1Y_1 + a_2Y_2)}] = E[e^{ta_1Y_1}e^{ta_2Y_2}] = E[e^{ta_1Y_1}]E[e^{ta_1Y_1}] = m_{Y_1}(a_1t) \cdot m_{Y_2}(a_2t)
+\]
+\subsubsection*{6.40}
+Suppose $Y_1$ and $Y_2$ are indpenedent, standard normal random variables. Find the density
+function of $U = Y_1^2 + Y_2^2$.\\\\
+We can compute the moment generating function as 
+\[
+    m_U(t) = m_{Y_1^2}(t) m_{Y_2^2}(t)
+\]
+Now lets compute the moment-generating function of a standard normal random variable squared.
+\begin{align*}
+    m_{Z^2}(t) &= E[e^{tZ^2}]\\
+    &= \int_\mathbb{R} e^{tz^2}  \varphi (z) dz\\
+    &= \int_\mathbb{R} e^{tz^2}  \frac{1}{\sqrt{2\pi}} e^{-z^2 / 2} dz \\
+    &= \int_\mathbb{R} e^{z^2 (t - \frac{1}{2})} \frac{1}{\sqrt{2\pi}} dz \\
+    &= \int_\mathbb{R} e^{-z^2 (\frac{1}{2} - t)} \frac{1}{\sqrt{2\pi}} dz \\
+\end{align*}
+Let $v = z\sqrt{1 - 2t}$ and $dv = dz\sqrt{1-2t}$. So then we have 
+\begin{align*}
+    \int_\mathbb{R} e^{-z^2 (\frac{1}{2} - t)} \frac{1}{\sqrt{2\pi}} dz &= \int_\mathbb{R} e^{-v^2 / 2} \frac{1}{\sqrt{2\pi}} \frac{1}{\sqrt{1-2t}} dv\\
+    &= \frac{1}{\sqrt{1 - 2t}} \int_\mathbb{R} \varphi (v) dv \\
+    &= (1-2t)^{-1 / 2}
+\end{align*}
+Having computed this, we can now say
+\[
+    m_U(t) = (1-2t)^{-\frac{1}{2}} \cdot (1-2t)^{-\frac{1}{2}} = \frac{1}{1-2t}
+\]
+This is the moment generating function for a $\chi^2$ distribution with $k = 2$ degrees of freedom.
+\subsubsection*{}
 \end{document}

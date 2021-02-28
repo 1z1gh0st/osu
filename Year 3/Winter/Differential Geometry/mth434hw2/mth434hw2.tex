@@ -1,0 +1,128 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{.25\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Differential Geometry - Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{(a)}
+\fbox{Show that all 2-forms in $\mathbb{R}^3$ are decomposable.}
+\begin{proof}
+    Let $H \in \bigwedge^2(\mathbb{R}^3)$.
+    We assume that this 2-form is defined by some vector field $\vec{H}$, and some surface $S \subset \mathbb{R}^3$.
+    Given our current coordinate system, we say $H = H_x dy \wedge dz + H_y dz \wedge dx + H_z dx \wedge dy$.
+    We want to show that there exist a product of 1-forms that compose $H$. Let $F, G \in \bigwedge^1(\mathbb{R}^3)$
+    be 1-forms where $F = F_xdx + F_ydy + F_zdz$ and $G = G_xdx + G_ydy + G_zdz$. Then, taking their wedge product, 
+    we have the following:
+    \[
+        F \wedge G = (F_yG_z - F_z G_y)(dy \wedge dx) - (F_xG_z - F_zG_x)(dx \wedge dz) + (F_xG_y - F_yG_x)(dx \wedge dy)
+    \]
+    Then, to satisfy $H = F \wedge G$, we produce a system of equations that looks like
+    \begin{align}
+        H_x &= F_yG_z - F_zG_y \\
+        H_y &= F_zG_x - F_xG_z \\
+        H_z &= F_xG_y - F_yG_x
+    \end{align}
+    Notice that this system of equations is equivalent to the system of equations one must solve in order to ``undo'' the
+    cross product. Given that we have shown this to be possible \fbox{Homework 1}, it follows that such 1-forms $F,G$
+    exist, and therefore $H = F \wedge G$ is decomposable.
+\end{proof}
+\subsection*{(b)}
+\fbox{Provide an example of a non-decomposable $p$-form.} \\\\
+We wish to find some example of a non-decomposable $p$-form in some vector space $V$.
+Let us look at $\mathbb{R}^4$. Call our dimensions $x_1, x_2, x_3, x_4$. We may have some 2-form,
+\[
+    u = dx_1 \wedge dx_2 + dx_3 \wedge dx_4
+\]
+Suppose that $u = v \wedge w$ for some pair of 1-forms, $v,w \in \bigwedge^1(\mathbb{R}^4)$.
+Then we say that \begin{align*}
+    u \wedge u &= (v \wedge w) \wedge (v \wedge w) \\
+    &= v \wedge (w \wedge v) \wedge w \\
+    &= v \wedge -(v \wedge w) \wedge w \\
+    &= (v \wedge -v) \wedge (-w \wedge w) \\
+    &= (v \wedge v \wedge -1) \wedge (-1 \wedge w \wedge w) \\
+    &= 0 \wedge 0\\
+    &= 0
+\end{align*}
+However, we can compute this same product $u \wedge u$ as
+\begin{align*}
+    u \wedge u &= (dx_1 \wedge dx_2 + dx_3 \wedge dx_4) \wedge (dx_1 \wedge dx_2 + dx_3 \wedge dx_4)\\
+    &= 2(dx_1 \wedge dx_2 \wedge dx_1 \wedge dx_2) + 2(dx_1 \wedge dx_2 \wedge dx_3 \wedge dx_4) \\
+    &= 0 + 2(dx_1 \wedge dx_2 \wedge dx_3 \wedge dx_4)
+\end{align*}
+Since $u \wedge u$ cannot be both equal to 0 and not equal to 0 we say that $u$ is not decomposable into a product of 1-forms.
+\subsection*{(c)}
+\fbox{Is $\gamma \wedge \gamma = 0$?}\\\\
+It depends on the rank of the form $\gamma$, denoted by $p$. We make the argument
+ using only the anti-symmetric property of the wedge product.
+Since $a \wedge b = (-1)^{p^2}(b \wedge a)$, if we let $a,b = \gamma$, then
+\begin{align*}
+    \gamma \wedge \gamma &= (-1)^{p^2}(\gamma \wedge \gamma) \\
+\end{align*}
+If $p$ is odd, then we are guaranteed that $\gamma \wedge \gamma = 0$.
+Otherwise, this is not guaranteed. For example, our $2$-form example from \fbox{1b.}
+serves as an example of differential form that does not equal 0 when wedged with itself.
+\section*{Problem 2}
+Let $\alpha = 3dx, \beta = 4dy$.
+\subsection*{(a)}
+\begin{figure}[ht]
+    \centering
+    \incfig{1}
+    \caption{``Stacks'' Diagram of $\alpha$ (green) and $\beta$ (red)}
+    \label{fig:1}
+\end{figure}
+\subsection*{(b)}
+\begin{figure}[ht]
+    \centering
+    \incfig{2}
+    \caption{``Stacks'' Diagram of $\gamma = \alpha + \beta$}
+    \label{fig:2}
+\end{figure}
+\subsection*{(c)}
+Let $\vec{v} = \langle 6, 8 \rangle \in \mathbb{R}^2$.
+\begin{figure}[ht]
+    \centering
+    \incfig{4}
+    \caption{$\vec{v}$ (blue) on $\alpha$ (green) and $\beta$ (red)}
+    \label{fig:4}
+\end{figure}
+From this diagram \fbox{Figure 3} we can see that $\vec{v}$ crosses exactly 2 of our green stacks,
+and 2 of our red stacks. So we say that $\alpha(\vec{v}) = 2 = \beta(\vec{v})$.
+\begin{figure}[ht]
+    \centering
+    \incfig{3}
+    \caption{$\vec{v}$ (blue) on $\gamma$}
+    \label{fig:3}
+\end{figure}
+From this second diagram \fbox{Figure 4} we have $\vec{v}$ crossing exactly 2 of our stacks, which
+means that $\gamma(\vec{v}) = 2$.
+\subsection*{(d)}
+Since $\alpha(\vec{v}) + \beta(\vec{v}) = 2 + 2 = 4 \neq 2 = \gamma(\vec{v})$, we did not obtain $\alpha(\vec{v}) + \beta(\vec{v}) = \gamma(\vec{v})$.
+It feels like we should have this relationship, but it turns out not to be the case.
+I believe that this is because if we were to take one ``unit'' of $\alpha,\beta,$ and $\gamma$
+as vectors, we do not have $||\alpha|| + ||\beta|| = ||\gamma||$
+\end{document}

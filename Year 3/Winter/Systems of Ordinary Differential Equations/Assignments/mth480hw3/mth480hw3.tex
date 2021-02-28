@@ -1,0 +1,150 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Systems of ODE's - Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 3.2}
+\subsection*{(iv)}
+We have a system of ODE's given by $X' = AX$ where $A = \begin{bmatrix}
+    1&1\\-1&3
+\end{bmatrix}$. We begin by computing the eigenvalues using the characteristic polynomial
+\[
+    \det(A - \lambda I) = (1-\lambda)(3-\lambda) - (1)(-1) = (\lambda - 2)^2 \Longrightarrow \lambda_1, \lambda_2 = 2
+\]
+So then we can compute the eigenvectors as follows
+\begin{align*}
+    (A-\lambda I)V & = \begin{bmatrix}
+        -1&1\\-1&1
+    \end{bmatrix}\begin{bmatrix}
+        x\\y
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        -x + y\\-x + y
+    \end{bmatrix}
+\end{align*}
+For $(A-\lambda I)V = 0$ it follows that $x = y$, so we say that we have only one
+linearly independent eigenvector $\begin{bmatrix}
+    1\\1
+\end{bmatrix}$.
+Choose $W = \langle 1,0 \rangle$ to be another vector that is independent from $V$.
+We then wish to solve for $\mu$ in the following equation
+\begin{align*}
+    AW &= \mu V + vW\\
+    \begin{bmatrix}
+        1&1\\-1&3
+    \end{bmatrix}\begin{bmatrix}
+        1\\0
+    \end{bmatrix}&=\mu V + v W\\
+    \begin{bmatrix}
+        1 \\ -1
+    \end{bmatrix} & = \mu \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix} + 2 \begin{bmatrix}
+        1 \\ 0
+    \end{bmatrix}\\
+    \Longrightarrow \mu & = -1
+\end{align*}
+Now we write $U = \frac{1}{\mu}W = \langle -1, 0 \rangle$, giving us the transformation matrix $T = \begin{bmatrix}
+    1&-1\\1&0
+\end{bmatrix}$.
+We know that $T^{-1}AT = \begin{bmatrix}
+    2&1\\0&2
+\end{bmatrix}$.
+Seeing this matrix in canonical form, we can solve this system easily, giving us 
+\[
+    Y(t) = \alpha e^{2 t} \begin{bmatrix}
+        1\\0
+    \end{bmatrix} + \beta e^{2 t}\begin{bmatrix}
+        t\\1
+    \end{bmatrix}
+\]
+Then we can solve for $X(T)$ using the fact that $X(t) = TY(t)$:
+\[
+    TY(t) = X(t) = \alpha e^{2t} \begin{bmatrix}
+        1\\1
+    \end{bmatrix} + \beta e^{2 t} \begin{bmatrix}
+        t - 1\\t
+    \end{bmatrix}
+\]
+All phase portraits can be found on the attached scan.
+\subsection*{(vi)}
+Finding eigenvalues using the characteristic polynomial we get 
+\[
+    \det (A - \lambda I) = (\lambda - \sqrt{2})(\lambda + \sqrt{2})
+\]
+The eigenvalues will be $\lambda_1 = \sqrt{2}, \lambda_2 = -\sqrt{2}$.
+Solving for eigenvectors using the kernel of $A - \lambda I$ we get eigenvectors
+$V_1 = \langle 1 + \sqrt{2}, 1 \rangle, V_2 = \langle 1 - \sqrt{2}, 1 \rangle$ corresponding to $\lambda_1, \lambda_2$
+respectively. So we use the transfomation matrix $T = \begin{bmatrix}
+    1 + \sqrt{2} & 1 - \sqrt{2} \\ 1 & 1
+\end{bmatrix}$ such that $T^{-1}AT = \begin{bmatrix}
+    \sqrt{2}&0\\0&-\sqrt{2}
+\end{bmatrix}$.
+This gives us the solution 
+\[
+    Y(t) = \alpha e^{\sqrt{2} t} \begin{bmatrix}
+        1\\0
+    \end{bmatrix} + \beta e^{-\sqrt{2} t} \begin{bmatrix}
+        0\\1
+    \end{bmatrix}
+\]
+Then we can compute the proper solution $X(t)$ by applying our transformation
+\[
+    TY(t) = X(t) = \alpha e^{\sqrt{2} t} \begin{bmatrix}
+        1 + \sqrt{2} \\ 1
+    \end{bmatrix} + \beta e^{-\sqrt{2} t} \begin{bmatrix}
+        1 - \sqrt{2}\\ 1
+    \end{bmatrix}
+\]
+See attached scan for phase portraits.
+\section*{Problem 3.5}
+We start by computing the eigenvalues of the system, so that we can see which category our solutions will fall into.
+We take the characteristic polynomial to be 
+\[
+    (a - \lambda)(2 - \lambda) - 2a = \lambda(\lambda - (2 + a))
+\]
+This gives us two eigenvalues, $\lambda_1 = 1, \lambda_2 = 2 + a$.
+In the case where $a = -2$ we have repeated eigenvalues with an eigenspace equivalent
+to the null space of $A$ (which by rank-nullity will have dimension 1). Otherwise we have real and distinct eigenvalues, with either a positive eigenvalue with 0 or a negative eigenvalue with 0.
+
+\section*{Problem 3.6}
+Let us first observe what our eigenvalues will be for this system.
+We have $A =\begin{bmatrix}
+    2a&b\\b&0
+\end{bmatrix}$.Then we take the characteristic polynomial to be 
+\[
+    \lambda^2 - 2 a \lambda - b^2
+\]
+So it follows that we have eigenvalues of 
+\begin{align*}
+    \lambda & = \frac{2a \pm \sqrt{4a^2 - 4(1)(-b^2)}}{2} \\
+    &= a \pm \sqrt{a^2 + b^2}
+\end{align*}
+It should be clear that this will always provide two real and distinct eigenvalues for any $a, b \in \mathbb{R}$.
+What may be of notice is that will always have one positive and one negative eigenvalue since $\sqrt{a^2 + b^2} \geqslant a$ for any $b \in \mathbb{R}$.
+\end{document}

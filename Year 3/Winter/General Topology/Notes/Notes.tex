@@ -1,0 +1,49 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology - Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+We say that a topological space is some set $X$ equipped with some topology $\tau$ such that the following
+are true (we call these the topological axioms).
+\begin{align*}
+    (i) & \ \ \O \in \tau, X \in \tau \\
+    (ii) & \text{ The collection is closed under any union.} \\
+    (iii) & \text{ The collection is closed under finite intersection. }
+\end{align*}
+The base of a topology is a collection of open subsets of $X$, such that 
+every set in $\tau$ is a union of sets in $B$. Any base must have two properties.
+First, the base elements conver $X$, that is, $\bigcup B \supset X$.
+Second, let $B_1, B_2 \in B$. For every $x \in B_1 \cap B_2$ there is some element $B_3 \in B$ such
+that $B_3 \subset B_1 \cap B_2$. An order relation can be defined on a product space similarly
+to how we order a dictionary (expand upon this).
+If we have $X_1, <_1, X_2, <_2, \cdots , X_n$. Then define 
+$<$ on $X_1 \times X_2 \times \cdots \times X_n$ by 
+$X_{11} \times x_{21} \times \cdots \times x_{n1} < x_{12} \times x_{22} \times \cdots \times x_{n2}$.
+There is an interesting case of the 'order topology' for which these definitions may become quite useful.
+s
+\end{document}

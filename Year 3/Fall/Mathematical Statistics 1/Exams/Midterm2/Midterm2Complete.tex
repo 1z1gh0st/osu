@@ -1,0 +1,37 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{.5\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Mathematical Statistics - Midterm 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{Problem 1}
+    The life span of an oil drilling bit is said to be distributed normally with a mean 
+    of $\mu = 75$ and a standard deviation of $\sigma = 12$ hours.
+    \subsection*{1.}
+        What proportion of bits will fail before 60 hours of use.
+\end{document}

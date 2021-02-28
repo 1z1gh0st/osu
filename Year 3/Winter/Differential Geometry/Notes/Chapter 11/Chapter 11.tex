@@ -1,0 +1,57 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Differential Geometry 1 Notes - Chapter 11}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Differentials and Integrands}
+We will write differentiation as $f \longmapsto df$, where all our typical rules
+of derivatives apply. That is,
+\begin{align*}
+    d(u^n) & = nu^{n-1}du, & \text{(power rule)}\\
+    d(e^u) & = e^u du, & \text{(exponential)}\\
+    d(\sin u) & = \cos u du, & \text{(trigonemtric derivatives)}\\
+    d(uv) & = udv + vdu, & \text{(product rule)}\\
+    d(u + cv) & = du + cdv, & \text{(distributive property)}
+\end{align*}
+Finally we write the chain rule as
+\[
+    \frac{df}{du} = \frac{df}{dq}\frac{dq}{du}
+\]
+Alternatively
+\[
+    df = \frac{\partial f}{\partial p}dp + \frac{\partial f}{\partial q}dq
+\]
+
+\section{Differential Forms}
+Consider $\mathbb{R}^n$ with coordinates $\{x^i\}$.
+Consider the formal objects $\{dx^i\}$.
+Let $V$ be the almost vector space,
+\[
+    V = \langle dx^i \rangle = \{a_i dx^i\}
+\]
+\end{document}

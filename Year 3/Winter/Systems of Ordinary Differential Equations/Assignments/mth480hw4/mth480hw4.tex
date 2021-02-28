@@ -1,0 +1,54 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Systems of ODE's - Homework 4}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+    Consider the one-parameter family of linear systems given by
+    \begin{align}
+        X'=\begin{bmatrix}
+            a&\sqrt{2}+(a/2)\\\sqrt{2}-(a/2)&0
+        \end{bmatrix}X
+    \end{align}
+    \subsection*{a)}
+        Sketch the path traced out by this family of linear systems in the
+        trace-determinant plane as $a$ varies.
+    \subsection*{b)}
+        Discuss any bifurcations that occur along this path and compute the 
+        corresponding values of $a$.\\\\
+        We can compute the trace and determinant of this planar system by 
+        \begin{align}
+            T = a + 0 & & D &= (a \cdot 0) - (\sqrt{2} + (a/2))(\sqrt{2} - (a/2)) \\
+            &&&= a - (2 - a^2 / 4)
+        \end{align}
+        Then we have $\Delta = T^2 - 4D = a^2 - 4(a - (2 - a^2/4))) = 4(2-a)$.
+        So we have $T$ positive if and only if $a$ is positive. Then $D$ is positive when 
+        \[
+            2 < a(4 + a)
+        \]
+\end{document}

@@ -1,0 +1,140 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{.5\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Mathematical Statistics - Midterm 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+
+\section*{Problem 1}
+    Let $X$ be a normally distributed random variable with $\mu = 75, \sigma = 12$.
+    \subsection*{(1)}
+        Since we have $Z = \frac{X - \mu}{\sigma}$, we say
+        \begin{align*}
+            P(X < 60) &= P(Z < - \frac{5}{4})\\
+            &= P(Z > \frac{5}{4}) & \text{(since $Z$ is symmetric)}\\
+            &= P(Z > 1.25)\\
+            &= .1056 & \text{($Z$-table from text)}
+        \end{align*}
+    \subsection*{(2)}
+        To last at least 60 hours, we say that this outcome event is the complement to part (1),
+        so the probability will be 1 - .1056 = .8944.
+    \subsection*{(3)}
+        We assume that once the life of a bit is over, that it must be replaced.
+        Then we want to find the proportion of the distribution that lies beyond $X = 90$
+        or after normalization, $Z = 1.25$. Since we have already computed $P(Z < -1.25)$, this
+        will be the same as $P(Z > 1.25)$ by symmetry, so we say that the answer is $.1056$.
+    \subsection*{(4)}
+        For a single bit to fail at or before 48 hours, we compute $P(X < 48) = P(Z < -2.25) = P(Z > 2.25) = .0122$.
+        Then we have a binomial distribution with $n = 10, p = .0122, k = 2$. By looking at the binomial distribution
+        table we get the probability of $1.000 - .996 = .004$.
+\section*{Problem 2}
+    \[
+        f(x,y) = 
+        \begin{cases}
+            1 / \pi, & x^2 + y^2 \leqslant 1\\
+            0, & \text{otherwise}
+        \end{cases}
+    \]
+    \subsection*{(1)}
+        The probability of this event is .5. This is because one can interpret this as 
+        integrating over the unit circle only where $y > x$ which will be half of the unit circle
+        above the $y = x$ diagonal. To paramaterize this explicitly, one might use polar coordinates and compute 
+        some double integral, but we argue that since exactly half of the unit circle lies above this diagonal,
+        we must be left with exactly half of our probability since it is distributed uniformly.
+    \subsection*{(2)}
+        The perimeter of the circle is described by $x^2 + y^2 = 1 \Longleftrightarrow y^2 = 1 - x^2 = (1 + x)(1 - x)$.
+        \begin{align*}
+            f_x(x) &= \int_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}} \frac{1}{\pi} dy\\
+            &= \frac{y}{\pi} \bigg|_{-\sqrt{1-x^2}}^{\sqrt{1-x^2}}\\
+            &= \frac{1}{\pi} \left( \sqrt{1-x^2} - (-\sqrt{1-x^2})\right)\\
+            &= \frac{2 \sqrt{1-x^2}}{\pi}
+        \end{align*}
+        Similarly, we have the bounds defined by $x = \pm \sqrt{1 - y^2}$ on the same function with respect to $x$, 
+        giving us
+        \begin{align*}
+            f_y(y) &= \int_{-\sqrt{1-y^2}}^{\sqrt{1-y^2}} \frac{1}{\pi} dx\\
+            &= \frac{x}{\pi} \bigg|_{-\sqrt{1-y^2}}^{\sqrt{1-y^2}}\\
+            &= \frac{1}{\pi} \left( \sqrt{1-y^2} - (-\sqrt{1-y^2})\right)\\
+            &= \frac{2 \sqrt{1-y^2}}{\pi}
+        \end{align*}
+    \subsection*{(3)}
+        We say that $X$ and $Y$ are independent if and only if $f(x,y) = f_x(x)f_y(y)$. Let us  verify.
+        \begin{align*}
+            f_x(x)f_y(y) & = \frac{2 \sqrt{1-y^2}}{\pi} \frac{2 \sqrt{1-x^2}}{\pi}\\
+            &= \frac{4 \sqrt{(1 - y^2)(1 - x^2)}}{\pi^2} \\
+            &= \frac{4 \sqrt{1 - y^2 - x^2 + x^2 y^2}}{\pi^2} \\
+            &= \frac{4 \sqrt{1 - 1 + x^2 y^2}}{\pi^2} \\
+            &= \frac{4 \sqrt{x^2 y^2}}{\pi^2} \\
+            &= \frac{4xy}{\pi^2} \neq \frac{1}{\pi}
+        \end{align*}
+        Thus they are not independent.
+    \subsection*{(4)}
+        \[
+            E[XY] = \int \int_{B_1(0)} \frac{xy}{\pi} dx dy = \int_0^1 \int_0^{2\pi} r^2 \sin \theta \cos \theta dr d\theta = 0
+        \]
+        \[
+            Cov(X,Y) = E[XY] - E[X]E[Y] = -E[X]E[Y] = - \int_{-1}^1 2x \sqrt{1 - x^2}{\pi} dx \int_{-1}^1 2y \sqrt{1 - y^2}{\pi} dx
+        \]
+    \subsection*{(5)}
+        
+\section*{Problem 3}
+    \subsection*{(1)}
+        To find a constant such that $f(y)$ is a density function, we integrate 
+        \begin{align*}
+            \int_0^\infty c ye^{-2y} dy &= c \int_0^\infty ye^{-2y} dy\\
+            &= c\left(\left[ (y) \frac{-e^{-2y}}{2} \right]_0^\infty - \int_0^\infty -\frac{e^{-2y}}{2} (1) dy \right)& \text{(integration by parts)}\\
+            &= c\left(\left[ (y) \frac{-e^{-2y}}{2} \right]_0^\infty + \frac{1}{2} \int_0^\infty e^{-2y} dy \right)\\
+            & = c\left(\left[ (y) \frac{-e^{-2y}}{2} \right]_0^\infty + \frac{1}{2} \left[ -\frac{e^{-2y}}{2}\right]_0^\infty \right)\\
+            &= c\left( 0 + \frac{1}{2} \left[- \frac{e^{-2y}}{2}\right]_0^\infty \right)\\
+            &= c\left(\frac{1}{2} \left[ 0 + \frac{e^{0}}{2}\right]\right) = c\frac{1}{2} \cdot \frac{1}{2} = c\frac{1}{4}
+        \end{align*}
+        We say that $c = 4$.
+    \subsection*{(2)}
+        Compute $P(Y > t)$ and $P(Y > t + s | Y > t)$.
+        \begin{align*}
+            P(Y > t) &= \int_t^\infty f(y) dy \\
+            &= 4\left(\left[y \frac{e^{-2y}}{-2} \right]_t^\infty + \frac{1}{2} \int_t^\infty -\frac{e^{-2y}}{2} dy\right) & \text{(from part (1))}\\
+            &= 4\left( \left[0 - t \frac{e^{-2t}}{-2} + \frac{1}{2} \left[-\frac{e^{-2y}}{2}\right]_t^\infty \right]\right)\\
+            &= 4\left(-t \frac{e^{-2t}}{-2} + \frac{1}{2}\left[\frac{e^{-2t}}{-2}\right]\right)\\
+            &= -2te^{-2t} -e^{-2t}\\
+            &= (-2t - 1)e^{-2t}
+        \end{align*}
+        Now for the conditional probability we can compute $\frac{P(Y > t+s)}{P(Y > t)}$. Since $P(A \cap B)$ or the probability that $Y > t+s$ and $Y > t$ is
+        just equal to the probability that $Y > t + s$. Then we get 
+        \[
+            P(Y > t + s | Y > t) = \frac{P(Y > t+s)}{P(Y > t)} = \frac{(-2(t+s) + 1)e^{-2(t+s)}}{(-2t + 1)e^{-2t}}
+        \]
+        This function does not have the memorylessness property.
+    \subsection*{(3)}
+    \[
+        E[e^{tY}] = \int_0^\infty e^{ty} 4ye^{-2y} dy = \int_0^\infty e^{(t - 2)y} 4y dy = \cdots
+    \]
+    \subsection*{(4)}
+    \[
+        E[e^{t(X+Y)}] = \int_0^\infty e^{tx + ty} 4ye^{-2y} dy = \int_0^\infty e^{tx + ty - 2y} 4y dy = \cdots
+    \]
+\end{document}

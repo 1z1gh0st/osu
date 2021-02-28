@@ -1,0 +1,109 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Systems of ODE's - Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 2.7}
+\begin{mdframed}
+    Consider the $2 \times 2$ matrix 
+    \[
+        A = \begin{bmatrix}
+            a&1\\0&1
+        \end{bmatrix}
+    \]
+    Find the value $a_0$ of the parameter $a$ for which $A$
+    has repeated real eigenvalues. What happens to the eigenvectors of
+    the matrix $a$ approaches $a_0$?
+\end{mdframed}
+Generally, we are looking for solutions to the equation $\det(A - \lambda I) = 0$.
+So we write the following
+\[
+    \det(A - \lambda I) = \det\begin{bmatrix}
+        a - \lambda & 1 \\ 0 & 1 - \lambda
+    \end{bmatrix}
+    = (a - \lambda)(1 - \lambda)
+\]
+This clearly has solutions at $a$ and $1$, which means that it will have repeated eigenvalues
+exactly when $a = a_0 = 1$. As the variable $a$ approaches $1$ the second eigenvector rotates
+towards the $\langle 1, 0 \rangle$ direction, so that both are parallel.
+\section*{Problem 3.4a}
+\begin{mdframed}
+Consider the harmonic oscillator system 
+\[
+    X' = \begin{bmatrix}
+        0&1\\-b&-k
+    \end{bmatrix} X
+\]
+where $b \geqslant 0, k \geqslant 0$, and the mass $m = 1$. For which values of $k,b$ does this system 
+have complex eigenvalues? Repeated eigenvalues? Real and distinct eigenvalues?
+\end{mdframed}
+The eigenvalues are determined by the solutions to the following equation.
+\[
+    \det \begin{bmatrix} 0-\lambda&1\\-b&-k-\lambda \end{bmatrix} = (-\lambda \cdot -k-\lambda) - (1 \cdot -b) = \lambda^2 +k\lambda + b = 0
+\]
+By the quadratic formula, this has solutions at,
+\[
+    \lambda = \frac{-k \pm \sqrt{k^2 - 4(b)}}{2}
+\]
+There will be complex eigenvalues whenever $k^2 - 4b < 0$. There will be repeated eigenvalues whenever $k^2 - b = 0$, and
+finally there will be real and distinct eigenvalues when $k^2 - 4b > 0 \Longleftrightarrow k > 2 \sqrt{b}$.
+\section*{Problem 3.12}
+\begin{mdframed}
+    Prove that $\alpha e^{\lambda t}\begin{bmatrix}
+        1\\0
+    \end{bmatrix} + \beta e^{\lambda t} \begin{bmatrix}
+        t\\1
+    \end{bmatrix}$ is the general solution of 
+    $
+        X' = \begin{bmatrix}
+            \lambda & 1\\ 0 & \lambda
+        \end{bmatrix}X
+    $.
+\end{mdframed}
+\begin{proof}
+    Write $X' = \begin{bmatrix}
+        x'(t)\\y'(t)
+    \end{bmatrix}, X = \begin{bmatrix}
+        x(t)\\y(t)
+    \end{bmatrix}$
+    . Then we say that $y'(t) = \lambda y(t) \Longrightarrow y(t) = \beta e^{\lambda t}$ for some $\beta \in \mathbb{R}$.
+    Now if $\beta = 0$, we say that $y(t) = 0$, and from there we have $x(t) = \alpha e^{\lambda t}$ for some $\alpha \in \mathbb{R}$
+    However if we have $\beta \neq 0$, then we must solve the system $x'(t) = \lambda x(t) + \beta e^{\lambda t}$.
+    \begin{align*}
+        x'(t) - \lambda x(t) & = \beta e^{\lambda t}\\
+        C\lambda e^{\lambda t} - C\lambda e^{\lambda t} &= \beta e^{\lambda t}
+    \end{align*}
+    Using the undetermined coefficients method we get the result $x'(t) = \alpha e^{\lambda t} + C t e^{\lambda t}$.
+    From there we have the final result $X = \alpha e^{\lambda t}\begin{bmatrix}
+        1\\0
+    \end{bmatrix} + \beta e^{\lambda t} \begin{bmatrix}
+        t\\1
+    \end{bmatrix}$ 
+\end{proof}
+
+\end{document}

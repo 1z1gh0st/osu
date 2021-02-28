@@ -1,0 +1,182 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and Fundamental Groups - Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{(a)}
+\begin{mdframed}
+    Let $\tau = \{ A \subset \mathbb{R} | \mathbb{R} \setminus A$ is countable or $A = \O \}$. Show that $\tau$
+    forms a topology on $\mathbb{R}$.
+\end{mdframed}
+\begin{proof}
+    Clearly we have $\O \in tau$, and since $\mathbb{R} \setminus \mathbb{R} = \O$ is countable, we also
+    have $\mathbb{R} \in \tau$.
+    Then let $\bigcup_{\alpha \in A} U_\alpha$ be an arbitrary union of sets in $\tau$.
+    The complement of the union will be the intersection of the complements, so we say
+    \[
+        \mathbb{R} \setminus\left( \bigcup_{\alpha \in A}U_\alpha \right)= \bigcap_{\alpha \in A}\left(\mathbb{R} \setminus U_\alpha \right)
+    \]
+    Of course, an intersection of countable sets is countable, so it follows that $\bigcup_{\alpha \in A} U_\alpha \in \tau$. Finally let 
+    $\bigcap_{\beta \in B} U_\beta$ be a finite intersection of sets in $\tau$. Then the complement of the intersection
+    will be a union of the complements, so we can write 
+    \[
+        \mathbb{R} \setminus \left(\bigcap_{\beta \in B} U_\beta\right) = \bigcup_{\beta \in B} \left(\mathbb{R} \setminus U_\beta \right)
+    \]
+    Recall that $B$ is finite, then we have a finite union of countable sets, which therefore must be countable.
+    Since the complement of finite intersections is countable, we say $\bigcap_{\beta \in B} U_\beta \in \tau$.
+    Having satisfied each axiom, $\tau$ is a topology on $\mathbb{R}$.
+\end{proof}
+\subsection*{(b)}
+\begin{mdframed}
+    Let $A \subset \mathbb{R}$ be uncountable. Find $\overline{A}$ in this topology.
+\end{mdframed}
+We know that $\overline{A}$ is the smallest closed set containing $A$. By definition of our topology,
+a set $B$ is closed if either $B$ is countable or $B = \mathbb{R}$. Since it is impossible for any countable 
+set $B$ to contain an uncountable set $A$, $\mathbb{R} \supset A$ is the only closed set containing $A$.
+Therefore $\overline{A} = \mathbb{R}$. As an immediate corollary, in this topology, any uncountable set is dense in $(\mathbb{R}, 
+\tau)$.
+\subsection*{(c)}
+\begin{mdframed}
+    Show that no sequence of distinct real numbers $\{a_n\} \subset \mathbb{R}$ converges in the topology $\tau$.
+\end{mdframed}
+\begin{proof}
+    Let $\{a_n\}\subset\mathbb{R}$ be a sequence in this topological space. Denote some limit candidate by $a \in \mathbb{R}$.
+    Choose the set defined by $U = \mathbb{R} \setminus \left(\bigcup_{n \in \mathbb{N}}\{a_n\} \setminus \{a\}\right)$. Its complement,
+    $\bigcup_{n \in \mathbb{N}}\{a_n\} \setminus \{a\}$ is countable, so of course $U$ is an open neighborhood of $a$. 
+    However, notice that the every element of the sequence except for $a$ itself is excluded from $U$.
+    Since we assume that our sequence is not eventually constant, it follows that it cannot be eventually in $U$.
+    Therefore $\exists U(x)$ such that $\forall N \in \mathbb{N}, \exists n \geqslant N : a_n \notin U$, and 
+    we say that this open neighborhood $U$ exists for any sequence, so no sequence of distinct numbers converges.
+\end{proof}
+\subsection*{(d)}
+\begin{mdframed}
+    Let $\iota : \mathbb{R} \rightarrow \mathbb{R}$ be the indentity map. Is $\iota$ continuous when mapping from the standard topology 
+    to $\tau$, or vice versa?
+\end{mdframed}
+In the case where we are mapping from $(\mathbb{R}, \tau) \rightarrow (\mathbb{R}, d)$ where $d$ is the standard metric topology on $\mathbb{R}$,
+$\iota$ is not continuous. Choose $(0,1) \subset \mathbb{R}$. It is open in the standard topology but since its complement is not countable,
+it is not open in $\tau$. For the other direction, take the set of all irrational numbers. This set is open in $\tau$, but is not open in 
+the standard topology. So for neither direction is $\iota$ continuous.
+\section*{Problem 2}
+\subsection*{(a)}
+\begin{mdframed}
+    Suppose that $G \subset X$ is a $G_\delta$ set. Show that there is a sequence of sets $G_1 \supset G_2 \supset \cdots$
+of open sets such that $G = \bigcap_{k \in \mathbb{N}}G_k$.
+\end{mdframed}
+\begin{proof}
+    Suppose $G$ is $G_\delta$ set. Then $G$ is a countable intersection of open sets.
+    Then we say $G = \bigcap_{n \in \mathbb{N}}G_n$. Define $G_k = \bigcup_{n=1}^k G_n$, then 
+    for all $k \in \mathbb{N}, G_k \supset G_{k+1}$. The limit as $k \rightarrow \infty$ of $G_k$ will
+    clearly be $\bigcap_{n \in \mathbb{N}} G_n$. Since finite intersections of open sets are open,
+    $G_k$ is open for every $k \in \mathbb{N}$.
+\end{proof}
+\begin{mdframed}
+    Suppose that $F \subset X$ is a $F_\sigma$ set. Show that there is a sequence of sets $F_1 \subset F_2 \subset \cdots$ 
+    such that $F = \bigcup_{k \in \mathbb{N}} F_k$.
+\end{mdframed}
+\begin{proof}
+    $F$ is an $F_\sigma$ set. Then we say $F = \bigcup_{n \in \mathbb{N}} F_n$ where $F_n$ is closed for every $n \in \mathbb{N}$.
+    Define $F_k = \bigcup_{n = 1}^k F_n$, then $F_k \subset F_{k+1} \forall k$.
+\end{proof}
+\section*{(b)}
+\begin{mdframed}
+    Let $Z \subset Y \subset X$ with their subspace topologies. Suppose that $Z$ is $G_\delta$ in $Y$, and $Y$ is $G_\delta$ in $X$.
+    Show $Z$ is $G_\delta$ in $X$.
+\end{mdframed}
+\begin{proof}
+    $Z = \bigcap_{n \in \mathbb{N}}V_n$ where $V_n$ is open in $Y$, and $Y = \bigcap_{m \in \mathbb{N}}O_n$ where $O_n$ is open in $X$.
+    Since $V_n$ is open in $Y$ with the subspace topology, we say $V_n = U_n \cap Y$ where $U_n$ is open in $X$. Finally,
+    \begin{align*}
+        Z &= \bigcap_{n \in \mathbb{N}}V_n \\
+        &= \bigcap_{n \in \mathbb{N}}\left(U_n \cap Y\right) \\
+        &= \left(\bigcap_{n \in \mathbb{N}}U_n\right) \cap Y \\
+        &= \left(\bigcap_{n \in \mathbb{N}}U_n\right) \cap \left(\bigcap_{m \in \mathbb{N}}O_m\right)
+    \end{align*}
+    Thus $Z$ is a countable intersection of open sets in $X$.
+\end{proof}
+\subsection*{(c)}
+\begin{mdframed}
+    Suppose that $Z \subset Y$ is $G_\delta$ in $Y$. Show that there is a $G_\delta$ set $W \subset X$ such that $Z = W \cap Y$.
+\end{mdframed}
+\begin{proof}
+    We say that $V_n$ are open in $Y$, and $V_n = Y \cap U_n$ where $U_n$ is open in $X$. Then $Z = \bigcap_{n \in \mathbb{N}} V_n = \bigcap_{n \in \mathbb{N}}(U_n \cap Y) = (\bigcap_{n \in \mathbb{N}}U_n) \cap Y$.
+    Let $W = \bigcap_{n \in \mathbb{N}}U_n$ and clearly $W$ is a $G_\delta$ in $X$
+\end{proof}
+\section*{Problem 3}
+\subsection*{(a)}
+\begin{mdframed}
+    Show that any closed set in a metric space is $G_\delta$.
+\end{mdframed}
+\begin{proof}
+    Let $(X,d)$ be a metric space and let $A \subset X$ be a closed set.
+    Define the open set $A_n = \bigcup_{a \in A} B_{1 / n}(a)$.
+    Then we say that $\bigcap_{n \in \mathbb{N}}A_n = A$. Since every point in $A$ is a limit point ($A$ being closed),
+    it follows that $a \in \bigcap_{n \in \mathbb{N}}A_n$. Then for every $x \notin A$, there is some neighborhood of $x$ 
+    not intersecting $A$ (since the complement of $A$ is open). Thus it follows that $x \notin \bigcap_{n \in \mathbb{N}}A_n$, and $A = \bigcap_{n \in \mathbb{N}}A_n$.
+\end{proof}
+\subsection*{(b)}
+\begin{mdframed}[]
+    Show that $\mathbb{Q}$ is not $G_\delta$ in $\mathbb{R}$.
+\end{mdframed}
+\begin{proof}
+    Suppose by contradiction that $\mathbb{Q}$ is $G_\delta$.
+    Then we must have $\mathbb{Q} = \bigcap_{n \in \mathbb{N}}U_n$. It must be
+    the case that for every $n$, $U_n \supset \mathbb{Q}$.
+    Then for each $n$, there exists $\epsilon > 0$ such that $B_\epsilon(\mathbb{Q}) \subset U_n$.
+    Let $\epsilon > 0$ be arbitrary, then $\mathbb{Q} \cap B_\epsilon(\sqrt{2}) \neq \O$.
+    This means that $\sqrt{2} \in B_\epsilon(\mathbb{Q})$, and therefore we have $\sqrt{2} \in \bigcap_{n \in \mathbb{N}}U_n = \mathbb{Q}$ (contradiction).
+\end{proof}
+\section*{Problem 4}
+\subsection*{(a)}
+\begin{mdframed}
+    Show that a smallest $\sigma$-algebra exists, $\mathcal{B}$.
+\end{mdframed}
+\begin{proof}
+    Let $\{\mathcal{M_i}_{i \in I}$ be the collection of all $\sigma$-algebras on $X$. We claim
+    that the smallest $\sigma$-algebra can be constructed by taking the intersection of this collection.
+    Clearly this will be smaller than any $\sigma$-algebra, but we must demonstrate that this intersection
+    is itself a $\sigma$-algebra.\\\\
+    \fbox{(i)} For every $i \in I$, $X \in \mathcal{M}_i$ therefore $X \in \bigcap_{i \in I}\mathcal{M}_i$.\\\\
+    \fbox{(ii)} Suppose $A \in \bigcap_{i \in I}\mathcal{M}_i$, then for all $i$, $A \in \mathcal{M}_i$, then of course $A^c \in \mathcal{M}_i$, 
+    so it follows that $A^c \in \bigcap_{i \in I}\mathcal{M}_i$.\\\\
+    \fbox{(iii)} Suppose for some indexed collection of subsets $A_k \in \bigcap_{i \in I} \mathcal{M}_i$ for every $k \in \mathbb{N}$.
+    Then for every $i \in I$, we have $A_k \in \mathcal{M}_i \Longrightarrow \bigcap_{k \in \mathbb{N}}A_k \in \mathcal{M}_i$.
+    Therefore $\bigcap_{k \in \mathbb{N}}A_k \in \bigcap_{i \in I}\mathcal{M}_i$.\\\\
+    Since each property of the $\sigma$-algebra is satisfied, we say that $\bigcap_{i \in I}\mathcal{M}_i$ is a $\sigma$-algebra.
+\end{proof}
+\subsection*{(b)}
+\begin{mdframed}
+Find a borel set in $\mathbb{R}$ that is neither $F_\sigma$ or $G_\delta$.
+\end{mdframed}
+\begin{proof}
+    Let the set
+    \[ A = ((-\infty, 0] \cap \mathbb{Q}) \cup ((0,1) \cap \mathbb{I}) \cup ([1,\infty) \cap \mathbb{Q}) \]
+    Then we we say that
+\end{proof}
+\end{document}

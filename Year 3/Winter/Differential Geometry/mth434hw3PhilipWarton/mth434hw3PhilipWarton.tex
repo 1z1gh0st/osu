@@ -1,0 +1,129 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Differential Geometry - Homework 3a}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{(a)}
+\begin{mdframed}
+    Determine the Hodge dual operator $*$ on all forms (expressed in spherical coordinates)
+    by computing its action on basis forms at each rank. 
+\end{mdframed}
+We think of the Hodge operator as a sort of ``completion'' upon a differential form. This is 
+described by the property that states
+\[
+    \alpha \wedge * \alpha = g(\alpha, \alpha) \omega
+\]
+In order to compute this on our basis forms, we must know both how the metric tensor will operate on
+our spherical bases, and some reasonable orientation $\omega$ for us to work in. We take the orientation
+$\omega = r^2 \sin \theta dr \wedge d \theta \wedge d \phi$ as described in the problem statement.
+Observing the basis elements $\{dr, r \sin \theta d\theta, r d\phi\}$, can we check that they are orthonormal?
+\\\\
+If we assume that they are, then we know that $g(\alpha, \alpha)$ should be equal to 1 in most cases.
+So, we can begin to compute the ``Hodge Complement'' of our basis elements. We begin with the 0-form:
+\[
+    *1 = \omega = r^2\sin \theta dr \wedge d \theta \wedge d \phi
+\]
+Then we move on to 1-forms,
+\begin{align*}
+    dr \wedge *dr &= g(dr, dr) r^2\sin\theta dr \wedge d \theta \wedge d\phi = dr \wedge (r^2\sin\theta d\theta \wedge d\phi) \\
+    \Longrightarrow *dr & = r^2\sin\theta d\theta \wedge d\phi \\\\
+    r\sin \theta d\theta \wedge * r\sin\theta d\theta &= g(r\sin\theta d\theta,r\sin\theta d\theta) r^2 \sin\theta dr\wedge d\theta\wedge d\phi\\
+    \Longrightarrow *r\sin\theta d\theta &= -r^2\sin\theta dr \wedge d\phi \\
+    \Longrightarrow *d\theta &= -r dr \wedge d\phi \\\\
+    rd\phi \wedge * rd\phi &= g(rd\phi, rd\phi)r^2\sin\theta dr\wedge d\theta\wedge d\phi \\
+    \Longrightarrow *rd\phi &= r^2 \sin \theta dr \wedge d\theta \\
+    \Longrightarrow *d\phi &= r \sin\theta dr \wedge d\theta \\\\
+\end{align*}
+Next, we must compute the dual for each 2-form,
+\begin{align*}
+    (dr \wedge r\sin\theta d\theta) \wedge * (dr \wedge r \sin\theta d\theta) &= g((dr \wedge r \sin\theta d\theta),(dr \wedge r \sin\theta d\theta))r^2 \sin\theta dr \wedge d\theta \wedge d\phi\\
+    \Longrightarrow *(dr \wedge r\sin\theta d\theta) & = rd\phi \\
+    \Longrightarrow *(dr \wedge d\theta) & = \frac{1}{\sin\theta}d\phi\\\\
+    (dr \wedge r d\phi) \wedge * (dr \wedge rd\phi) & = g((dr \wedge rd\phi),(dr \wedge rd\phi))r^2 \sin\theta dr\wedge d\theta \wedge d\phi\\
+    \Longrightarrow  * (dr \wedge rd\phi) &= -r \sin \theta d\theta \\
+    \Longrightarrow *(dr \wedge d\phi) & = -\sin\theta d\theta \\\\
+    (r\sin\theta d\theta \wedge rd\phi) \wedge * (r\sin\theta d\theta \wedge rd\phi) & = g((r\sin\theta d\theta \wedge rd\phi), (r\sin\theta d\theta \wedge rd\phi))r^2 \sin\theta dr \wedge d\theta \wedge d\phi \\
+    \Longrightarrow *(r\sin\theta d\theta \wedge rd\phi) & = dr \\
+    \Longrightarrow *(d\theta \wedge d\phi) & = \frac{1}{r^2 \sin\theta} dr
+\end{align*}
+Finally, for the 3-form, the task should be somewhat trivial.
+\begin{align*}
+    (dr \wedge r\sin\theta d\theta \wedge rd\phi) \wedge * (dr \wedge r\sin\theta d\theta \wedge rd\phi) &= g((dr \wedge r\sin\theta d\theta \wedge rd\phi),(dr \wedge r\sin\theta d\theta \wedge rd\phi))r^2 \sin\theta dr\wedge d\theta \wedge d\phi\\
+    \Longrightarrow *(dr \wedge r\sin\theta d\theta \wedge rd\phi) & = 1\\
+    \Longrightarrow *(dr \wedge d\theta \wedge d\phi) &= \frac{1}{r^2 \sin\theta}
+\end{align*}
+What is lacking here is the justification for the metric tensor on our bases with themselves being positive normal.
+\subsection*{(b)}
+\begin{mdframed}
+Compute the dot and cross products of 2 generic “vector fields” (really 1-forms) in sphericalcoordinates using the expressions:
+\[
+    \alpha \cdot \beta = *(\alpha \wedge *\beta)
+\]
+\[
+    \alpha \times \beta = *(\alpha \wedge \beta)
+\]
+\end{mdframed}
+Let us begin with the dot product. First, note that $\alpha,\beta$ are both 1-forms.
+This means that their ``Hodge Complements'' will be 2-forms, since we are in a 3-dimensional space.
+So then we can compute the rank of our dot product using only these facts. The term $\alpha \wedge *\beta$
+is the wedge product of a 2-form and a 1-form, which will of course result in some 3-form.
+Then the ``Hodge Complement'' of a 3-form in a 3-dimensional space is some constant $x \in \mathbb{R}$. 
+We can write $\alpha = a_1 dr + a_2  d\theta + a_3 d\phi$, and similarly $\beta = b_1 dr + b_2 d\theta + b_3 d\phi$
+(this is with respect to a coordinate basis rather than an orthonormal one).
+Then we say
+\[
+    *\beta = b_1(*dr) + b_2(*d\theta) + b_3(*d\phi)
+\]
+So then 
+\begin{align*}
+    \alpha \wedge *\beta &= [a_1 dr \wedge b_1(*dr)] + [a_1 dr \wedge b_2(*d\theta)] + [a_1 dr \wedge b_3(*d\phi)] \\
+    & + [a_2 d\theta \wedge b_1(*dr)] + [a_2 d\theta \wedge b_2(*d\theta)] + [a_2 d\theta \wedge b_3(*d\phi)]\\
+    & + [a_3 d\phi \wedge b_1(*dr)] + [a_3 d\phi \wedge b_2(*d\theta)] + [a_3 d\phi \wedge b_3(*d\phi)]\\\\
+    &= (a_1b_1) dr \wedge d\phi \wedge d\theta + 0 + 0\\
+    &+ 0 + (a_2b_2) dr \wedge d\phi \wedge d\theta + 0 \\
+    &+ 0 + 0 + (a_3b_3) dr \wedge d\phi \wedge d\theta\\\\
+    &=(a_1b_1 + a_2b_2 + a_3b_3)dr \wedge d\phi \wedge d\theta
+\end{align*}
+And from there it follows quite easily that
+\[
+    *(\alpha \wedge *\beta) = \frac{a_1b_1 + a_2b_2 + a_3b_3}{r^2\sin\theta}
+\]
+Now, we compute the cross product. The wedge product of two 1-forms $\alpha, \beta$ provides a 2-form.
+Then its dual should be a 1-form in a 3-dimensional space.
+We write
+\begin{align*}
+    \alpha \wedge \beta &= (a_1b_2 - a_2b_1) dr \wedge d\theta - (a_1b_3 - a_3b_1) dr \wedge d\phi + (a_2b_3 - a_3b_2)d\theta \wedge d\phi\\\\
+    \Longrightarrow *(\alpha \wedge \beta) & = (a_1b_2 - a_2b_1)(*(dr \wedge d\theta)) + (a_1b_3 - a_3b_1)(*(dr \wedge d\phi)) + (a_2b_3 - a_3b_2)(*(d\theta \wedge d\phi))\\
+    &=\frac{a_1b_2-a_2b_1}{\sin\theta}d\phi -\sin\theta(a_1b_3 - a_3b_1)d\theta + \frac{a_2b_3 - a_3b_2}{r^2\sin\theta}dr \\
+    &= \left(\frac{1}{r^2\sin\theta}\right)\left[
+        (a_2b_3 - a_3b_2) dr - r^2\sin^2\theta(a_1b_3 - a_3b_1)d\theta + r^2(a_1b_2 - a_2b_1)d\phi
+        \right]
+\end{align*}
+Thus we have the cross product.
+\end{document}

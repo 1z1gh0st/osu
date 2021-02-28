@@ -1,0 +1,55 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Practice Problems}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{3.145}
+    If $Y$ has a binomial distribution with $n$ trials and probability of success $p$, show that teh moment-generating function for $Y$ is
+    \[
+        m(t) = (pe^t + q)^n, \ \ \ \ \ \text{where $q = 1 - p$}
+    \]
+    \begin{proof}
+        Let $Y$ be a discrete random variable that is a binomial distribution with $n$ trials and success probability $p$. Then its moment
+        generating function is described by $m(t) = E[e^{tY}]$. This can be rewritten as $\sum_{k = 0}^n e^{tk} {n \choose k} p^k q^{n-k}$.
+        Then we wish to show that this some ends up being equal to $(pe^t + q)^n$. To show this we compute the sum as
+        \[
+            m(t) = \sum_{x = 0}^n e^{tx} {n \choose x} p^x q^{n - x} = \sum_{x = 0}^n {n \choose x} (pe^t)^x q^{n-x} = (pe^t + q)^n
+        \]
+        This last equality comes from the binomial theorem.
+    \end{proof}
+\section*{3.146}
+    Differentiate the moment-generating function in \fbox{3.145} to find $E(Y)$ and $E(Y^2)$. Then find $V(Y)$.\\\\
+    We take the derivative of $m(t)$, and say that 
+    \[
+        m'(t) = \frac{d}{dt} (pe^t + q)^n = (pe^t + q)^{n-1}(pe^t)
+    \]
+    So then our mean is equal to $m^{(1)}(0) = Then we wish to take the second derivative of this which gives us 
+    \[
+        m''(t) = \frac{d}{dt} (pe^t + q)^{n-1}(pe^t) = (pe^y + q)^{n - 2}(pe^t)^2 + (pe^t + q)^{n-1}(pe^t)
+    \]
+\end{document}

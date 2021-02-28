@@ -1,0 +1,77 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Real Analysis - Assignment 8}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+    \begin{mdframed}
+        A sequence of real valued functions $f_n : X \rightarrow \mathbb{R}$ is uniformly continuous if and
+        only if it is uniformly Cauchy.
+    \end{mdframed}
+    \begin{proof}
+        We must show the bi-conditional by showing that the implication holds in both directions. \\\\
+        \fbox{$\Rightarrow$} Assume that $f_n$ is uniformly convergent. Then $||f_n - f||_\infty \rightarrow 0$.
+        Equivalently, we say that $\sup_{x \in X} | f_n(x) - f(x) | \rightarrow 0$. Thus we say that for every $\epsilon > 0,
+        \exists N \in \mathbb{N}$ such that $\forall n \geqslant N$ $\sup_{x \in X} |f_n(x) - f(x)| < \epsilon$.\\\\
+        Choose some $\epsilon' > 0$ arbitrarily. Then $\exists N_{\epsilon' / 2} \in \mathbb{N}$ such that $\forall n 
+        \geqslant N_{\epsilon' / 2}, \ \||f_n - f||_\infty < \epsilon' / 2$. Then choose $m,n \geqslant N_{\epsilon' / 2}$
+        and it follows that
+        \[
+            \sup_{x \in X} |f_n(x) - f_m(x)| = \sup_{x \in X} |f_n(x) - f(x) + f(x) - f_m(x)| \leqslant \sup_{x \in X} |f_n(x) - f(x)| + \sup_{x \in X} |f_m(x) - f(x)| \leqslant 2 \epsilon ' / 2 = \epsilon'
+        \]
+        \fbox{$\Leftarrow$} Assume that $f_n$ is uniformly Cauchy. Then it must be the case that $f_n$ is pointwise Cauchy, and therefore pointwise convergent.
+        Thus $f_n \rightarrow f$ pointwise. Suppose that this convergence is not uniform. Then $\exists \epsilon > 0$ such that $||f_n - f||_\infty \geqslant \epsilon \ \ \forall n$.
+        Choose some $\epsilon > \delta > 0$ arbitrarily. Then $\exists x \in X$ such that $|f_n(x) - f(x) | > \epsilon - \delta > 0 \forall n$.
+        Therefore $f_n$ is not pointwise convergent at some $x$ (contradiction). Finally $f_n$ must be uniformly convergent.
+    \end{proof}
+\begin{mdframed}
+    Let $(X,d), (Y, \rho)$ be metric spaces. Let $f, f_n: X \rightarrow Y$ and let $f_n$ converge uniformly to $f$ on $X$.
+    Show that $D(f) \subset \bigcup_{n=1}^\infty D(f_n)$.
+
+\end{mdframed}
+\begin{proof}
+    Let $x \in X$ such that $x \notin D(f_n)$ for every natural number $n$. If $x$ is some isolated point, then $f(x)$  must be continuous trivially.
+    Otherwise, we say that $x_n \rightarrow x \Longrightarrow f_k(x_n) \rightarrow f_k(x)$ for every natural number $k$. Choose $\frac{\epsilon}{3} > 0$ to be arbitrary.
+    Then $\exists N_1$ such that $\forall n \geqslant N_1$, $\rho(f_k(x_n),f_k(x)) < \frac{\epsilon}{3}$ since $f_k$ is continuous at $x$. Since $f_k \rightarrow f$
+    uniformly, $\exists N_2$ such that $\forall k \geqslant N_2$, $\rho(f_k(x), f(x)) < \frac{\epsilon}{3}$ for every point $x \in X$. Choose $N = \max\{N_1,N_2\}$. Then 
+    it follows that for $k,n \geqslant N$
+    \[
+        \rho(f(x_n),f(x)) \leqslant \rho(f(x_n),f_k(x_n)) + \rho(f_k(x_n), f(x)) \leqslant \rho(f(x_n),f_k(x_n)) + \rho(f_k(x_n),f_k(x)) + \rho(f_k(x), f(x)) < \frac{\epsilon}{3} + \frac{\epsilon}{3} + \frac{\epsilon}{3} = \epsilon
+    \] 
+    Therefore $x_n \rightarrow x \Longrightarrow f(x_n) \rightarrow f(x)$ so $f$ is continuous at $x$. Thus $x \notin \bigcup_{\mathbb{N}} D(f_n)$ implies $x \notin D(f)$.
+\end{proof}
+\begin{mdframed}
+    Let $f,f_n \in C[0,1]$ where $f_n$ converges uniformly to $f$. Then $\int_0^{1 - 1 / n} f_n \rightarrow \int_0^1 f$.
+\end{mdframed}
+\begin{proof}
+    \[
+        \left|\int_0^{1-1/n}f_n - \int_0^1 f\right| = \left|\int_0^1 f_n -f - \int_{1-1/n}^1f_n\right| \leqslant
+    \]
+    Yikes idk how to do this
+\end{proof}
+
+\end{document}

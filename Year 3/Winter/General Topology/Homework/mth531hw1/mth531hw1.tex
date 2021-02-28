@@ -1,0 +1,283 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and Fundamental Groups - Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+    Let $f: X \rightarrow Y$ be a function. Let $A \subset X$ and $B \subset Y$.
+    Let $U_\alpha \subset X, \alpha \in \mathcal{A}$ and $V_\beta \subset Y, \beta \in \mathcal{B}$.
+    \subsection*{(a)}
+        \fbox{$f(\bigcup_{\alpha \in \mathcal{A}}U_\alpha) = \bigcup_{\alpha \in \mathcal{A}} f(U_\alpha)$}
+        \begin{proof}
+            \fbox{$\subset$} Let $x \in f(\bigcup_{\alpha \in \mathcal{A}}U_\alpha)$.
+            By definition of the image of a set, there exists $x' \in \bigcup_{\alpha \in \mathcal{A}}U_\alpha$ such that $f(x') = x$.
+            Therefore $\exists \alpha_0 \in \mathcal{A}$ such that $x' \in U_{\alpha_0}$.
+            It follows that $x \in f(U_{\alpha_0})$ and therefore $x \in \bigcup_{\alpha \in \mathcal{A}} f(U_\alpha)$. \\\\
+            \fbox{$\supset$} Let $y \in \bigcup_{\alpha \in \mathcal{A}} f(U_\alpha)$.
+            Then there exists some $\alpha_1 \in \mathcal{A}$ such that $y \in f(U_{\alpha_1})$.
+            Thus $\exists y' \in U_{\alpha_1} : f(y') = y$.
+            This element $y'$ belongs to the union of all $U_\alpha$ such that $\alpha \in \mathcal{A}$ therefore
+            $y$ belongs to the image of this union.
+        \end{proof}
+    \subsection*{(b)}
+        \fbox{$f(\bigcap_{\alpha \in \mathcal{A}} U_\alpha) \subset \bigcap_{\alpha \in \mathcal{A}} f(U_\alpha)$}
+        \begin{proof}
+            Let $x \in f(\bigcap_{\alpha \in \mathcal{A}} U_\alpha) \Longrightarrow \exists x' \in \bigcap_{\alpha \in \mathcal{A}} U_\alpha :
+            f(x') = x \Longrightarrow \forall \alpha \in \mathcal{A}, x' \in U_\alpha \Longrightarrow \forall \alpha \in \mathcal{A}, x \in 
+            f(U_\alpha) \Longrightarrow x \in \bigcap_{\alpha \in \mathcal{A}} f(U_\alpha)$
+        \end{proof}
+    \subsection*{(c)}
+        \fbox{$f^{-1}(\bigcup_{\beta \in \mathcal{B}} V_\beta) = \bigcup_{\beta \in \mathcal{B}} f^{-1}(V_\beta)$}
+        \begin{proof}
+            \fbox{$\subset$}
+            Let $x \in f^{-1}(\bigcup_{\beta \in \mathcal{B}} V_\beta)$.
+            Then $f(x) \in \bigcup_{\beta \in \mathcal{B}} V_\beta$. Thus
+            $\exists \beta \in \mathcal{B} : f(x) \in V_\beta$. Therefore $x \in f^{-1}(V_\beta) \subset \bigcup_{\beta \in \mathcal{B}}f^{-1}(V_\beta)$.
+            \\\\
+            \fbox{$\supset$}
+            Let $x \in \bigcup_{\beta \in \mathcal{B}} f^{-1}(V_\beta)$.
+            Then $\exists \beta \in \mathcal{B} : x \in f^{-1}(V_\beta)$.
+            So this means $f(x) \in V_\beta$ for some $\beta \in \mathcal{B}$.
+            Then $f(x) \in \bigcup_{\beta \in \mathcal{B}} V_\beta$ therefore $x \in f^{-1}(\bigcup_{\beta \in \mathcal{B}} V_\beta)$.
+        \end{proof}
+    \subsection*{(d)}
+        \fbox{$f^{-1}(\bigcap_{\beta \in \mathcal{B}} V_\beta) = \bigcap_{\beta \in \mathcal{B}} f^{-1}(V_\beta)$}
+        \begin{proof}
+            \fbox{$\subset$}
+            Let $x \in f^{-1}(\bigcap_{\beta \in \mathcal{B}} V_\beta)$. Then $f(x) \in \bigcap_{\beta \in \mathcal{B}} V_\beta$, which means 
+            $f(x) \in V_\beta$ for every $\beta \in \mathcal{B}$. Thus $x \in f^{-1}(V_\beta)$ for every $\beta \in \mathcal{B}$, and the desired inclusion follows.
+            \\\\
+            \fbox{$\supset$}
+            Let $x \in  \bigcap_{\beta \in \mathcal{B}} f^{-1}(V_\beta)$. Then for every $\beta \in \mathcal{B}, x \in f^{-1}(V_\beta)$.
+            So it must be the case that $f(x) \in V_\beta$ for every $\beta \in \mathcal{B}$. So it follows that $f(x) \in \bigcap_{\beta \in \mathcal{B}} V_\beta$ and
+            thus we have $f^{-1}(\bigcap_{\beta \in \mathcal{B}} V_\beta) \supset \bigcap_{\beta \in \mathcal{B}} f^{-1}(V_\beta)$.
+        \end{proof}
+\section*{Problem 2}
+    Let $f: X \rightarrow Y$ be a funciton. Prove that the following are equivalent.
+    \begin{align*}
+        (i) \ & f \text{ is injective } \\
+        (ii) \ & \forall A \subset X, f^{-1}(f(A)) = A \\
+        (iii) \ & \forall A,B \subset X, f(A \cap B) = f(A) \cap f(B) \\
+        (iv) \ & \forall A,B \subset X, A \cap B = \O \Rightarrow f(A) \cap f(B) = \O \\
+        (v) \ & \forall A,B \subset X | B \subset A, \ \ \ f(A \setminus B) = f(A) \setminus f(B)
+    \end{align*}
+    \begin{proof}
+        \fbox{(i) $\Rightarrow$ (ii)} Assume that $f$ is injective. Let $A \subset X$ be arbitrary.
+        We know that $f(x) = f(y) \Longrightarrow x = y$.
+        First let us show the claim that $x \in A \Leftrightarrow f(x) \in f(A)$. Clearly $x \in A$ implies $f(x) \in f(A)$.
+        For the other direction, suppose that this was not the case. Then it could be the case that $f(x) \in f(A)$ but $x \notin A$.
+        This would mean $\exists x_0 \in A$ such that $f(x) = f(x_0)$. However since $f$ is injective $x = x_0$, so it is the case $x \in A$.
+        Given this, we have $f^{-1}(f(A)) = \{x \in X | f(x) \in f(A) \} = \{x \in X | x \in A\} = A$. \\\\
+        \fbox{(ii) $\Rightarrow$ (iii)} Assume that for every subset of $X$, the pre-image of the image is equal to the set.
+        Then let $A$ and $B$ be two subsets of $X$.
+        We want to show $f(A \cap B) = f(A) \cap f(B)$. 
+        Let $x \in f(A \cap B)$. Then $f^{-1}(x) \in A \cap B$.
+        Thus $f^{-1}(x) \in A$ and $f^{-1}(x) \in B$ therefore $x \in f(A)$ and $x \in f(B)$,
+        so $x \in f(A) \cap f(B)$.\\\\
+        \fbox{(iii) $\Rightarrow$ (iv)}
+        Assume (iii) to be true. Then let $A$ and $B$ be disjoint subsets of $X$. It follows that 
+        $f(A) \cap f(B) = f(A \cap B) = f(\O) = \O$.\\\\
+        \fbox{(iii) $\Rightarrow$ (v)} Assume (iii) to be true. Then Let $B \subset A \subset X$.
+        First note that $f(A) \subset f(X)$, clearly. Then we can write
+        \[
+            f(A \setminus B) = f(A \cap B^c) = f(A) \cap f(B^c) = f(A) \setminus f(B^c)^c = f(A) \setminus (f(B^c)^c \cap f(X)) = f(A) \setminus f(B)
+        \]
+        \fbox{(v) $\Rightarrow$ (i)} Assume that for any two subsets of $X$, the image of their difference is the difference of their images.
+        Then let $f(x) = f(y)$ for $x,y \in X$. Assuming that the function is well defined, we can say.
+        \begin{align}
+            f(\{x \}) = f(\{y \}) \\
+            \Rightarrow f(\{x\}) \setminus f(\{y\}) = \O \\
+            \Rightarrow f(\{x\} \setminus \{x \}) = \O \\
+            \Rightarrow \{x\} \setminus \{y\} = \O \\
+            \Rightarrow x = y
+        \end{align}
+    \end{proof}
+\section*{Problem 3}
+    \subsection*{(a)}
+        Let $\tau_\alpha : \alpha \in \mathcal{A}$ be a colleciton of topologies on $X$.
+        Show that $\bigcap_{\alpha \in \mathcal{A}}\tau_\alpha = \{\mathcal{O} \subset X | \mathcal O \in \tau_\alpha \ \ \forall \alpha \in \mathcal{A} \}$
+        is a topology on $X$.
+        \begin{proof}
+            Since $\O, X \in \tau_\alpha$ by the axioms of topological spaces for every $\alpha \in \mathcal{A}$ it follows that
+            both belong also to their intersection. Let $\bigcup_{i \in I} \mathcal{O}_i$ be an arbitrary union of sets belonging to our
+            intersect topology (which we will denote simply as $\tau$). Then for every $i \in I$ and for every $\alpha \in \mathcal{A}$,\
+            we have $\mathcal{O}_i \in \tau_\alpha$. Therefore we must have $\bigcup_{i \in I} \mathcal{O}_i \in \tau_\alpha$ for every $\alpha$, 
+            and finally it follows that this union must also belong to $\tau$. Now let $\bigcap_{f \in F}\mathcal{O}_f$ be a finite intersection of
+            open sets in $\tau$. By the same logic as our arbitrary union, each open set belongs to each $\tau_\alpha$ and it follows that since each $\tau_\alpha$ is a
+            proper topology, it will also contain $\bigcap_{f \in F} \mathcal{O}_f$. Since this is true for each $\alpha \in \mathcal{A}$, we have $\bigcap_{f \in F}\mathcal{O}_f \in \tau$.
+            Thus the axioms of a topology are satisfied by our intersection of topologies.
+        \end{proof}
+    \subsection*{(b)}
+        Let $\mathcal{F}$ be any family of subsets of a space $X$. Show that there is a smallest topology $\tau_\mathcal{F}$ on $X$ containing $\mathcal{F}$.
+        \begin{proof}
+            Firstly note that there must be at least one topology containing $\tau_\mathcal{F}$, namely the discrete topology is guaranteed for any space.
+            Thus it follows that the intersection of all topologies containing $\mathcal{F}$ will be non-empty.
+            Suppose that there is some topology that is smaller than this intersection, call it $\tau_0$.
+            Then $\tau_0$ should belong to the collection of all topologies containing $\mathcal{F}$ and it follows that
+            $\tau_0$ contains this intersection, and cannot be smaller than it. So a smallest topology $\tau_\mathcal{F}$ containing $\mathcal{F}$ exists
+            and can be constructed by taking this intersection of all containing topologies.
+        \end{proof}
+    \subsection*{(c)}
+        We can construct this topology by taking two collection
+        \[
+            A = \{\text{ collection of all arbitrary unions of sets in $\mathcal{F}$}\}, \ \ \ \ B = \{\text{ collection of
+        all finite intersections of sets in $\mathcal{F}$}\}
+        \]
+        Then simply take $\tau_\mathcal{F} = \mathcal{F} \cup A \cup B \cup X \cup \O$.
+\section*{Problem 4}
+    \subsection*{(a)}
+        Show by example that if $A$ is a dense subset of a space $X$ and $Y \subset X$
+        , then $Y \cap A$ need not be dense in $Y$ in the subspace topology.
+        \\\\
+        Choose $X = \mathbb{R}, \ \ Y = \mathbb{R} \setminus \mathbb{Q}, \ \ A = \mathbb{Q}$. Then we have $A \cap Y = \O$ which is not dense in $Y$.
+    \subsection*{(b)}
+        Let $A$ be dense in $X$ and let $\mathcal{O} \subset X$ be open. Show that $\overline{A \cap \mathcal{O}} = \overline{\mathcal{O}}$.
+        \\\\
+        \begin{proof}
+            \fbox{$\subset$} Let $x \in \overline{A \cap \mathcal{O}}$. Then every neighborhood $U(x)$ intersects 
+            $A \cap \mathcal{O}$. This means that each neighborhood must intersect both $A$ and $\mathcal{O}$.
+            Then it follows that each neighborhood of $x$ intersects $\mathcal{O}$. Thus $x \in \overline{O}$. \\\\
+            \fbox{$\supset$} Let $x \in \overline{\mathcal{O}}$. Then every neighborhood $U(x)$ intersects $\mathcal{O}$.
+            Let $U$ be an arbitrary neighborhood of $x$. We know that it has a non-empty intersection with $\mathcal{O}$ 
+            (since $x \in \overline{\mathcal{O}}$) and with $A$ (since $A$ is dense in $X$). Then we know that $A \cap \mathcal{O}$ is
+            non-empty since $A$ is dense. So it follows that $U \cap A \cap \mathcal{O}$ is non-empty. Since this is true for any arbitrary
+            neighborhood of $x$, we say that $x \in \overline{A \cap \mathcal{O}}$.
+        \end{proof}
+    \subsection*{(c)}
+        Show that Ext$(A \cup B) =$ Ext $(A) \cap $ Ext $(B)$
+        \begin{proof}
+            \begin{align*}
+                Ext(A \cup B) & = Int((A \cup B)^c) \\
+                &= Int(A^c \cap B^c) \\
+                &= Int(A^c) \cap Int(B^c) \\
+                &= Ext(A) \cap Ext(B)
+            \end{align*}
+        \end{proof}
+        Show that $X \setminus \overline{A} = $Ext$(A)$.
+        \begin{proof}
+            Let $x \in (\overline{A})^c$. Then $x \notin \overline{A}$.
+            This means that there exists some nieghborhood $U(x)$ such that $U$ and
+            $A$ are disjoint. This means there is a neighborhood of $x$ contained entirely in $A^c$,
+            so we say that $x \in Int(A^c)$. Let $x \notin (\overline{A})^c$. Then it is the case that
+            every neighborhood of $x$ intersects $A$, and therefore $x \notin Int(A^c)$. Finally we say
+            \[
+                (\overline{A})^c = Int(A^c) = Ext(A)
+            \]
+        \end{proof}
+\section*{Problem 5}
+    \subsection*{(a)}
+        Show that 
+        $x \in \overline{S} \subset \mathbb{R}_\ell \Longleftrightarrow \exists \{x_n\}_{n \in \mathbb{N}} \subset S : x_n \geqslant x$ and $\lim_{n \rightarrow \infty}x_n = x$ in $\mathbb{R}$.
+        \begin{proof}
+            \fbox{$\Rightarrow$} Let $x \in \overline{S} \subset \mathbb{R}_\ell$.
+            Then every neighborhood of $x$ intersects $S$.
+            By construction $[x,x + \frac{1}{n})$ is a neighborhood of $x$ in $\mathbb{R}_\ell$ for any 
+            natural number $n$. Since each of these neighborhoods intersects $S$ choose a sequence where $x_n$ is some element of $[x, x + \frac{1}{n}) \cap S$
+            for each $n$ (which we know such an element will always exist). Since $x$ is a lower bound $[x, x + \frac{1}{n}) \cap S$, it follows that $x_n \geqslant x$
+            for every $n$. To show that the limit of the sequence converges to $x$, choose $\epsilon > 0$ arbitrarily. Then
+            choose $N \in \mathbb{N}$ such that $\frac{1}{N} < \epsilon$. Then for every $n \geqslant N,$ clearly $x_n \in V_\epsilon(x)$ in $\mathbb{R}$.\\\\
+            \fbox{$\Leftarrow$}
+            Assume that there exists some sequence in $S$ that is bounded below by $x$ such that $(x_n) \rightarrow x$. Then for every $\epsilon > 0$ there exists a point in $[x,\epsilon) \cap S$.
+            Then for every neighborhood of $x$, there is some $\epsilon$ such that $[x, x + \epsilon)$ is a subset of that neighborhood.
+            Thus for every neighborhood of $x$, within it there lies some element of $S$, therefore $x \in \overline{A} \subset \mathbb{R}_\ell$.
+        \end{proof}
+    \subsection*{(b)}
+    Show that $f: \mathbb{R}_\ell \rightarrow \mathbb{R}$ is continuous if and only if $\lim_{x \rightarrow a^+}f(x)$ exists for all $a \in \mathbb{R}$.
+    \begin{proof}
+        \fbox{$\Rightarrow$} Let $x' \in \mathbb{R}$. Assume that $f$ is continuous. Then every open set in $\mathbb{R}$ has an open pre-image in $\mathbb{R}_\ell$.
+        Then there is some interval $[a, b) \subset f^{-1}(U)$. Then at least we know that there exists a sequence approaching $x'$ from above that lies in $f^{-1}(U)$.
+        If we take the positive limit of such a sequence, it follows that its image must approach $f(x')$. \\\\
+        \fbox{$\Leftarrow$} Assume that $\lim_{x \rightarrow x'}f(x)$ exists and approaches $f(x')$.
+        It follows that every neighborhood of $x'$ in $\mathbb{R}_\ell$ will contain some element of the sequence approaching $x'$ from above.
+        Thus it must be the case that $f^{-1}(U)$ is open in $\mathbb{R}_\ell$.
+    \end{proof}
+\section*{Problem 6}
+    \subsection*{(a)} Show that all intervals on $\mathbb{R}$ in combination with neighborhoods of $p$ form a basis for a topology on $X$.
+    \begin{proof}
+        If we take the intervals $(k, k+2)$ such that $k \in \mathbb{Z}$ and $(-1,0)\cup \{p\} \cup (0,1)$, together they form a cover on $X$.
+        Let $A,B$ be two sets from our collection. Let $x \in I = B_1 \cap B_2$. We 
+        want to show that $\exists C$ in our collection such that $x \in B_3 \subset I$.
+        Write the endpoints for $A$ and $B$ as $a_0, a_1, b_0, b_1$.
+        Choose some $x \in I$. If $x > 0$, choose $C = (c_0,c_1)$ such that $0 < c_0 < c_1 < \min\{a_1,b_1\}$.
+        Then $C \subset I$. If $x < 0$ choose $C = (c_0, c_1)$ such that $\max\{a_0,b_0\} < c_0 < c_1 < 0$
+        If $x = 0$ we can choose $(c_0, c_1)$ such that $\min\{a_0,b_0\} < c_0 < 0 < c_1 < \max\{a_1,b_1\}$.
+        Finally if $x = p$, we can choose $(c_0, 0) \cup \{p\} \cup (0,c_1)$ such that $\min\{a_0,b_0\} < c_0 < 0 < c_1 < \max\{a_1,b_1\}$.
+    \end{proof}
+    \subsection*{(b)}
+        Show that if $U$ and $V$ are any open sets containing 0 and $p$, then $U \cap V \neq \O$.
+        \begin{proof}
+            There exists some $\epsilon > 0$ such that $(-\epsilon,\epsilon) \subset U$ and $(-\epsilon,0) \cup \{p\} \cup (0,\epsilon) \subset V$.
+            This is the case because there must be some basis set that lies within $U$ and $V$ respectively, of which we can find $\epsilon$
+            such that it is less than the absolute value of each end point of these two basis sets. Then it is guaranteed that $\frac{\epsilon}{2} \in U \cap V$.
+        \end{proof}
+    \subsection*{(c)}
+        Show that $\mathbb{Q} \subset \mathbb{R}$ is dense in $X$.
+        \begin{proof}
+            We assume without proof that for any open set in $\mathbb{R}$ intersects $\mathbb{Q}$.
+            Now choose some open set containing $p$. Then there is some open set $(-x, 0)$ that is contained within this neighborhood of $p$.
+            Then we know that this open set in $\mathbb{R}$ must intersect $\mathbb{Q}$. Therefore any 
+            neighborhood of $p$ must intersect $\mathbb{Q}$. Therefore $\mathbb{Q}$ is dense in $X$.
+        \end{proof}
+    \subsection*{(d)}
+    Is the function $f:X \rightarrow \mathbb{R}, f(x) = x$ if $x \in \mathbb{R}, f(p) = 0$ continuous?\\\\
+    Choose $U \subset \mathbb{R}$. Then we claim $f^{-1}(U)$ is open in $X$.
+    If $0 \notin U$ then clearly $f^{-1}(U) = U$ and is open in $\mathbb{R}$.
+    If $0 \in U$ then we know $f^{-1}(U) = U \cup \{p \}$. Since $0 \in U$, there must also be some neighborhood of 0, which will also be in $f^{-1}(U)$.
+    Then it follows that we have some neighborhood of $p \in U \cup \{p\}$. Simply modify the neighborhood of $0$ to exclude 0 and include $\{p\}$.
+    Thus for any point $x \in f^{-1}(U)$ we have a neighborhood around $x$ that is contained in $f^{-1}(U)$. So the set is open, and $f$ is continuous.
+\section*{Problem 7}
+    \subsection*{(a)}
+    \begin{proof}
+        We wish to show $\{x \in X| f(x) < g(x) \text{ or } f(x) = g(x) \}$ is closed.
+        Let us observe the that the complementary set is open, 
+        \[ \{x \in X | f(x) > g(x)\} \]
+        Choose some element $x'$ in the set.
+        Then we know that $f(x') > g(x')$.
+        Choose some point $d \in Y$ such that $f(x') > d > g(x')$.
+        Take the the intersection
+        \[
+            A = f^{-1}\{y \in Y | y > d\} \cap g^{-1}\{y \in Y | y < d\}
+        \]
+        We know that it must be non-empty since $x'$ belongs to both.
+        Then since they are both the pre-images of open sets under continuous funcitons,
+        both are open, and so too is their intersection. Then $f(A) > d$ and $g(A) < d$,
+        so the set must be contained in $\{x \in X | f(x) > g(x)\}$.
+        \\\\
+        If such a point $d$ does not exist, simply rewrite as $A = f^{-1}\{y \in Y | y > g(x')\} \cap g^{-1}\{y \in Y| y < f(x')\}$.
+        Either $f(A) > g(A)$ or either $f$ or $g$ is not continuous.
+    \end{proof}
+    \subsection*{(b)}
+    Show that $h: X \rightarrow Y, h(x) = \min\{f(x), g(x)\}$ is continuous.
+    \begin{proof}
+        Let $U \subset Y$ be an open set.
+        Choose $x \in h^{-1}(U)$. Then either $h(x) = f(x)$ or $h(x) = g(x)$.
+        There must exist some neighborhood $O(x)$ such that either $f(O(x)) < g(O(x))$ or $f(O(x)) > g(O(x))$.
+        Then take the inverse under either $f$ or $g$ of the set $U \cap f(O(x))$ or $U \cap g(O(x))$.
+        If some such neighborhood does not exist, then $U$ is not open.
+    \end{proof}
+\end{document}

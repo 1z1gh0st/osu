@@ -1,0 +1,189 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Intro to Mathematical Statistics - Final Exam}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{(a)}
+The variable $X$ can be represented by a binomial distribution such that $X \sim B(n = 100, p = .02)$. 
+We say $P(X \leqslant 2) = P(X = 0) + P(X = 1) + P(X = 2) = {100 \choose 0} .02^0 .98^{100 - 0} + {100 \choose 1} .02^1 .98^{100 - 1} + {100 \choose 2} .02^2 .98^{100-2} \approx .6767$.
+\subsection*{(b)}
+To use Poisson, first note that $\lambda = E[X] = np = 100 * .02 = 2$. Then we write 
+\[
+    P(X \leqslant 2) = P(X = 0) + P(X = 1) + P(X = 2) = e^{-2} \sum_{0 \leqslant i \leqslant 2} \frac{2^i}{i!} = 5e^{-2} \approx .6767
+\]
+\section*{Problem 2}
+\subsection*{(a)}
+\begin{align*}
+    \int_0^1 \int_0^{1-y} k dx dy &= k \int_0^1 \int_0^{1-y} (1) dx dy \\
+    &= k\int_0^1 [1-y] - [0] dy \\
+    &= k\left[y  - \frac{y^2}{2} \right]_0^1\\
+    &= k(1 - \frac{1}{2}) \\
+    &= k\frac{1}{2}
+\end{align*}
+Since we need to have a total probability of 1, $k = 2$.
+\subsection*{(b)}
+We say that for $x \in [0,1]$,
+\begin{align*}
+    f_X(x) &= \int_{1 - x}^1 2 dy \\
+    &= 2[1 - (1 - x)] \\
+    &= 2x
+\end{align*}
+Similarly for $y \in [0,1]$
+\begin{align*}
+    f_Y(y) &= \int_0^{1 - y} 2 dx \\
+    &= 2(1 - y)
+\end{align*}
+
+\subsection*{(c)}
+$P(X > .5 \text{ and } Y < .5)$ Simply change the bounds of our integral so that the requirements are 
+matched.
+\begin{align*}
+    \int_0^{.5} \int_{.5}^{1 - y} 2 dx dy &= \int_0^{.5} 2 - 2y - 1 dy \\
+    &= \int_0^{.5} 1 - 2y dy \\
+    &= y - y^2 \bigg|_0^{.5}\\
+    &= [.5 - .5^2] - [0 - 0] \\
+    &= .25
+\end{align*}
+\subsection*{(d)}
+To find $Cov(X,Y)$ we must find $E[XY], E[X], E[Y]$ and then we write 
+\[
+    Cov(X,Y) = E[XY] - E[X]E[Y]
+\]
+To compute the first we take the integral 
+\begin{align*}
+    \int_0^1 \int_0^{1 - y} (xy) 2 dx dy &= \int_0^1 \left[x^2 y\right]_0^{1-y} dy \\
+    &= \int_0^1 (1-y)^2 y dy \\
+    &= \int_0^1 (1 - 2y + y^2)y dy \\
+    &= \left[\frac{y^2}{2} - \frac{2y^3}{3} + \frac{y^4}{4}\right]_0^1 \\
+    &= \frac{1}{2} - \frac{2}{3} + \frac{1}{4} = \frac{1}{12}
+\end{align*}
+Then we compute $E[X]$ and $E[Y]$.
+\[
+    E[X] = \int_0^1 x (2x) dx = 2x^3 / 3 \bigg|_0^1 = 2 / 3
+\]
+Then 
+\[
+    E[Y] = \int_0^1 (y)2(1-y) dy = \int_0^1 2y - 2y^2 dy = y^2 - \frac{2y^3}{3} \bigg|_0^1 = 1 - \frac{2}{3} = \frac{1}{3}
+\]
+Finally we can write the covariance as
+\[
+    Cov(X,Y) = \frac{1}{12} - \frac{2}{3}\frac{1}{3} = \frac{1}{12} - \frac{2}{9}
+\]
+I would think that this value should come to 0, rather than some negative value since it appears that $X,Y$ should be independent.
+\section*{Problem 3}
+\subsection*{(a)}
+Let $X = Z_1^2$, we can compute the moment generating function of $X$ by
+\begin{align*}
+    m_{X}(t) &= E[e^{tZ^2}]\\
+    &= \int_\mathbb{R} e^{tz^2}  \varphi (z) dz\\
+    &= \int_\mathbb{R} e^{tz^2}  \frac{1}{\sqrt{2\pi}} e^{-z^2 / 2} dz \\
+    &= \int_\mathbb{R} e^{z^2 (t - \frac{1}{2})} \frac{1}{\sqrt{2\pi}} dz \\
+    &= \int_\mathbb{R} e^{-z^2 (\frac{1}{2} - t)} \frac{1}{\sqrt{2\pi}} dz \\
+\end{align*}
+Let $v = z\sqrt{1 - 2t}$ and $dv = dz\sqrt{1-2t}$. So then we have 
+\begin{align*}
+    \int_\mathbb{R} e^{-z^2 (\frac{1}{2} - t)} \frac{1}{\sqrt{2\pi}} dz &= \int_\mathbb{R} e^{-v^2 / 2} \frac{1}{\sqrt{2\pi}} \frac{1}{\sqrt{1-2t}} dv\\
+    &= \frac{1}{\sqrt{1 - 2t}} \int_\mathbb{R} \varphi (v) dv \\
+    &= (1-2t)^{-1 / 2}
+\end{align*}
+Then, notice that this is the moment-generating function of a $\chi^2$ distribution with $k = 1$ degrees of freedom. Since its mgf is unique, we say 
+the densities are the same.
+Thus,
+\[
+    f(x) = \frac{1}{\sqrt{2} \Gamma (1 / 2)}x^{1 / 2 - 1}e^{-x/2} = \frac{1}{\sqrt{2\pi}}x^{1 / 2 - 1}e^{-x/2}
+\]
+\subsection*{(b)}
+We can differentiate the mgf to get expectation and variance.
+\[
+    E[X] = m'(0) = -\frac{1}{2} (1-2t)^{-3 / 2} (-2) \bigg|_{t=0} = (1-2t)^{-3 / 2}\bigg|_{t=0} = 1^{-3 / 2} = 1
+\]
+\[
+    E[X^2] = m''(0) = -\frac{3}{2} (1 - 2t)^{-5 / 2} (-2) \bigg|_{t = 0} = 3(1 - 2t)^{-5 / 2} \bigg|_{t = 0} = 3
+\]
+Then the variance will be $E[X^2] - E[X]^2 = 3 - 1^2 = 2$.
+\subsection*{(c)}
+Since $Y$ is also a squared standard normal random variable, it will have the same mgf. Then since the two are independent we say
+$m_{X + Y}(t) = m_X(t) m_Y(t) = \frac{1}{\sqrt{1-2t}}^2 = \frac{1}{1-2t}$. This is identical to the $\chi^2$ moment-generating function with degrees of freedom $k = 2$.
+
+\section*{Problem 4}
+\subsection*{(a)}
+We have the probability of having a success or failure by some $n-th$ trial as $.5^{n-1}.5$ then the probability of achieving the same flip on the next toss is $.5$. This will be a geometric random variable shifted over by one, so 
+\[
+    P(X = k) = P(Geom(.5) = k + 1) = .5^{k} .5 = .5^{k+1} \ \ \ \ \ \forall k = 2,3,4,\cdots
+\]
+\subsection*{(b)}
+Since it is simply a shifted geometric distribution, we say $\mu = E[Geom(.5) + 1] = 2 + 1 = 3$.
+Then the variance will be unchanged, so $Var(X) = \frac{.5}{.5^2} = \frac{.5}{.25} = 2$.
+\subsection*{(c)}
+We compute the mgf. We have 
+\begin{align*}
+    E[e^tX] &= \sum_{2 \leqslant k < \infty} e^{tk} .5^{k+1}\\
+    &= \sum_{2 \leqslant k < \infty} \frac{1}{e^t} (e^t .5)^{k+1}\\
+    &=  \frac{1}{e^t} \sum_{2 \leqslant k < \infty} (e^t .5)^{k+1}\\
+    &=  \frac{1}{e^t} \sum_{3 \leqslant k < \infty} (e^t .5)^{k}\\
+    &= \frac{1}{e^t} \left[\frac{1}{1 - e^t .5} - (e^t.5)^0 - (e^t.5)^1 - (e^t.t)^2\right]\\
+\end{align*}
+\section*{Problem 5}
+\subsection*{(a)} We know that $m_X(t) = \sum_{k \in \mathbb{N}} e^t P(X = k)$. 
+That is,
+\begin{align*}
+    \sum_{k \in \mathbb{N}} e^{tk} P(X = k) &= c \left(\frac{1}{8}e^{-t} + \frac{1}{4} +  \frac{1}{4}e^t + \frac{3}{8}e^{2t}\right)\\
+    &=c \sum_{k \in \{-1, 0, 1, 2\}} e^{tk} P(X = k)
+\end{align*}
+Then from this we can deduce that $P(X = k)$ must be 
+\[
+    P(X = k) = \begin{cases}
+        \frac{c}{8} & k = -1\\
+        \frac{c}{4} & k = 0 \\
+        \frac{c}{4} & k = 1 \\
+        \frac{3c}{8} & k = 2
+    \end{cases}
+\]
+Since the sum of these probabilities is $c$, we say that $c = 1$ and 
+\[
+    P(X = k) = \begin{cases}
+        \frac{1}{8} & k = -1\\
+        \frac{1}{4} & k = 0 \\
+        \frac{1}{4} & k = 1 \\
+        \frac{3}{8} & k = 2
+    \end{cases}
+\]
+\subsection*{(b)}
+We can compute the first moment by taking the derivative of $m_X(t)$ giving us 
+\[
+    m'(t) = (-1)\frac{1}{8}e^{-t} + 0 + \frac{1}{4}e^t + (2) \frac{3}{8}e^{2t}
+\]
+Then we can say that $m'(0) = \frac{7}{8}$. We compute the second moment by 
+\[
+    m''(t) = \frac{1}{8}e^{-t} + 0 + \frac{1}{4}e^t + (4) \frac{3}{8} e^{2t}
+\]
+Then $m''(0) = \frac{13}{8}$.
+\subsection*{(c)}
+The probability of $X$ being stricly between 0 and 2 non-inclusive will be $P(X = 1) = \frac{1}{4}$.
+\end{document}

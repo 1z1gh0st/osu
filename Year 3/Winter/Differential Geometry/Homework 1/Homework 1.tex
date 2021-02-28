@@ -1,0 +1,53 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Differential Geoemetry - Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+Let $\vec{u} = u_x \hat{x} + u_y \hat{y} + u_z \hat{z} \in \mathbb{R}^3$. Determine two vectors
+$\vec{v}$ and $\vec{w}$ such that $\vec{u} = \vec{v} \times \vec{w}$.\\\\
+
+We know that for two vectors $\vec{v}, \vec{w} \in \mathbb{R}^3$, the cross product is defined as
+\[
+    \vec{v} \times \vec{w} = det\begin{bmatrix}
+        \hat{x}&\hat{y}&\hat{z}\\
+        v_x&v_y&v_z\\
+        w_x&w_y&w_z
+    \end{bmatrix} = \hat{x}(v_yw_z - v_zw_y) - \hat{y}(v_xw_z - v_zw_x) + \hat{z}(v_xw_y - v_yw_x)
+\]
+And, we know also that the cross product is orthogonal to both of the input vectors.
+\\\\
+In the case that $\vec{u} = 0$, simply choose $\vec{v} = 0 = \vec{w}$ (this is only one of many possible solutions).
+Otherwise $\vec{u} \neq 0$. In this scenario, we know that for any two vectors that lie on the plane $0 = u_x x + u_y y + u_z z$
+(that is, a plane whose normal vector is $\vec{u}$),
+both will be orthogonal to $\vec{u}$. We choose $\vec{v_0}, \vec{w_0}$ to be two orthogonal unit vectors that lie on this plane. Then,
+let $\vec{v} = \vec{v_0}$, and let $\vec{w} = ||\vec{u}|| \vec{w_0}$. As a result, we will have either $\vec{u} = \vec{v} \times \vec{w}$ or 
+$-\vec{u} = \vec{v} \times \vec{w}$. This is because of the property of cross products where $||a \times b|| = ||a|| \ ||b|| 
+\ |\sin \theta|$ where $\theta$
+is the angle between $a$ and $b$. Since we chose two vectors orthogonal to each other $\sin \theta = 1$. In the case where $-\vec{u} = \vec{v} \times \vec{w}$, without loss of generality, relabel $\vec{v}$ and $\vec{w}$ so that they are swapped,
+and then we will have $\vec{u} = \vec{v} \times \vec{w}$ by the anti-commutative property of cross products.
+\end{document}

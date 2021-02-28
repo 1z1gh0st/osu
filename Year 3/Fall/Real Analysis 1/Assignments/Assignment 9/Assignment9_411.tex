@@ -1,0 +1,90 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Real Analysis - Assignment 9}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\begin{mdframed}
+    A finite dimensional normed vector space is complete.
+\end{mdframed}
+\begin{proof}
+    Let $(V, ||\cdot ||)$ be a normed $n$-dimensional vector space. Then we say that any vector $v\in V$ consists
+    of $n$ real or complex numbers. Let $(v_k) \subset V$ be an arbitrary sequence in our space, then it follows that 
+    we can write this sequnce out as
+    \[
+        v_1 = \begin{bmatrix}
+            x_{1_1}\\x_{2_1}\\ \vdots \\ x_{n_1}
+        \end{bmatrix}, v_2 = \begin{bmatrix}
+            x_{1_2}\\x_{2_2} \\ \vdots \\ x_{n_2}
+        \end{bmatrix}, \cdots
+    \]
+    Then for any sequence $(x_{i_k}) \subset F$ where $F$ is either the real or complex numbers, $F$ is complete and 
+    therefore there exists some subsequence that converges to $x_i \in F$. We say that this subsequence relies on some $K_1 \subset \mathbb{N}$.
+    Take the intersection of all the $K_i$ sets, and you have a Cauchy subsequence of $(v_k)$ that converges to some vector $v \in V$.
+\end{proof}
+Since a linear subspace of a normed vector space is also a normed vector space, thus it is complete.
+\begin{mdframed}
+    Show that $\mathcal{P}_n$ is closed in $C[a,b]$. Then show that $P = \bigcup_{i \in \mathbb{N}}\mathcal{P}_n \neq C[a,b]$.
+\end{mdframed}
+\begin{proof}
+    We know that $\mathcal{P}_n$ is a finite dimensional linear subspace of a normed vector space. Thus it is complete, and
+    then it contains its limit points and is therefore closed.
+\end{proof}
+\begin{proof}
+    Take some function with an infinite polynomial expansion, such as $e^x$. Then $\forall i \in \mathbb{N}$ we say that 
+    $e^x \notin \mathcal{P}_n$ thus there exists some continuous function on $[a,b]$ that is not contained in the set $\mathcal{P}$.
+\end{proof}
+\begin{mdframed}
+    Let $p_n$ be a polynomial of degree $m_n$. The suppose that $p_n \rightarrow f$ in $C[a,b]$. That is, it converges uniformly to $f$ on 
+    this interval where $f$ is not a polynomial. Show that $m_n \rightarrow \infty$.
+\end{mdframed}
+\begin{proof}
+    Suppose that $m_n$ does not diverge to infinity. Then it must be eventually bounded by some integer $k \in \mathbb{N}$. So some polynomial of degree $k$
+    will be a function such that $\forall \epsilon > 0, ||p_n - f|| < \epsilon$. Then it follows that $f$ must be a polynomial of degree $k$ (contradiction).
+\end{proof}
+\begin{mdframed}
+    Show that the set of all polynomials $\mathcal{P}$ is first category.
+\end{mdframed}
+\begin{proof}
+    We know that $\mathcal{P} = \bigcup_{n \in \mathbb{N}} \mathcal{P}_n$. Then we wish to show that for any $n \in \mathbb{N}, int(cl(\mathcal{P}_n)) = \O$.
+    We know already that $\mathcal{P}_n$ is closed so $cl(\mathcal{P}_n) = \mathcal{P}_n$.
+    Let $n \in \mathbb{N}$ and $p \in \mathcal{P}_n$ arbitrarily. Choose some $p' \in \mathcal{P}_{n+1}$ with all $n$ coefficients identical. This function can be made arbitrarily close to $p$,
+    so we say that no neighborhood of $p$ lies in $\mathcal{P}_n$. Thus $int(cl(\mathcal{P}_n))$ is empty, and we say $\mathcal{P}_n$ is nowhere dense. Thus $\mathcal{P}$ is 
+    a first category set.
+\end{proof}
+\begin{mdframed}
+    Suppose that $f: [1, \infty) \rightarrow \mathbb{R}$ is continuous and that $\lim_{x\rightarrow \infty} f(x)$ exists.
+    For $\epsilon >0$ there is a polynomial $p$ such that $|f(x) - p(1/x)| < \epsilon$ for all $x \geqslant 1$.
+\end{mdframed}
+\begin{proof}
+    Let $g:[0,1] \rightarrow \mathbb{R}$ where $g(x) = f(x^{-1})$ for $x \in (0,1]$ and $g(x) = \lim_{x \rightarrow \infty}f(x)$ at $x = 0$. Then by the Weierstrass Approximation Theorem it follows that 
+    for any arbitrary $\epsilon > 0$ there exists some polynomial $p \in \mathcal{P}$ such that $||p - g||_\infty < \epsilon$. Then it follows that 
+    \[
+        |f(x) - p(x^{-1})| < \epsilon
+    \]
+\end{proof}
+\end{document}

@@ -1,0 +1,60 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Real Analysis - Assignment 10}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\begin{mdframed}
+    A bounded subset of $\mathbb{R}$ is totally bounded.
+\end{mdframed}
+\begin{proof}
+    Let $A \subset \mathbb{R}$ be bounded. That is, there exists some $M > 0 : |x| \leqslant M \forall x \in A$.
+    Choose $\epsilon > 0$ randomly. Then $\exists k \in \mathbb{N} : k\epsilon > M$ (Archimedean Property). So take
+    \[
+        S = \{-k\epsilon, -(k - \frac{1}{2})\epsilon, -(k - 1)\epsilon, \cdots, -\epsilon, -\frac{1}{2} \epsilon, 0, \frac{1}{2} \epsilon, \epsilon, \cdots, (k - \frac{1}{2})\epsilon, k\epsilon\}  
+    \]
+    This is a finite set with a cardinality of $4k$ such that $A \subset \bigcup_{s \in S} B_\epsilon(s)$. Thus $A$ is totally bounded.
+\end{proof}
+\begin{mdframed}
+    A bounded subset of $\mathbb{R}^n$ is totally bounded.
+\end{mdframed}
+\begin{proof}
+    This will follow a similar formula. Let $A \subset \mathbb{R}^n : \exists M > 0 \text{ where } A \subset B_M(0)$.
+    Choose $\epsilon > 0$ arbitrarily, and $\exists k \in \mathbb{N} : k\epsilon > M$. Take $S$ as defined in the previous proof,
+    and then take $S \times S \times \cdots \times S$ so that you have an $n$-tuple of elements of $S$, and have each permutation.
+    This set may be large, but it will be finite. Then $A \subset \bigcup_{s \in S^n} B_\epsilon(s)$.
+\end{proof}
+\begin{mdframed}
+    The closed unit ball in $\ell_p, 1 \leqslant p \leqslant \infty$ is not totally bounded.
+\end{mdframed}
+\begin{proof}
+    Let $(x_n) \subset \ell_p : x_n = (0,\cdots,0,1,0,\cdots)$ where there is a 1 at the $n$-th element and 0 elsewhere.
+    For any two elements, for any $1 \leqslant p \leqslant \infty$ we know that $||x_m - x_n||_p = 1$.
+    Therefore there is no Cauchy subsequence of this sequence, therefore this closed unit ball is not totally bounded.
+\end{proof}
+
+\end{document}

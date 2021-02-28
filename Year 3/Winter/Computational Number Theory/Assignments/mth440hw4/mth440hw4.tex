@@ -1,0 +1,164 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Computational Number Theory - Homework 4}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 24}
+\section*{Problem 25}
+\subsection*{a)}
+\[
+    x^2 \equiv 17 \mod{67}
+\]
+\begin{align}
+    \left(\frac{17}{67}\right) & = \left(\frac{67}{17}\right)\\
+    & = \left(\frac{16}{17}\right) \\
+    & = \left(\frac{2}{17}\right)^4 \\
+    & = 1
+\end{align}
+\subsection*{b)}
+\[
+    x^2 \equiv 3 \mod{67}
+\]
+\begin{align}
+    \left(\frac{3}{67}\right)
+    & = (-1)\left(\frac{67}{3}\right) \\
+    & = (-1)\left(\frac{1}{3}\right) \\
+    & = -1
+\end{align}
+\subsection*{c)}
+\[
+    2x^2 + 5x + 1 \equiv 0   
+\]
+\subsection*{d)}
+\[
+    x^2 \equiv 65 \mod{101}    
+\]
+\begin{align}
+    \left(\frac{65}{101}\right) 
+    & = (-1)\left(\frac{101}{65}\right)\\
+    & = (-1)\left(\frac{31}{65}\right)\\
+    & = (-1)\left(\frac{65}{31}\right)\\
+    & = (-1)\left(\frac{3}{31}\right)\\
+    & = \left(\frac{31}{3}\right)\\
+    & = \left(\frac{1}{3}\right) = 1
+\end{align}
+\subsection*{e)}
+\[
+    x^2 \equiv 5 \mod{2\cdots 1}
+\]
+\begin{align}
+    \left(\frac{5}{2\cdots 1}\right)
+    & = (-1)\left(\frac{2\cdots 1}{5}\right)\\
+    & = (-1)\left(\frac{1}{5}\right) \\
+    & = -1
+\end{align}
+\section*{Problem 26}
+\begin{mdframed}[]
+    \fbox{Code:}
+    \begin{verbatim}
+def solve_quadratic(b, n):
+    for a in range(1, n):
+        if a^2 % n == b:
+            return a
+        else:
+            a = a + 1
+    return 0
+
+print(solve_quadratic(17, 67))
+print(solve_quadratic(65, 101))
+    \end{verbatim}
+    \fbox{Output:}
+    \begin{verbatim}
+33
+41
+    \end{verbatim}
+\end{mdframed}
+The answer to \fbox{a.} is 33, and the answer to \fbox{d.} is 41.
+\section*{Problem 27}
+\begin{mdframed}
+    \fbox{Code:}
+    \begin{verbatim}
+def discrete_log(n, a, b):
+    k = 1
+    while(a^k % n != b):
+        k = k + 1
+    return k
+
+def diffie_hellman(p, g, g_a, g_b):
+    a = discrete_log(p, g, g_a)
+    b = discrete_log(p, g, g_b)
+    s = g^(a*b) % p
+    return s
+
+print(diffie_hellman(49253, 2, 558, 32288))
+    \end{verbatim}
+    \fbox{Output:}
+    \begin{verbatim}
+43739
+    \end{verbatim}
+\end{mdframed}
+\section*{Problem 28}
+\begin{mdframed}
+    \fbox{Code:}
+    \begin{verbatim}
+def fermat_factorization(n):
+
+    #--STEP 1--
+    t_0 = ceil(sqrt(n))
+    
+    #--STEP 2--
+    l = 0
+    while (not is_square((t_0 + l)^2 - n)):
+        l = l + 1
+    t = t_0 + l
+    s = sqrt(t^2 - n)
+    
+    #--STEP 3--
+    return (t - s, t + s)
+
+print(fermat_factorization(41156989185107))
+    \end{verbatim}
+    \fbox{Output:}
+    \begin{verbatim}
+(6409511, 6421237)
+    \end{verbatim}
+\end{mdframed}
+\section*{Problem 29}
+\[
+x^7 \equiv 17792272918826 \mod{41156989185107}
+\]
+\[
+    6409511 \cdot 6421237 = 41156989185107
+\]
+\begin{align}
+    x^7 &\equiv 17792272918826 \mod{6421237}\\
+    x^7 &\equiv 17792272918826 \mod{6409511}
+\end{align}
+We get the solution 9546903516023, but this cannot be right since there is no 95th or 54th
+character.
+\end{document}

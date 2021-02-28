@@ -1,0 +1,91 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Systems of ODEs - Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1.11}
+\subsection*{(a)}
+Find a general solution to the following differential equaiton: $x' = x^2$.
+\\\\
+We can solve this by doing a speration of variables and then some simple calculus.
+\begin{align*}
+    x' & = x^2 \\
+    \frac{dx}{dt} & = x^2 \\
+    x^{-2} dx & = dt \\
+    \int x^{-2} dx & = \int dt \\
+    (-1)x^{-1} + c_1 & = t + c_2 \\
+    x^{-1} & = c - t \\
+    x & = (c - t)^{-1}
+\end{align*}
+\subsection*{(b)}
+The domain of the above solution is $\mathbb{R} \setminus \{c\}$ for every constant $c \in \mathbb{R}$.
+\subsection*{(c)}
+Give a differential equation such that $x(0) = 0$ is a solution defined only on $-1 < t < 1$.
+\[
+    x' = \sqrt{1 - x^2} - 1
+\]
+\section*{Problem 2.11}
+    Let $V = (v_1, v_2), W = (w_1, w_2)$ be vectors in $\mathbb{R}^2$. Prove that $V$ and $W$ are linearly independent
+    if and only if $\det \begin{bmatrix}
+        v_1 & w_1 \\
+        v_2 & w_2
+    \end{bmatrix} = 0$.
+    \begin{proof}
+        \fbox{$\Rightarrow$} Assume that $V$ and $W$ are linearly independent. Then $V$ and $W$ are not co-linear.
+        That is, $\forall x \in \mathbb{R} xV \neq W$ or equivalently $xv_1 \neq w_1$ and $xv_2 \neq w_2$.
+        So $\det \begin{bmatrix}
+            v_1&w_1\\v_2&w_2
+        \end{bmatrix}=v_1w_2 - v_2w_1$.
+        Suppose, by contradiction, that $v_1w_2 - v_2w_1 = 0$. We know that neither vector can be the 0 vector, otherwise, scale
+        the other by a 0 coefficient. So we must have $v_1w_2 = v_2w_1$ non-trivially. This can be rewritten as $v_1 \frac{w_2}{v_2} = w_1$
+        (contradiciton).\\\\
+        \fbox{$\Leftarrow$} Assume that $V$ and $W$ are not linearly independent. Then $\exists x \in \mathbb{R}$ such that $xV = W$
+        (if $V$ is the 0 vector, without loss of generality, swap $V$ and $W$). Then we know that $\det[X \ X] = 0$ for any vector $X \in \mathbb{R}^2$,
+        so it follows that 
+        \[ \det [V \ W] = v_1 w_2 - v_2 w_1 = xv_1 w_2 - xv_2 w_1 = \det[xV \ W] = \det[W \ W] = 0\]
+    \end{proof}
+
+\section*{Problem 2.14}
+    Prove that two eigenvectors from distinct real eigenvalues of a $2 \times 2$ matrix are always linearly independent.
+    \begin{proof}
+        Let $A \in M_{2 \times 2}(\mathbb{R})$ be a matrix such that $\exists \lambda_1 \neq \lambda_2 \in \mathbb{R}$
+        eigenvalues of $A$, and let $\vec{v}_1, \vec{v}_2$ be the associated eigenvectors.
+        We want to show that $x_1 \vec{v}_1 + x_2 \vec{v}_2 = 0$ has only the trivial solution, $x_1,x_2 = 0$.
+        This equation scaled by $\lambda_1$ is $x_1 \lambda_1 \vec{v}_1 + x_2 \lambda_1 \vec{v}_2 = 0$.
+        Another equation can be produced by multiplying our matrix $A$ to both sides of the equation, giving us
+        $Ax_1\vec{v}_1 + Ax_2\vec{v}_2 = x_1 A\vec{v}_1 + x_2 A\vec{v}_2 = x_1 \lambda_1 \vec{v}_1 + x_2 \lambda_2 \vec{v}_2 = 0$.
+        We then have the following:
+        \begin{align*}
+            x_1 \lambda_1 \vec{v}_1 + x_2 \lambda_1 \vec{v}_2 & = x_1 \lambda_1 \vec{v}_1 + x_2 \lambda_1 \vec{v}_2 \\
+            x_2 \lambda_1 \vec{v}_2 & =  x_2 \lambda_2 \vec{v}_2 \\
+            \Longrightarrow x_2 = 0
+        \end{align*}
+        Then it follows that $x_1$ must also be equal to 0 since we have real non-trivial eigenvectors so we say that 
+        $\vec{v}_1$ and $\vec{v}_2$ are linearly independent.s
+    \end{proof}
+\end{document}

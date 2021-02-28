@@ -206,14 +206,31 @@
         Let $(V, ||.||)$ and $(W, |||.|||)$ be normed vector spaces and let $T:V \rightarrow W$ be a linear map. Then the 
         following are equivalent:
         \begin{align*}
-            \text{(i)} & \text{$T$ is Lipschitz} \\
-            \text{(ii)} & \text{$T$ is uniformly continuous}\\
-            \text{(iii)} & \text{$T$ is everywhere continuous}\\
-            \text{(iv)} & \text{$T$ is continuous at $0 \in V$}\\
-            \text{(v)} & \text{there is a constant $C < \infty$ such that $|||T(x)||| \leqslant C||x||$ for all $x \in V$}
+            \text{(i) } & \text{$T$ is Lipschitz} \\
+            \text{(ii) } & \text{$T$ is uniformly continuous}\\
+            \text{(iii) } & \text{$T$ is everywhere continuous}\\
+            \text{(iv) } & \text{$T$ is continuous at $0 \in V$}\\
+            \text{(v) } & \text{there is a constant $C < \infty$ such that $|||T(x)||| \leqslant C||x||$ for all $x \in V$}
         \end{align*}
-
     \end{theorem}
 
+\section{Continuous Functions}
+    Let $C[a,b] = \{ f : [a,b] \rightarrow \mathbb{R}, f\text{ is continuous}\}$.
+    Then this function can be infinitely approximated by some polynomial.
+    \begin{definition}
+        For $f \in C[0,1]$ the order $n$ Bernstein polynomial for $f$ is defined as
+        \[
+            B_n(f)(x) = \sum_{k=1}^n f(\frac{k}{n}) ({n \choose k}) x^k (1-x)^{n - k}
+        \]
+    \end{definition}
+    \begin{theorem}
+        For any $f \in C[0,1], B_n(f) \rightarrow f$ on $[0,1]$ as $n \rightarrow infty$.
+        As a consequence one obtains the Weierstrass Approximation Theorem (WAT).
+    \end{theorem}
+    \begin{lemma}
+        Let $f_0(x) = 1, f_1(x) = x, f_2(x) = x$. Then i) $B_n(f_0) = f_0$ and $B_n(f_1) = f_1$,
+        ii) $B_n(f_2) = (1-  \frac{1}{n}) f_n + \frac{1}{n} f_1$, and hence $B_n(f_2) \rightarrow f_2$,
+        iii) $\sum_{k=0}^n (\frac{k}{n} - x)^2 {n \choose k} x^k (1 - x)^{n - k}$
+    \end{lemma}
     
 \end{document}

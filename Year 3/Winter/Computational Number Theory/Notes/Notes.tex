@@ -1,0 +1,94 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Computational Number Theory - Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Introduction and Divisibility}
+The first important set we look at is the set of integers 
+\[\mathbb{Z} = \{\cdots, -2,-1,0,1,2,\cdots \}\]
+\begin{mdframed}
+    \begin{definition}
+        If $a,b \in \mathbb{Z}$, we say that $a$ divides $b$, denote $a | b$ if there exists some $n \in \mathbb{Z}$ such that $b = na$.
+    \end{definition}
+\end{mdframed}
+If no such $n$ exists we say that $a$ does not divide $b$.
+\\\\
+\fbox{The Division Algorithm} Let $a,b \in \mathbb{Z}$ with $b \geqslant 1$.
+Then there exists unique integers $q$ and $r$ such that 
+\[
+    a = qb + r
+\]
+Where $q \in \mathbb{Z}$ and $r \in \{0,1, \cdots b\}$.
+\begin{proof}
+    Let $S = \{a + bx | x \in \mathbb{Z} \}$. It follows that the subset 
+    of nonnegative values in $S$ is bounded below, and contains some smallest nonnegative element.
+    Call this $r$. Then if $r = a + bx_0$, let $q = -x_0$.
+    Then of course $a = qb + r$. To show that $0 \leqslant r < b$, first note 
+    that by construction $r$ must be non-negative. Then if $r \geqslant b$, it follows that we can replace 
+    $bx_0$ with $b(x_0 - 1)$ resulting in a smaller non-negative element of $S$. Thuse $0 \leqslant r < b$.\\\\
+    Then show uniqueness, please.
+\end{proof}
+\begin{mdframed}
+    \begin{theorem}[Euclid]
+        There are infinitely many prime numbers.
+    \end{theorem}
+\end{mdframed}
+\begin{lemma}
+    Every integer $n \geqslant 2$ is divisible by some prime.
+\end{lemma}
+\begin{proof}
+If this lemma is false, let $n$ be the smallest integer which is not divisible by any prime.
+We know that $n$ cannot be prime, since we would have $n | n$. 
+So $n$ can be factored as $n = ab$ where $a,b \in \{1,2,3, \cdots , n\}$.
+Then $a$ is smaller than the smallest integer that has no prime factor, thus it has a prime factor.
+Then it follows that the prime factor of $a$ must be a prime factor of $n$.
+\end{proof}
+Now that this lemma has been proven, we can move on to prove the theorem at hand.
+\begin{proof}
+    Assume that there are finitely many primes.
+    Let 
+    \[
+        N = p_1p_2, \cdots p_k + 1
+    \]
+    Then $N$ is divisible by a some prime $p_i$. It follows that 
+    $N = p_i(m) + 1$ which means that $r \neq 0$ and $p_i$ does not divide $N$. 
+\end{proof}
+If $n \geqslant 2$ is composite then $n$ is divisible by some prime $p \leqslant \sqrt{n}$.
+\begin{proof}
+    If $x > \sqrt{n}$ and $y > \sqrt{n}$ then $n = xy > \sqrt{n}\sqrt{n} = n$ which is false.
+    So either $x$ or $y$ is less than or equal to $\sqrt{n}$. Take $p$ to be a prime factor of either $x$ or $y$,
+    depending on which is not larger than $\sqrt{n}$.
+\end{proof}
+\begin{mdframed}[]
+    Siene of Eratosthenes: A method to find all primes $p$ up to some bound $N$.\\
+    \fbox{1.} Write the numbers from $2$ to $N$.\\
+    \fbox{2.} Starting with the smallest element $n$ still on the list. Eliminate all multiples of this number up to $N$.\\
+    \fbox{3.} Let $p$ be the next smallest element remaining, and remove the previous $p$.
+    \fbox{4.} Repeat steps 2 and 3 up to $\sqrt{N}$.
+\end{mdframed}
+\end{document}

@@ -1,0 +1,85 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Differential Geometry - Homework 5}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+Integration on the sphere. Consider $\mathbb{S}^2$, which can be viewed as the surface in $\mathbb{E}^3$ with 
+the line element $ds^2 = r^2(d\theta^2+\sin^2\theta d\phi^2)$.
+\subsection*{a)}
+\begin{mdframed}
+    Let $\omega$ be the orientation of $\mathbb{S}^2$. Determine $\int_{\mathbb{S}^2}\omega$.    
+\end{mdframed}
+Based on the line element, we determine that the the $d\vec{r}$ vector is,
+\begin{align}
+    d\vec{r} = r(d\theta \hat{\theta} + \sin\theta d\phi \hat{\phi})
+\end{align}
+Using this fact we can conclude that the coefficients here provide an orthonormal basis for
+our space $\mathbb{S}^2$ so we write
+\begin{align}
+    \omega &= rd\theta \wedge r\sin\theta d\phi
+\end{align}
+Now we can simply compute the integral,
+\begin{align}
+    \int_{\mathbb{S}^2}\omega & = \int_{\mathbb{S}^2} rd\theta \wedge r\sin\theta d\phi \\
+    &=\int_0^{2\pi}\int_0^\pi r^2\sin\theta d\theta d\phi \\
+    &=\int_0^{2\pi}-r^2\cos\theta\bigg|_0^\pi d\phi \\
+    &=\int_0^{2\pi}2r^2d\phi\\
+    &=4\pi r^2
+\end{align}
+This seems like it is the correct answer, as it is the formula for the surface area of the
+sphere. Since we are integrating the orientation over the entire sphere this appears logical.
+\subsection*{b)}
+\begin{mdframed}
+    Let $\alpha \in \bigwedge^1(\mathbb{S}^2)$. Compute $\int_{\mathbb{S}^2}d\alpha$.
+\end{mdframed}
+By Stokes' theorem we have,
+\begin{align}
+    \int_{\mathbb{S}^2}d\alpha &= \int_{\partial\mathbb{S}^2}\alpha \\
+    &=\int_{\emptyset}\alpha \\
+    &= 0
+\end{align}
+\subsection*{c)}
+\begin{mdframed}
+    Find $\alpha \in \bigwedge^1(\mathbb{S}^2)$ such that $d\alpha = \omega$.
+\end{mdframed}
+Write $\alpha = fd\theta + gd\phi$. Then we can write 
+\begin{align}
+    d\alpha &=\frac{\partial f}{\partial\theta}d\theta \wedge d\phi + \frac{\partial g}{\partial \phi}d\phi \wedge d\theta
+\end{align}
+Choose $-r^2\cos\theta d\theta = \alpha$. Then,
+\begin{align}
+    d\alpha &= r^2 \sin\theta d\theta \wedge d\phi \\
+    &= rd\theta \wedge r\sin\theta d\phi\\
+    &= \omega
+\end{align}
+\subsection*{d)}
+Why is this possible?
+We know that $\omega$ has an anti-derivative from part \fbox{a}. So it follows that there exists some
+1-form whose derivative is equal to $\omega$.
+\end{document}

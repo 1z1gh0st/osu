@@ -1,0 +1,111 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and Fundamental Groups - Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+    \subsection*{(a)}
+    \begin{mdframed}
+        Let $f: X \rightarrow Y$ be an open map, and let $A \subset Y$ be arbitrary.
+        Let $f^{-1}(A) \subset C$ where $C \subset X$ is closed. Then there is a closed set $D \subset Y$ such that 
+        $A \subset D$ and $f^{-1}(D) \subset C$.
+    \end{mdframed}
+    \begin{proof}
+        Let 
+        \[
+            D = Y \setminus f(X \setminus C)
+        \]
+        Since $C$ is closed, $X \setminus C$ is open. An open map $f$, will map this complement to an open set, so $f(X \setminus C)$ is open.
+        Thus its complement, $D$, is closed. Since $f^{-1}(A) \subset C$ it follows by set theory that $A \subset D$.
+        Then we write
+        \[
+            f^{-1}(D) = f^{-1}(Y) \setminus f^{-1}f(X \setminus C) \subset X \setminus (X \setminus C) = C
+        \]
+    \end{proof}
+    \subsection*{(b)}
+        \begin{mdframed}
+            $f:X \rightarrow Y$ is a closed map if and only if $\overline{f(A)} \subset f(\overline{A})$.
+        \end{mdframed}
+        \begin{proof}
+            \fbox{$\Rightarrow$} Assume that $f$ is closed. Then $f(\overline{A})$ is a closed set, which
+            clearly contains $f(A)$ since $A \subset \overline{A}$. Then since the closure is the smallest closed 
+            set containing the original, it must be the case that $\overline{f(A)} \subset f(\overline{A})$.\\\\
+            \fbox{$\Leftarrow$} Suppose $\overline{f(A)} \subset f(\overline{A})$ for every $A \subset X$.
+            Let $C \subset X$ be some arbitrary closed set. Suppose by contradiction that $f(C)$ is not closed.
+            Then by characterization of closed sets we say $f(C) \subsetneq \overline{f(C)}$. However, by assumption, 
+            we say $\overline{f(C)} \subset f(\overline{C})$. Since $C$ is closed, $C = \overline{C}$. So 
+            \[
+                f(C) \subsetneq \overline{f(C)} \subset f(\overline{C}) = f(C) \ \ \ \ \Longrightarrow \ \ \ \ f(C) \subsetneq f(C) \ \ \ \ \text{ (contradiction)}
+            \]
+        \end{proof}
+\section*{Problem 2}
+    \begin{mdframed}
+        Let $\mathfrak{U} = \{A_i\}, i = 1,2,\cdots,$ be a family of sets in $X$ such that $A_{i + 1} \subset A_i$ for all $k$.
+        Show that if $\bigcap_{i \in \mathbb{N}}\overline{A_i} = \O$, then $\mathfrak{U}$ is locally finite.
+    \end{mdframed}
+    \begin{proof}
+        Suppose that that $\bigcap_{i \in \mathbb{N}}\overline{A_i} = \emptyset$ and that $\mathfrak{U}$ is not locally finite.
+        Then there exists some point $x \in X$ such that every neighborhood of $x$ intersects infinitely many sets in $\mathfrak{U}$. Thus for every natural number
+        $N$ there exists another $n > N$ such that $U(x) \cap A_n \neq \emptyset$. Since these sets are nested, it follows that $U(x)$ must intersect 
+        every $A_m$ such that $m < n$. Then if $U(x)$ did not intersect every single set $A_i$ then since they are nested, it 
+        would only intersect finitely many (contradiction). So then we say that every neighborhood of $x$ intersects each $A_i$.\\\\
+        It follows that $x$ is a limit point of $\bigcap_{i \in \mathbb{N}}\overline{A_i}$ since every neighborhood of $x$ intersects 
+        every $A_i$. Then since this is an intersection of closed sets, we say that $\bigcap_{i \in \mathbb{N}}\overline{A_i}$ is itself a closed
+        set, and must contain its limit points. In particular $x \in \bigcap_{i \in \mathbb{N}}\overline{A_i}$ so it cannot be empty (contradiction).
+        Therefore, such an $x$ must not exist, and the intersection is locally finite.
+    \end{proof}
+\section*{Problem 3}
+    \begin{mdframed}
+        Let $\{B_\alpha\}, \alpha \in \mathcal{A}$ be an open or locally finite, closed cover of $Y$, and let 
+        $f: X \rightarrow Y$ be continuous. Suppose that the restrictions $f_{|f^{-1}(B_\alpha)}:f^{-1}(B_\alpha) \rightarrow B_\alpha, \alpha \in \mathcal{A}$
+        are homeomorphisms. Show that $f$ is a homeomorphism.
+    \end{mdframed}
+    \begin{proof}
+        \fbox{Continuity} Let $U \subset Y$ be open. Show that $f^{-1}$ \\\\
+        Continuity is given for $f$ already. For bijectivity let us first show surjectivity.
+        Let $y \in Y$, then it lies in some $B_\alpha$. Then since we have a homeomorphism from $f^{-1}(B_\alpha) \rightarrow B_\alpha$
+        we know that there exists $x \in X$ such that $f(x) = y$. To show injectivity let $f(x) = f(y)$, then for every $B_\alpha$ that contains $f(x) = f(y)$,
+        we know that this implies $x = y$. Thus we know that $f$ is a bijection.
+        \\\\
+        We wish to show now that $f$ is an open map. We break this into two cases:\\\\
+        \fbox{Case 1: $\{B_\alpha\}$ is an open cover of $Y$} Let $U \subset X$ be some arbitrary open set.
+        Since $\{B_\alpha\}$ is an open cover of $Y$ and since $f$ is continuous it follows that $\{f^{-1}(B_\alpha)\}$ is an open 
+        cover of $X$. We write $U = X \cap \bigcup_{\alpha \in A}B_\alpha$.
+        Then,\[
+            U = \bigcup_{\alpha \in A}(f^{-1}(B_\alpha) \cap U) \ \ \ \ \Longrightarrow \ \ \ \ f(U) = \bigcup_{\alpha \in A}f(B_\alpha \cap U)
+        \]
+        Then we know that $f(B_\alpha \cap U)$ is open in $Y$ since $f_{|B_\alpha}$ is a homeomorphism. Therefore $f$ is an open map.\\\\
+        \fbox{Case 2: $\{B_\alpha\}$ is a closed, locally finite cover of $Y$} Suppose that $V \subset Y$ is some arbitrary closed set.
+        Then we know that $\{f^{-1}(B_\alpha)\}$ is a closed locally-finite cover of $X$. Then similarly to case 1, except this time with $F \subset A$ being finite.
+        \[
+            V = \bigcup_{a \in F}(f^{-1}(B_\alpha) \cap V) \ \ \ \ \Longrightarrow \ \ \ \ f(V) = \bigcup_{a \in F}f(B_a \cap V)
+        \]
+        Then, we know that $f(B_\alpha \cap V)$ is a closed set, so a finite union of closed sets is closed therefore $f(V)$ is closed, and $f$ is a closed map.\\\\
+        In either case $f$ is a bijective continuous open and closed map, therefore it is a homeomorphism.
+    \end{proof}
+\end{document}

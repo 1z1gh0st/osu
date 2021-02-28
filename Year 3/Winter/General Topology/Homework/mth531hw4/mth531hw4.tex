@@ -1,0 +1,207 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and Fundamental Groups - Homework 4}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+    Let $(X,d)$ be a metric space and let $A \subset X$.
+    Define the distance $d(x,A)$ of a point $x \in X$ from $A$
+    by $d(x,A) = \inf\{d(x,a)|a \in A\}$.
+    \subsection*{a)}
+        \begin{mdframed}
+            Fix $A \subset X$. The function $d(\cdot , A): X 
+            \rightarrow \mathbb{R}, x \rightarrow d(x,A)$ is
+            continuous.
+        \end{mdframed}
+        \begin{proof}
+            Since we have two metric spaces, we can use the $\epsilon$-$\delta$ definition
+            of continuity. That is, a function $f:X \rightarrow Y$ is continuous if and only
+            if for every $\epsilon > 0$ there exists a $\delta > 0$ such that 
+            \begin{align}
+                d(x,y) < \delta \Longrightarrow \rho(f(x), f(y)) < \epsilon
+            \end{align}
+            Before our notation becomes confusing we will define our distance in the space $X$
+            to be denoted by $d(x,y)$ for two points $x,y \in X$. Then we will denote our function
+            described in the problem statement as $f: X \rightarrow \mathbb{R}$ where 
+            \begin{align}
+                f(x) = d(x,A)
+            \end{align}
+            Then for our metric on $\mathbb{R}$ we say that $\rho(x,y) = |x - y| \ \ \forall x,y \in
+            \mathbb{R}$.
+            Having made our notation follow our definition of continuity clearly we may now continue. \\\\
+            Let $\epsilon > 0$ be arbitrary. Then choose $\delta = \epsilon$. Choose any point $z \in A$. 
+            If $d(x,y) < \delta$, then by the reverse triangle inequality in metric spaces, we have
+            \begin{align}
+                |d(x,A) - d(y,A)| \leqslant |d(x,z) - d(y,z)| < d(x,y) < \delta = \epsilon
+            \end{align}
+            Therefore the function is continuous.
+        \end{proof}
+    \subsection*{b)}
+        \begin{mdframed}
+            The distance $d(x,A) = 0$ if and only if $x \in \overline{A}$.
+        \end{mdframed}
+        \begin{proof}
+            \fbox{$\Rightarrow$} Assume that $d(x,A) = 0$. Then let $\epsilon > 0$ be arbitrary.
+            There exists some $a \in A$ such that $d(x,a) < \epsilon$. Since $x$ is clearly a limit
+            point of $A$, it follows that $x \in \overline{A}$.\\\\
+            \fbox{$\Leftarrow$} Assume that $x \in \overline{A}$. Then for every $\epsilon > 0, \ \ 
+            B_\epsilon(x) \cap A \neq \emptyset$. So it follows that there exists $a \in A$ such that 
+            $d(x,a) < \epsilon$ for every positive radius $\epsilon$. Therefore the infimum of all strictly
+            positive radii must be 0, and we say that $d(x,A) = \inf\{d(x,a) | a \in A\} = 0$.
+        \end{proof}
+    \subsection*{c)}
+        \begin{mdframed}
+            Let $A,B \subset X$ be subsets of $X$ with disjoint closures. The distance function yields 
+            some Urysohn function for $A$ and $B$ directly.
+        \end{mdframed}
+        Define a function $f: X \rightarrow \{0,1\}$ as follows 
+        \begin{align}
+            f(x) =
+            \begin{cases}
+                0, & d(x,A) = 0\\
+                1, & \text{otherwise}
+            \end{cases}
+        \end{align}
+\section*{Problem 2}
+    \begin{mdframed}
+        Let $X$ be a topological space and let $D \subset \mathbb{R}$ be dense. Suppose that there
+        is an open $X_r \subset X$ for each $r \in D$ such that $\overline{X}_r \subset X_{\tilde{r}}$
+        when $r < \tilde{r}$, and $\bigcup_{r \in D}X_r = X$. Define $f: X \rightarrow \mathbb{R}$
+        by $f(x) = \inf\{r \in D | x \in X_r\}$. The function $f$ is continuous.
+    \end{mdframed}
+    \begin{proof}
+        Choose some open interval $(a,b) \in \mathbb{R}$. Sets of such a form are a basis for the
+        standard topology on $\mathbb{R}$. Therefore if we can show that $f^{-1}((a,b))$ is an open
+        set in $X$, then we say that $f$ is continuous. Define the set $X_s = \bigcup_{r < s}X_r$,
+        which allows us to take such sets on any point in $\mathbb{R}$.
+        So we write the following,
+        \begin{align}
+            f^{-1}((a,b)) &= \{x \in X | f(x) \in (a,b) \} \\
+            &=\{x \in X | \inf\{r \in D | x \in X_r\} \in (a,b)\}\\
+            &=\{x \in X | a < \inf\{r \in D | x \in X_r\} < b\}\\
+            &=\{x \in X | a < \inf\{r \in D | x \in X_r\}\} \cap \{x \in X | b > \inf\{r \in D | x \in X_r\}\}\\
+            &=\{x \in X | a \geqslant \inf\{r \in D | x \in X_r\}\}^c \cap \{x \in X | b > \inf\{r \in D | x \in X_r\}\}\\
+            &= \left(\overline{X_a}\right)^c \cap X_b 
+        \end{align}
+        This last line is justified by the fact that these sets are nested, and that the closure of the 
+        nested set still lies within any containing open set. So since the the closure of $X_a$ is
+        closed, its complement is open, and clearly $X_b$, a union of open sets, is also open.
+        Then we have the intersection of two open sets which is of course open.
+    \end{proof}
+\section*{Problem 4}
+    Define a strong limit point to be a limit point $x$ of a set $A$ such that for any neighborhood
+    $U$ of $x$ has infinitely many points in its intersection with $A$. Define countably compact to
+    mean that any countable open cover of a topological space $X$ yields some finite sub-cover.
+    \begin{mdframed}
+        A singleton set in a $T_1$ space is closed.
+    \end{mdframed}
+    \begin{proof}
+        Let $X$ be a $T_1$ topological space. Let $x \in X$.
+        For every $y \neq x$, there exists some neighborhood $U(y)$ not containing $x$.
+        Take the union
+        \begin{align}
+            \bigcup_{y \in X \setminus \{x\}}U(y) = X \setminus \{x\}
+        \end{align}
+        As this is a union of open sets, it is open, therefore the singleton set $\{x\}$ is closed.
+    \end{proof}
+    \subsection*{a)}
+        \begin{mdframed}
+            Assume that $X$ is a $T_1$ space. Any limit point of a set is a strong limit point of
+            that set.
+        \end{mdframed}
+        \begin{proof}
+            Let $A \subset X$ with some limit point $x \in X$. Let $U$ be some arbitrary open 
+            neighborhood of $x$. Then suppose by contradiction that $U \cap A$ is finite.
+            Write
+            \begin{align}
+                U \cap A \setminus \{x\} &= \{a_1, a_2, \cdots , a_k\} \setminus \{x\}\\
+                &= \bigcup_{1 \leqslant i \leqslant k} \{a_i\} \setminus \{x\}
+            \end{align}
+            Since singleton sets are closed, a finite union of singleton sets will be closed. Therefore
+            can take the complement of this set and it will be open. That is,
+            \begin{align}
+                X \setminus \left(\bigcup_{1 \leqslant i \leqslant k}\{a_i\} \setminus \{x\}\right)
+            \end{align}
+            However, this is an open neighborhood of $x$ that does not intersect $A$ anywhere other than at
+            the point $x$ itself, therefore $x$ is not a limit point of $A$ (contradiction).
+        \end{proof}
+    \subsection*{b)}
+        \begin{mdframed}
+            Assume that $X$ is $T_1$ and assume that any infinite set in $X$ has an accumulation point.
+            Then $X$ is coutably compact.
+        \end{mdframed}
+        \begin{proof}
+            Let $\bigcup_{n \in \mathbb{N}} \mathcal{O}_n = X$ be some countable cover of $X$.
+            We want to show that there exists some finite subcover of $X$.
+            Suppose by contradiction that no finite subcover exists. That is, for every reordering of our
+            countable cover,
+            \begin{align}
+                \bigcup_{i = 1}^k \mathcal{O}_i \neq X
+            \end{align}
+            Then for every $i \in \mathbb{N}$ there exists some point $x_i \in X \setminus \bigcup_{i = 1}^k
+            \mathcal{O}_i$. Thus the set $\{x_k\}_{k \in \mathbb{N}}$ is infinite.
+            For any $i \in \mathbb{N}$, the intersection $\{x_k\}_{k \in \mathbb{N}} \cap \mathcal{O}_i$ is 
+            finite by definition (it will have exactly $\max\{0, i-k\}$ elements in fact).
+            Then since the set $\{x_k\}_{k \in \mathbb{N}}$ is infinite, it will of course have some limit point
+            $x \in X$. Then since we have an open cover of $X$, we know that for some $n \in \mathbb{N}$
+            $x \in \mathcal{O}_n$. Since $x$ is a limit point of $\{x_k\}_{k \in \mathbb{N}}$ and $\mathcal{O}_n$
+            is a neighborhood of $x$, it must be the case that $\mathcal{O}_n \cap \{x_k\}_{k \in \mathbb{N}}$ is
+            an infinite set (contradiction).
+        \end{proof}
+\section*{Problem 5}
+    Let $(X, \tau_1)$ be a compact Hausdorff space.
+    \subsection*{a)}
+        \begin{mdframed}
+            Suppose $X$ is also compact in topology $\tau_2$ and assume that $\tau_2$ is finer than $\tau_1$.
+            Then $\tau_1 = \tau_2$.
+        \end{mdframed}
+        We use the following facts without proof: A closed subset of a compact space is compact in the subspace
+        topology. A compact subset of a compact Hausdorff space is closed.
+        \begin{proof}
+            Let $C$ be closed in $(X, \tau_2)$. Then, arbitrarily choose an open cover of $C$ in the subspace topology 
+            consisting only of sets from $\tau_1$. Then clearly it must yield some finite sub-cover. That is,
+            \begin{align}
+                \bigcup_{\alpha \in A}U_\alpha \cap C = C \ \ \ \Longrightarrow \ \ \ \bigcup_{\alpha \in F}U_\alpha \cap C = C
+            \end{align}
+            It follows then that $C$ is compact in the subspace topology of $(X \cap C, \tau_1)$. Since $C$ is compact
+            in this subspace, it is the case that $C$ is a closed set in $(X, \tau_1)$.
+            Since any closed set in $\tau_2$ is closed in $\tau_1$, we have $\tau_2 \subset \tau_1$. Then since 
+            $\tau_2$ is finer than $\tau_1$, we have $\tau_1 = \tau_2$.
+        \end{proof}
+    \subsection*{b)}
+        \begin{mdframed}
+            Assume only that $\tau_2$ is Hausdorff and finer than $\tau_1$. Then still $\tau_1 = \tau_2$.
+        \end{mdframed}
+        \begin{proof}
+            Let $f$ be the identity map. Then $f: (X,\tau_2) \rightarrow (X,\tau_1)$ is continuous, by $\tau_2$ being finer
+            than $\tau_1$. That is for every open set $O \in \tau_1, O \in \tau_2$. Then clearly the identity map
+            is a bijection. So it follows that this function $f$ must be a homeomorphism since it is mapping from a
+            compact Hausdorff space to a Hausdorff space. Therefore $(X, \tau_2)$ is a compact space. From there,
+            the conditions of \fbox{5a} are met so we say that $\tau_1 = \tau_2$.
+        \end{proof}
+\end{document}

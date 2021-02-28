@@ -134,8 +134,8 @@ Matrix Matrix::operator/(double _c_) {
 // Entrywise addition
 Matrix Matrix::operator+(const Matrix &A) {
     if (m_numRows != A.m_numRows || m_numCols != A.m_numCols) {
-        cout << "ERROR: matrix subtraction of invalid dimension" << endl;
-        throw("Matrix subtraction invalid dimension");
+        cout << "ERROR: matrix addition of invalid dimension" << endl;
+        throw("Matrix addition invalid dimension");
     } else {
         for (unsigned i = 0; i < m_numRows; i++) {
             for (unsigned j = 0; j < m_numCols; j++) {

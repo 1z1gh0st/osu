@@ -1,0 +1,84 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Systems of ODE's - Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Solutions to systems of ODE's}
+Suppose we have an autonomous system 
+\[x'(t) = F(x(t))\]
+The solution $x = x(t) = (x_1(t), x_2(t), \cdots , x_n(t))^T$ is a function
+\[X: I \rightarrow \mathbb{R}^n \]
+\begin{mdframed}[]
+    \begin{definition}
+        An equilibrium solution of $X' = F(x)$ is a constant solution, i.e., it takes the form
+        \[X(t) = X^* \in \mathbb{R}^n \ \ \ \ \forall t \in I \]
+        where $x^* = (x_1^*, x_2^*, \cdots ,x_n^*)^T \in \mathbb{R}^n$ is a constant vector.
+    \end{definition}
+\end{mdframed}
+The implication of this is that $X'(t) = 0 \Rightarrow F(x^*) = 0$. Sometimes these are called transient solutions.
+\\\\
+\fbox{Exponential growth/decay ODE:}
+\[ x' := \frac{dx}{dt} = rx, r \in \mathbb{R} \]
+This is solved using the seperation of variables technique, that is
+\begin{align}
+    \frac{dx}{dt} &= rx \\
+    dx &= rx dt \\
+    x^{-1} dx &= r dt \\
+    \int x^{-1} dx &= \int r dt \\
+    \ln(x) + c_0 &= rt + c_1 \\
+    \ln(x) &= rt + c \\
+    x &= Ke^{rt}
+\end{align}
+This is a one parameter $(K)$ family of solutions ($\forall K \in \mathbb{R}$ or $\mathbb{R}^+ \cup \{0\}$).
+If we are given some initial value such as $x_0 = x(0)$ then we have one unique solution based on this value.
+Specifically we have the solution $x(t) = x_0 e^{rt}$. If we ahve $x_0 = 0$ then $x(t) = 0$ for all $r \in \mathbb{R}$.
+This constant solution is called an equilibrium or steady state solution. Equilibrium solutions or equilibria are constant solutions to the ODE.
+\\\\
+\fbox{Logistic Initial Value Problem}
+\[x' = rx(1 - \frac{x}{K}), r > 0, K > 0\]
+Where $x(0) = x_0, x_0 \in \mathbb{R}^+ \cup \{0\}$.
+The solution to this can be derived using seperation of variables, giving us $x(t) = \frac{Kx_0}{x_0 + (k - x_0)e^{-rt}}$.
+If $x_0 = 0$ then we have an equilibria of $x(t) = 0$. If we have $x_0 = K$ we also have a constant solution $x(t) = K$.
+\section{Systems}
+Let $n \in \mathbb{N}$. What are the equilibrium solutions of the linear system? That is,
+\[X' = AX\]
+By definition and its consequence equilibrium solutions are solutions to $AX = 0$.
+If $\det(A) \neq 0$, then $X(t) = 0$ is the only equilibrium solution.
+We look at planar systems of linear ODE's. Then we break it down into several cases,
+based on our different eigenvalues for a $A \in M_{2 \times 2}(\mathbb{R})$ matrix.
+Our main cases are 
+\begin{align}
+    \text{Real and distinct eigenvalues} & \\
+    \text{Real repeated eigenvalues} & \\
+    \text{Complex eigenvalues}
+\end{align}
+We often get a solution of the form $X(t) = \begin{bmatrix}
+    \alpha e ^{\lambda_1 t} \\ \beta e^{\lambda_2 t}
+\end{bmatrix}$.
+Understanding the phase plane and portrait.
+\end{document}

@@ -1,0 +1,121 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Differential Geometry - Homework 3b}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{(a)}
+\begin{mdframed}
+    Determine the Hodge dual operator $*$ on all forms by computing its action on basis
+    forms at each rank.
+\end{mdframed}
+Lets begin with the 0-form.
+\begin{align*}
+    1 \wedge * 1 &= g(1,1) dx \wedge dy \wedge dz \wedge dt \\
+    \Longrightarrow *1 & = dx \wedge dy \wedge dz \wedge dt
+\end{align*}
+Now we do each of the 1-forms. We can determine the sign, using the inner product and counting
+how many times we must commute wedges to get our LHS wedge product factored out of the RHS.
+\begin{align*}
+    dx \wedge * dx & = g(dx,dx) dx \wedge dy \wedge dz \wedge dt \\
+    *dx & = dy \wedge dz \wedge dt \\
+    *dy & = -dx \wedge dz \wedge dt \\
+    *dz & = dx \wedge dy \wedge dt \\
+    *dt & = dx \wedge dy \wedge dz
+\end{align*}
+Before moving onto 2-forms, lets compute the inner products we will need:
+\begin{align*} 
+    g(dx \wedge dy, dx \wedge dy) & = \det\begin{bmatrix}
+        g(dx, dx) & g(dx, dy) \\
+        g(dy, dx) & g(dy, dy)
+    \end{bmatrix}\\
+    &= \det \begin{bmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{bmatrix}\\
+    &= 1
+\end{align*}
+\begin{align*}
+    g(dx \wedge dz, dx \wedge dz) & = \det \begin{bmatrix}
+        g(dx, dx) & g(dx, dz) \\
+        g(dz, dx) & g(dz, dz)
+    \end{bmatrix} \\
+    &= \det \begin{bmatrix}
+        1 & 0\\0 & 1
+    \end{bmatrix}\\
+    &= 1
+\end{align*}
+We can see that clearly any pair involving $dx,dy,dz$ will have an inner product of 1.
+Any pair including $dt$ will have an inner product of $-1$. Now we move on to computing the 
+Hodge operator on 2-forms:
+\begin{align*}
+    *(dx \wedge dy) & = dz \wedge dt \\
+    *(dx \wedge dz) & = -dy \wedge dt \\
+    *(dx \wedge dt) & = -dy \wedge dz \\
+    *(dy \wedge dz) & = dx \wedge dt \\
+    *(dy \wedge dt) & = dx \wedge dz \\
+    *(dz \wedge dt) & = -dx \wedge dy
+\end{align*}
+Before attending to the 3-forms, we must compute the inner product of each triple.
+We use the following
+\begin{align*}
+    g(dx \wedge dy \wedge dz,dx \wedge dy \wedge dz) = g((dx \wedge dy) \wedge dz, (dx \wedge dy) \wedge dz) & = \det \begin{bmatrix}
+        g((dx \wedge dy), (dx \wedge dy)) & g((dx \wedge dy),dz)\\g(dz, (dx \wedge dy)) &g(dz, dz)
+    \end{bmatrix}\\
+    &= \det\begin{bmatrix}
+        1&0\\0&1
+    \end{bmatrix}
+    & = 1
+\end{align*}
+We will see that any inner product involving $dt$ will gather a minus sign, while each other inner product will not.
+So we compute the hodge operator on 3-forms as follows:
+\begin{align*}
+    *(dx \wedge dy \wedge dz) &= dt \\
+    *(dx \wedge dy \wedge dt) &= dz \\
+    *(dx \wedge dz \wedge dt) &= -dy \\
+    *(dy \wedge dz \wedge dt) &= dx
+\end{align*}
+Finally for our 4-form, we compute $g(\omega, \omega) = -1$ since it will be the product of $g(dx \wedge dy \wedge dz, dx \wedge dy \wedge dz)$ and $g(dt, dt)$ which will of course be -1.
+So we say that
+\begin{align*}
+    *(dx \wedge dy \wedge dz \wedge dt) &= -1
+\end{align*}
+Or equivalently
+\[
+    *\omega = -1
+\]
+\subsection*{(b)}
+If we change our orientation so that $\omega = dt \wedge dx \wedge dy \wedge dz$,
+by the anti-commutativity of the wedge product, we can notice that
+\[
+    dx \wedge dy \wedge dz \wedge dt = -dt \wedge dx \wedge dy \wedge dz
+\]
+So using the fact that $\alpha \wedge * \alpha = g(\alpha, \alpha) \omega$
+it follows that if our bases are the same and the sign of $\omega$ is flipped,
+we can simply change the sign on our Hodge operator computations.
+\end{document}
