@@ -1,0 +1,145 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Systems of ODE's - Homework 5}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 8.1 (iii)}
+Take the following system:
+\begin{align*}
+    x'&=x+y^2\\y'&=2y
+\end{align*}
+\subsection*{a)}
+Find all of the equilibrium points and describe the behavior of the associated linearized system.\\\\
+So we want solutions such that both $x' = y' = 0$.
+If we want $y' = 0$ then we must have $2y = 0 \Longrightarrow y = 0$.
+Then once we have $y=0$ it follows that for $x' = x + y^2 = 0$ to also 
+hold we must have $x' = x + y^2 = x + 0^2 = 0$ therefore $x = 0$.
+So the one and only equilibrium point is at $(0,0)$. Having found our equilibrium
+point, now we wish to linearize the system, and observe the behavoir of this system.
+Let
+\begin{align*}
+    f(x,y)&=x+y^2\\g(x,y)&=2y
+\end{align*}
+Then we perform a (trivial) change of variables, where 
+$(a,b)$ is an equilibrium point, we let
+\begin{align*}
+    u&=x-a\\v&=y-b
+\end{align*}
+So in our case $(u,v) = (x,y)$. Then we compute
+\begin{align*}
+    u'&=f_x(0,0)u+f_y(0,0)v\\
+    v'&=g_x(0,0)u+g_y(0,0)v\\\\
+    \Longleftrightarrow
+    u'&=u\\
+    v'&=2v
+\end{align*}
+This gives us the linearized system $U' = \begin{bmatrix}
+    1&0\\0&2
+\end{bmatrix}U$. Clearly we have positive real and distinct eigenvalues 1 and 2.
+Or we can compute our trace and determinant to be $T = 1 + 2 = 3$ and $D = 1 \cdot 2 = 2$.
+Then $\Delta = T^2 - 4D = 9 - 8 = 1$. There will obviously be a nodal source behavoir
+of this system if we were to draw a phase portrait.
+\subsection*{b)}
+For the non-linear system, notice that we can take the equilibrium solutions
+$2y = 0$ and $x + y^2 = 0$. We get one solution $\langle x(t), y(t) \rangle = \langle Ce^{-t}, 0\rangle$.
+Then we also get another solution that follows the parabola $x + y^2 = 0$ that must 
+be oriented towards the origin. We can draw parallels between this and the nodal source 
+linear equilibrium solutions, which lie upon the x and y axis. Then,
+we can imagine bending the y-axis into this parabola $x + y^2 = 0$, and this will
+give us a vague idea of the behavior of the non-linearized system.
+\subsection*{c)}
+Yes, the linearized system does resemble the non-linearized system near the origin.
+Notice that the parabola $x + y^2 = 0$ is tangential to the $y$-axis as the distance from
+the origin approaches 0. Then also the solution where $2y = 0$ is indentical to the 
+solution to the linearized system everywhere including near the origin.
+\section*{Problem 8.5}
+\subsection*{a)}
+We have the system of differential equations,
+\begin{align*}
+    x'&=x^2+y\\y'&=x-a+a
+\end{align*}
+We first wish to find the equilibrium points. That is, when both $x'$ and $y'$ are equal to 0.
+To do this first we can write 
+\[
+    y' = x-y+a = 0\ \ \ \ \Longleftrightarrow \ \ \ \ y = x + a
+\]
+Then, we can put this into our equation for $x'$, giving us 
+\begin{align*}
+    x' &= x^2 + y\\
+    &=x^2 + x + a
+\end{align*}
+Since this is simply a quadratic function, it has roots given by the quadratic formula. It 
+follows that we have equilibrium points at 
+\[
+    \left(\frac{-1 \pm \sqrt{1-4a}}{2}, \frac{-1 \pm \sqrt{1-4a}}{2} + a\right) = \{p_1,p_2\} \subset \mathbb{R}^2
+\]
+Both equilibrium only exist when $a < \frac{1}{4}$.We can linearize the system by doing an exchange of variables giving us 
+\[
+    U' = \begin{bmatrix}
+        2x&1\\1&-1
+    \end{bmatrix}U
+\]
+Simply plug in $x_1, x_2$ to compute the system for each respective equilibrium point.
+\subsection*{b)}
+Now we will compute the trace, determinant, and big delta of this linear system at both
+equilibrium points $p_1, p_2$. We write
+\begin{align*}
+    T&=2x-1\\D&=-2x-1\\ \Delta&=4x^2 + 4x + 5
+\end{align*}
+So for $x = \frac{-1+\sqrt{1-4a}}{2}$ (i.e. for $p_1$), we have
+\begin{align*}
+    T&=-2+\sqrt{1-4a}\\
+    D&=-\sqrt{1-4a}\\
+    \Delta&=5-4a
+\end{align*}
+So at $p_1$ we are guaranteed a negative determinant, which means that around this point
+there will be saddle behavior.\\\\
+Then if $x = \frac{-1-\sqrt{1-4a}}{2}$, or at $p_2$,
+\begin{align*}
+    T&=-2-\sqrt{1-4a}\\
+    D&=\sqrt{1-4a}\\
+    \Delta&=5-4a
+\end{align*}
+Here our determinant is positive, so we are in the upper half of the trace-determinant plane.
+Then, our trace is guaranteed to be negative, so we are in the upper left quadrant of the trace
+-determinant plane. Then if $a < \frac{5}{4}$ (which is guaranteed when $p_2$ exists) then we are guaranteed $\Delta > 0$, that is, we have 
+real and distinct eigenvalues, thus we have nodal source resembling behavior around $p_2$.
+\section*{Problem 8.8}
+We consider the system given by
+\begin{align*}
+    r'&=r-r^3\\
+    \theta'&=\sin^2\theta + a
+\end{align*}
+Clearly we have an equilibrium point at the origin.
+Nearby to this point we have a spiral source for any initial value with $0 < r < 1$
+. For $a \leqslant -1$, for any initial value not at the origin, we have $r \rightarrow 1$ as $t \rightarrow \infty$, meaning this 
+system resembles the one presented by the hopf bifurcation. For any solution with an initial value 
+of $r = 1$, we have a solution that simply travels clockwise along the unit circle. If we observe $a \in (-1,0)$,
+we notice that two equilibrium points appear in our phase portrait, at $(1, 3\pi /4), (1, 7\pi / 4)$ that 
+locally exibit nodal source behavior.
+\end{document}

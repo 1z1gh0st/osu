@@ -1,0 +1,94 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Differential Geometry - Homework 7}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{a)}
+From \fbox{Homework 6}, we write the following elements in $\mathbb{R}^3$,
+\begin{align*}
+    d\hat r & = \sin\theta d\phi\hat\phi + d\theta\hat\theta\\
+    d\hat\theta&=\cos\theta d\phi\hat\phi - d\theta\hat r\\
+    d\hat\phi&=-\cos\theta d\phi\hat\theta - \sin\theta d\phi\hat r
+\end{align*}
+If we drop the $\hat r$ components, then we get the resulting elments,
+\begin{align*}
+    d\hat\theta&=\cos\theta d\phi\hat\phi\\
+    d\hat\phi&=-\cos\theta d\phi\hat\theta
+\end{align*}
+Then, to get our connection components, we know that 
+\[
+    \omega_{ij} = g_{ik}\omega^k_{\ j} = \omega^i_{\ j}
+\]
+Since $d\hat e_j = \omega^i_{\ j} \hat e_i$, it follows that
+\begin{align*}
+    d \hat \theta &= \omega^\phi_{\ \theta} d\hat\phi\\
+    \Longrightarrow \omega^\phi_{\ \theta} &= \cos\theta d\phi \\\\
+    d\hat\phi &= \omega^\theta_{\ \phi} d\hat\theta \\
+    \Longrightarrow \omega^\theta_{\ \phi} &= -\cos\theta d\phi
+\end{align*}
+So writing all our connective componenets into a matrix
+we can write this out as
+\[
+    \begin{bmatrix}
+        \omega_{\theta \theta} & \omega_{\theta \phi} \\
+        \omega_{\phi \theta} & \omega_{\phi \phi}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        \omega^{\theta}_{\ \theta} & \omega^{\theta}_{\ \phi} \\
+        \omega^{\phi}_{\ \theta} & \omega^{\phi}_{\ \phi}
+    \end{bmatrix} =
+    \begin{bmatrix}
+        0 & -\cos\theta d\phi \\
+        \cos\theta d\phi & 0
+    \end{bmatrix}
+\]
+\subsection*{b)}
+Then we compute $\Omega^i_{\ j} = d\omega^i_{\ j} + \omega^i_{\ k} \wedge \omega^k_{\ j}$
+for this part. First note that since we have only two coordinates, any term of the form 
+\[
+    \omega^i_{\ k} \wedge \omega^{k}_{\ j}
+\]
+Is guaranteed to have one of them be $\omega^k_{\ k} = 0$, and therefore the whole term
+goes to 0. Thus we have $\Omega^i_{\ j} = d\omega^i_{\ j}$. From this we get 
+\begin{align*}
+    \Omega_{\theta \phi} &= d\omega^\theta_{\ \phi} = d(-cos\theta d\phi) = \sin\phi d\phi \wedge d\theta\\
+    \Omega_{\phi \theta} &= d\omega^\phi_{\ \theta} = d(cos \theta d\phi) = -\sin\phi d\phi \wedge d\theta
+\end{align*}
+Note that $\Omega_{i i} = d\omega^i_{\ i} = d(0) = 0$ is guaranteed quite easily.
+ Now we simply write these $\Omega$ as a matrix,
+\[
+    \begin{bmatrix}
+        \Omega_{\theta \theta} &\Omega_{\theta \phi}\\
+        \Omega_{\phi \theta} & \Omega_{\phi \phi}
+    \end{bmatrix} = \begin{bmatrix}
+        0 & \sin\phi d\phi \wedge d\theta \\
+        -\sin\phi d\phi \wedge d\theta & 0
+    \end{bmatrix}
+\]
+\end{document}

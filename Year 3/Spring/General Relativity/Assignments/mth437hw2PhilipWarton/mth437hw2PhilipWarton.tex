@@ -1,0 +1,107 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Relativity - Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+The line element for Schwarzschild black holes is,
+\[
+    ds^2 = -\left(1 - \frac{2m}{r}\right)dt^2 + \frac{dr^2}{1-\frac{2m}{r}} + r^2(d\theta^2 + \sin^2\theta d\phi^2)
+\]
+\section*{Problem 1}
+\subsection*{a)}
+\begin{mdframed}
+    Find an expression for the infinitesimal distance between nearby shells, assuming that only the radius changes (and that $r > 2m$).
+\end{mdframed}
+Let $r > 2m$. To find such an expression, we assume that we want distance given that only our radius $r$ changes, and that none of our other coordinate variables change.
+If these have no change, then we say that their derivative is equal to 0.
+That is, let $dt, d\theta, d\phi = 0$. Then we wish to compute $ds$ given that those non-radial derivatives are fixed as such. We write 
+\begin{align*}
+    ds^2 &=  -\left(1 - \frac{2m}{r}\right)0^2 + \frac{dr^2}{1-\frac{2m}{r}} + r^2(0^2 + \sin^2\theta (0^2))\\
+    &= \frac{dr^2}{1-\frac{2m}{r}}\\\\
+    \Longrightarrow ds &= \frac{dr}{\sqrt{1-\frac{2m}{r}}}
+\end{align*}
+\subsection*{b)}
+\begin{mdframed}
+    What happens as $r$ approaches $2m$ from above, what happens to the expression? How far away is the horizon?
+    Do you ever get to the horizon?
+\end{mdframed}
+As $r \rightarrow 2m^+$ we say that $ds \rightarrow \frac{dr}{\sqrt{1 - 1}}$. If we fix the differential $dr = c \in \mathbb{R}$ to be constant, 
+then it follows that $ds \rightarrow \infty$. This indicates that the horizon may be infinitely far away, and that one can never get to the horizon.
+\\\\
+However, as a corallary, what if one could construct a function of $r$ based on some parameter such that $r \rightarrow 2m^{+}$ and $dr \rightarrow 0$ at a similar rate?
+Take 
+\[
+    r(u) = 2m + \frac{1}{u}, \ \ \ \ r'(u) = \frac{-1}{u^2}
+\]
+Now it follows that as $u \rightarrow \infty$ we have 
+\begin{align*}
+    ds &\rightarrow \lim_{u \rightarrow \infty}\frac{-u^{-2}}{\sqrt{1-(2m)/(2m + u^{-1})}}\\
+    &= \lim_{u \rightarrow \infty} \frac{-1}{u^2\sqrt{1-(2m)/(2m + u^{-1})}}
+\end{align*}
+This is going to diverge to negative infinity somehow, which means that either I've done something wrong, or the behavior or very strange.
+No matter which convergent function you plug into the derivative, I sense that it would like still diverge, and that the distance to the horizon is infinite.
+\section*{Problem 2}
+\begin{mdframed}
+    Let $m = 5km$. Let $r \in \mathbb{R}$ be given and fixed, and $\Delta r = \frac{1}{1000} km$.
+    We use the expression from \fbox{Problem 1a} to approximate the radial distance between the shells for each of the following.
+\end{mdframed}
+\subsection*{a)}
+We approximate the change in difference by $\Delta s$ where we compute,
+\begin{align*}
+    \Delta s &\approx \frac{\Delta r}{\sqrt{1 - 2m/r}}\\
+    &\approx \frac{1/1000}{\sqrt{1 - 2(5)/r}} \\
+    &\approx \frac{1}{1000\sqrt{1- 10/r}} \\
+\end{align*}
+If we choose $r = 50$ then we get $\Delta s \approx \frac{\sqrt{5}}{2000} \approx 0.001118$ km.
+\subsection*{b)}
+If we choose $r = 15$ then we get $\Delta s \approx \frac{\sqrt{3}}{1000} \approx 0.001732$ km.
+\subsection*{c)}
+If we choose $r = 10.5$ then we get $\Delta s \approx \frac{\sqrt{21}}{1000} \approx 0.004583$ km.
+\section*{Problem 3}
+\section*{a)}
+\begin{mdframed}
+    Use the expression for infinitesimal distnace to determine the exact radial distance between two shells.
+\end{mdframed}
+We have an expression for the differential $ds$ and want the exact distance $s$. So we must integrate $ds$ with respect to $r$.
+This can be computed using Wolfram$|$Alpha given the input:
+\begin{verbatim}
+{Integrate[1/Sqrt[1 - 2*(m/r)], r], r > 2*m}
+\end{verbatim}
+We get the following result for exact distance,
+\[
+    s = \int ds = r \sqrt{1-2m/r} + 2m \tanh^{-1}\sqrt{1- 2m/r} + c
+\]
+\subsection*{b)}
+Decide wether the radial distance to the horizon is finite or infinite.
+We use the computer solver to check the limit of $s$ as $r \rightarrow 2m^{+}$.
+We input
+\begin{verbatim}
+Limit[r*Sqrt[1 - 2/r] + 2*ArcTanh[Sqrt[1 - 2/r]], r -> 2, Direction -> -1]
+\end{verbatim}
+Which gives us the result of 0, which means that the distance to the horizon is finite.
+\end{document}

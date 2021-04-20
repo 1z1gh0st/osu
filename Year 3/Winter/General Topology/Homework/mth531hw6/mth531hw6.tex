@@ -1,0 +1,233 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and Fundamental Groups - Homework 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{a)}
+\begin{mdframed}
+    Let $\pi : X \rightarrow Y$ be continuous, and $\sigma : Y \rightarrow X$ such that $\pi \circ \sigma = Id_Y$. Show that $\pi$ is a quotient map.
+\end{mdframed}
+\begin{proof}
+    This proof will consist of showing the following conditions: $\pi$ is surjective, $U \subset Y$ is open if and only if $\pi^{-1}(U) \subset X$ is open.\\\\
+    \fbox{$\pi$ is a surjection.}\\\\
+    Suppose by contradiction that $\pi$ is not a surjection. Then $\exists y \in Y$ such that $\pi^{-1}(y) = \emptyset$.
+    However we know that 
+    \[
+        \pi \circ \sigma (y) = Id_Y (y) = y
+    \]
+    However $\sigma(y)$ is an element of $X$ such that $\pi$ maps it to $y$ thus $\sigma(y) \in \pi^{-1}(y)$, and the set is not empty (contradiction).
+    Thus $\pi$ is surjective.\\\\
+    \fbox{$U \subset Y$ is open if and only if $\pi^{-1}(U)\subset X$ is open.}\\\\
+    Since $\pi$ is assumed continuous, we have $U \subset Y$ open implies $\pi^{-1}(U) \subset X$ open already granted.
+    Now assume that $U \subset Y$ is some set such that $\pi^{-1}(U)$ is open. Then since $\sigma$ is continuous it follows that 
+    $\sigma^{-1}(\pi^{-1}(U))$ is open in $Y$. Then we can write 
+    \begin{align*}
+        \sigma^{-1}(\pi^{-1}(U)) &= Id_Y(\sigma^{-1}(\pi^{-1}(U))\\
+        &= \pi(\sigma(\sigma^{-1}(\pi^{-1}(U))) \\
+        &\subset \pi(\pi^{-1}(U)) = U && \text{(since $\pi$ is injective)}
+    \end{align*}
+    Then by set theory we get the following result,
+    \begin{align*}
+        U &= U \\
+        Id_Y(U) &= U \\
+        \pi (\sigma(U)) &= U \\
+        \pi^{-1}(\pi(\sigma(U))) &= \pi^{-1}(U) \\
+        \sigma^{-1}(\pi^{-1}(\pi(\sigma(U)))) &= \sigma^{-1}(\pi^{-1}(U))\\
+        U \subset \sigma^{-1}(\sigma(U)) \subset \sigma^{-1}(\pi^{-1}(\pi(\sigma(U)))) &= \sigma^{-1}(\pi^{-1}(U))
+    \end{align*}
+    Since the two are subsets of each other, we get 
+    \[
+        U = \sigma^{-1}(\pi^{-1}(U))
+    \]
+    So it follows that, of course, $U$ is an open set in $Y$. Finally having shown both of these conditions, we say that $\pi$ is a quotient map.
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}
+    Let $A \subset X$ be equipped with the subspace topology.
+    A retraction of $X$ onto $A$ is a continuous map $r: X \rightarrow A$ such that $r(a) = a$ for all
+    $a \in A$. Show that any retraction $r$ is a quotient map.
+\end{mdframed}
+\begin{proof}
+    We know that $a \in r^{-1}(a)$ for any $a \in A$, which gives us $r$ is an injection trivially.
+    Then we wish to show that $r^{-1}(U)$ being open in $X$ implies $U$ is open in $A$. Note that since $r$ is surjective and for any subset $U \subset A, r(U) = U$, it must be the case that 
+    \begin{align*}
+        U \cap A &= U \\
+        r(r^{-1}(U)) \cap r(A) &= r(U) \\
+        r^{-1}(U) \cap A &= U
+    \end{align*}
+    Then since $r^{-1}(U)$ is open by assumption, $U$ is open in the subspace topology of $A$ by definition. Thus it follows that $r$ is a quotient map by the critereon met for 
+    \fbox{1a}.
+\end{proof}
+\section*{Problem 2}
+\begin{mdframed}
+    Let $\pi : X \rightarrow Y$ be a quotient map. Suppose that the saturation of any open set in $X$ is open.
+    Show that $\pi$ is an open map. Does the analogous statement hold with closed sets and closed maps?
+\end{mdframed}
+\fbox{Open}
+\begin{proof}
+    Suppose by contradiction that $\pi$ is not an open map.
+    Then $\exists U \subset X$ open such that $\pi(U)$ is not open.
+    Denote $V = \pi(U)$. Then since $\pi$ is a quotient map we know that $V \subset Y$ is 
+    open if and only if $\pi^{-1}(V)$ is open. That is, if $V$ is not open then we have 
+    $\pi^{-1}(\pi(U))$ is not open in $X$ (contradiction).
+\end{proof}
+Now for closed sets.\\\\
+\fbox{Closed}\\\\
+We repeat the same argument for $\pi$ being a closed maps, since the condition of quotient maps stating
+$U \subset Y$ is open if and only if $\pi^{-1}(U)$ is open yields a similar property of closed sets.
+Let us first prove this fact.
+\begin{proof}
+    Let $q:X\rightarrow Y$ be a quotient map. We want to show that $C \subset Y$ is closed if and only if
+    $q^{-1}(C) \subset X$ is closed.\\\\
+    \fbox{$\Rightarrow$} Let $C \subset Y$ be an arbitrary closed set. We know that $q$ is continuous, thus $q^{-1}(C)$ is closed.
+    \\\\
+    \fbox{$\Leftarrow$} Let $q^{-1}(C)$ be a closed saturated set in $X$. 
+    Then we know
+    \begin{align*}
+        X \setminus q^{-1}(C) &= q^{-1}(Y) \setminus q^{-1}(C)\\
+        &= q^{-1}(Y \setminus C) \\
+    \end{align*}
+    Since $q^{-1}(Y \setminus C)$ is an open set in $X$ it must be the case that $Y \setminus C$ is open in $Y$,
+    hence $C$ is closed.
+\end{proof}
+Now the same argument for open sets should follow quite easily.
+\begin{proof}
+    Suppose that $\pi$ is not a closed map. Then $\exists C \subset X$ that is closed such that $\pi(C)$ is not.
+    Denote $D = \pi(C)$. Then we know that $D$ is closed if and only if $\pi^{-1}(D)$ is closed. Thus if $D$ is
+    not closed $\pi^{-1}(D) = \pi^{-1}(\pi(C))$ is not closed. However, this contradicts the assumption that for 
+    every closed set $C$ its saturation $\pi^{-1}(\pi(C))$ is closed.
+\end{proof}
+\section*{Problem 3}
+\subsection*{a)}
+\begin{mdframed}
+    Let $\pi_i: X_i \rightarrow Y_i, i = 1,2,\cdots,n$ be continuous, surjective, and open.
+    Show that the map $\pi = \pi_1 \times \pi_2 \times \cdots \times \pi_n : X_1 \times X_2 \times \cdots \times X_n \rightarrow Y_1 \times Y_2 \times \cdots \times Y_n$
+    is a quotient map.
+\end{mdframed}
+\begin{proof}
+    We will prove this for the case of a product of two spaces, and naturally since $\pi$ maps topological spaces,
+    this will clearly extend to any finite product.
+    We start by writing 
+    \[
+        \pi = \pi_1 \times \pi_2 : X_1 \times X_2 \rightarrow Y_1 \times Y_2
+    \]
+    \fbox{Continuity}\\\\
+    Let $U \subset Y_1 \times Y_2$ be open, it can be written as $U = U_1 \times U_2$ where $U_1 \subset Y_1$ and $U_2 \subset Y_2$ are open.
+    Then 
+    \begin{align*}
+        \pi^{-1}(U) = \{(a,b) : \pi(a,b) \in U_1 \times U_2 \}\\
+        &=\{(a,b) : a\in \pi_1^{-1}(U_1), b \in \pi_1^{-2}(U_2)\}\\
+        &=\pi_1^{-1}(U_1) \times \pi_2^{-1}(U_2)
+    \end{align*}
+    Since this is a product of open sets in $X_1, X_2$ respectively, it is an open set. Therefore $\pi$ is continuous.
+    \\\\
+    \fbox{Surjectivity}\\\\
+    Let $(y_1, y_2) \in Y_1 \times Y_2$. Since $\pi_1, \pi_2$ are surejctive, $\exists x_1\in X_1, x_2 \in X_2$ such that 
+    $\pi_1(x_1) = y_1, \pi_2(x_2) = y_2$ therefore $\pi(x_1, x_2) = (y_1,y_2)$. So we have shown that $\pi$ is surjective.\\\\
+    \fbox{Open Map Property}\\\\
+    Let $U \subset X_1, V \subset X_2$ be open and equivalently $U \times V \subset X_1 \times X_2$ be open.
+    Then we say $\pi(U \times V) = \pi_1(U) \times \pi_2(V)$. Since $\pi_i$ are open maps, we have a product of open sets, thus an open set.
+    Therefore $\pi$ is an open map.
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}
+    Let $X$ be T2 and suppose that $K \subset X$ is compact. Show that $X / K$ is T2.
+\end{mdframed}
+\begin{proof}
+    Let $x \neq y \in X / K$. If both are equal to $K$, then the points are not distinct. If neither are 
+    equal to $K$, then they must be singleton points in $X \setminus K$. Then since they are points in $X$ which is $T_2$,
+    choose two neighborhoods $U,V$ of $x,y$ respectively such that they are disjoint. Then since $K$ is compact in a $T_2$ space,
+    we say that $K$ must be closed. So we can take the following sets,
+    \[
+        U \cap (X \setminus K), \ \ \ \ V \cap (X \setminus K)
+    \]
+    These will be open neighborhoods of $x$ and $y$ that are disjoint from each other, and also disjoint from $K$, so they will remain disjoint
+    under this quotient topology. Thus we have two disjoint neighborhoods of $x$ and $y$ in $X / K$. Suppose that $x = K, y \neq K$.
+    Then we must show that distinct neighborhoods around $K$, and some point $y \in X \setminus K$ both exist. Let $U(a)$ be a set around a point $a \in K$ such that
+    it is disjoint from a set $V(y)$ which is a neighborhood of $Y$. Since $K$ is compact, we know 
+    \[
+        K = \bigcup_{a \in K}U(a) \cap K = \bigcup_{i = 1}^n U(a_i) \cap K
+    \]
+    Then for each set $U(a_i)$, we know that there is some $V_i(y)$ that is disjoint from it. So then it follows that the following sets will be the distinct open neighborhoods we require,
+    \[
+        K \subset \bigcup_{i=1}^n U(a_i), \ \ \ \ y \in \bigcap_{i=1}^n V_i(y)
+    \]
+    Thus under the quotient map, these sets will remain disjoint because only one intersects $K$ and both are disjoint in $X$. Thus for any two distinct points 
+    in $X/K$ we have disjoint open neighborhoods of each, and we say that the space $X / K$ is itself $T_2$.
+\end{proof}
+\section*{Problem 4}
+The $K$-topology $\mathbb{R}_K$ on the real axis is generated by the basis consisting of all open
+intervals $(a,b), a < b$, and the sets $(a,b) \setminus K$, where $K = \{1 / n | n \in \mathbb{N}\}$.
+Let $\mathbb{R}_K / K$ be equipped with the quotient topology and let $\pi$ denote the quotient map.
+\subsection*{a)}
+\begin{mdframed}
+    Show that $\mathbb{R}_K / K$ is T1 but not T2.
+\end{mdframed}
+\begin{proof}
+    Let $x,y \in \mathbb{R}_K / K$. We want to show that there exists some neighborhood $U$ containing $x$ and not $y$.
+    If $x,y \neq [K]$, then choose $U = \mathbb{R} \setminus \{y\}$. Since $[K] \in U$, we know that its pre-image $\pi^{-1}(U) = \mathbb{R} \setminus \{y\} = (-\infty,y) \cup (y, \infty)$
+    which is open in $\mathbb{R}_K$. Thus $U \subset \mathbb{R}_K / K$ is open in the quotient space and contains $x$ and not $y$.
+    Now suppose that $x = [K]$. The same arugment still holds since $U = \mathbb{R} \setminus \{y\}$ still contains $K$.
+    Suppose that $y = [K]$, then let $a < x < b$ such that $a,b \notin K$. Take the set 
+    $U = (a,b) \setminus K$. Clearly the set contains $x$ and not $y$. Since it is disjoint from $K$ its pre-image is equal to the set so $\pi^{-1}(U) = U = (a,b) \setminus K$.
+    This set is clearly open in $\mathbb{R}_K$ thus $U \subset \mathbb{R}_K / K$ is open.\\\\
+    To show that it is not T2, take the points $0, K \in \mathbb{R}_K / K$. Since every $1/ n$ is contained in $K$,
+    for each of these we must have some interval of the form $(a,b) \ni 1/n$ that lies within any open neighborhood of $K$,
+    since open intervals of the other form are disjoint from $K$. Then for any $\epsilon > 0$ there exists a point not of the form $1/n$ in the interval $(0, \epsilon)$.
+    Thus it follows that any open neighborhood of $0$, even of the form $(a,b) \setminus K$ will still intersect any open neighborhood of $K$.
+    Therefore these two points are not completely seperated, and $\mathbb{R}_K/K$ is not T2.
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}
+    Show that $\pi \times \pi : \mathbb{R}_K \times \mathbb{R}_K \rightarrow \mathbb{R}_K / K \times \mathbb{R}_K / K$ is not a quotient map.
+\end{mdframed}
+\begin{proof}
+    We know (by a previous HW problem) that the diagonal, denoted by $\Delta$, of a product space is closed if and only if the original space is Hausdorff (that is, T2).
+    So it follows that since $\mathbb{R}_K / K$ is not T2, $\Delta$ is not closed. Take $(\pi \times \pi)^{-1}(\Delta)$. This will be the set 
+    \[
+        \{(x,y) \in \mathbb{R}_K \times \mathbb{R}_K : \pi(x) = \pi(y)\}
+    \]
+    This will consist of all pairs of identical points obviously, and also of all points in $K \times K$, since each of these are appended to each other.
+    So we can write the set as $K \times K \cup \{(x,x) \in \mathbb{R}^2\}$. We argue that this set is equal to its closure in $\mathbb{R}_K^2$. Let $(x,y) \in \mathbb{R}_K^2 \setminus (\pi \times \pi)^{-1}(\Delta)$.
+    Then if neither $x$ or $y$ is in $K$, then pick two disjoint neighborhoods of $x$ and $y$ which are also both disjoint from $K$, that is pick $U \ni x, V \ni y$ such that 
+    $U \cap V = \emptyset, U \cap K = \emptyset, V \cap K = \emptyset$.
+    This is guaranteed since $K$ is closed, so take two disjoint neighborhoods and intersect them with the complement of $K$.
+    Then it follows that $(x,y) \in U \times V$ and that this is a neighborhood of that point disjoint from $(\pi \times \pi)^{-1}(\Delta)$.
+    Suppose that $x$ or $y$ belongs to $K$. Then take two disjoint intervals $x \in (a,b), y \in (c,d)$ such that $y \notin (a,b), x \notin(c,d)$.
+    Also we add that whichever interval contains the point not in $K$ be restricted to $K$'s complement.
+    Then if $x$ belongs to $K$, we have the neighborhood \[(a,b) \times ((c,d) \setminus K)\] If $y \in K$ we take
+    \[
+        ((a,b) \setminus K) \times (c,d)
+        \]
+    And it follows that these are disjoint from $(\pi \times \pi)^{-1}(\Delta)$ by construction. Therefore any point in the complement of the pre-image of
+    the diagonal has a neighborhood that is contained within the complement of the pre-image of the diagonal. Therefore the pre-image of the diagonal is closed.
+    So we say that $\Delta$ is not closed and $(\pi \times \pi)^{-1}(\Delta)$ is, therefore $\pi \times \pi$ is not a quotient map.
+\end{proof}
+
+\end{document}

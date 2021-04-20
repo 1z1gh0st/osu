@@ -1,0 +1,79 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and Fundamental Group - Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Introduction to Algebraic Topology}
+Let $Top = \{\text{all topological spaces}\}$ and let $Alg = \{ \text{all groups/rings/
+}\cdots \}$. Then we have a functor $F: Top \rightarrow Alg$.
+$Top$ is equipped with continuous functions. If $f: X \rightarrow Y$ is continuous then 
+there exists $f_*: F(X) \rightarrow F(Y)$. The function $f_*$ must satisfy:
+\begin{align}
+    f = id \ \ \ &\Longrightarrow \ \ \ f_* = id \\
+    f:X\rightarrow Y,g:Y\rightarrow Z \ \ \ &\Longrightarrow \ \ \ (g \circ f)_* = g_* \circ f_*
+\end{align}
+If $f$ is homeomorphic then $f_*$ is isomorphic.
+\begin{mdframed}
+    \begin{definition}[Path]
+        Let $X$ be a topological space with $x_0,x_1\in X$. A path $\alpha$ is a function 
+        $\alpha : I \rightarrow X$ such that $\alpha(0) = x_0, \alpha(1) = x_1$ is a path in $X$.
+    \end{definition}
+\end{mdframed}
+The constant path $\alpha(t) = x \forall t$ can be written simply as $\alpha = x$.
+\begin{mdframed}
+    \begin{definition}[Path Homotopy]
+        Two paths from $x_0$ to $x_1$ are said to be homotopic if $\exists F:I \times I \rightarrow X$
+        such that
+        \begin{align}
+            &F(t,0) = \alpha(t)\\
+            &F(t,1) = \beta(t)\\
+            &F(0,u) = x_0 \\
+            &F(1,u) = x_1
+        \end{align}
+        and $F$ is continuous.
+    \end{definition}
+\end{mdframed}
+For path homotopy we write $\alpha \simeq_p^F \beta$. Now this is an equivalence relation, that is,
+\begin{align}
+    \alpha &\simeq_p \alpha \\
+    \alpha &\simeq_p \beta \Longrightarrow \beta \simeq_p \alpha \\
+    \alpha &\simeq_p \beta, \beta \simeq_p \gamma \Longrightarrow \alpha \simeq_p \beta & \text{by glueing lemma}
+\end{align}
+We show this now.
+\begin{proof}
+    Assume that $\alpha \simeq_p \beta$.
+\end{proof}
+We can define a concatenation of two paths $\alpha, \beta$ such that $\alpha(1) = \beta(0)$ as 
+\[
+    \alpha * \beta : I \rightarrow X, \alpha * \beta (t) = \begin{cases}
+        x_0, & t \in [0, 1/2] \\
+        \alpha(2t-1), & t \in (1/2, 1]
+    \end{cases}
+\]
+One can show that $x_0 * \alpha \simeq_p \alpha$.
+\end{document}

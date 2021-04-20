@@ -1,0 +1,273 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Intro to Differential Geoemetry - Final Exam}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{a)}
+Express the triple product $T(\vec{u},\vec{v},\vec{w}) = (\vec{u} \times \vec{v}) \cdot \vec{w}$ in differential forms.
+\\\\
+If $\vec{a}$ is a vector $\vec{a} = a_x \hat x + a_y \hat y + a_z \hat z$ we say that it is 
+equivalent to the differential form $a = a_x dx + a_y dy + a_z dz \in \bigwedge^1 (\mathbb{R}^3)$.
+Then we say that 
+\[
+(\vec u \times \vec v) \cdot \vec w = (\star (u \wedge v)) \cdot \vec w = \star((\star(u \wedge v)) \wedge \star w)
+\]
+\subsection*{b)}
+Show that $(\vec u \times \vec v) \cdot \vec w = \vec u \cdot (\vec v \times \vec w)$.
+\begin{proof}
+    We begin by rewriting $(\vec u \times \vec v) \cdot \vec w = \vec w \cdot (\vec u \times \vec v)$.
+    This is the case because the dot product in $\mathbb{R}^3$ is of course symmetric. This can now be written 
+    in differnetial froms as 
+    \[
+        \star ( w \wedge \star ( \star (u \wedge v)))
+    \]
+    Then, since $\star \star \alpha = (-1)^{k(n-k)} \alpha = \alpha$, we write 
+    \begin{align*}
+        (\vec u \times \vec v) \cdot \vec w &= \star ( w \wedge (u \wedge v))\\
+        &=\star ( w \wedge u \wedge v) & \text{(by associativity of the wedge)}\\
+        &=\star (u \wedge v \wedge w) & \text{(by antisymmetry of the wedge)}\\
+        &= \star(u \wedge (v \wedge w))\\
+        &= \star(u \wedge \star(\star(v \wedge w)))\\
+        &= \vec u \cdot (\vec v \times \vec w)
+    \end{align*}
+\end{proof}
+\section*{Problem 2}
+\subsection*{a)}
+\subsubsection*{$\beta_1$}
+The form is closed. That is,
+\begin{align*}
+    d\beta_1 &= d(xdy \wedge dz - y dz \wedge dx) \\
+    &= (1)dx \wedge dy \wedge dz - (1)dy \wedge dz \wedge dx \\
+    &= dx \wedge dy \wedge dz - dx \wedge dy \wedge dz & \text{(antisymmetry)} \\
+    &= 0
+\end{align*}
+\subsubsection*{$\beta_2$}
+The form is not closed. That is,
+\begin{align*}
+    d\beta_2 &= d(xdy \wedge dz + y dz \wedge dx) \\
+    &= (1)dx \wedge dy \wedge dz + (1)dy \wedge dz \wedge dx \\
+    &= dx \wedge dy \wedge dz + dx \wedge dy \wedge dz & \text{(antisymmetry)} \\
+    &= 2 dx \wedge dy \wedge dz
+\end{align*}
+\subsection*{b)}
+\subsubsection*{$\beta_1$}
+This form may be exact since $d \beta_1 = 0$, otherwise we would violate the notion of $d^2 = 0$.
+We know that to produce a $xdy \wedge dz$ term we must have either a $yxdz$ or $-zxdy$ term, and similarly
+to produce a $ydz \wedge dx$ term we must have either a $zydx$ or $-xydz$ term. The combination that produces
+the necessary cancellations is
+\[
+\alpha_1 = -zxdy - zydx + C dz
+\]
+Where $C \in \mathbb{R}$ is a constant. Taking the derivative of this will produce $\beta_1$.
+\begin{align*}
+    d \alpha_1 &= d(-zxdy) - d(zydx) + dCdz \\
+    &= [xdy \wedge dz - z dx \wedge dy] - [-zdx \wedge dy + y dz \wedge dx] + [0] \\
+    &= xdy\wedge dz - ydz \wedge dx\\
+    &= \beta_1
+\end{align*}
+\subsubsection*{$\beta_2$}
+This form cannot be exact. Suppose that $\exists \alpha_2$ such that $d\alpha_2 = \beta_2$.
+Then $d(d\alpha_2) = d^2 \alpha_2 = d\beta_2 \neq 0$ (contradiction).
+\section*{Problem 3}
+\subsection*{a)}
+Let our space be $\bigwedge^p(M)$ where $M$ is a 3-dimensional coordinate space with coordinates $t, \psi, \phi$.
+Our orthonormal basis will be determined by the coefficients of our $d\vec{r}$ vector which can be 
+accurately derived by observing the line element, 
+\begin{align*}
+    ds^2 &= -dt^2 + r^2(d\psi^2 + \sinh^2\psi d\phi^2)\\
+    \Longrightarrow d\vec{r} &= -\hat t + r \hat \psi + r\sinh \psi \hat \phi
+\end{align*}
+So we write our orothonormal basis as $\{dt, rd\psi, r\sinh\psi d\phi\}$. Hence the orientation 
+is the wedge product of these.
+To compute all $\star$ operations in this space, let us begin with the obvious 0-form,
+\begin{align*}
+    \star 1 &= \omega
+\end{align*}
+Then before moving on let us express the metric tensor as a matrix of orthonormal basis, based upon the signs observed 
+in the line element. That is,
+\[
+    g^{ij} = \begin{bmatrix}
+        -1 &0&0\\0&1&0\\0&0&1
+    \end{bmatrix}
+\]
+Where $i,j = dt, rd\psi,r\sinh\psi d\phi$. Then we can compute the hodge duals of our basis 1-forms,
+\begin{align*}
+    dt \wedge \star dt &= g^{dt,dt}r^2 \sinh\psi dt \wedge d\psi \wedge d\phi \\
+    \star dt &= (-1)r^2 \sinh\psi d\psi \wedge d\phi\\\\
+    rd\psi \wedge \star rd\psi &= g^{rd\psi, rd\psi}r^2 \sinh\psi dt \wedge d\psi \wedge d\phi \\
+    \star rd\psi &= -r\sinh\psi dt \wedge d\phi \\\\
+    r\sinh\psi d\phi \wedge \star r\sinh\psi d\phi  &= g^{r\sinh\psi d\phi, r\sinh\psi d\phi }r^2 \sinh\psi dt \wedge \psi \wedge d\phi \\
+    \star r\sinh\psi d\phi &= rdt \wedge d\psi
+\end{align*}
+Now can move on to our hodge duals of basis 2-forms, which we can derive from our hodge duals of basis 1-forms, knowing 
+that $(-1)^{k(n-k)} = 1$ since $k(n-k)$ is even as long as $n$ is odd (in 3 dimensions $n = 3$). So it follows that $\star \star \alpha = \alpha$.
+So immediately we have 
+\begin{align*}
+    \star r \sinh \psi d\phi &= rdt \wedge d\psi &\Longrightarrow& \star r dt \wedge d\psi = r \sinh\psi d\phi \\
+    \star rd\psi &= -r\sinh\psi dt \wedge d\phi &\Longrightarrow& \star r \sinh\psi dt \wedge d\phi = -rd\psi \\
+    \star dt &= (-1)r^2 \sinh\psi d\psi \wedge d\phi &\Longrightarrow& \star r^2\sinh\psi d\psi \wedge d\phi = -dt
+\end{align*}
+Then finally for our basis 3-form, we say that $\star \omega = \star \star 1 = 1$.
+\subsection*{b)}
+We compute the Laplacian of a function $f, \Delta f$ by the relation $\Delta f = \star d \star d f$. We write,
+\begin{align*}
+    df &= \frac{\partial f}{\partial t} dt + \frac{\partial f}{\partial \psi} d\psi + \frac{\partial f}{\partial \phi} d\phi \\
+    \star df &=\frac{\partial f}{\partial t} \star dt + \frac{\partial f}{\partial \psi} \star d\psi + \frac{\partial f}{\partial \phi} \star d\phi \\
+    d \star df &=\frac{\partial^2 f}{\partial t^2} dt \wedge \star dt + \frac{\partial^2 f}{\partial \psi^2} d\psi \wedge \star d\psi + \frac{\partial^2 f}{\partial \phi^2}d\phi \wedge \star d\phi \\
+    d \star df &=(-f_{tt} + f_{\psi\psi} + f_{\phi\phi})\omega \\
+    \star d\star df &= -f_{tt} + f_{\psi\psi} + f_{\phi\phi} \\
+    \Delta f &= -f_{tt} + f_{\psi\psi} + f_{\phi\phi}
+\end{align*}
+\section*{Problem 4}
+We have the line element 
+\[
+    ds^2 = a^2\left(\frac{dX^2 + dY^2}{Y^2}\right)
+\]
+Which yields the $d\vec r$ vector as 
+\[
+    d\vec r = \frac{a}{Y}dX \hat X + \frac{a}{Y} dY \hat{Y}
+\]
+We take our orthonormal basis to be,
+\[\left\{\sigma^X = \frac{a}{Y} dX, \ \ \ \ \sigma^Y = \frac{a}{Y} dY\right\}\]
+With $\omega = \frac{a^2}{Y^2}dX \wedge dY$. By the structure equations we can derive the following,
+\begin{align*}
+    d\sigma^X &= (0)dX \wedge dX - \frac{a}{Y^2} dY \wedge dX = -\frac{a}{Y^2} dY \wedge dX\\
+    d\sigma^Y &= (0)dX \wedge dY - \frac{a}{Y^2} dY \wedge dX = 0
+\end{align*}
+So then from $0 = d\sigma^X + \omega^X_{\ Y} \wedge \sigma^Y$ it follows that 
+\begin{align*}
+    -\frac{a}{Y^2} dY \wedge dX &= -\omega^X_{\ Y} \wedge \frac{a}{Y}dY \\
+    \frac{1}{Y} dY \wedge dX &= \omega^X_{\ Y} \wedge dY \\
+    \frac{1}{Y}dX &= \omega^X_{\ Y} 
+\end{align*}
+And then taking the derivative we have, \[
+    d\omega^X_{\ Y} = \frac{-1}{Y^2}dX \wedge dY = K \frac{a^2}{Y^2} dX \wedge dY
+    \] 
+Which immediately yields $K = -1 / a^2$. This result seems correct because with an extremely large scaling 
+factor $a$, our curvature will become much smaller, but we will always remain in negative curvature since it is a hyperbolic surface.
+\section*{Problem 5}
+\subsection*{a)}
+We want to compute the integral over the interior of $S^3$. First let us derive our orientation and orthonormal basis from the 
+line element. We get $\{dr, r d\psi, r\sin\psi d\theta, r \sin\psi \sin\theta d\phi\}$. Then we can write 
+\[
+\omega = r^3\sin^2\psi\sin\theta dr \wedge d\psi \wedge d\theta \wedge d\phi
+    \]
+Now notice that if we take the 3-form $\alpha = \frac{1}{4}r^4 \sin^2 \psi \sin \theta d\psi \wedge d\theta \wedge d\phi$,
+its derivative is equal to $\omega$. So then, by Stokes theorem, we have 
+\begin{align*}
+    \int_{B^4} \omega = \int_{B^4}d\alpha &= \int_{S^3} \alpha
+\end{align*}
+Where $B^4$ is the closed 4-ball and $S^3$ is its boundary. So we can parameterize this integral as 
+\begin{align*}
+    & \int_0^{2\pi} \int_0^\pi \int_0^\pi \frac{1}{4}a^4 \sin^2 \psi \sin \theta d\psi \wedge d\theta \wedge d\phi \\
+    =& \frac{1}{4}a^4 \int_0^{2\pi} \int_0^\pi \int_0^\pi \sin^2 \psi \sin \theta d\psi \wedge d\theta \wedge d\phi \\
+    =& \left(\frac{\pi}{2}\right)\left(\frac{1}{4}a^4\right) \int_0^{2\pi} \int_0^\pi \sin \theta d\theta \wedge d\phi \\
+    =& (2)\left(\frac{\pi}{2}\right)\left(\frac{1}{4}a^4\right) \int_0^{2\pi} d\phi \\
+    =& (2\pi)(2)\left(\frac{\pi}{2}\right)\left(\frac{1}{4}a^4\right) \\
+    =& \frac{\pi^2 a^4}{2}
+\end{align*}
+\subsection*{b)}
+Now we want to compute 
+\[
+    \int_{S^3} r \star dr
+\]
+First let's compute $r \star dr$, which we can do by using the properties of the hodge dual. Namely,
+\begin{align*}
+    dr \wedge \star dr &= g(dr, dr) \omega \\
+    &= dr \wedge r^3 \sin^2\psi \sin \theta d\psi \wedge d\theta \wedge d\phi \\
+    \star dr &= r^3 \sin^2\psi \sin \theta d\psi \wedge d\theta \wedge d\phi \\
+    r \star dr &= r^4 \sin^2\psi \sin \theta d\psi \wedge d\theta \wedge d\phi 
+\end{align*}
+Then of course we can integrate over the 3-sphere just as before, and one may notice that after factoring out the first
+coefficient term, the integral becomes the same,
+\begin{align*}
+    & \int_0^{2\pi} \int_0^\pi \int_0^\pi r^4 \sin^2 \psi \sin \theta d\psi \wedge d\theta \wedge d\phi \\
+    =& r^4 \int_0^{2\pi} \int_0^\pi \int_0^\pi \sin^2 \psi \sin \theta d\psi \wedge d\theta \wedge d\phi \\
+    =& \left(\frac{\pi}{2}\right)\left(r^4\right) \int_0^{2\pi} \int_0^\pi \sin \theta d\theta \wedge d\phi \\
+    =& (2)\left(\frac{\pi}{2}\right)\left(r^4\right) \int_0^{2\pi} d\phi \\
+    =& (2\pi)(2)\left(\frac{\pi}{2}\right)\left(r^4\right) \\
+    =& 2\pi^2 r^4
+\end{align*}
+\section*{Problem 6}
+Intuitively, one might try to first normalize the basis elements and hope they become orthogonal. But 
+this does not yield a correct answer. If we choose a basis of 
+\[
+    \left\{\cosh X dT, \cosh XdX\right\}   
+\]
+We are still left with non-orthogonal, but now normal, basis elements. The goal is to find a way to eliminate the 
+$-\dfrac{\sinh X}{\cosh^2X}$ term from the metric $g(d\alpha, d\beta)$ where $\alpha,\beta$ are our basis elements.
+In lieu of finding this, we resort to Graham Schmidtt orthogonalization,
+\begin{align*}
+    u_1 &= dT \\
+    u_2 &= dX - proj_{dT}dX \\
+    &= dX - \frac{g(dT,dX)}{g(dT,dT)}dT \\
+    &= dX - \sinh X dT
+\end{align*}
+Then let $e_1 = u_1 /\sqrt{g(u_1,u_1)}  = \cosh X dT$ and $e_2 = u_2 / \sqrt{g(u_2,u_2)} = dX - \sinh X dT / \sqrt{g(u_2, u_2)}$.
+We can compute this by using properties of inner products we know to be true. Computing this gets us,
+\begin{align*}
+    g(u_2, u_2) &= g(dX - \sinh X dT, dX - \sinh X dT) \\
+    &= g(dX, dX - \sinh X dT) - \sinh X g(dT, dX - \sinh X dT) \\
+    &= g(dX, dX) - \sinh X g(dX, dT) - \sinh Xg(dT, dX) + \sinh^2X g(dT,dT) \\
+    &= \frac{1}{\cosh^2 X} - 2\sinh X \frac{-\sinh X}{\cosh^2 X} + \sinh^2 X \frac{-1}{\cosh^2 X} \\
+    &= \frac{1 + 2 \sinh^2 X - \sinh^2 X}{\cosh^2 X} \\
+    &= \frac{1 + \sinh^2 X}{\cosh^2 X}\\\\
+    \sqrt{g(u_2, u_2)} &= \frac{\sqrt{1 + \sinh^2 X}}{\cosh X}\}
+\end{align*}
+So finally, we have an orthonormal basis given by,
+\[
+    \left\{\cosh X dT, \frac{(\cosh X)(dX - \sinh X dT)}{\sqrt{1 + \sinh^2 X}}\right\}    
+\]
+\subsection*{b)}
+We compute $g(e_1,e_1), g(e_2,e_2)$ in order to find the signature. Firstly,
+\begin{align*}
+    g(\cosh X dT, \cosh X dT) &= \cosh^2 X g(dT,dT) = -1 \\
+    g\left((\frac{(\cosh X)(dX - \sinh X dT)}{\sqrt{1 + \sinh^2 X}},\frac{(\cosh X)(dX - \sinh X dT)}{\sqrt{1 + \sinh^2 X}}\right) &= \frac{\cosh^2 X}{1 + \sinh^2 X} g(dX - \sinh X dT, dX - \sinh X dT) \\
+    &= \frac{\cosh^2 X}{1 + \sinh^2 X} \left(\frac{1 + \sinh^2 X}{\cosh^2 X}\right)\\
+    & = 1
+\end{align*}
+The signature is given by the number of basis elements whose inner product is negative, so for ours we have 
+a signature of $s = 1$. Or if you wanted to write it as a plus/minus ordered pair, we would write $(1,1)$ as in 1 positive, 1 negative 
+respectively. Or we could even write $(-,+)$, or write out the metric as a matrix 
+\[
+    g = \begin{bmatrix}
+        -1&0\\0&1
+    \end{bmatrix}
+\]
+As we did for a previous problem.
+\subsection*{c)}
+The line element is given by 
+\begin{align*}
+    ds^2 &= g_{ij}dx^idx^j
+\end{align*}
+So we write this out as
+\begin{align*}
+   ds^2 &= \frac{-1}{\cosh^2 X}dT^2 + 2\left(\frac{-\sinh X}{\cosh^2X}\right)dXdT + \frac{1}{\cosh^2X}dX^2
+\end{align*}
+\end{document}

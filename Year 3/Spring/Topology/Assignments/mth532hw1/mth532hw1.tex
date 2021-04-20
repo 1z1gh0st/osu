@@ -1,0 +1,130 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and Fundamental Group - Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\begin{mdframed}
+    Let $[a,b] \subset \mathbb{R}$. Write $k_{a,b}:I \rightarrow [a,b]$ for the linear bijection 
+    of the form $y = kx + l, k, l \in \mathbb{R}$. Let $0 = a_0 < a_1 < \cdots < a_{n-1} < a_n = 1$.
+    Then let $\alpha_i = \alpha \circ k_{a_{i -1},a_i}, \forall i \in \{1,2,\cdots , n\}$ where $\alpha:[a,b] \rightarrow X$ is continuous. Show that $[\alpha] = [\alpha_1]*[\alpha_2]*\cdots * [\alpha_n]$.
+\end{mdframed}
+\begin{proof}
+    We immediately begin by writing 
+    \begin{align*}
+        [\alpha_1] * [\alpha_2] * \cdots * [\alpha_n] &= [\alpha_1 * \alpha_2 * \cdots * \alpha_n] \\
+        &= [(\alpha \circ k_{a_0,a_1}) * (\alpha \circ k_{a_1,a_2}) * \cdots * (\alpha \circ k_{a_{n-1},a_n})] \\
+        &= [\alpha \circ (k_{a_0,a_1} * k_{a_1, a_2} * \cdots * k_{a_{n-1},a_n})]
+    \end{align*}
+    Then we argue that $k_{a_0,a_1} * k_{a_1, a_2} * \cdots * k_{a_{n-1},a_n} \cong_p id_I$.
+    This is the case because we concatenate linear paths from $0 = a_0$ to $a_1$, $a_1$ to $a_2$, and so on...
+    so it clearly follows that this produces a path in the unit interval that travels from 0 to 1 moving only in the positive direction.
+    This will be path homotopic to $id_I$. \\\\ From there we have 
+    \[
+        [\alpha \circ (k_{a_0,a_1} * k_{a_1, a_2} * \cdots * k_{a_{n-1},a_n})] = [\alpha] \circ [k_{a_0,a_1} * k_{a_1, a_2} * \cdots * k_{a_{n-1},a_n}] = [\alpha] \circ [id_I] = [\alpha \circ id_I] = [\alpha]
+    \]
+\end{proof}
+\section*{Problem 2}
+Let $\alpha:I \rightarrow S^2$ be a path.
+\subsection*{a)}
+\begin{mdframed}
+    Suppose $\alpha$ is not surjective. Show that if $\alpha(0) \neq \alpha(1)$, then $\alpha$ is path homotopic to 
+    to an injective $\beta:I \rightarrow S^2$.
+\end{mdframed}
+\begin{proof}
+    If $\alpha$ is injective then trivially $\alpha \cong_p \alpha$. Otherwise $\alpha$ is not injective, that is, it must intersect itself at some point on the sphere.
+    We know it is not closed, so it connects two distinct points on the sphere. Since $\alpha$ is not surjective, we know that there exists some point $p \in S^2$ not contained in $\alpha(I)$.
+    Thus we can take $S^2 \setminus \{p\}$, and take the stereographic projection $spr_p : S^2 \setminus \{p\} \rightarrow \mathbb{R}^2$ from this point, and have a homeomorphism.\\\\
+    Then we have a path between two points in $\mathbb{R}^2$, which is of course homotopic to the straight line between $spr_p(\alpha(0))$ and $spr_p(\alpha(1))$, since $\mathbb{R}^2$ is simply connected. 
+    Since this straight line path $\gamma$ is injective, let $$\beta = spr_p^{-1} \circ \gamma$$ and it follows that $\beta$ is an injective path homotopic to $\alpha$ on $S^2$.
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}
+    Suppose $\alpha$ is not surjective. Show that if $\alpha(0) = \alpha(1)$, then $\alpha$ is path homotopic to the constant map $e_{\alpha(0)}$.
+\end{mdframed}
+\begin{proof}
+    Since $\alpha$ is not surjective, $\exists p \in S^2 \setminus \alpha(I)$, so we take the stereographic projection $spr_p: S^2 \setminus \{p\} \rightarrow \mathbb{R}^2$
+    once again, which we know to be a homeomorphism. Then since $\mathbb{R}^2$ is simply connected, there exists some path homotopy $P$ that brings $spr_p \circ \alpha$ to the trivial path at its starting / ending point. 
+    It follows that $spr_p^{-1} \circ P$ will be a path homotopy between $\alpha$ and $e_{\alpha(0)}$.
+\end{proof}
+\section*{Problem 3}
+\begin{mdframed}
+    Let $\alpha : I \rightarrow S^2$ be injective. Show that $int(\alpha(I)) = \emptyset$.
+\end{mdframed}
+\begin{proof}
+    Suppose that $\alpha(I)$ has a non-trivial interior. Then $B_\epsilon(p) \subset int(\alpha(I))$ by assumption. Let $A = \alpha^{-1}(B_\epsilon(p))$.
+    Of course $A \subset I$ and also $\alpha|_A : A \rightarrow B_\epsilon(p)$ is a homeomorphism. If $A$ is not of the form $[a,b] : 0<a<b<1$,
+    then it is disconnected, and a contradiction arises. If $A$ is of the form $[a,b]$, simply remove one point $x \in (a,b)$ and we have \[\alpha|_{A \setminus \{x\}}: A \setminus \{x\} \rightarrow B_\epsilon(p) \setminus \alpha(x)\]
+    However, this is clearly a homeomorphism between a disconnected and connected space (contradiction). So it must be the case that $int(\alpha(I)) = \emptyset$.
+\end{proof}
+\section*{Problem 4}
+A continuous surjective map $\alpha : I \rightarrow I \times I$ produces a space filling curve.
+\subsection*{a)}
+\begin{mdframed}
+    Show that a space filling curve $\alpha : I \rightarrow S^2$ must exist.
+\end{mdframed}
+Let $\alpha$ be a space filling curve mapping $I$ to $I \times I$. We know that $S^2$ can be described in spherical coordinates as $\{(\rho, \phi, \theta) \in \mathbb{R}^3 : \rho = 1 \}$.
+If we map $I \times I$ to $S^2$ by $f(x,y) = (1, \pi x, 2\pi y)$ then we have an open (but not continuous) mapping from $I \times I$ to $S^2$.
+This makes sense considering the relationship of $S^1$ and $I$ where the periodic-ness is preventing continuity. However, take $f \circ \alpha$,
+and this will be a surjective path mapping $I$ to $S^2$. That is, a space filling curve.
+\subsection*{b)}
+\begin{mdframed}
+    Given a curve $\alpha : I \rightarrow S^2$, show that there are $0 = a_0 < a_1 < \cdots < a_{n-1} < a_n$
+    such that $\alpha([a_{i-1},a_i]) \neq S^2, i = 1,2, \cdots, n$.
+\end{mdframed}
+\begin{proof}
+    Suppose that for every partition of $I$ there exists some $i \in \{1,2,\cdots,n-1,n\}$ such that $\alpha([a_{i-1},a_i]) = S^2$.
+    Then take a sequence of partitions $P_k = [0,\frac{1}{k},\frac{2}{k},\cdots , \frac{k-1}{k}, 1]$. It must be the case 
+    that for each $k \in \mathbb{N}$ some sub-interval maps to all of $S^2$. Then we can take $\alpha_k$ to be the map of this sub-interval to $S^2$.
+    If we take the limit of these partitions it must be the case that we map an arbitrarily small closed interval (a point) to all of $S^2$, which 
+    is clearly a contradiction.
+\end{proof}
+\subsection*{c)}
+\begin{mdframed}
+    Show that any path $\alpha : I \rightarrow S^2$ is path homotopic to a path $\beta : I \rightarrow S^2$ with $\beta(I) \neq S^2$.
+\end{mdframed}
+\begin{proof}
+    If $\alpha$ is not a surjection then let $\beta = \alpha$ thus $\alpha \cong_p \beta$ such that $\beta(I) \neq S^2$.
+    If $\alpha$ is a surjection then it is a space filling curve.
+    Let $p \in S^2$ be equal to neither endpoints of $\alpha$.
+    Take the partition that we know to exist from part (b). Then we know that $[\alpha] = [\alpha_1] * [\alpha_2] * \cdots * [\alpha_k]$ from \fbox{Problem 1}.
+    Each of these will not be a surjection. For each of these they will be homotopic to a path not containing $p$.
+    Then call this path $\beta$ and $\alpha \cong_p \beta$ such that $\beta(I) \neq S^2$.
+\end{proof}
+\subsection*{d)}
+\begin{mdframed}
+    Conclude that $S^2$ is a simply connected space.
+\end{mdframed}
+Suppose $\exists p \in \alpha(I) \cap \beta(I)$. Then take $spr_p : S^2 \rightarrow \mathbb{R}^2$ and since $\mathbb{R}^2$ is simply connected it follows that the two paths are homotopic.
+    If such a point $p$ does not exist then we must take another approach. If both are not surjective, then they will be homotopic to some path that does not include $p$,
+    and the same proof will still hold. Otherwise, $\alpha$ must be a space-filling curve.
+    Take the partition that we know to exist from part (b). Then we know that $[\alpha] = [\alpha_1] * [\alpha_2] * \cdots * [\alpha_k]$ from \fbox{Problem 1}.
+    Each of these will not be a surjection. For each of these they will be homotopic to a path not containing $p$, so we call this modified version path not containing $p, \alpha'$.
+    Then $\alpha \cong_p \alpha' \cong_p \beta$ by our initial method. For part (d), if both are space filling curves, simply do the same process to $\beta$, and apply the logic again. Then 
+    it follows that any two paths with the same endpoints are path homotopic, and the space is simply connected.
+\end{document}

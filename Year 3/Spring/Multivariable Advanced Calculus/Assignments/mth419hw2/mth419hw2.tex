@@ -1,0 +1,205 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{.25\linewidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Advanced Multivariable Calculus - Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Preamble}
+    \begin{mdframed}
+        Suppose that $f:\mathbb{R}^k \rightarrow \mathbb{R}^m$ and that $g:\mathbb{R}^m \rightarrow \mathbb{R}^n$, both continuously.
+        Then, it follows that $g \circ f : \mathbb{R}^k \rightarrow \mathbb{R}^n$ is continuous.
+    \end{mdframed}
+    \begin{proof}
+        Let $\epsilon > 0$ be arbitrary. We wish to show that $\exists \delta > 0$ such that $||X-Y||< \delta \Rightarrow ||g\circ f(X) - g\circ f(Y)||<\epsilon$.
+        We know that $\exists \delta_g > 0$ such that $||f(X) - f(Y)||< \delta_g$ implies $||g\circ f(X) - g\circ f(Y)||< \epsilon$ by the continuity of $g$.
+        Then by the continuity of $f$, take $\delta_g$ as the ``$\epsilon$'' for the function $f$, and we know that $\exists \delta > 0$ such that
+        $||X - Y||<\delta \Rightarrow ||f(X) - f(Y)||<\delta_g$. Of course, we then have the implications,
+        \[
+            ||X - Y||<\delta \ \ \ \ \Longrightarrow \ \ \ \ ||f(X) - f(Y)||<\delta_g \ \ \ \ \Longrightarrow \ \ \ \ ||g\circ f(X) - g \circ f(Y)||<\epsilon
+        \]
+        Therefore $g\circ f$ is continuous.
+    \end{proof}
+    \begin{mdframed}
+        Let $f : \mathbb{R}^n \rightarrow \mathbb{R}$ and $g: \mathbb{R}^n \rightarrow \mathbb{R}$ be continuous.
+        Then we have the following:
+        \begin{align*}
+            \text{(i)} \ \ & f(X) + g(X) \text{ is continuous}\\\\
+            \text{(ii)}\ \  & f(X)g(X) \text{ is continuous} \\\\
+            \text{(iii)} \ \ & \frac{f(X)}{g(X)} \text{ is continuous when } g(X) \neq 0
+        \end{align*}
+    \end{mdframed}
+    \begin{proof}
+        \fbox{(i)} Since $G(x,y) = x + y$ is continuous, and the function $F(X) = (f(X),g(X))$ is continuous, it follows that $G \circ F$ is continuous.
+        For more details see \fbox{Homework 1}.\\\\
+        \fbox{(ii)} We argue that $G(x,y) = xy$ is continuous, and thus by the same logic $f(X)g(X)$ will be continuous as well.
+        To show this, let $\epsilon > 0$ be arbitrary. Then we have 
+        \begin{align*}
+            |xy - x_0y_0| &= |xy - x_0y + x_0y - x_0y_0| \\
+            &\leqslant |xy -x_0y| + |x_0y - x_0y_0| \\
+            &= |(x-x_0)y| + |x_0(y - y_0)| \\
+            &= |x-x_0||y| + |x_0||y-y_0| \\
+            &< \epsilon (|y| + |x_0|) \\
+            & <\epsilon(|y| + |x + \epsilon|)
+        \end{align*}
+        This can be made arbitrarily small since $(x,y)\in\mathbb{R}^2$ is a fixed value.
+        Thusly, $f(X)g(X) = G \circ F(X)$ and is continuous.\\\\
+        \fbox{(iii)}Assume that $g(X) \neq 0$. Then it follows that $\frac{1}{g(X)}$ is continuous. Then by \fbox{(ii)} we have $f(X) \frac{1}{g(X)}$ is continuous, so it
+        follows that the quotient of them is continuous.
+    \end{proof}
+\section*{Problem 1}
+\begin{mdframed}
+    Let $C \subset \mathbb{R}^n$, and assume that whenever $\{ x_n \}$ is a sequence in $C$ with $x_n \rightarrow x$, it follows that $x \in C$. Show that $C$ is closed.
+\end{mdframed}
+\begin{proof}
+    Let $x \notin C$. We want to show that there is some $\epsilon$-ball around $x$ such that 
+    $B_\epsilon(x) \subset \mathbb{R}^n \setminus C$. Suppose that this is not the case. Then for every $\epsilon > 0$ there is a point in $B_\epsilon(x) \cap C$.
+    We can take $\epsilon_k = \frac{1}{k}$, and then let $x_k$ belong to that intersection.
+    Clearly there is a sequence of points $\{x_k\}$ such that $x_k \rightarrow x$, and we have $x \in C$ (contradiction).
+    So it must be the case that there is some $\epsilon > 0$ such that $B_\epsilon(x) \subset \mathbb{R}^n \setminus C$.
+    Thus the complement is open, so $C$ is closed.
+\end{proof}
+\section*{Problem 2}
+\begin{mdframed}
+    Let $O \subset \mathbb{R}^n$ be open. Assume $F:O \rightarrow \mathbb{R}^m$ is a function such that if $V \subset \mathbb{R}^m$ is open then so too is $F^{-1}(V)\subset \mathbb{R}^n$.
+    Prove that $F$ is continuous on $O$.
+\end{mdframed}
+\begin{proof}
+    Let $\epsilon > 0$ be arbitrary. We want to show that $\exists \delta > 0$ such that $||X - Y||<\delta \Rightarrow ||F(X) - F(Y)||< \epsilon$.
+    We know that $B_\epsilon(F(X))$ is an open set in $\mathbb{R}^m$. Thus we know that $F^{-1}(B_\epsilon(F(X)))$ is open in $\mathbb{R}^n$.
+    Trivially it must contain $X$, since it is the pre-image of a set containing $F(X)$. Then, 
+    we know that there is some $\delta$-neighborhood of $X$ contained in $F^{-1}(B_\epsilon(F(X)))$ since it is an open set.
+    So it follows that
+    \[
+        Y \in B_\delta(X) \subset F^{-1}(B_\epsilon(F(X))) \ \ \ \ \Longrightarrow \ \ \ \ F(Y) \in F(B_\delta(X)) \subset B_\epsilon(F(X))
+    \]
+    Or alternatively,
+    \[
+        ||X - Y||< \delta \ \ \ \ \Longrightarrow \ \ \ \ ||F(X) - F(Y)|| < \epsilon
+    \]
+    And we conclude that $F$ must be continuous.
+\end{proof}
+\section*{Problem 3}
+\begin{mdframed}
+    Prove that for any subsets $A$ and $B$ of $\mathbb{R}^n$, if $A \subset B$, then $\overline{A} \subset \overline{B}$.
+\end{mdframed}
+\begin{proof}
+    Let $A \subset B \subset \mathbb{R}^n$. Let $x \in \overline{A}$ be arbitrary. We wish to show that $x \in \overline{B}$.
+    We know that since $x \in \overline{A}$ that every $\epsilon$-neighborhood of $x$ must intersect $A$.
+    Then since $B_\epsilon(x) \cap A$ is non-empty it follows that $B_\epsilon \cap B$ is also non-empty.
+    Thus $x$ is a limit point of $B$ and belongs in its closure.
+\end{proof}
+\section*{Problem 4}
+    \begin{mdframed}
+        Show that the function 
+        \[
+            f(x,y,z) = \frac{\sin(x^2 + y^2)}{e^{z+y}}
+        \]
+        is continuous at all points $(x,y,z)\in\mathbb{R}^3$.
+    \end{mdframed}
+    \begin{proof}
+        We know that $x \mapsto x^2$ is continuous, so it follows that $(x,y,z)\mapsto x^2$ is also continuous.
+        The same is true for $(x,y,z) \mapsto y^2$, and also for $(x,y,z) \mapsto e^{-x}$ and $(x,y,z) \mapsto e^{-y}$.
+        We know also that $\sin(h)$ is continuous given that $h$ is continuous. Given these facts, we use the algebraic properties of functional 
+        continuity to assert that $f$ must of course be a continuous function.
+    \end{proof}
+\section*{Problem 5}
+\begin{mdframed}
+    Let $f:C\subset \mathbb{R}^n \rightarrow \mathbb{R}^m$ be continuous and let $C$ be closed and bounded. The function $f$ is uniformly continuous.
+\end{mdframed}
+\begin{proof}
+    Suppose by contradiction that $f$ is not uniformly continuous.  Then $\exists \epsilon > 0$ such that $\forall \delta > 0$, there 
+    exist two points $X,Y\in \mathbb{R}^n$ where $||X-Y||<\delta $ and $||f(X) -f(Y)||\geqslant \epsilon$. Let $k \in \mathbb{N}$ be arbitrary.
+    Choose $\delta_k = \frac{1}{k}$, and since it is true for every $\delta > 0$, we know that there are two points $X_k, Y_k$ such that 
+    $||X_k - Y_k||< \frac{1}{k}$ and $||f(X_k) -f(Y_k)||\geqslant \epsilon$. \\\\
+    Since $C$ is a closed and bounded set in $\mathbb{R}^n$ it is compact (Heine-Borel). Therefore every sequence has a convergent subsequence that converges to a point $X \in C$.
+    Since $f$ is continuous on $C$ we know that 
+    \[
+        \lim_{k_i \rightarrow \infty} X_{k_i} \rightarrow X \ \ \ \ \Longrightarrow \ \ \ \ \lim_{k_i \rightarrow \infty}f(X_{k_i}) \rightarrow f(X)
+    \]\\\\
+    Take $\epsilon > 0$ to be arbitrary, and let $\alpha = \frac{\epsilon}{2}$. Then we know that $ \frac{1}{k_i} < \alpha$ after some index in the sequence.
+    So it follows that 
+    \begin{align*}
+        ||X-Y_{k_i}|| &\leqslant ||X-X_{k_i}|| + ||X_{k_i} - Y_{k_i}|| \\
+        &< \alpha + \frac{1}{k_i} \\
+        &< \alpha + \alpha = \epsilon
+    \end{align*}
+    Thus we say that $Y_{k_i}\rightarrow X$.\\\\
+    Then from our conlcusion before we must have $Y_{k_i}\rightarrow X \Longrightarrow f(Y_{k_i}) \rightarrow f(X)$.
+    But if both $f(X_{k_i})$ and $f(Y_{k_i})$ converge to the point $f(X)$, it follows that their difference must converge to 0. Simply choose $\epsilon > 0$ arbitrary,
+    and make both $||f(X_{k_i}) - f(X)|| <\epsilon / 2$ and $||f(Y_{k_i}) - f(X)||<\epsilon/2$ and then we have 
+    \[
+        ||f(X_{k_i}) - f(Y_{k-i})|| = ||f(X_{k_i}) - f(X) + f(X) - f(Y_{k_i}) || \leqslant ||f(X_{k_i}) - f(X)|| + ||f(Y_{k_i}) - f(X)|| < \epsilon
+    \]
+    However this lies in direct contradiction to the fact that there exists $\epsilon > 0$ such that $||f(X_{k_i}) - f(Y_{k_i})||\geqslant \epsilon$.
+    Thus our assumption that $f$ is not uniformly continuous must be false, and $f$ is uniformly continuous on $C$.
+\end{proof}
+\section*{Problem 6}
+    Provide an example and show that it holds.
+    \subsection*{i)}
+    \begin{mdframed}
+        A function $f:\mathbb{R}^2 \rightarrow \mathbb{R}$ and an open set $V$ in $\mathbb{R}$ such that $f^{-1}(V)$ is not open in
+        $\mathbb{R}^2$.
+    \end{mdframed}
+    Take the function $$f(x,y) = \begin{cases}
+        ||(x,y)||, & (x,y)\neq 0\\
+        1, & \text{otherwise}
+    \end{cases}$$ Then take the interval $(\frac{1}{2},\frac{2}{3}) \subset \mathbb{R}$ which is clearly open.
+    Then its preimage is all $(x,y)$ such that $1/2 < ||(x,y)|| < 3/2$ and $(x,y) = 0$.
+    Any open ball of $(0,0)$ will contain points such that $||(x,y)|| < 1/2$ and will intersect $f^{-1}(\frac{1}{2}, \frac{2}{3})^c$.
+    \begin{figure}[ht]
+        \centering
+        \incfig{1}
+        \caption{$f^{-1}(\frac{1}{2},\frac{2}{3})$}
+        \label{fig:1}
+    \end{figure}
+    \\
+    Since clearly no neighborhood of $(0,0)$ is contained in the set, it cannot be open.
+    \subsection*{ii)}
+        \begin{mdframed}
+            A bounded $A \subset \mathbb{R}$ and a function $f:A \rightarrow \mathbb{R}$ which is continuous on $A$
+            but not uniformly continuous on $A$.
+        \end{mdframed}
+        Take the function $f = x^{-1}$ and let $A = (0,1)$.
+        Then we know that $f$ is continuous on $A$, but it is not uniformly continuous due to its 
+        asymptote at $x = 0$.\\\\
+        Let $\epsilon > 0$ be arbitrary. Choose $\delta < \min\{\frac{x^2\epsilon}{2}, \frac{x}{2}\}$. Then if $|x - y|<\delta $ we have 
+        \begin{align*}
+            \left|\frac{1}{x} - \frac{1}{y}\right| &= \left|\frac{x-y}{xy}\right|\\
+            &= \frac{|x-y|}{xy} \\
+            &\leqslant \frac{2|x-y|}{x^2} \\
+            &< 2\delta / x^2 \\
+            &< \epsilon
+        \end{align*}
+        So it follows that $f$ is continuous on $(0,1)$.
+        \\\\
+        Let $\epsilon = 1$. We argue that for all $\delta > 0$ there exists $x\in (0,1)$ such that there exists $y \in (x-\delta, x+\delta)$
+        where $\left|\frac{1}{x} - \frac{1}{y}\right| \geqslant 1$. Let $x = \min\{\frac{1}{2}, \delta\}$. Then for every $x > y > 0$ we know that $y \in (x - \delta, x + \delta)$.
+        Choose $0 < y = \frac{x}{2} < x$. Then we have 
+        \[
+            \left|\frac{1}{x}-\frac{1}{y}\right| = \frac{|x -y|}{xy} = \frac{\frac{x}{2}}{\frac{x^2}{2}} = \frac{1}{x} > 1
+        \]
+\end{document}

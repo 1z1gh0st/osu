@@ -1,0 +1,173 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Advanced Multivariable Calculus - Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1.64}
+\subsection*{a)}
+\begin{mdframed}[]
+    Show that if $U$ is a unit vector and if $U \cdot V = ||U|| \ ||V||$ then $V = (U \cdot V) U$.
+\end{mdframed}
+\begin{proof}
+    Let $U$ be a unit vector and suppose that $U \cdot V = ||U|| \ ||V||$. Then
+    \[
+        ||U|| \ ||V|| = (1)||V|| = ||V|| = U \cdot V
+    \]
+    Then we compute the orthogonal projection of $U$ onto $V$,
+    \[
+        proj_VU = \frac{U \cdot V}{V \cdot V}V = \frac{||V||}{||V||^2}V = \frac{V}{||V||}
+    \]
+    This is clearly a unit vector, which means that $U$ had no change in magnitude under this 
+    projection, and must of course be parallel to $V$. So if $U \cdot V$ is positive and $U$ is a unit vector parallel to $V$,
+    it follows trivially that
+    \[
+        (U \cdot V)U = ||V||U = V
+    \]
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}[]
+    Show that $|U \cdot V| = ||U|| \ ||V||$ implies that $U$ is a multiple of $V$.
+\end{mdframed}
+\begin{proof}
+    If $U = 0$ then trivially it is equal to $0V$. If $||U|| = 1$ then refer to \fbox{1.64 (a)}. Otherwise we have $\frac{U}{||U||}$ is a unit vector thus
+    \begin{align*}
+        V &= \left(\frac{U}{||U||} \cdot V\right) \frac{U}{||U||} \\
+        &= \left(\frac{U}{||U||^2} \cdot V\right) U
+    \end{align*}
+    And since the term in parenthesis is a real number it follows that $U$ is a multiple of $V$.
+\end{proof}
+\section*{Problem 2.25}
+$F:\mathbb{R}^n \rightarrow\mathbb{R}^2$ is continuous. $g:\mathbb{R}^2 \rightarrow \mathbb{R}$ is continuous.
+\subsection*{a)}
+\begin{mdframed}
+    Show that $g \circ F$ is continuous.
+\end{mdframed}
+\begin{proof}
+    Let $\epsilon > 0$ be arbitrary. By the continuity of $g$ we know that there exists $\alpha > 0$
+    such that $||\vec x - \vec y||< \alpha \Longrightarrow |g(\vec x) - g(\vec y)| < \epsilon$.
+    Then by the continuity of $F$ we know that with $\alpha > 0$ there exists some $\delta > 0$
+    such that $||\vec a - \vec b|| < \delta \Longrightarrow ||F(\vec a) - F(\vec b)||< \alpha$.
+    So it follows that
+    \[
+        ||\vec x - \vec y ||< \delta \Longrightarrow ||F(\vec x) - F(\vec y)|| < \alpha \Longrightarrow |g(F(\vec x)) - g(F(\vec y))| < \epsilon
+    \]
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}
+    Show that the funciton $g(x,y) = x + y$ is continuous.
+\end{mdframed}
+\begin{proof}
+    Let $\begin{bmatrix}
+        x\\y
+    \end{bmatrix}\in \mathbb{R}^2$. Then let $\epsilon > 0$, and let $\delta = \epsilon / 2$.
+    Then if $||( x, y ) - ( a, b ) || < \delta$, we say
+    \begin{align*}
+        |g(x,y) -g(a,b)| &= |(x+y) -(a+b)| \\
+        &= |(x-a) + (y-b)|\\
+        &\leqslant |x-a| + |y - b|\\
+        &<\delta + \delta = 2\delta = \epsilon
+    \end{align*}
+\end{proof}
+\subsection*{c)}
+\begin{mdframed}
+    Show that if $f_1,f_2 : \mathbb{R}^n \rightarrow \mathbb{R}$ are both continuous that $f_1 + f_2 : \mathbb{R}^n \rightarrow \mathbb{R}$ is continuous.
+\end{mdframed}
+\begin{proof}
+    Since $f_1,f_2$ are continuous it follows that $F(x,y) = (f_1(x,y), f_2(x,y))$ is continous. Then
+    we know that the function $g(x,y) = x + y$ is continuous from \fbox{2.25b}. Thus from \fbox{2.25a} we know 
+    that $g \circ F = f_1 + f_2$ is continuous.
+\end{proof}
+\section*{2.35}
+\begin{mdframed}
+    Show that the set $\{(x,y,z) \in \mathbb{R}^3 : x^2 + y^2 < 1 \} \subset \mathbb{R}^3$ is open.
+\end{mdframed}
+\begin{proof}
+    Let $(x_0,y_0,z_0) \in \mathbb{R}^3$ such that $x_0^2 + y_0^2 < 1$.
+    Then we have $1 - x_0^2 - y_0^2 > 0$. Choose $\epsilon = (1 - x_0^2 - y_0^2)/2$, and by the 
+    triangle inequality it follows that if $(x,y,z) \in B_\epsilon(x_0,y_0,z_0)$ then $x^2 + y^2 < 1$.
+    Thus $B_\epsilon(x_0,y_0,z_0) \subset \{(x,y,z) \in \mathbb{R}^3 : x^2 + y^2 < 1 \}$ and we say that the set must be open.
+\end{proof}
+\section*{2.36}
+\begin{mdframed}
+    Let $S = \mathbb{R}^2 \setminus \{(0,0)\}$. Then $(0,0) \in \partial S$.
+\end{mdframed}
+\begin{proof}
+    Let $\epsilon > 0$ be arbitrary. Trivially, $B_\epsilon(0,0) \cap S^c \neq \emptyset$ since $(0,0) \in B_\epsilon(0,0)$.
+    Then choose $x \in \mathbb{R} : 0 < x < \epsilon$, we have $||(0,x) - (0,0)|| = x < \epsilon$,
+    therefore $(0,x) \in B_\epsilon(0,0)$ and we say $B_\epsilon(0,0)$ has a non-empty intersection with $S$.
+    Since any neighborhood of $(0,0)$ intersects both $S$ and its complement we say that $(0,0) \in \partial S$.
+\end{proof}
+\section*{2.41}
+\subsection*{b)}
+\begin{mdframed}
+    Use the Cauchy-Shwarz inequality to show that $g(X, Y) = X \cdot Y$ mapping $\mathbb{R}^{2n}$ to $\mathbb{R}$ is continuous.
+\end{mdframed}
+\begin{proof}
+    Choose $\begin{bmatrix}
+        X \\ Y
+    \end{bmatrix} \in \mathbb{R}^{2n}$ arbitrarily. Let $\begin{bmatrix}
+        X_n \\ Y_N
+    \end{bmatrix}$ be a sequence converging to $\begin{bmatrix}
+        X\\Y
+    \end{bmatrix}$. Then it follows that $(X_n)\rightarrow X$ and $(Y_n) \rightarrow Y$ trivially.
+    We wish to show that $(X_n \cdot Y_n) \rightarrow X \cdot Y$, or alternatively that $|X \cdot Y - X_n \cdot Y_n| \rightarrow 0$.
+    We write 
+    \begin{align*}
+        |X \cdot Y - X_n \cdot Y_n| &= |X\cdot Y - X_n \cdot Y + X_n \cdot Y - X_n \cdot Y_n| \\
+        &\leqslant |X\cdot Y - X_n \cdot Y| + |X_n \cdot Y - X_n \cdot Y_n| \\
+        &= |(X - X_n) \cdot Y| + |X_n \cdot (Y - Y_n)|\\
+        &\leqslant ||X - X_n|| \ ||Y|| + ||Y-Y_n|| \ ||X_n||
+    \end{align*}
+    Then we know that the norm of $Y$ is fixed, and that the norm of $X_n$ must converge to that of $X$.
+    So then we have $||X - X_n|| \ ||Y|| \rightarrow 0||Y|| = 0$ and $||Y-Y_n|| \ ||X_n|| \rightarrow 0 ||X|| = 0$,
+    so we say that $X_n \cdot Y_n \rightarrow X \cdot Y$ and the dot product is continuous.
+\end{proof}
+\section*{2.44}
+\begin{mdframed}
+    Let $F:\mathbb{R}^n \rightarrow \mathbb{R}^m$. If for every sequence $(X_n)\rightarrow X$
+    , $F(X_n) \rightarrow F(X)$ then $F$ is continuous.
+\end{mdframed}
+\begin{proof}
+    Suppose that $F$ is not continuous at $A \in \mathbb{R}^n$. Then $\exists \epsilon > 0$
+    such that $\forall \delta > 0, \ \ ||A - B||< \delta \not \Rightarrow ||F(A)-F(B)||\leqslant \epsilon$.
+    That means that it is not the case that for all $B$ where $||A-B||< \delta$ we have $|F(A)-F(B)||\leqslant \epsilon$.
+    Clearly it must be the case that there exists some $B$ within the $\delta$-ball of $A$ such that $||F(A) - F(B)||>\epsilon$.\\\\
+    By the Archimedean property we of course have for every $k \in \mathbb{N}$ there is some $\delta > 0$ such that $\frac{1}{k} > \delta$.
+    Thus it follows that for the same epsilon which we assume to exist in the previous paragraph that for all $k \in \mathbb{N}$ there exists
+    some $\delta < 1 / k$ so we have a point $B$ within a $\delta$-neighborhood of $A$ where $||F(A)-F(B)||>\epsilon$.
+    Call this point $B = X_k$, and we have a point $X_k$ within a $1 / k$-neighborhood of $A$ where $||F(A) - F(X_k)|| > \epsilon$. \\\\
+    Take these points $X_k$ to be a sequence. Clearly we have $(X_k) \rightarrow A$ since for every $\epsilon > 0$ choose $k \in \mathbb{N}$
+    such that $1 / k < \epsilon$ and there is some index in the sequence where every point $X_k$ lies within this radius.
+    However, as shown in the previous paragraph, for every $k \in \mathbb{N}$ we have $||F(A) - F(X_k)|| > \epsilon$ for some $\epsilon > 0$ that we know 
+    to exist. So it cannot be the case that $F(X_n) \rightarrow F(A)$.\\\\
+    Having shown that if $F$ is not continuous at $A$ then there exists a sequence $X_k \rightarrow A$
+    such that $F(X_k) \not\rightarrow F(A)$, it follows that the contra-positive holds as well.
+    That is, if we have $X_k \rightarrow A \Rightarrow F(X_k) \rightarrow F(A)$, then $F$ is continuous at $A$.
+    If this holds for every $A$ in the domain of $F$ then we say $F$ is continuous.
+\end{proof}
+\end{document}

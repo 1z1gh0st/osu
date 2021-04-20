@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Differential Geometry - Homework 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{a)}
+We begin with
+\begin{align}
+    x &= r\cos\phi\sin\theta \\
+    y &= r\sin\phi\sin\theta \\
+    z &= r\cos\theta
+\end{align}
+and the fact that we can express these as differentials,
+\begin{align}
+    dx &= \cos\phi\sin\theta dr + r\cos\phi\cos\theta d\theta - r\sin\phi\sin\theta d\phi\\
+    dy &= \sin\phi\sin\theta dr + r\sin\phi\cos\theta d\theta + r\cos\phi\sin\theta d\phi\\
+    dz &= \cos\theta dr - r\sin\theta d\theta
+\end{align}
+We can compute the inverse relationships as follows:
+\begin{align}
+    dr &= \cos\phi\sin\theta dx + \sin\phi\sin\theta dy + \cos\theta dz\\
+    d\theta &= \frac{1}{r}\cos\phi\cos\theta dx + \frac{1}{r}\sin\phi\cos\theta dy - \frac{1}{r}\sin\theta dz\\
+    d\phi &= \frac{-1}{r\sin\theta}\sin\phi dx + \frac{1}{r\sin\theta}\cos\phi dy
+\end{align}
+Then, since there is a correspondence between these differentials, our orthonormal bases' coefficients, and between our $\hat{e_i}$ elements,
+we write
+\begin{align}
+    \hat{r} &= \cos\phi\sin\theta\hat{x} + \sin\phi\sin\theta\hat{y} + \cos\theta\hat{z}\\
+    \hat{\theta} &= \cos\phi\cos\theta \hat{x} + \sin\phi\cos\theta \hat{y} - \sin\theta \hat{z}\\
+    \hat{\phi} &= -\sin\phi \hat{x} + \cos\phi \hat{y}
+\end{align}
+Then we can take the derivative of each of these as a sum of the various partial derivatives;
+that is, ``zapping them with d''.
+\begin{align}
+    d\hat{r} &= (-\sin\phi\sin\theta d\phi + \cos\phi\cos\theta d\theta)\hat{x} + (\cos\phi\sin\theta d\phi + \sin\phi\cos\theta d\theta)\hat{y} + (-\sin\theta d\theta)\hat{z}\\
+    d\hat{\theta} &= (-\sin\phi\cos\theta d\phi - \cos\phi\sin\theta d\theta)\hat{x} + (\cos\phi\sin\theta d\phi + \sin\phi\cos\theta d\theta)\hat{y} + (-\sin\theta d\theta)\hat{z}\\
+    d\hat{\phi} &= (-\sin\phi)\hat{x} + (\cos\phi)\hat{y}
+\end{align}
+We can finally exchange our standard unit basis vectors for spherical ones, which gives us
+\begin{align}
+    d\hat{r} &= \sin\theta d\phi \hat{\phi} + d\theta\hat\theta\\
+    d\hat\theta &= \cos\theta d\phi\hat\phi - d\theta\hat r\\
+    d\hat\phi &= -\cos\theta d\phi \hat\theta - \sin\theta d\phi \hat{r}
+\end{align}
+The kind of beast that we get for each of these is a vector-valued 1-form, or linear combination of basis vector-valued 1-forms.
+This is correct because we are taking the derivative of vector valued unctions, or 0-forms in this context.
+\subsection*{b)}
+We say that $\omega_{i \ j} = e_i \cdot d e_j$ which is the coefficient of the 2-form $e_i \wedge d e_j$.
+Since we have an orthonormal basis, we say that $\omega_{i \ i} = 0$. Then we need only to compute the remaining 3 combinations. We compute,
+\begin{align}
+    \omega_{r, \theta}(\hat{r}\wedge\hat{\theta}) &= \hat{r} \wedge d\hat{\theta}\\
+    &= \hat{r} \wedge (\cos\theta d\phi\hat\phi - d\theta\hat r)\\
+    &= \cos\theta d\phi (\hat{r} \wedge \hat{\phi})\\
+    \omega_{r,\theta} &= \cos\theta d\phi \\\\
+    \omega_{r, \phi}(\hat{r}\wedge\hat{\phi}) &= \hat{r} \wedge d\hat{\phi}\\
+    &= \hat{r} \wedge (-\cos\theta d\phi \hat\theta - \sin\theta d\phi \hat{r})\\
+    &= -\cos\theta d\phi \hat\theta(\hat{r} \wedge \hat\theta)\\
+    \omega_{r,\phi} &= -\cos\theta d\phi\\\\
+    \omega_{\theta,\phi}(\hat{\theta} \wedge\hat r) &= \hat\theta \wedge d\hat\phi\\
+    &= \hat\theta\wedge(-\cos\theta d\phi \hat\theta - \sin\theta d\phi \hat{r})\\
+    &= -\sin\theta d\phi (\hat\theta \wedge \hat r)\\
+    \omega_{\theta,\phi} &= -\sin\theta d\phi
+\end{align}
+\subsection*{c)}
+Since each of our $\omega$ is a scalar function, we should have $d\omega \in \bigwedge^1$,
+but to take the wedge of two scalar functions, we will have a wedge product that is not vector-valued?
+Let us try to compute these nontheless.
+\begin{align}
+    \Omega_{i, i} & = d\omega_{i, i} + \omega_{i, k} \wedge \omega_{k, i} \\
+    &= d (0) + \sum_{k = 1}^3 \omega_{i,k} \wedge \omega_{k,i} \\
+    &= d(0) + \sum_{k = 1}^3 \omega_{i,k} \wedge \omega_{i,k} \\
+    &= 0 + \sum_{k = 1}^3 0\\
+    &= 0 \\\\
+    \Omega_{i, j} & = d\omega_{i,j} + \sum_{k=1}^3\omega_{i,k}\wedge\omega_{k,j}\\
+\end{align}
+
+\end{document}

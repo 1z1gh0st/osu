@@ -1,0 +1,137 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Computational Number Theory - Homework 5}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 31}
+Let $p$ be an odd prime.
+\subsection*{a)}
+\begin{mdframed}
+    Prove that $-1$ is a quadractic residue mod $p$ if and only if $p \equiv 1 \mod{4}$
+\end{mdframed}
+\begin{proof}
+    We know that the legendre symbol of $-1$ is $\left(\frac{-1}{p}\right)$. By Euler's criterion, we have
+    \begin{align*}
+        \left(\frac{-1}{p}\right) & \equiv (-1)^{(p-1)/2} \mod{p} \\
+    \end{align*}
+    Suppose $p = 4k + 3$, then 
+    \[
+        (-1)^{(4k + 3 - 1)/2} = (-1)^{2k + 1} = -1
+    \]
+    Thus $-1$ cannot be a quadractic residue mod $p$. Then suppose $p = 4k + 1$,
+    \[ (-1)^{(4k + 1 - 1)/2} = (-1)^{4k} = 1 \]
+    So it must be the case that $-1$ is a quadratic residue mod $p$.
+    These are the only options for $p$, as $p$ is an odd prime.
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}
+    Assuming $p \geqslant 5$, prove that $-3$ is a quadratic residue mod $p$ if and only if $p \equiv 1 \mod{3}$.
+\end{mdframed}
+\begin{proof}
+    We begin by writing the legendre symbol for $-3$,
+    \[
+        \left(\frac{-3}{p}\right) = \left(\frac{-1}{p}\right)\left(\frac{3}{p}\right) = (-1)^{(p-1)/2}\left(\frac{3}{p}\right)
+    \]
+    Suppose that $p \equiv 1$ mod ${4}$,
+    then by quadratic reciprocity we have 
+    \[
+        (-1)^{(p-1)/2}\left(\frac{3}{p}\right) = (-1)^{(4k + 1 - 1)/2}\left(\frac{3}{p}\right) = (-1)^{2k}\left(\frac{p}{3}\right) = \left(\frac{p}{3}\right)
+    \]
+    Then suppose we have $p \equiv 3$ mod $4$, it follows that we get
+    \[
+        (-1)^{(4k + 3 - 1)/2} \left(\frac{3}{p}\right)  = (-1)^{2k + 1}(-1)\left(\frac{p}{3}\right) = (-1)(-1)\left(\frac{p}{3}\right) = \left(\frac{p}{3}\right)
+    \]
+    In either scenario, we have the end result of $\left(\frac{p}{3}\right)$. \\\\
+    Then we know that $\left(\frac{p}{3}\right) = \left(\frac{p \text{ mod } 3}{3}\right)$.
+    So if $p \equiv 1$ mod $3$, clearly the legendre symbol of $-3$ is $\left(\frac{1}{3}\right) = 1$ and we say that $-3$ is a quadratic residue mod $p$.
+    Then if $p \not\equiv 1$ mod $3$, we must have $p \equiv 2$ mod $3$, and so the legendre symbol of $-3$ is $\left(\frac{2}{3}\right) = -1$ so $-3$ is a quadractic non-residue mod $p$.
+\end{proof}
+\section*{Problem 32}
+\begin{mdframed}
+    Code:
+    \begin{verbatim}
+def QuadraticResidues(p):
+    QR = []
+    for a in range(0, p):
+        if legendre_symbol(a, p) == 1:
+            QR.append(a)
+    return(QR)
+
+print(QuadraticResidues(17))
+print(QuadraticResidues(53))
+    \end{verbatim}
+    Output:
+    \begin{verbatim}
+[1, 2, 4, 8, 9, 13, 15, 16]
+[1, 4, 6, 7, 9, 10, 11, 13, 15, 16, 17, 24, 25, 28, 29, 36, 37, 38, 40, 42, 43, 44, 46,
+ 47, 49, 52]        
+    \end{verbatim}
+\end{mdframed}
+\section*{Problem 33}
+\begin{mdframed}
+    Code:
+    \begin{verbatim}
+def DiscreteLog(a, n):
+    for k in range(0, n):
+        if 2^k % n == a % n:
+            return k
+    return 0
+
+print(DiscreteLog(452, 1019))
+    \end{verbatim}
+    Output:
+    \begin{verbatim}
+632     
+    \end{verbatim}
+\end{mdframed}
+\section*{Problem 34}
+\begin{mdframed}
+    Euclid's GCD Algorithm:
+    \begin{verbatim}
+def GCD(a, b):
+    if a > b:
+        temp = b
+        b = a
+        a = temp
+    r = b % a
+    if r == 0:
+        return a
+    else:
+        return GCD(a, r)
+
+# Tests
+print(GCD(87444, 238))
+print(GCD(28464, 812))
+    \end{verbatim}
+Output:
+\begin{verbatim}
+14
+4
+\end{verbatim}
+\end{mdframed}
+\end{document}

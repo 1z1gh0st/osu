@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.1 (c497b03c, 2020-09-10)"
+   sodipodi:docname="1.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.2285447"
+     inkscape:cx="112.37756"
+     inkscape:cy="479.80818"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     inkscape:window-width="1252"
+     inkscape:window-height="916"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path833"
+       style="fill:#000000;fill-opacity:0.108871;fill-rule:evenodd;stroke:#000000;stroke-width:1.00157;stroke-miterlimit:4;stroke-dasharray:4.0063, 2.00315;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 132.82812 404.69531 A 73.850676 73.850676 0 0 0 59.359375 478.54492 A 73.850676 73.850676 0 0 0 133.21094 552.39648 A 73.850676 73.850676 0 0 0 207.06055 478.54492 A 73.850676 73.850676 0 0 0 133.21094 404.69531 A 73.850676 73.850676 0 0 0 132.82812 404.69531 z M 132.85547 430.87109 A 46.451263 46.451263 0 0 1 133.03516 430.87109 A 46.451263 46.451263 0 0 1 179.48633 477.32227 A 46.451263 46.451263 0 0 1 133.03516 523.77344 A 46.451263 46.451263 0 0 1 86.583984 477.32227 A 46.451263 46.451263 0 0 1 132.85547 430.87109 z "
+       transform="scale(0.26458333)" />
+    <circle
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke-width:0.264583"
+       id="path892"
+       cx="35.152912"
+       cy="126.1532"
+       r="0.60050958" />
+    <text
+       xml:space="preserve"
+       style="font-size:2.74659px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;stroke-width:0.068665"
+       x="36.870911"
+       y="129.06932"
+       id="text896"><tspan
+         sodipodi:role="line"
+         id="tspan894"
+         x="36.870911"
+         y="129.06932"
+         style="stroke-width:0.068665">$(0,0)$</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:1.65613px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;stroke-width:0.0414036"
+       x="7.748148"
+       y="154.34799"
+       id="text900"><tspan
+         sodipodi:role="line"
+         id="tspan898"
+         x="7.748148"
+         y="154.34799"
+         style="stroke-width:0.0414036">$\{(x,y) \in \mathbb{R}^2 | \frac{1}{2} &lt; ||(x,y)|| &lt; \frac{2}{3}\}$</tspan></text>
+  </g>
+</svg>
