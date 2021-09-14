@@ -1,0 +1,46 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Computational Topology Reading Group - Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Filtrations}
+\begin{definition}
+    Let $K$ be a simplicial complex and $A$ a set. A map $\Phi : A \rightarrow \mathbb{R}^{|K|}$
+\end{definition}
+Some interesting loss function and running filtration experiment
+\\\\
+Suppose we have a graph where each vertex is a vector of features.
+For each vertex we define a function.
+For $k$ we have a function.
+\\\\
+\section{Autoencoders}
+We have an input vector $X \in \mathbb{R}^n$ and an output vector $\overline{X} \in \mathbb{R}^n$.
+Then we have an intermediary vector $Z \in \mathbb{R}^k$ such that $k < n$. We compute a toplogical loss function for 
+the autoencoder so that (hopefully) topological features are preserved.
+
+\end{document}

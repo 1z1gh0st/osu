@@ -1,0 +1,51 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Discrete Mathematics - Homework 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\subsection*{3.1.12}
+\begin{mdframed}[]
+    Suppose $x$ and $y$ are real numbers, and $3x + 2y \leqslant 5$. Prove that if $x > 1$
+    then $y < 1$.
+\end{mdframed}
+\begin{proof}
+    Suppose that $x,y \in \mathbb{R}$ and that $3x + 2y \leqslant 5$ and $x > 1$.
+\end{proof}
+\subsection*{3.1.13}
+\subsection*{3.1.16}
+\section*{Problem 2}
+\subsection*{3.3.6}
+\subsection*{3.3.8}
+\subsection*{3.3.21}
+\subsection*{3.3.24}
+\section*{Problem 3}
+\subsection*{3.4.8}
+\subsection*{3.4.10}
+
+\end{document}

@@ -1,0 +1,240 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Advanced Multivariable Calculus - Homework 5}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+\begin{mdframed}[]
+    Let $f:I \rightarrow \mathbb{R}$ continuously where $I$ is a product of real intervals.
+    Then for any partition $P$ on $I$, there exists some $J \in P$ where there exists $u,v\in J$
+    such that 
+    \[
+        0 \leqslant U(f,P) - L(f,P) \leqslant \text{Vol(I)}[f(u)-f(v)]
+    \]
+\end{mdframed}
+\begin{proof}
+Since $P$ is finite we can say let 
+\[
+    \alpha = \max_{J \in P}\{M(f,J) - m(f,J)\}
+\]
+Then it follows that 
+\[
+    \sum_{J \in P}M(f,J)\text{Vol}(J) - \sum_{J \in P}m(f,J)\text{Vol}(J) = \sum_{J \in P}\text{Vol}(J)[M(f,J) - m(f,J)] \leqslant \sum_{J \in P}\text{Vol}(J)\alpha
+\]
+Then since $\alpha \in \mathbb{R}$ is constant we can simply write
+\[
+    \sum_{J \in P}\text{Vol}(J)\alpha = \alpha\sum_{J \in P}\text{Vol}(J) = \alpha \text{Vol}(I)
+\]
+So since each $J$ is compact by the extreme value theorem we say there exists $u_J,v_J \in J$ for each $J$
+such that $f(u_J) = M(f,J), f(v_J) = m(f,J)$. So then finally we say that $\exists J \in P$ containing points 
+$u,v$ such that $f(u) - f(v) = \alpha$, and thus
+\[
+    0 \leqslant U(f,P) - L(f,P) \leqslant \text{Vol}(I)[f(u) - f(v)]
+\]
+\end{proof}
+\section*{Problem 2}
+\begin{mdframed}[]
+    Let $f:\mathbb{R}^2 \rightarrow \mathbb{R}$ where $f$ is defined by
+\[
+    f(x,y) = \begin{cases}
+        1 & x \in \mathbb{Q}\\
+        2y & x \notin \mathbb{Q}
+    \end{cases}
+\]
+Then the following integral is true:
+\[
+    \int_0^1\left(\int_0^1fdy\right)dx = 1
+\]
+However, $f$ is not integrable.
+\end{mdframed}
+\begin{proof}
+    Let us begin with the nested integrals.
+    We say that $\int_0^1fdy$ is equal to the following:
+    \begin{align*}
+        \int_{y=0}^{y=1}fdy &= \begin{cases}
+            y & x \in \mathbb{Q} \\
+            y^2 & x \notin \mathbb{Q}
+        \end{cases}\bigg|_0^1\\
+        &= 1 - 0 \ \ \ \ \forall x \in [0,1] \\
+        &= 1
+    \end{align*}
+    Then clearly $\int_0^1 (1)dx = 1$. So we say that 
+    \[
+        \int_0^1\left(\int_0^1 fdy\right)dx = 1
+    \]
+    Now we wish to show that $f$ is not integrable.
+    To do this we will show that $U(f,P) > L(f,P)$ thus they cannot be equal.
+    We start with our upper sum. That is,
+    \begin{align*}
+        U(f,P) &= \sum_{J \in P} M(f,J) \text{Vol}(J) \\
+        &= \sum_{J \in P}\sup\{f(x,y) \ | \ (x,y) \in J\}  \text{Vol}(J) \\
+        &= \sum_{J \in P}\max\{1,2y \ | \ (x,y) \in J\}  \text{Vol}(J)
+    \end{align*}
+    Then since we are partitioning the unit square, we know that there must exist some 
+    $J_1 \in P$ such that $(\frac{\pi}{4},1) \in J_1$. Therefore 
+    \begin{align*}
+        U(f,P) &= \max\{1,2y \ | \ (x,y) \in J_1\}\text{Vol}(J_1) + \sum_{J \in P \setminus \{J_1\}} \max\{1,2y \ | \ (x,y) \in J\}  \text{Vol}(J)\\
+        &= (2) \text{Vol}(J_1) + \sum_{J \in P \setminus \{J_1\}} \max\{1,2y \ | \ (x,y) \in J\}  \text{Vol}(J)\\
+        &>  (1) \text{Vol}(J_1) + \sum_{J \in P \setminus \{J_1\}} (1) \text{Vol}(J) = \text{Vol}(I) = 1
+    \end{align*}
+    Similarly $\exists J_0 \in P$ such that $(\frac{\pi}{4}, 0) \in J_0$. Then it follows that $\min\{1,2y | (x,y) \in J_0\} = 0$.
+\end{proof}
+\section*{Problem 3}
+\begin{mdframed}[]
+    Let $f:[a,b]\times[a,b] \rightarrow \mathbb{R}$ continuously. Then 
+    \[
+        \int_a^b\left(\int_a^xfdy\right)dx = \int_a^b\left(\int_y^bfdx\right)dy
+    \]
+\end{mdframed}
+\begin{proof}
+    Define the set $D = \{(x,y) \in \mathbb{R}^2 | (x,y) \in [a,b]\times[a,b] \text{ and } x > y\}$. By Fubini's theorem, we can say that
+    \begin{align*}
+        \int_a^b\left(\int_a^xfdy\right)dx &= \int_a^b\left(\int_{D(x)}fdy\right)dx
+        =\int_DfdA
+        =\int_a^b\left(\int_{D(y)}fdx\right)dy
+        = \int_a^b\left(\int_y^bfdx\right)dy
+    \end{align*}
+\end{proof}
+\section*{Problem 4}
+\begin{mdframed}[]
+    Let $D = \{(x,y) \in \mathbb{R}^2 \ | \ x^2 + y^2 \leqslant 1\}$. Then the integral of $f(x,y) = x^2y^2$ over $D$ can be computed as $$\int_D x^2y^2dxdy = \frac{\pi}{24}$$
+\end{mdframed}
+\begin{proof}
+Firstly let $\Phi : \mathbb{R}^2 \rightarrow \mathbb{R}^2$ be given by
+\[
+    \Phi(r,\theta) = (r\cos\theta,r\sin\theta)  
+\]
+Since $\Phi$ is continuously differentiable, it is a valid change of variables on $\mathbb{R}^2$.
+The boundary set of $D$ can be shown to be equal to $\partial D = \{(x,y)\in\mathbb{R}^2 \ | \ x^2 + y^2 = 1\}$.
+Then we define $C = \{(r,\theta)\in \mathbb{R}^2 \ | \ 0 \leqslant r \leqslant 1 \text{ and } 0 \leqslant \theta < 2\pi \}$.
+Similarly, in polar coordinates we have $\partial C =  ([0,1] \times [0,2\pi]) \setminus \text{int}( [0,1] \times [0,2\pi])$.
+Then, we compute that 
+\[
+    \Phi(\partial C)  = \{(\cos\theta,\sin\theta) \ | \ \theta \in [0,2\pi) \} = \partial D  
+\]
+So it follows that we have a valid change of variables moving from rectangular to polar coordinates, since $\Phi$ is both 1-1 and onto as well.
+Then we can write
+\[
+  \int_D x^2y^2 dxdy = \int_C r^4\cos^2\theta\sin^2\theta |J_\Phi|drd\theta  
+\]
+Where $C = [0,1]\times[0,2\pi)\subset \mathbb{R}^2$. Then we compute $|J_\Phi(r,\theta)|$ by the following:
+\begin{align*}
+    |J_\Phi(r,\theta)| &=\left|\begin{pmatrix}
+        \frac{\partial \Phi_1}{\partial r} & \frac{\partial \Phi_1}{\partial \theta}\\\\
+        \frac{\partial \Phi_2}{\partial r} & \frac{\partial \Phi_2}{\partial \theta}
+    \end{pmatrix}\right|\\
+    &=\left|\begin{pmatrix}
+        \cos\theta & -r\sin\theta \\
+        \sin\theta & r\cos\theta
+    \end{pmatrix}\right|\\
+    &= (r\cos^2\theta)-(-r\sin^2\theta)\\
+    &= r(\cos^2\theta + \sin^2\theta) = r
+\end{align*}
+Given that $|J_\Phi| = r$ we can now write 
+\[
+  \int_D x^2y^2 dxdy = \int_C r^4\cos^2\theta\sin^2\theta rdrd\theta  
+\]
+Now all that is left is to compute the integral, which we will do now.
+\begin{align*}
+    \int_0^{2\pi}\int_0^1 r^5 \sin^2\theta\cos^2\theta drd\theta &= \frac{1}{6}\int_0^{2\pi}\sin^2\theta\cos^2\theta d\theta\\
+    &= \frac{1}{6}\int_0^{2\pi}\sin^2\theta(1-\sin^2\theta)d\theta\\
+    &=\frac{1}{6}\int_0^{2\pi}\sin^2\theta-\sin^4\theta d\theta\\
+    &=\frac{1}{6}\left(\int_0^{2\pi}\sin^2\theta d\theta-\int_0^{2\pi}\sin^4\theta d\theta\right)\\
+    &=\frac{1}{6}\left(\int_0^{2\pi}\sin^2\theta d\theta-\left[\frac{-\cos\theta\sin^3\theta}{4}\bigg|_0^{2\pi} + \frac{3}{4}\int_0^{2\pi}\sin^2 \theta d \theta \right]\right)\\
+    &=\frac{1}{24}\int_0^{2\pi}\sin^2\theta d\theta \\
+    &= \frac{1}{24}\int_0^{2\pi}\frac{1-\cos(2\theta)}{2}d\theta
+\end{align*}
+Then we must perform a single variable $u$-substitution. Let $u = 2\theta, du = 2d\theta$. Then we can write
+\begin{align*}
+    &= \frac{1}{24}\int_0^{4\pi}\frac{1-\cos(u)}{4}du \\
+    &= \frac{1}{24}\left(\frac{4\pi}{4} - \frac{\sin u}{4}\bigg|_0^{4\pi}\right)\\
+    &= \frac{1}{24}\left(\pi - 0\right) = \frac{\pi}{24}
+\end{align*}
+\end{proof}
+\section*{Problem 5}
+\subsection*{a)}
+\begin{mdframed}[]
+    Set $G = \{(x,y) \in \mathbb{R}^2 \ | \ x > 0, y > 0\}$. Define $\Phi : G \rightarrow \mathbb{R}^2$ by $\Phi(x,y) = (x^2 - y^2, xy)$ for 
+    each $(x,y) \in G$. Then the function $\Phi : G \rightarrow \mathbb{R}^2$ is 1-1 on $G$, and that for each $(x,y) \in G$,
+    the Jacobian matrix $J_\Phi(x,y)$ is invertible.
+\end{mdframed}
+\begin{proof}
+    To show that $\Phi$ is 1-1, let $\Phi(x_1,y_1) = \Phi(x_2,y_2)$ be arbitrary.
+    Then since both are points in $\mathbb{R}^2$ that are equal, their norms must be equal as well. That is,
+    \begin{align*}
+        ||\Phi(x_1,y_1)|| &= ||\Phi(x_2,y_2)||\\
+        \sqrt{\Phi_1(x_1,y_1)^2 + \Phi_2(x_1,y_1)^2} &= \sqrt{\Phi_1(x_2,y_2)^2 + \Phi_2(x_2,y_2)^2}\\
+        \sqrt{(x_1^2-y_1^2)^2 + (x_1y_1)^2} &= \sqrt{(x_2^2-y_2^2)^2 + (x_2y_2)^2} \\
+        \sqrt{x_1^4 - 2x_1^2y_1^2 + y_1^4 + x_1^2y_1^2} &= \sqrt{x_2^4 - 2x_2^2y_2^2 + y_2^4 + x_2^2y_2^2}\\
+        \sqrt{x_1^4 + 2x_1^2y_1^2 + y_1^4 - 3x_1^2y_1^2} &= \sqrt{x_2^4 + 2x_2^2y_2^2 + y_2^4 - 3x_2^2y_2^2}\\
+        x_1^4 + 2x_1^2y_1^2 + y_1^4 - 3x_1^2y_1^2 & = x_2^4 + 2x_2^2y_2^2 + y_2^4 - 3x_2^2y_2^2
+    \end{align*}
+    Since we know $x_1y_1 = x_2y_2$ it follows that $3x_1^2y_1^2 = 3x_2^2y_2^2$. So then we can write 
+    \begin{align*}
+        x_1^4 + 2x_1^2y_1^2 + y_1^4 & = x_2^4 + 2x_2^2y_2^2 + y_2^4 \\
+        (x_1^2 + y_1^2)^2 &= (x_2^2 + y_2^2)^2 \\
+        x_1^2 + y_1^2 &= x_2^2 + y_2^2
+    \end{align*}
+Given this fact, and that $x_1^2 - y_1^2 = x_2^2 - y_2^2$ it follows that $(x_1,y_1) = (x_2,y_2)$. So we say that $\Phi$ is 1-1.\\\\
+To verify that $J_\Phi$ is invertible, we can simply check if the determinant is non-zero. So we write 
+\begin{align*}
+    \det J_\Phi & = \det \begin{pmatrix}
+        \frac{\partial \Phi_1}{\partial x} & \frac{\partial \Phi_1}{\partial y} \\\\
+        \frac{\partial \Phi_2}{\partial x} & \frac{\partial \Phi_2}{\partial y}
+    \end{pmatrix}\\
+    &= \det \begin{pmatrix}
+        2x & -2y\\
+        y & x
+    \end{pmatrix}\\
+    &= 2x^2 + 2y^2
+\end{align*}
+Then since we cannot have $x$ or $y$ equal to 0 it follows that $|J_\Phi| \neq 0$, and the Jacobian is thusforth invertible.
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}[]
+    Using the change of variables given by $\Phi$, and the given the set $D = \{(x,y) \in\mathbb{R}^2 \ | \ x>0,y>0, 1\leqslant x^2 -y^2 \leqslant 9, 2 \leqslant xy \leqslant 4\}$.
+    The following integral can be computed:
+    \[
+        \int_Dx^2 + y^2 dxdy = 8  
+    \]
+\end{mdframed}
+\begin{proof}
+    First notice that $x^2 + y^2 = \frac{|J_\Phi|}{2}$. Since $\Phi$ is a smooth transformation from $D$ to $C$,
+\[
+    \int_C \frac{1}{2} dudv = \int_D \frac{|J_\Phi|}{2} dxdy
+\]  
+While the notation is a little bit backwards, the transformation is still as desired.
+So we want to write $D$ in terms of $u = x^2 -y^2$ and $v = xy$. This is simply $C=\{(u,v)\in\mathbb{R}^2 \ | \ 1 \leqslant u \leqslant 9, 2\leqslant v \leqslant 4 \}$.
+Then the integral is a simple compuation,
+\begin{align*}
+    \int_D \frac{|J_\Phi|}{2} dxdy &= \int_C \frac{1}{2} dudv\\
+    &= \int_2^4\int_1^9 \frac{1}{2}dudv \\
+    &= \frac{1}{2}(2)(8) = 8
+\end{align*}
+\end{proof}
+\end{document}

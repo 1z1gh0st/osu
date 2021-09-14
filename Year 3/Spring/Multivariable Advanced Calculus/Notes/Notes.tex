@@ -10,9 +10,10 @@
 \usepackage{xifthen}
 \usepackage{pdfpages}
 \usepackage{transparent}
+\usepackage{bm}
 
 \newcommand{\incfig}[1]{%
-    \def\svgwidth{\columnwidth}
+    \def\svgwidth{.5\linewidth}
     \import{./figures/}{#1.pdf_tex}
 }
 
@@ -83,4 +84,90 @@ But we care mostly about the following property:
         such that $||\vec{x} - \vec y|| < \delta$ implies $||f(\vec x) - f(\vec y)|| < \epsilon$.
     \end{definition}
 \end{mdframed}
+
+\section{Integration}
+\subsection{Partitions on $\mathbb{R}^n$}
+Let $I = I_1 \times I_2 \times \cdots \times I_k$ be a generalized rectangle, so $I_\ell = [a_\ell, b_\ell], 1 \leqslant \ell \leqslant k$.
+For each $\ell$ between $1$ and $k$, let $P_\ell$ be a partition of $I_\ell$. The collection of 
+generalized rectangles 
+\[
+    \{ J = J_1 \times \cdots \times J_\ell \times \cdots \times J_k \ | \ J_\ell \text{ is an interval in $P_\ell$}\}
+\]
+Is a partition of $I$, and is denoted $P = (P_1,P_2, \cdots , P_m)$.
+\begin{figure}[ht]
+    \centering
+    \incfig{1}
+    \caption{Generalized Rectangle Partition}
+    \label{fig:1}
+\end{figure}
+For example, we can take this rectangle with the following partition: 
+$P_1 = \{x_0,x_1,x_2,x_3\}, P_2 = \{y_0,y_1,y_2,y_3,y_4\}$ \fbox{Figure 1}.\\\\
+The volume $Vol(I) = \sum_{J \in P}Vol(J)$.
+    Let $I$ be a generalized rectangle. Let $P$ be a partition of $I$.
+    Let $f:I \rightarrow \mathbb{R}$ be bounded. For $J$ a generalized sub-rectangle in $P$,
+    let 
+    \[
+        M(f,J) = \sup\{f(\bm x) : \bm x \in J\}
+    \]
+    \[
+        m(f,J) = \inf\{f(\bm x) : \bm x \in J\}
+    \]
+    The upper sum of $f$ with respect to $P$ is \[U(f,P) = \sum_{J \in P}M(f,J)Vol(J)\]
+    And the lower sum is 
+    \[
+        L(f,P) = \sum_{J \in P} m(f,J)Vol(J)
+    \]
+We wish to find an upper bound for $L(f,P)$ and a lower bound for $U(f,P)$, so we use the following lemma.
+\begin{mdframed}\begin{lemma}
+    Let $f:I \rightarrow \mathbb{R}$ be a bounded function on a generalized rectangle $I$.
+    Suppose 
+    \[
+        m \leqslant f(\bm x) \leqslant M \ \ \ \ \forall \bm x \in I
+    \]
+    Then for every partition $P$ of $I$,
+    \[
+        m \cdot Vol(I) \leqslant L(f,P) \leqslant U(f,P) \leqslant M \cdot Vol(I)
+    \]
+\end{lemma}\end{mdframed}
+Now we can write the following definition to start thinking about integration in $\mathbb{R}^n$.
+    \begin{definition}
+        Let $f: I \rightarrow \mathbb{R}$ be bounded, and $I$ a generalized rectangle in $\mathbb{R}^n$.
+        The lower integral of $f$ on $I$ is 
+        \[
+            \underline{\int_{I}}f = \sup\{L(f,P) : P \text{ partition of } I\}
+        \]
+        The upper integral of $f$ on $I$ is 
+        \[
+            \overline{\int_{I}}f = \inf\{U(f,P) : P \text{ partition of } I\}
+        \]
+    \end{definition}
+So then we also need to get a definition for integrable functions, which we say is the following:
+\begin{definition}
+    Let $f: I \rightarrow \mathbb{R}$ be bounded where $I$ is a generalized rectangle.
+    Then $f$ is integrable on $I$ if 
+    \[
+        \underline{\int_I}f = \overline{\int_I}f
+    \]
+    In which case we write 
+    \[
+        \int_I f = \underline{\int_I}f = \overline{\int_I}f
+    \]
+\end{definition}
+For an example, let $I$ be a generalized rectangle.
+Define a function $f:I \rightarrow \mathbb{R}$ as follows:
+\[
+    f(\bm x) = \begin{cases}
+        1, & \bm x \text{ has a rational coordinate } \\
+        0, & \text{otherwise}
+    \end{cases}
+\]
+Then by the density of rational and irrational numbers in $\mathbb{R}$, for any partition $P$ of $I$,
+it must be the case that 
+\[
+    L(f,P) = \sum_{J \in P}m(f,J) Vol(J) = 0
+\]
+and 
+\[
+    U(f,P) = \sum_{J \in P}M(f,J) Vol(J) = \sum_{J \in P} Vol(J) = Vol(I) \neq 0
+\]
 \end{document}

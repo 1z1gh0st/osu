@@ -1,0 +1,215 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{bm}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Advanced Multivariable Calculus - Assignment 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+Let $f: \mathbb{R}^2 \rightarrow \mathbb{R}$ where
+\[
+    f(x,y) = \begin{cases}
+        \frac{xy}{x^2 + y^2}, & (x,y)= 0\\
+        0, & \text{otherwise}
+    \end{cases}
+\]
+\subsection*{a)}
+\begin{mdframed}
+    Compute the partial derivatives of $f$ at $(x,y) = 0$.
+\end{mdframed}
+For the partial derivative with respect to $x$ at 0, we write,
+\begin{align*}
+    \frac{\partial f}{\partial x}(0,0) &= \lim_{h \rightarrow 0} \frac{f(0 + h, 0) - f(0,0)}{h}\\
+    &= \lim_{h \rightarrow 0} \frac{\frac{h(0)}{h^2 + 0^2} - 0}{h}\\
+    &= \lim_{h \rightarrow 0} \frac{0}{h} \\
+    &= 0
+\end{align*}
+And since the function is identical if we switch variables $x$ and $y$, it follows that $\frac{\partial f}{\partial y}(0,0) = 0$ as well.
+\subsection*{b)}
+\begin{mdframed}
+    Show that $f$ is not continuous at 0 and therefore not differentiable at 0.
+\end{mdframed}
+\begin{proof}
+    Let $(x_n,y_n) = (\frac{1}{n},\frac{1}{n})$. Then it follows that $(x_n,y_n) \rightarrow 0$ as $n \rightarrow \infty$.
+    But, if we take the limit of $f(x_n,y_n)$, we find that
+    \begin{align*}
+        \lim_{n \rightarrow \infty} f(x_n,y_n) &= \lim_{n\rightarrow \infty}\frac{(\frac{1}{n})(\frac{1}{n})}{(\frac{1}{n})^2 + (\frac{1}{n})^2}\\
+        &= \lim_{n\rightarrow \infty} \frac{(\frac{1}{n})^2}{2(\frac{1}{n})^2}\\
+        &= \lim_{n \rightarrow \infty} \frac{1}{2}\\
+        &= \frac{1}{2}
+    \end{align*}
+    Since $(x_n,y_n) \rightarrow 0$ but $f(x_n,y_n) \not \rightarrow f(0)$, we say that $f$ cannot be continuous at 0.
+    Any function from $\mathbb{R}^2 \rightarrow \mathbb{R}$ that is differentiable at a point $A$, is continuous at $A$,
+    so by the contrapositive of that statement it follows that $f$ cannot be differentiable at $0$.
+\end{proof}
+\section*{Problem 2}
+    Consider the partial differential equation
+    \[
+        u_t + 3u_x = 0
+    \]
+    for a differentiable function $u(x,t)$.
+    \subsection*{a)}
+        \begin{mdframed}
+            Suppose $f$ is a differentiable function of one variable. Show that $u(x,t) = f(x - 3t)$ satisfies the 
+            partial differential equation.
+        \end{mdframed}
+        Let $g : \mathbb{R}^2 \rightarrow \mathbb{R}$ where $g(x,t) = x - 3t$. Then we can write $f(x-3t) = (f \circ g)(x,t)$.
+        Then, we compute the partial derivatives of $u$ using the chain rule
+        \begin{align*}
+            u_x &= \frac{\partial}{\partial x}(f(g(x,t))) = \frac{df}{dy} \cdot \frac{\partial g}{\partial x}\\
+            &= \frac{df}{dy}(1) = \frac{df}{dy} \\\\
+            u_t &= \frac{\partial}{\partial t}(f(g(x,t))) = \frac{df}{dy} \cdot \frac{\partial g}{\partial t}\\
+            &=  \frac{df}{dy}(-3)
+        \end{align*}
+        Then it follows that 
+        \[
+            u_t + 3u_x = \frac{df}{dy}(-3) + (3) \frac{df}{dy} = 0
+        \]
+        So we say that the partial differential equation is satisfied.
+    \subsection*{b)}
+        \begin{mdframed}
+            Let $V = \frac{1}{\sqrt{10}}(3,1)$. Show that if $u(x,t)$ satisfies the differential equation then 
+            the directional derivative $D_v u = 0$.
+        \end{mdframed}
+        \begin{proof}
+            Let $u(x,t)$ be some function such that $u_t + 3u_x = 0$.
+            We wish to show that $D_v u = 0$.
+            So by definition of the directional derivative,
+            \begin{align*}
+                D_v u(x,t) &= \nabla u(x,t) \cdot V \\
+                &= \langle u_x, u_t \rangle \cdot \frac{1}{\sqrt{10}}\langle 3,1\rangle \\
+                &= (3u_x + u_t)\frac{1}{\sqrt{10}} \\
+                &= 0
+            \end{align*}
+        \end{proof}
+    \subsection*{c)}
+        \begin{mdframed}
+            Show that a line that passes through $(x,t)$ and is parallel to $V$ passes through $(x-3t,0)$.
+        \end{mdframed}
+        We know that there is only one line parallel to $V$ passing through $(x,t)$ by one of Euclid's geometric postulates.
+        So if we take the line passing through both $(x,t)$ and $(x-3t,0)$ and show it is parallel to $V$, we have shown the desired statement.
+        The slope of a line passing through both points is equal to 
+        \begin{align*}
+            \frac{t-0}{x - (x-3t)} & = \frac{t}{3t} = \frac{1}{3}
+        \end{align*}
+        Then since $V$ is a scalar multiple of $\langle 3,1\rangle $ it follows that it is parallel to this line.
+    \subsection*{d)}
+        \begin{mdframed}
+            Show that every solution $u(x,t)$ has the property $u(x,t) = u(x - 3t, 0)$.
+        \end{mdframed}
+        \begin{proof}
+            We know that for any solution $u(x,t)$ that its directional derivative with respect to $V$ is 0.
+            Because of this, $u$ is constant on any line parallel to $V$.
+            Then since for any $(x,t)$ we know that the line parallel to $V$ passing through 
+            it also passes through $(x - 3t, 0)$. So $u$ is constant on this line therefore
+            $u(x,t) = u(x-3t,0)$.
+        \end{proof}
+\section*{Problem 3}
+    \begin{mdframed}
+        Let $G \subset \mathbb{R}^2$ be an open set, and assume $f : G \rightarrow \mathbb{R}$ is differentiable 
+        on $G$. Let $C$ be a smooth curve in $G$, given by $\gamma:(a,b) \rightarrow G$.
+        Assume $f$ is constant on $C$. Prove that $\nabla f(\gamma(t)) \cdot \gamma'(t) = 0$.
+    \end{mdframed}
+    \begin{proof}
+        Since $f$ is constant on $C$, we write $f(\gamma(t)) = c \in \mathbb{R}$ for every $t \in (a,b)$. By the chain rule we write
+        \begin{align*}
+            \nabla f(\gamma(t)) \cdot \gamma'(t) & = \frac{d}{dt} f(\gamma(t))\\
+            &=\frac{d}{dt} c\\
+            &= 0
+        \end{align*}
+    \end{proof}
+\section*{Problem 4}
+    \begin{mdframed}
+        Let $f: [a,b] \rightarrow \mathbb{R}^2$ continuously on $[a,b]$ such that $f$ is differentiable
+        on $(a,b)$. Then there exists some $t \in (a,b)$ such that
+        \[
+            ||f(b) - f(a)|| \leqslant ||f'(t)|| (b-a)
+        \]
+    \end{mdframed}
+    \begin{proof}
+        Let $z = f(b) - f(a)$ and let $\varphi = z \cdot f(t)$. Then we have $\varphi : (a,b) \rightarrow \mathbb{R}$.
+        By the ordinary mean value theorem on real valued functions, we say that $\exists t \in (a,b)$ such that 
+        \begin{align*}
+            \varphi(b) - \varphi(a) & = \varphi ' (t)(b-a)\\
+            z \cdot f(b) - z \cdot f(a) & = z \cdot f'(t) (b-a)\\
+            z \cdot (f(b) - f(a)) & = z \cdot f'(t) (b-a) \\
+            (f(b) - f(a)) \cdot (f(b) - f(a)) &= (f(b) - f(a)) \cdot f'(t) (b-a) \\
+            ||f(b)-f(a)||^2 &= [(f_1(b) - f_1(a))f_1'(c) + (f_2(b) - f_2(a))f_2'(c)](b-a)
+        \end{align*}
+        Then by the mean value theorem in $\mathbb{R}$, we know that $f_i(b) - f_i(b) = f_i'(t)(b-a)$,
+        but multiplying both sides by $f_i'(t)$ we get $f_i(b)f_i'(t) - f_i(a)f_i'(t) = f_i'(t)^2(b-a)$.
+        Therefore we can write
+        \begin{align*}
+            ||f(b)-f(a)||^2 &= [f_1'(c)^2(b-a) + f_2'(c)^2(b-a)](b-a) \\
+            ||f(b)-f(a)||^2 &= [f_1'(c)^2 + f_2'(c)^2](b-a)^2 \\
+            ||f(b)-f(a)||^2 &= ||f'(c)||^2(b-a)^2
+        \end{align*}
+        Since all terms are positive, we can take the square root of each side without consequences, showing that 
+        $||f(b) - f(a)|| = ||f'(t)||(b-a)$, and so the inclusive inequality will hold as well.
+    \end{proof}
+\section*{Problem 5}
+    \begin{mdframed}
+        Fix $r > 0$ and let $B_r(0)$ be the open ball in $\mathbb{R}^2$. Assume $f: B_r(0) \rightarrow \mathbb{R}
+        $ is differentiable on $B_r(0)$ and assume there exists a positivie real number $M$ such that $||\nabla f(x)|| \leqslant M$
+        for all $x \in B_r(0)$. Prove that for any $\bm a,\bm b \in B_r(0)$,
+        \[
+            |f(\bm b) - f(\bm a)| \leqslant M||\bm b-\bm a||
+        \]
+    \end{mdframed}
+    \begin{proof}
+        Let $\gamma : [0,1] \rightarrow \mathbb{R}^2$ where $\gamma(t) = \bm a + t (\bm b - \bm a)$.
+        Then we write $\bm a = \gamma(0), \bm b = \gamma(1)$. Then we can rewrite 
+        \[
+            |f(\bm b) - f(\bm a)| = |(f\circ \gamma)(1) - (f \circ \gamma)(0)|
+        \]
+        By the mean value theorem, we know that $\exists c \in (0,1)$ such that 
+        \[
+            (f\circ \gamma)(1) - (f \circ \gamma)(0) = (f \circ \gamma)'(c)
+        \]
+        Then by the chain rule, we write
+        \[
+            (f \circ \gamma)'(c) = \nabla f(\gamma (c)) \cdot \gamma'(c)
+        \]
+        Then since $\gamma(t) = \bm a + t(\bm b - \bm a)$, we know that $\gamma'(t) = \bm b - \bm a$ for every
+        $t$. So then we have 
+        \begin{align*}
+            \nabla f ( \gamma (c)) \cdot \gamma'(c) &= \nabla f ( \gamma (c)) \cdot (\bm b - \bm a)\\
+            &\leqslant ||\nabla f(\gamma(c))|| \ ||\bm b - \bm a|| \\
+            &\leqslant M ||\bm b - \bm a||
+        \end{align*}
+        And transitively we have shown that $|f(\bm b) - f(\bm a)| \leqslant M||\bm b - \bm a||$.
+    \end{proof}
+\begin{proof}
+    Assume by contradiction that there exists some $n \in \{2,3,4,\cdots\}$ such that $n$ is neither prime 
+    or a product of two or more primes. By the well-ordering principle there must exist some such $n$
+    that is the smallest element of $\{2,3,4,\cdots\}$ such that it is neither prime nor the product of two or more primes.
+    Call this smallest such element $n$. Then since $n$ is not prime it must be the case that $\exists a,b \in \{2,3,\cdots,n-1\}$
+    such that $n = a \cdot b$. However since $n$ is the smallest natural number larger than 1 that is neither prime or a product of primes,
+    it must be the case that both $a$ and $b$ are prime or a product of two or more primes. So it follows that $n$ is either prime or a product of two or more primes (contradiction).
+    Therefore for every $n \in \mathbb{N}$ such that $n \geqslant 2$ we conclude that $n$ is prime or a product of two or more primes.
+\end{proof}
+\end{document}

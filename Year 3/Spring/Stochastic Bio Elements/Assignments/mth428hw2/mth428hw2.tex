@@ -1,0 +1,104 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Stochastic Elements of Mathematical Biology - Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+For each time iteration, we have three possibilities 
+\begin{align*}X_{k+1} &= X_k - 1,\\ X_{k+1} &= X_k,\\ X_{k+1} &= X_k + 1\end{align*}
+So for $X_{k+1} = X_k - 1$ then we must have the following conditions:
+\begin{align*}
+    &\text{Select $A$ individual to be replaced.}\\
+    &\text{    a) Replace with some $a$ individual.}\\
+    &\text{    b) Replace with $A$ and it mutates to $a$ during cloning.}
+\end{align*}
+So we select $A$ individual with probability of $\frac{X_t}{n}$ and then the probability 
+of a) occuring given we have selected an $A$ individual is $\frac{n - X_t}{n}$. Then 
+the probability of b) occuring is $\frac{X_t}{n} \cdot \rho$. So we say that 
+\[
+    p(X_{k+1} = X_k - 1) = \left(\frac{X_t}{n}\right) \cdot \left(\frac{n-X_t}{n} + \frac{X_k}{n} \cdot \rho\right)
+\]
+And then for $X_{k + 1} = X_k + 1$ we must have the following conditions:
+\begin{align*}
+    &\text{Select $a$ individual to be replaced.}\\
+    &\text{Replace with $A$.}\\
+    &\text{The individual $A$ does not mutate to $a$ during cloning.}
+\end{align*}
+To satisfy these conditions we pick an individual $a$ with probability $\frac{n-X_t}{n}$ and 
+the probability to choose some individual $A$ is $\frac{X_k}{n}$, and the this individual
+mutates during cloning with a probability of $1-\rho$. Then we say 
+\[
+    p(X_{k+1} = X_k + 1) = \left(\frac{n-X_t}{n}\right)\cdot \left(\frac{X_k}{n}\right)\cdot (1- \rho)
+\]
+Then we are left with
+\[
+p(X_{k+1} = X_k) = 1 - p(X_{k+1} = X_k - 1) - p(X_{k+1} = X_k + 1)
+\]
+Our fixation time $T_f = \min\{t \in \{0,1,2,\cdots\} \ | X_t = 0 \text{ or } X_t = n\}$.
+\section*{Problem 2}
+To compute the fixation time we have to look at the following recurrence relation
+\[
+    \Delta \varphi (j) = \frac{q_j}{p_j} \Delta \varphi(j - 1) - \frac{1}{p_j}  
+\]
+So if we extend this out to its final form we get 
+\[
+    \Delta \varphi (j) = \prod_{k=0}^j \left(\frac{q_k}{p_k}\right)\Delta \varphi(0) - \sum_{k = 0}^j \frac{\prod_{i = j - k + 1}^j q_i}{\prod_{i = j - k}^j p_i}
+\]
+Then we have clearly that $\Delta \varphi(0) = \varphi(1)$. 
+Denote \begin{align*}
+    g_p(i,j) &= \prod_{k = i}^j p_k \\
+    g_q(i,j) &= \prod_{k = i}^j q_k
+\end{align*}
+Then we write 
+\[
+    \Delta \varphi(j) = \varphi(1) \frac{g_q(0,j)}{g_p(0,j)} - \sum_{k=0}^j \frac{g_q(j- k + 1, j)}{g_p(j-k,k)}
+\]
+And it follows that we can write 
+\begin{align*}
+    \varphi(j) &= \sum_{m = 0}^{j-1} \Delta \varphi(m)\\
+    &= \sum_{m=0}^{j-1}\left(\varphi(1) \frac{g_q(0,m)}{g_p(0,m)} - \sum_{k=0}^m \frac{g_q(m- k + 1, j)}{g_p(m-k,k)}\right)
+\end{align*}
+If we choose $j = n$ then $\varphi(n) = 0$ so we write 
+\begin{align*}
+    0&= \sum_{m=0}^{n-1}\left(\varphi(1) \frac{g_q(0,m)}{g_p(0,m)} - \sum_{k=0}^m \frac{g_q(m- k + 1, j)}{g_p(m-k,k)}\right)\\
+    0&= \left(\sum_{m=0}^{n-1}\varphi(1) \frac{g_q(0,m)}{g_p(0,m)}\right) - \sum_{m=0}^{n-1}\left(\sum_{k=0}^m \frac{g_q(m- k + 1, j)}{g_p(m-k,k)}\right)\\
+    \sum_{m=0}^{n-1}\left(\sum_{k=0}^m \frac{g_q(m- k + 1, j)}{g_p(m-k,k)}\right)&=\left(\sum_{m=0}^{n-1}\varphi(1) \frac{g_q(0,m)}{g_p(0,m)}\right)\\
+    \sum_{m=0}^{n-1}\left(\sum_{k=0}^m \frac{g_q(m- k + 1, j)}{g_p(m-k,k)}\right) &= (n-1)\varphi(1) \left(\sum_{m=0}^{n-1} \frac{g_q(0,m)}{g_p(0,m)}\right)\\
+    \frac{\sum_{m=0}^{n-1}\left(\sum_{k=0}^m \frac{g_q(m- k + 1, j)}{g_p(m-k,k)}\right)}{(n-1)\left(\sum_{m=0}^{n-1} \frac{g_q(0,m)}{g_p(0,m)}\right)} &= \varphi(1)
+\end{align*}
+Now we can plug $\varphi(1)$ back into our $\Delta\varphi(j)$ and get 
+\[
+    \Delta \varphi(j) = \frac{\sum_{m=0}^{n-1}\left(\sum_{k=0}^m \frac{g_q(m- k + 1, j)}{g_p(m-k,k)}\right)}{(n-1)\left(\sum_{m=0}^{n-1} \frac{g_q(0,m)}{g_p(0,m)}\right)} \frac{g_q(0,j)}{g_p(0,j)} - \sum_{k=0}^j \frac{g_q(j- k + 1, j)}{g_p(j-k,k)}
+\]
+So for our final formula for $\varphi(j)$ we get 
+\begin{align*}
+    \varphi(j) &= \sum_{a = 0}^{j-1} \Delta \varphi(a)\\
+    &=  \sum_{a=0}^{j-1}\frac{\sum_{m=0}^{n-1}\left(\sum_{k=0}^m \frac{g_q(m- k + 1, j)}{g_p(m-k,k)}\right)}{(n-1)\left(\sum_{m=0}^{n-1} \frac{g_q(0,m)}{g_p(0,m)}\right)} \frac{g_q(0,a)}{g_p(0,a)} - \sum_{k=0}^a \frac{g_q(a- k + 1, j)}{g_p(a-k,k)}
+\end{align*}
+This is in fact quite messy, and most likely incorrect.
+\end{document}

@@ -1,0 +1,369 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{.5\linewidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and the Fundamental Group - Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Pre-Amble}
+    \begin{theorem}[First Isomorphism Theorem of Anti-Homomorphisms]
+        \begin{mdframed}
+            Let $H$ and $G$ be groups and let $f: G \rightarrow H$ be an anti-homomorphism.
+            That is, $f(g_1\cdot g_2) = f(g_2)\cdot f(g_1)$ for every $g_1,g_2 \in G$. Then
+            \begin{align*}
+                (i) & \ \ \ \ker(f) \triangleleft G \\
+                (ii) & \ \ \ f(G) < H \\
+                (iii) & \ \ \ f(G) \cong G / \ker(f)
+            \end{align*}
+        \end{mdframed}
+    \end{theorem}
+    \begin{proof}
+        Let $G$ and $H$ be groups and $f:G \rightarrow H$ be an anti-homomorphism such that $f(g_1 g_2) = f(g_2)f(g_1)$.
+        \fbox{(i)} To show that $\ker(f) < G$, first we know that $e_G \in \ker(f)$ since $f(e_G) = e_H$.
+        Then let $a,b \in \ker(f)$. Then we have 
+        \[
+            f(ab) = f(b)f(a) = e_H e_H = e_H
+        \]
+        Thus we say $ab \in \ker(f)$. Now to show that the subgroup is normal, let $g \in G$ and let 
+        $k \in \ker(f)$ be arbitrary. Then 
+        \begin{align*}
+            f(gkg^{-1}) & = f(kg^{-1})f(g) \\
+            &= f(g^{-1})f(k)f(g) \\
+            &= f(g^{-1})e_Hf(g)\\
+            &= f(g^{-1})f(g) \\
+            &= f(g g^{-1}) \\
+            &= f(e_G)\\
+            &= e_H
+        \end{align*}
+        So it follows that $gkg^{-1} \in \ker(f)$ for every $g \in G$.\\\\
+        \fbox{(ii)} To show that $f(G) < H$, firstly we have $e_H \in f(G)$ clearly since $f(e_G) = e_H$.
+        Then let $f(a),f(b) \in f(G)$. It follows that 
+        \[
+            f(a)f(b) = f(ba) \in f(G)
+        \]
+        So we have $f(G) < H$.\\\\
+        \fbox{(iii)} Let $\phi([a]) = \phi([b])$. Then we want to show that $[a] = [b]$. So we write 
+        \begin{align*}
+            f(a) & = f(b) \\
+            f(a)f(b)^{-1} & = e \\
+            f(a)f(b^{-1}) & = e \\
+            f(b^{-1}a) & = e \\
+            f(b^{-1}a) & = e
+        \end{align*}
+        So then we have $b^{-1}a \in \ker(f)$, and it follows that $a \in b\ker(f)$, thus $[a] = [b]$.
+    \end{proof}
+\section*{Problem 1}
+    Let $f:S^1\rightarrow S^1$. Describe $f_*$, the induced homeomorphism.
+    \subsection*{a)}
+        \begin{mdframed}
+            Let $f$ be given by the following function:
+            \[
+                f(z) = \begin{cases}
+                    z, & Im(z) \geqslant 0 \\
+                    \overline z, & Im(z) < 0
+                \end{cases}
+            \]
+        \end{mdframed}
+        First notice that $f$ folds the unit circle in half across the real axis. Any path in $\pi_1(S^1, 1)$
+        can be parameterized by $g(x) = e^{ix}$ composed with some real valued function $h : [0,1] \rightarrow \mathbb{R}$
+        where $h(0) = 2\pi m$ and $h(1) = 2\pi n$. The value $n - m$ gives us the path homotopy equivalence class of our path.
+        That is, we can classify paths by how many times they go around, and in what direction. However, when we fold the plane
+        into simply one half circle, all paths clearly become contractible to a single point \fbox{Figure 1}.
+        \begin{figure}[ht]
+            \centering
+            \incfig{1}
+            \caption{How all paths become trivial under $f_*$.}
+            \label{fig:1}
+        \end{figure}
+    \subsection*{b)}
+        \begin{mdframed}
+            Let $f$ be given by the following function:
+            \[
+                f(z) = \begin{cases}
+                    z, & Im(z) \geqslant 0 \\
+                    {\overline z}^3, & Im(z) < 0
+                \end{cases}
+            \]
+        \end{mdframed}
+        Now first consider a simple example, $\gamma(t) = e^{2\pi i t}$ where $t \in [0,1]$. This would be 
+        a path that travels once around the unit circle counter clock-wise. However, under $f$, this path Now
+        travels half way around the circle counter clock-wise, and then turns around and travels $3\pi$ radians around 
+        the circle clock-wise, and now is path homotopic to the path going once around clock-wise. If we consider $\gamma(1-t)$,
+        the exact opposite will occur, making the path go from the path homotopy class that goes once counter clockwise to 
+        the one that goes exactly once around counter-clockwise. Under $f_*$ the equivalence class for $n - m$ becomes the one for $m - n$,
+        and contractible paths remain trivial.
+\section*{Problem 2}
+    Let $c_g: G \rightarrow G$ be the conjugacy of some algebraic element of a group $g \in G$, or alternatively 
+    called an inner automorphism.
+    \subsection*{a)}
+        \begin{mdframed}
+            Check that $c_g \in Aut(G)$ and that $\varphi(g) = c_g$ is an anti-homomorphism.
+        \end{mdframed}
+        \fbox{$c_g \in Aut(G)$} Since $g^{-1}, h, g$ all belong to $G$, it follows that $c_g(h) \in G$.
+        Now let $a,b \in G$. Then
+        \begin{align*}
+            g^{-1} (ab) g & = g^{-1}a (id) b g \\
+            &= g^{-1}a(g g^{-1})bg \\
+            &=(g^{-1}ag)(g^{-1}bg)
+        \end{align*}
+        So obviously $c_g$ is a group homomorphism. Now we've got to show that it is both an endomorphism and a monomorphism.
+        Let $a,b \in G$. Then assume that 
+        \begin{align*}
+            c_g(a) &= c_g(b) \\
+            g^{-1}ag &= g^{-1}bg \\
+            ag &= bg\\
+            a & = b
+        \end{align*}
+        So we have a monomorphism. Pick any $a \in G$. Then if we want to find some $h \in G$  such that 
+        $a = c_g(h)$ simply let $h = gag^{-1}$. Then 
+        \begin{align*}
+            c_g(h) &= c_g(gag^{-1})\\
+            &= g^{-1}gag^{-1}g\\
+            &= (id)a(id)\\
+            &= a
+        \end{align*}
+        So we also have an endomorphism, and thus an isomorphism. Then since $c_g$ is an isomorphism from $G$ onto itself,
+        by definition $c_g \in Aut(G)$.\\\\
+        \fbox{$\varphi$ is an anti-homomorphism.} We take the automorphism group of $G$ to have the compositional operator.
+        To show that $\varphi$ is an anti-homomorphism let $g,h \in G$. We have to demonstrate that $\varphi(gh)= \varphi(h) \circ \varphi(g)$.
+        So pick any $a \in G$, and we say that
+        \begin{align*}
+            \varphi(gh)(a) &= c_{gh}(a)\\
+            &=(gh)^{-1}a(gh)\\
+            &=h^{-1}g^{-1}agh \\
+            &=h^{-1}(g^{-1}ag)h\\
+            &=(c_h \circ c_g)(a)\\
+            &=(\varphi(g)\circ\varphi(h))(a)
+        \end{align*}
+        So we say that $\varphi(gh) = \varphi(h)\circ\varphi(g)$ and $\varphi$ is an anti-homomorphism.
+    \subsection*{b)}
+        \begin{mdframed}
+            Show that $Inn(G) \triangleleft Aut(G)$.
+        \end{mdframed}
+        \begin{proof}
+            Let $e\in G$ be the identity element. Then $c_e(a) = e^{-1}ae = a$ is an inner automorphism and 
+            we say that $c_e = id_G$. So we have the identity map within $Inn(G)$.
+            Then for any $g,h\in G$ we have $c_g \circ c_h = c_{h \cdot g}$ as we proved in part (a).
+            So we have a subgroup of $Aut(G)$ here. Now to show that it's a normal subgroup we must show that for 
+            any $f \in Aut(G)$ and for any $g \in G$ we have $(f^{-1} \circ c_g \circ f) \in Inn(G)$. 
+            So pick any $a \in G$ arbitrarily, and we write 
+            \begin{align*}
+                (f^{-1} \circ c_g \circ f)(a) &= (f^{-1} \circ c_g)(f(a)) \\
+                &=f^{-1}(g^{-1} \cdot f(a) \cdot g) \\
+                &=f^{-1}(g^{-1}) \cdot f^{-1}(f(a)) \cdot f^{-1}(g) \\
+                &=f^{-1}(g^{-1}) \cdot a \cdot f^{-1}(g)
+            \end{align*}
+            Then since $f^{-1}$ is a group homomorphsim on $G$, we know that 
+            \[
+                f^{-1}(g^{-1}) \cdot f^{-1}(g) = f^{-1}(g^{-1} \cdot g) = f^{-1}(e) = e
+            \]
+            So we know that $f^{-1}(g^{-1})$ must be the inverse of $f^{-1}(g)$. Then since $a$ is sandwiched 
+            by some element of $G$ and its inverse, clearly $f^{-1} \circ c_g \circ f \in Inn(G)$, and we say that 
+            $Inn(G) \triangleright Aut(G)$.
+        \end{proof}
+    \subsection*{c)}
+        \begin{mdframed}
+            Show that $\ker(\varphi) = Z(G)$ and that $Inn(G) \cong G / Z(G)$.
+        \end{mdframed}
+        \begin{proof}
+            We know that $\ker(\varphi) = \varphi^{-1}(id_G)$. That is, the kernel of $\varphi$ is 
+            the set of all elements $g \in G$ such that $c_g$ is the identity function. If this is 
+            the case then $g^{-1}a g = id_g(a) = a$ for every $a \in G$. Then we can rewrite this equality 
+            as $ag = ga$ multiplying both sides by $g$ on the left. So this is the set of all $g \in G$ such that 
+            $g$ commutes with every element $a \in G$. By definition, this is the center, $Z(G)$.
+            So by the first isomorphism theorem on anti-homomorphisms we say that the image of $\phi$ is isomorphic to $G / \ker \phi$.
+            Or, alternatively,
+            \[
+                Inn(G) \cong G / Z(G)
+            \]
+        \end{proof}
+\section*{Problem 3}
+    \subsection*{a)}
+        \begin{mdframed}
+            Let $x_0, x_1 \in X$ and let $\alpha$ be a path from $x_0$ to $x_1$. Define $\hat \alpha : \pi_1(X,x_0) \rightarrow \pi_1(X,x_1)$
+            by $\hat \alpha([\gamma]) = [\alpha^{-1} * \gamma * \alpha]$. Verify that the map $\hat \alpha$ depends only on the path homotopy class $\alpha \in \pi_1(X,x_0,x_1)$,
+            and that, consequently, there is a well-defined map $\Theta:\pi_1(X,x_0,x_1)\rightarrow\mathcal{I}(x_0,x_1)$. Here $\mathcal{I}(x_0,x_1)$ stands for 
+            the collection of group isomorphisms from $\pi_1(X,x_0)$ onto $\pi_1(X,x_1)$.
+        \end{mdframed}
+        \begin{proof}
+            Let $[\alpha] = [\beta] \in \pi_1(X,x_0,x_1)$. We claim that if $\hat \alpha = \hat \beta$ then we have shown that $\hat \alpha$
+            dependes only on the path homotopy class of $\alpha$. That is, if we do not change the path homotopy class, then we do not change the function.
+            So for any $\gamma \in \pi_1(X,x_0)$ we have
+            \begin{align*}
+                \hat \alpha([\gamma]) &= [\alpha^{-1} * \gamma * \alpha] \\
+                &= [\alpha^{-1}] * [\gamma] * [\alpha] \\
+                &= [\beta^{-1}] * [\gamma] * [\beta] \\
+                &= [\beta^{-1} * \gamma * \beta] \\
+                &= \hat \beta(\gamma)
+            \end{align*}
+            So it follows that if $\hat \alpha([\gamma]) = \hat \beta([\gamma])$ for every $\gamma \in \pi_1(X,x_0)$ then 
+            $\hat \alpha = \hat \beta$. Thus $\hat \alpha$ depends only on the path homotopy class of $\alpha$.
+            Let $\Theta : \pi_1(X,x_0,x_1) \rightarrow \mathcal I(x_0,x_1)$ where $\Theta([\alpha]) = \hat \alpha$.
+            Let us confirm that $\hat \alpha$ is guaranteed to be a group isomorphism. Let 
+            \begin{align*}
+                \hat\alpha([\gamma_1]) &= \hat\alpha([\gamma_2])\\
+                [\alpha^{-1} * \gamma_1 * \alpha]  & =  [\alpha^{-1} * \gamma_2 * \alpha] \\
+                [\alpha^{-1}] * [\gamma_1] * [\alpha] & = [\alpha^{-1}] * [\gamma_2] * [\alpha]\\
+                \Longrightarrow [\gamma_1] * [\alpha] & = [\gamma_2] * [\alpha]\\
+                \Longrightarrow [\gamma_1]  & = [\gamma_2] 
+            \end{align*}
+            So we say that $\hat \alpha$ is injective. Now let $[\gamma] \in \pi_1(X,x_1)$.
+            Then the path homotopy class of $[\alpha * \gamma * \alpha^{-1}] \in \pi_1(X,x_0)$.
+            So if we take $\hat\alpha([\alpha * \gamma * \alpha^{-1}])$ we get 
+            \[
+                \hat\alpha([\alpha * \gamma * \alpha^{-1}])  = [\alpha^{-1} * \alpha * \gamma * \alpha^{-1} * \alpha]   = [\gamma]
+            \]
+            So we say $\hat\alpha$ is bijective. Now we need to demonstrate that $\hat \alpha$ is a group homomorphism.
+            Let $[\gamma_1],[\gamma_2] \in \pi_1(X,x_0)$. Then we say that 
+            \begin{align*}
+                \hat\alpha([\gamma_1] * [\gamma_2]) &= [\alpha^{-1} * [\gamma_1] * [\gamma_2] * \alpha]\\
+                &=[ \alpha^{-1}] * [\gamma_1] * [\gamma_2 ]* [\alpha]\\
+                &= [ \alpha^{-1}] * [\gamma_1] *e* [\gamma_2 ]* [\alpha]\\
+                &=[ \alpha^{-1}] * [\gamma_1] *[\alpha * \alpha^{-1}] * [\gamma_2 ]* [\alpha]\\
+                &=[ \alpha^{-1}] * [\gamma_1] *[\alpha]*[ \alpha^{-1}] * [\gamma_2 ]* [\alpha]\\
+                &=[ \alpha^{-1} * \gamma_1 *\alpha]*[ \alpha^{-1} * \gamma_2 * \alpha]\\
+                &= \hat\alpha([\gamma_1]) * \hat\alpha([\gamma_2])
+            \end{align*}
+            So we have $\hat \alpha$ is a bijective group homomorphism and therefore $\hat \alpha \in \mathcal{I}(x_0,x_1)$.
+        \end{proof}
+    \subsection*{b)}
+        \begin{mdframed}
+            Let $[\alpha], [\beta] \in \pi_1(X,x_0,x_1)$.
+            Show that the composition $\Theta([\alpha])^{-1}\circ\Theta([\beta])$
+            corresponds to a conjugation in $\pi_1(X,x_0)$ and conclude that $\Theta([\beta]) = \Theta([\alpha]) \circ c_{[\gamma]}$
+            for some $[\gamma] \in \pi_1(X,x_0)$.
+        \end{mdframed}
+        \begin{proof}
+            Let $[\delta] \in \pi_1(X,x_0)$. Then we write 
+            \begin{align*}
+                (\Theta([\alpha])^{-1} \circ \Theta([\beta]))([\delta]) & = (\hat\alpha^{-1} \circ \hat\beta)([\delta]) \\
+                &=\hat\alpha^{-1}(\hat\beta([\delta])) \\
+                &=\hat\alpha^{-1}([\beta^{-1} * \delta * \beta]) \\
+                &=[\alpha * [\beta^{-1} * \delta * \beta] * \alpha^{-1}]\\
+                &=[(\alpha * \beta^{-1}) * \delta * (\alpha * \beta^{-1})^{-1}]
+            \end{align*}
+            Then we know that $\alpha$ is a path from $x_0$ to $x_1$, and that $\beta^{-1}$ is a path from $x_1$ to $x_0$.
+            So it follows that $[\alpha * \beta^{-1}] \in \pi_1(X,x_0)$. Thus we have a conjugation $c_{[\alpha * \beta^{-1}]} = \Theta([\alpha])^{-1} \circ \Theta([\beta])$.
+            It then clearly is the case that $\Theta([\alpha]) \circ c_{[\alpha * \beta^{-1}]} = \Theta([\beta])$.
+        \end{proof}
+    \subsection*{c)}
+        \begin{mdframed}
+            Show that $\varPhi : \pi_1(X,x_0) \times \mathcal I(x_0,x_1) \rightarrow \mathcal I(x_0,x_1), \varPhi([\gamma],\varphi) = \varphi \circ c_{[\gamma]}$
+            defines a right action of $\pi_1(X,x_0)$ on $\mathcal{I}(x_0,x_1)$. What is the orbit of $\Theta([\alpha]), [\alpha]\in\pi_1(X,x_0,x_1)$?
+        \end{mdframed}
+        \begin{proof}
+            To show that $\varPhi$ is a right action, we must satisfy both identity and compatibility. \fbox{Identity}
+            In order to demonstrate this let $\varphi \in\pi_1(X,x_0)$. Then we must show that 
+            $\varPhi([x_0], \varphi) = \varphi$. So we write 
+            \begin{align*}
+                \varphi \circ c_{[x_0]} & = \varphi
+            \end{align*}
+            Which is clearly this case since $c_{[x_0]}(\gamma) = \gamma$ as $[x_0]$ is simply the constant trivial loop. Then 
+            we also need \fbox{Compatibility}. So we must show that for any $\gamma_1, \gamma_2 \in \pi_1(X,x_0)$,
+            we have $\varPhi([\gamma_1], \varPhi([\gamma_2],\varphi)) = \varPhi([\gamma_1] * [\gamma_2], \varphi)$.
+            We write 
+            \begin{align*}
+                \varPhi([\gamma_1], \varPhi([\gamma_2],\varphi)) & =  \varPhi([\gamma_1], \varphi \circ c_{[\gamma_2]})\\
+                &=\varphi \circ c_{[\gamma_2]} \circ c_{[\gamma_1]} \\
+                &= \varphi \circ c_{[\gamma_1] * [\gamma_2]} \\
+                &= \varPhi([\gamma_1] * [\gamma_2], \varphi)
+            \end{align*}
+            So we have shown that $\varPhi$ is a right group action on $\mathcal{I}(x_0,x_1)$.\\\\
+            To find the orbit of $\Theta([\alpha])$ we write
+            \begin{align*}
+                \varPhi(\pi_1(X,x_0), \Theta([\alpha])) &= \{\varPhi([\gamma], \Theta([\alpha])) \ | \ [\gamma] \in \pi_1(X,x_0)\} \\
+                &= \{\Theta([\alpha]) \circ c_{[\gamma]} \ | \ [\gamma] \in \pi_1(X,x_0)\} \\ 
+            \end{align*}
+        \end{proof}
+    \subsection*{d)}
+        -- Not Complete --
+\section*{Problem 4}
+        Show in detail that the following maps are covering maps.
+    \subsection*{a)}
+        \begin{mdframed}[]
+            $p: \mathbb{R} \rightarrow S^1, p(x) = e^{i2\pi x}$
+        \end{mdframed}
+        \begin{proof}
+            Let $y \in S^1$. We write $U(y) = \{z \ : \ |\arg(z) - \arg(y)| < \pi\}$.
+            Then we write that 
+            \[
+                p^{-1}(U(u)) = \left\{\left(k + \frac{\arg(y)}{2\pi} - \frac{1}{4},k + \frac{\arg(y)}{2\pi} + \frac{1}{4}\right) \ | \ k \in \mathbb{Z} \right\}
+            \]
+            Each interval is clearly homeomorphic to the half-circle under $p$, so we have a covering map.
+        \end{proof}
+    \subsection*{b)}
+        \begin{mdframed}[]
+            $p: S^1 \rightarrow S^1, p(z) = z^n, n \in \mathbb{N}$
+        \end{mdframed}
+        -- Not Complete -- 
+    \subsection*{c)}
+    -- Not Complete --
+\section*{Problem 5}
+    \begin{mdframed}[]
+        Let $G$ be a topological group and let $H \subset G$ be an algebraic subgroup of $G$.
+        Show that $H$ and $\overline{H}$ are both topological subgroups of $G$.
+    \end{mdframed}
+    \begin{proof}
+        We must show that $H$ is a topological group. That is, that our mulitplication and inverse functions 
+        are continuous in $H$ and its subspace topology.
+        Let $U \subset H$ be open. Then $\exists V \subset G$ that is open in $G$ such that $U = H \cap V$.
+        Then we take the inverse, $V^{-1} \subset G$. Since $^{-1} : G \rightarrow G$ is continuous in $G$, it 
+        follows that $V^{-1}$ is open in $G$. Therefore $V^{-1} \cap H$ is open in $H$. This set must also be non-empty,
+        since any $x \in U$ must have an inverse element in $H$ since $H < G$ algebraicly. So $^{-1}$ is continuous in $H$.
+        Now we must show that the same is true for multiplication. Let $U \subset H$ be open. Then let $h \in H$ be some element.
+        Write $U = V \cap H$ where $V \subset G$ is open. Then $L_{h^{-1}}$ is continuous in $G$ so we know $L_{h^{-1}}(U)$
+        will be open in $G$. Then take $H \cap L_{h^{-1}}(U)$ and it follows that this is an open set in $H$ that is non-empty.
+        So we have shown that both $^{-1}$ and $m$ are continuous in $H$ so we say that $H$ is a topological subgroup of $G$.\\\\
+        Having shown that this is true for any algebraic subgroup $H < G$, now we wish to show that $\overline {H}$ is a 
+        subgroup of $G$ algebraically. We know we must have our identity element $e \in H \subset \overline{H} \subset G$.
+        Now let $h \in \overline{H}$. For every neighborhood $U\subset G$ of $h$ we know that $U \cap H$ is non-empty.
+        Then we know that $(U \cap H)^{-1}$ is an open set in $H$. Since this is true for every neighborhood of $h$
+        it follows that $h^{-1}$ must be a limit point of $H$ thus $h^{-1} \in \overline H$. Now let $a,b \in \overline{H}$ be arbitrary.
+        We wish to show that their product is in $\overline{H}$. So we write $(a,b) \in \overline{H} \times \overline{H}$.
+        Thus 
+        \[
+            m(a,b) \in m(\overline{H} \times \overline{H}) = m(\overline{H} \times {H}) \subset \overline{m(H \times H)}
+        \]
+        So we say that every neighborhood of $ab$ intersects $m(H \times H) \subset H$ so it follows that $ab \in \overline{H}$.
+        Therefore $\overline{H} < G$ and is therefore a topological subgroup of $G$.
+    \end{proof}
+\section*{Problem 6}
+    \begin{mdframed}[]
+        Let $G$ be a topological group and let $\{e\}$ be a closed set. Show that $G$ is Hausdorff.
+    \end{mdframed}
+    \begin{proof}
+        We know that $G$ is Hausdorff or $T_2$ if and only if $\Delta$ is closed in $G \times G$.
+        We have $^{-1}:G \rightarrow G$ is a continuous map, and $id:G\rightarrow G$ is continuous.
+        Therefore define $f: G \times G \rightarrow G\times G$ by $f(x,y) = (x, y^{-1})$, and this will be continuous 
+        since both dimensions are continuous. Then if $m:G \times G \rightarrow G$ is our multiplication operation
+        we can write $m(f(x,y)) = m(x, y^{-1})$ then this, being a composition of continuous functions, is continuous.
+        Now we know that ${e}$ is closed and that this function is continuous. So consider the pre-image of ${e}$ under this function.
+        That is \[
+            \{(x,y) \in G \times G \ | \ xy^{-1} = e\} = \{ (x,y) \in G \times G \ | \ y^{-1} = x^{-1}\} = \{(x,y) \in G \times G \ | \ y = x \} = \Delta
+        \]
+        So $\Delta$ must be a closed set, and we say that $G$ is Hausdorff.
+    \end{proof}
+\end{document}

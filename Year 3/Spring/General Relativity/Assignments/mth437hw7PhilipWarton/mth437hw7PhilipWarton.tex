@@ -1,0 +1,131 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Relativity - Homework 7}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Traces}
+We assume the following three equations:
+\begin{align*}
+\vec G &= G^i_{\ j} \sigma^j \hat e_i \\
+\vec R &= R^i_{\ j}\sigma^j \hat e_i \\
+G^i_{\ j} &= R^i_{\ j} - \frac{1}{2}\delta^i_{\ j}R
+\end{align*}
+Then to compute the $trace(G)$ we write 
+\begin{align*}
+    trace(G) &= \sum_{i \in I}G^i_{\ i} \\
+    &= \sum_{i \in I}R^i_{\ i} - \frac{1}{2}\delta^i_{\ i}R \\
+    &= \sum_{i \in I}R^i_{\ i} - \frac{1}{2}\sum_{i \in I}\delta^i_{\ i} R\\
+    &= R - \frac{|I|R}{2}
+\end{align*}
+This is the case because $\delta^a_{\ b}$ is the Kroenecker delta we say that $\delta^i_{\ i} = 0 \ \ \forall i \in I$.
+Let $n = |I|$ be our number of dimensions and we get 
+\begin{align*}
+    trace(G) = R\left(1 - \frac{n}{2}\right)
+\end{align*}
+\section{Robertson-Walker Geometry}
+Firstly, the connection forms are written as
+\begin{align*}
+    \Omega^t_{\ r} &= \frac{\ddot a}{a}\sigma^t \wedge \sigma^r \\
+    \Omega^t_{\ \theta} &= \frac{\ddot a}{a}\sigma^t \wedge \sigma^\theta \\
+    \Omega^t_{\ \phi} &= \frac{\ddot a}{a}\sigma^t \wedge \sigma^\phi \\
+    \Omega^r_{\ \theta} &= \frac{\dot a^2+k}{a^2}\sigma^r \wedge \sigma^\theta \\
+    \Omega^r_{\ \phi} &= \frac{\dot a^2 + k}{a^2}\sigma^r \wedge \sigma^\phi \\
+    \Omega^\theta_{\ \phi} &= \frac{\dot a^2 + k}{a^2}\sigma^\theta \wedge \sigma^\phi \\
+\end{align*}
+Then we use the following relationship to compute our Riemannian curvature tensors
+\[
+    \Omega^i_{\ j} = \frac{1}{2}R^i_{\ jkl}\sigma^k \wedge \sigma^l
+\]
+So we can write 
+\begin{align*}
+    \Omega^t_{\ r} &= \frac{1}{2} \left(\sum_{k \in I}\sum_{l \in I}R^t_{\ rkl}\sigma^k \wedge \sigma^l\right)
+\end{align*}
+However, since we know that we only have $\sigma^t \wedge \sigma^r$ on the left hand side we can eliminate any terms that 
+do not have $\sigma^t \wedge \sigma^r$ on the right hand side. Thus 
+\begin{align*}
+    \Omega^t_{\ r} &= \frac{1}{2} \left(\sum_{k \in I}\sum_{l \in I}R^t_{\ rkl}\sigma^k \wedge \sigma^l\right) \\
+    \frac{\ddot a}{a}\sigma^t \wedge \sigma^r &= \frac{1}{2}\left(R^t_{\ rtr}\sigma^t \wedge \sigma^r + R^t_{\ rrt}\sigma^r \wedge \sigma^t\right)\\
+    &= \frac{1}{2}\left(R^t_{\ rtr}\sigma^t \wedge \sigma^r - R^t_{\ rrt}\sigma^t \wedge \sigma^r\right)\\
+    &= \frac{1}{2}\left(R^t_{\ rtr}\sigma^t \wedge \sigma^r + R^t_{\ rtr}\sigma^t \wedge \sigma^r\right)\\
+    &= \frac{1}{2}\left(2 R^t_{\ rtr}\sigma^t \wedge \sigma^r\right)\\
+    &= R^t_{\ rtr} \sigma^t \wedge \sigma^r
+\end{align*}
+So thus it follows that $R^t_{\ rtr} = \frac{\ddot a}{a}$. Also notice that this implies that all other Riemann tensors must be equal to 0 by this argument. Similarly,
+\begin{align*}
+    R^t_{\ rtr} &= R^t_{\ \theta t \theta} = R^t_{\ \phi t \phi} = \frac{\ddot a}{a}\\
+    R^r_{\ \theta r \theta} &= R^r_{\ \phi r \phi} = R^\theta_{\ \phi \theta \phi} = \frac{\dot a + k}{a^2}
+\end{align*}
+So then we can write our diagonal Ricci curvature in terms of Riemannian curvature,
+\[
+    R_{ii} = \sum_{k \in I}R^k_{\ iki}
+\]
+So we state that
+\begin{align*}
+    R_{tt} &= \sum_{k \in I}R^k_{\ tkt}\\
+    &= \sum_{k \in I}-R^k_{\ ttk} \\
+    &= \sum_{k \in I}-R^t_{\ ktk} \\
+    &= -R^t_{\ ttt} - R^t_{\ rtr} - R^t_{\ \theta t \theta} - R^t_{\ \phi t \phi} \\
+    &= 0 - \frac{\ddot a}{a} -\frac{\ddot a}{a}-\frac{\ddot a}{a}\\
+    &= \frac{-3\ddot a}{a}
+\end{align*}
+For our space-like variables, $x$, we write
+\begin{align*}
+    R_{xx} &= \sum_{k \in I} R^k_{\ x k x} \\
+    &= R^t_{\ x t x} + \sum_{k \in I \setminus \{t\}}R^k_{\ x k x} \\
+    &= \frac{\ddot a}{a} + \sum_{k \in I \setminus \{t, x\}}R^k_{\ x k x}\\
+    &= \frac{\ddot a}{a} + \sum_{k \in I \setminus \{t, x\}}R^x_{\ k x k}
+\end{align*}
+So by the Riemann curvatures computed earlier we get
+\[R_{rr} = R_{\theta\theta} = R_{\phi\phi} = \frac{\ddot a}{a} + \frac{2(\dot a + k)}{a^2}\]
+Computing the Ricci scalar, the sum of these diagonal components is
+\begin{align*}
+    R &= -R_{tt} + R_{rr} + R_{\theta\theta} + R_{\phi \phi}\\
+    &= \frac{3 \ddot a}{a} + 3 \left(\frac{\ddot a}{a} + \frac{2(\dot a + k)}{a^2}\right)\\
+    &= \frac{6\ddot a}{a} + \frac{6(\dot a + k)}{a^2} \\
+    &= \frac{6 \ddot a a + 6 \dot a + 6k}{a^2}
+\end{align*}
+Then we know simply that for $x \neq t$,
+\[
+    R^t_{\ t} = -R_{tt} = \frac{3\ddot a}{a} \ \ \ \ \ \ \ \ \ \ \ \ R^x_{\ x} = R_{xx} = \frac{\ddot a}{a} + \frac{2(\dot a + k)}{a^2}
+\]
+To compute the diagonal components $G^i_{\ i}$ we simply use the Ricci terms that we have already have computed,
+\begin{align*}
+    G^t_{\ t} &= R^t_{\ t} - \frac{1}{2}\delta^t_{\ t} R \\
+    &= \frac{3\ddot a}{a} - \frac{6 \ddot a a + 6 \dot a + 6k}{2a^2}\\
+    &= \frac{-6 \dot a - 6k}{2a^2}\\
+    &= \frac{-3(\dot a + k)}{a^2} \\\
+    G^x_{\ x} &= R^x_{\ x} - \frac{1}{2}\delta^x_{\ x} R \\
+    &= \frac{\ddot a}{a} + \frac{2(\dot a + k)}{a^2} - \frac{6 \ddot a a + 6 \dot a + 6k}{2a^2}\\
+    &= \frac{2 \ddot a a}{2a^2} + \frac{4(\dot a + k)}{2a^2} - \frac{6 \ddot a a + 6 \dot a + 6k}{2a^2} \\
+    &= \frac{2 \ddot a a}{2a^2} + \frac{4\dot a + 4k}{2a^2} - \frac{6 \ddot a a + 6 \dot a + 6k}{2a^2}\\
+    &= \frac{-4 \ddot a a - 2 \dot a - 2k}{2a^2}\\
+    &= - \frac{2 \ddot a a + \dot a + k}{2a^2}
+\end{align*}
+Where $x = r, \theta, \phi$. Since the Kroenecker delta is only non-zero on the diagonal, and also our Ricci components 
+are only non-zero as computed, we say that no other $G^i_{\ j}$ is non-trivial.
+\end{document}

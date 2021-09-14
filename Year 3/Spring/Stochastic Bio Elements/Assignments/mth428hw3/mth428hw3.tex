@@ -1,0 +1,91 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\usepackage{bm}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Stochastic Elements of Mathematical Biology - Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+For each $k=0,1,2,\cdots,9$ in order to compute $p_k(\bm i)$ we must first compute the likelihood of each 
+possible gamete column. That is, during the process of segregation with recombination, what is the likelihood that 
+a given gamete column is produced. First note that recombination only affects the probabilities of getting certain gametes 
+from $i_4, i_5$. This is because for all others, the recombination produces the same two outcomes as without recomination.
+For example,
+\[
+    \begin{pmatrix}
+        A&A\\B&b
+    \end{pmatrix} \mapsto_{r} \begin{pmatrix}
+        A & A \\
+        b & B
+    \end{pmatrix}
+\]
+These clearly will have the same segregated gamete columns, so this process is only relavant to $i_4,i_5$.
+Then for each $m \in \{0,1,\cdots,9\}$, we add the frequency of this dimension multiplied with the desired gamete column.
+That is, for $p_0(\bm i)$ we can sum $\frac{i_m}{N} \cdot P_m{A \choose B}$ over $m$ where $P_m{A \choose B}$ is the likelihood
+that the $m$-th gamete will produce the desired column. Given this, we write
+\begin{align*}
+    P{A \choose B} &= \frac{2i_0 + i_1 + i_3 + (1-r)i_4 + ri_5}{2N}\\\\
+    P{A \choose b} &= \frac{i_1 + 2i_2 + ri_4 + (1-r)i_5 + 2i_7 + i_8}{2N}\\\\
+    P{a \choose B} &= \frac{i_3 + ri_4 + (1-r)i_5 + 2i_7 + i_8}{2N}\\\\
+    P{a \choose b} &= \frac{(1-r)i_4 + ri_5 + i_6 + i_8 + 2i_9}{2N}
+\end{align*}
+Since the order of columns does not matter, we have 2 options in which we can choose our columns, both with the probability 
+of the likelihood of achivieng this gamete columns multiplied together. That is,
+\begin{align*}
+    p_0(\bm i) &= 2 \cdot P{A \choose B} \cdot P{A \choose B} &&
+    p_1(\bm i) = 2 \cdot P{A \choose B} \cdot P{A \choose b} &&
+    p_2(\bm i) = 2 \cdot P{A \choose b} \cdot P{A \choose b} \\\\
+    p_3(\bm i) &= 2 \cdot P{A \choose B} \cdot P{a \choose B} &&
+    p_4(\bm i) = 2 \cdot P{A \choose B} \cdot P{a \choose b} &&
+    p_5(\bm i) = 2 \cdot P{A \choose b} \cdot P{a \choose B} \\\\
+    p_6(\bm i) &= 2 \cdot P{A \choose b} \cdot P{a \choose b} &&
+    p_7(\bm i) = 2 \cdot P{a \choose B} \cdot P{a \choose B} &&
+    p_8(\bm i) = 2 \cdot P{a \choose B} \cdot P{a \choose b} \\\\
+    p_9(\bm i) &= 2 \cdot P{a \choose b} \cdot P{a \choose b}
+\end{align*}
+And these are our probabilities of producing each gamete based on $\bm i$.
+\\\\\\\\
+\section*{Problem 2}
+To compute the probability of transitioning from $\bm i$ to $\bm j$ is done using a multinomial distribution for 
+our more complex Fisher-Wright model. The probability mass function for this generalization of the binomial distribution is given by 
+\[
+    \frac{n!}{x_1! \cdot x_2! \cdots x_k!} \cdot p_1^{x_1} \cdot p_2^{x_2} \cdots p_k^{x_k}
+\]
+Where $\bm x = \begin{pmatrix}
+    x_1\\x_2\\ \vdots\\x_k
+\end{pmatrix}$ is the desired outcome state of the probability and $\bm p = \begin{pmatrix}
+    p_1\\p_2\\ \vdots \\ p_k
+\end{pmatrix}$ is the probability of drawing each corresponding $x_i$.\\\\
+So to write the transition probability of $p(\bm i, \bm j)$ we must know what $n, \bm x,$ and $\bm p$ are.
+Firstly, we know that $n = N$, secondly, we know that $\bm x = \bm j$. Finally we know that $\bm p = \bm p(i) = (p_0(i), p_1(i),\cdots,p_9(i))$.
+From here it follows simply that
+\[
+    p(\bm i, \bm j) = p(X(t+1) = \bm j | X(t) = \bm i) = \frac{N!}{j_0! \cdots j_9!}p_0^{j_0}(\bm i) \cdots p_9^{j_9}(\bm i)
+\]
+And we are done.
+\end{document}

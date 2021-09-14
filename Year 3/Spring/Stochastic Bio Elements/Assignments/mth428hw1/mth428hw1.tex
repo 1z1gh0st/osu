@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Stochastic Elements of Mathematical Biology - Assignment 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+We let $S = \{AA, Aa, aa\}$. Then we have $AA \mapsto AA, p = 1, 
+aa \mapsto aa, p = 1$ and our most complicated case:
+\[
+    Aa \mapsto \begin{cases}
+        AA, &p = \frac{1}{4}\\
+        Aa, &p = \frac{1}{2}\\
+        aa, &p = \frac{1}{4}
+    \end{cases}
+\]
+So then we can write our transition matrix as
+\[
+    P = \begin{pmatrix}
+        1 & 0 & 0\\
+        \frac{1}{4} & \frac{1}{2} & \frac{1}{4}\\
+        0&0&1
+    \end{pmatrix}
+\]
+Where we take alleles in the order listen in $S$.
+We know that $P^n = P_n$ (Chapman-Kolmagorov). Then we know as well that we have 
+$P_n = \left(p_n(i,j)\right)_{i,j\in S}$ by definition. We can immediately determine the first and last row,
+since at no point in the self polination process can an $AA$ or $aa$ allele deviate from its current form. So we have
+\[
+    P_n = \begin{pmatrix}
+        1&0&0\\
+        p_n(Aa,AA)&p_n(Aa,Aa)&p_n(Aa,aa)\\
+        0&0&1
+    \end{pmatrix}
+\]
+For the entry $p_n(Aa,Aa)$ we know that if $n = 0$ this value is 1, and if $n = 1$ than it is $\frac{1}{2}$.
+However, we know that in order to maintain the heterozygous form at the $n$-th iteration, we must have
+achieved this $p = \frac{1}{2}$ probability $n$ times. By multiplication of probabilities, we claim that $p_n(Aa,Aa) = \left(\frac{1}{2}\right)^n$.
+While we could attempt to explicitly compute $p_n(Aa,AA), p_n(Aa,aa)$, instead note that it is equally likely to 
+end up with $Aa \mapsto_n aa$ as $Aa \mapsto_n AA$. Then since these probabilities must add up to 1,
+we take
+\[
+    p_n(Aa,AA) = p_n(Aa,aa) = \frac{1 - \left(\frac{1}{2}\right)^n}{2} = \frac{1}{2} - \left(\frac{1}{2}\right)^{n+1}
+\]
+Thus,
+\[
+    P^n = \begin{pmatrix}
+        1&0&0\\\\
+        \frac{1}{2} - \left(\frac{1}{2}\right)^{n+1} & \left(\frac{1}{2}\right)^n & \frac{1}{2} - \left(\frac{1}{2}\right)^{n+1}\\\\
+        0&0&1
+    \end{pmatrix}
+\]
+Then we take 
+\[
+    \lim_{n \rightarrow \infty} P^n = \begin{pmatrix}
+        1 & 0 & 0\\
+        \frac{1}{2} & 0 & \frac{1}{2}\\
+        0 & 0 & 1
+    \end{pmatrix}
+\]
+\section*{Problem 2}
+Now we have $S = \{(AA,AA), (AA,Aa), (AA,aa), (Aa,Aa), (Aa, aa), (aa,aa)\}$. Then we have,
+\begin{align*}
+    (AA,AA) &\mapsto AA, p = 1\\
+    (AA,Aa) &\mapsto AA, p = \frac{1}{2} \ \ \ \ Aa, p = \frac{1}{2} \\
+    (AA,aa) &\mapsto Aa, p = 1\\
+    (Aa, Aa) &\mapsto AA, p = \frac{1}{4} \ \ \ \ Aa, p = \frac{1}{2} \ \ \ \ aa, p =\frac{1}{4}\\
+    (Aa, aa) &\mapsto Aa, p = \frac{1}{2} \ \ \ \ aa, p = \frac{1}{2}\\
+    (aa,aa) &\mapsto aa, p = 1
+\end{align*}
+Then for an outcome of the form $(x,x)$, we can simply square its probability. However,
+for outcomes such as $(x,y)$, we multiply the probability of achieving $x$ with the probability of achieving $y$,
+but since we can take either order of $x$ then $y$ or $y$ then $x$ we multiply this product of probabilities by 2.
+Using these notions, we write our tranistion matrix as follows:
+\[
+    P = \begin{pmatrix}
+        1 & 0 & 0 & 0 & 0 & 0\\\\
+        (\frac{1}{2})^2 & 2(\frac{1}{2})^2 & 0 & (\frac{1}{2})^2 & 0 & 0\\\\
+        0 & 0 & 0 & 1 & 0 & 0 \\\\
+        (\frac{1}{4})^2 & 2(\frac{1}{2})(\frac{1}{4}) & 2(\frac{1}{4})^2 & (\frac{1}{2})^2 & 2(\frac{1}{2})(\frac{1}{4}) & (\frac{1}{4})^2 \\\\
+        0 & 0 & 0 & (\frac{1}{2})^2 & 2(\frac{1}{2})^2 & (\frac{1}{2})^2 \\\\
+        0 & 0 & 0 & 0 & 0 & 1
+    \end{pmatrix}
+    = \begin{pmatrix}
+        1 & 0 & 0 & 0 & 0 & 0\\\\
+        \frac{1}{4} & \frac{1}{2} & 0 & \frac{1}{4} & 0 & 0\\\\
+        0 & 0 & 0 & 1 & 0 & 0 \\\\
+        \frac{1}{16} & \frac{1}{4} & \frac{1}{8} & \frac{1}{4} & \frac{1}{4} & \frac{1}{16} \\\\
+        0 & 0 & 0 & \frac{1}{4} & \frac{1}{2} & \frac{1}{4} \\\\
+        0 & 0 & 0 & 0 & 0 & 1
+    \end{pmatrix}
+\]
+And thus we have our transition matrix for the markov chain.
+\end{document}

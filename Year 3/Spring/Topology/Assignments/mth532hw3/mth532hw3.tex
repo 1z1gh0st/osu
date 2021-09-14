@@ -1,0 +1,255 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{bm}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{General Topology and the Fundamental Group - Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+Let $G$ be a topological group.
+\section*{a)}
+\begin{mdframed}[]
+    Suppose that $H \subset G$ is an open subgroup. Show that $H$ is closed, and conclude that if $G$ is connected that $H = G$.
+\end{mdframed}
+\begin{proof}
+    \fbox{$H$ is closed} We wish to show that $G \setminus H$ is open in order to show that $H$
+    is closed. Let $g \in G \setminus H$ be arbitrary. Let $U = gH = \{gh \ | \ h \in H\}$ be 
+    an open neighborhood of $g$. We know this to be true since $H$ must contain the identity element,
+    so $g \in U$ and also we know that $m$ is an open map, therefore $gH$ is open since $H$ is open.
+    Now we wish to show that $gH$ is contained in $G \setminus H$. Suppose by contradiction that
+    there exists some element $h \in H \cap gH$. So of course $h \in H$, and since $h \in gH$
+    we say $\exists h_0 \in H$ such that $h = gh_0$. If we multiply both sides of the equality on the 
+    right by $h_0^{-1}$ then we get $hh_0^{-1} = g$. Since $h, h_0^{-1}$ both belong to $H$ and 
+    $H$ is a group, their product $g$ also must belong to $H$. This a contradiction, since by 
+    assumption $g \in G \setminus H$ so $g \in H$ cannot also be the case. \\\\
+    \fbox{$G$ is connected $\Longrightarrow H = G$} We will do a proof by contrapositive. Suppose that $H \neq G$.
+    Then we can construct a non-trivial disconnection $H \cup (G \setminus H)$. Clearly the union is disjoint and covers $G$ by definition.
+    Since $H$ is both open and closed it 
+    follows that the same must be true for its complement $G \setminus H$. Then since $H \neq G$ we know that $G \setminus H$
+    is non-empty. $H$ must also be non-empty as it must contain at least the identity element.
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}[]
+    Let $K_1,K_2 \subset G$ be compact sets. Show that their product $K_1K_2$ is compact.
+\end{mdframed}
+\begin{proof}
+    First, we write $K_1K_2 = m(K_1,K_2)$. Since $K_1$ and $K_2$ are compact we know that $K_1 \times K_2$ is compact
+    in the product toplogy. Then since $K_1 \times K_2 \subset G \times G$ is compact, we know that its continuous image 
+    must be compact. So since $m$ is continuous, $K_1K_2 = m(K_1,K_2)$ is compact.
+\end{proof}
+\subsection*{c)}
+\begin{mdframed}[]
+    Show that $m:G \times G \rightarrow G$ is an open map.
+\end{mdframed}
+\begin{proof}
+    Let $U \times V \subset G \times G$ be an arbitrary basis element of the topology on $G \times G$.
+    Then both $U$ and $V$ are clearly open by properties of the product toplogy. Then we write 
+    \[
+        m(U \times V) = UV = \{uv \in G \ | \ u \in U, v \in V\} = \bigcup_{u \in U} L_u(V)
+    \]
+    Since $V$ is open, for any $u \in G, L_u(V)$ is also open, and we conclude that $m(U, V)$ is open, therefore $m$ is an open map.
+\end{proof}
+\section*{Problem 2}
+Let $G$ be a topological group.
+\subsection*{a)}
+\begin{mdframed}[]
+    Show that the connected component $G_0$ is a normal subgroup of $G$ and that any connected component is of the form $gG_0$ for some $g \in G$.
+\end{mdframed}
+\begin{proof}
+    By definition, we know that our identity element $e \in G_0$. We wish to show that $g(G_0)g^{-1} \subset G_0$ for every $g \in G$.
+    Since $L_g$ and $R_{g^{-1}}$ are both continuous functions, it follows that $g(G_0)g^{-1} = R_{g^{-1}}(L_g(G_0))$ is a connected set,
+    since the image of a connected set is connected. Then also $geg^{-1} \in g(G_0)g^{-1}$ where $e$ is the identity element.
+    Then since $geg^{-1} = gg^{-1} = e$, it follows that $g(G_0)g^{-1}$ is a connected set containing $e$. Since $G_0$ is 
+    the connected component containing $e$, it contains any connected set containing $e$ as well, so $g(G_0)g^{-1} \subset G_0$. Thus
+    $G_0$ is a normal subgroup.\\\\
+    Now to show that any connected componenet is of the form $gG_0$ for some $g \in G$, let $H \subset G$ be a connected component.
+    Let $h \in H$ be some element, since we assume $H$ is non-empty. Then $L_{h^{-1}}(H)$ is an open connected set containing the identity
+    element $e$. Suppose by contradiction that $h^{-1}H \neq G_0$ and there exists some element $a \in G_0$ that is not in $h^{-1}H$.
+    However $ha$ is an element of $hG_0$ which is of course a connected set containing $h$. But since $a \notin h^{-1}H$,
+    we know that $ha \notin hh^{-1}H = H$. This means that $H$ is not a connected componenet (contradiction). Therefore $h^{-1}H = G_0$,
+    so $H$ can be written in the form
+    \[
+        H = hG_0
+    \]
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}[]
+    Show that $G \setminus G_0$ is a totally disconnected group.
+\end{mdframed}
+\begin{proof}
+    Let $[g] \in G \setminus G_0$. Let $H \subset G$ be a connected componenet other than $G_0$.
+    Let $a,b \in H$ be two elements. Then since $H = hG_0$ by part (a), it follows that $h^{-1}a, h^{-1}b \in G_0$.
+    So then it follows that $[h^{-1}a] = [h^{-1}b] \Rightarrow [a] = [b]$. Since any two elements of $H$ are equivalent,
+    $H \subset [h]$. Let $g \in G$ be an element such that $g \simeq h$. Then it must be the case that 
+    $h^{-1}g \simeq h^{-1}h= e$. Therefore $h^{-1}g \in G_0$, which implies that $g \in hG_0 = H$, which implies that $H = [h]$.
+    Since every point in the space belongs to a connected componenet, and its equivalence class will be equal to its connected component,
+    it follows that each equivalence class in $G / G_0$ is a connected componenet, and that 
+    $G / G_0$ is a totally disconnected group.
+\end{proof}
+\section*{Problem 3}
+Let $Gl(n,\mathbb{C})$ be the set of invertible $n \times n$ matrices over the complex numbers.
+Let $SO(n)$ be the set of orthogonal $n \times n$ matrices.
+\subsection*{a)}
+\begin{mdframed}[]
+    Show that $Gl(n,\mathbb{C})$ is path connected.
+\end{mdframed}
+\begin{proof}
+    Let $A \in Gl(n,\mathbb{C})$. Then write its Jordan normal form as 
+    \[
+        J = P^{-1}AP
+    \]
+    Since our matrices are invertible, our eigenvalues for $A$, $\lambda_1, \cdots ,\lambda_n$ and for 
+    $B$, $\Lambda_1, \cdots, \Lambda_n$ are all non-zero. Since they all belong to the complex plane with 0
+    removed, we know that $\lambda_i$ and $z = 1$ are path connected without crossing $0$. This is because 
+    the set of complex numbers without 0 is a path connected space, simply go around the origin. So let 
+    $\gamma_i$ connect $\lambda_i$ with $\Lambda_i$ such that $\gamma_i(t) \neq 0 \ \forall t$. Then 
+    accross the superdiagonal simply linearly move from one to zero given by $s(t) = 1-t$ with $t \in [0,1]$.
+    Then write our path,
+    \[
+        \Gamma_{J_1,I}(t) = \begin{pmatrix}
+            \gamma_1 & 0 \\
+            & \gamma_2 & s \\
+            & & \ddots & s \\
+            & & & \gamma_n 
+        \end{pmatrix}
+    \]
+    Where for every sub-path along the superdiagonal we choose between $\{0,s\}$ appropriately (that is, if there is a 1 there for $J_1$ choose $s$, otherwise choose 0).
+     Then we have 
+    $\Gamma_{J,I}(0) = J_1, \Gamma_{J,I}(1) = I$, and $\Gamma_{J,I}(t) \in Gl(n, \mathbb{C}) \ \forall t \in [0,1]$. This last 
+    fact follows from the fact that our matrices remain as upper triangular matrices with no zeroes on the diagonal.
+    We know that $P,P^{-1}$ are group homeomorphisms, so it follows that 
+    \[
+        \Gamma = P^{-1}(\Gamma_{J,I})P
+    \]
+    Then we know that $\Gamma(0) = A$ and $\Gamma(1) = I$, so any matrix is path connected to the identity matrix,
+    therefore $Gl(n,\mathbb{C})$ is path connected.
+\end{proof}
+\subsection*{b)}
+\begin{mdframed}[]
+    Show that $SO(n)$ is path connected.
+\end{mdframed}
+\begin{proof}
+    \fbox{i} Let $A \in SO(n)$ and $V \subset \mathbb{R}^n$ be a linear subspace.
+    Suppose $L_A(V) = V$ and that $L_A(V^\perp) \neq V^\perp$. Since $L_A$ is an isomorphism on $\mathbb{R}^n$,
+    it follows that there exists some $\bm v \in V^\perp$ such that $L_A(\bm v) \notin V^\perp$.
+    We know that there must exist also some $\bm u \in V$ such that $\bm u \perp \bm v$. Then we also have 
+    $L_A(\bm u) \perp L_A(\bm v)$ since dot-product is preserved. However, this implies that $L_A(\bm v) \in V^\perp$ (contradiction).
+    So it must be that if $L_A(V) = V$, then $L_A(V^\perp) = V^\perp$.
+    \\\\
+    \fbox{ii} Now we wanna show that all real eigenvalues $\lambda$ of $A$ have the property $|\lambda| = 1$.
+    Let $\lambda$ be some real eigenvalue of $A$. There exists some corresponding vector $\bm v$ such that 
+    $A\bm v = \lambda \bm v$. Since $A$ is orthogonal, we know that $A^{-1} = A^T$. So then,
+    \[
+        ||\lambda \bm v|| = ||A \bm v|| = (A\bm v)^T(A \bm v) = \bm v^T A^T A \bm v = \bm v^T \bm v = ||\bm v||
+    \]
+    Knowing that $||\lambda \bm v|| = ||\bm v||$ we can write the following:
+    \begin{align*}
+        ||\lambda \bm v|| &= ||\bm v||\\
+        |\lambda| \ ||\bm v|| &= ||\bm v|| \\
+        \Rightarrow |\lambda| &= 1
+    \end{align*}
+    Now we've gotta show that $\mathbb{R}^n = V \oplus V^\perp$ where $V$ admits some basis $\bm v_1,\cdots,\bm v_n$
+    such that $L_A(\bm v_i) = \pm \bm v_i$ and $L_A(\bm u) \neq \bm u$ for every $\bm u \notin V$. We will do this by 
+    induction. Let $n = 1$. On the real line, the matrix whose transpose is it's own inverse is $(1) = (1)^{-1} = (1)^T$.
+    Then clearly $V = \text{span}(1)$, and $V^\perp = \{0\}$ is trivial so $\mathbb{R} = V \oplus V^\perp$. Assume by 
+    induction that the statement is true for some integer $n$, and we will show it holds for $n+1$.
+    Let us assume that the problem is non-trivial and that $A$ possesses at least one real eigenvector $\bm x$.
+    Then let $U = \{ \bm u \in \mathbb{R}^{n+1} \ | \ \bm u \perp \bm x\}$. Clearly $U$ is a subspace of $\mathbb{R}^{n+1}$
+    with 1 less dimension, so it follows that since $\lambda \bm x = \pm \bm x$, we have $U = \mathbb{R}^{n}$.
+    Then by induction $U = V \oplus V^\perp$ in $\mathbb{R}^{n-1}$. Since $U \perp \bm x$ we know that $V^\perp \perp \bm x$, and it follows that 
+    its orthogonal complement in $\mathbb{R}^{n+1}$ will be equal to 
+    \[
+        \text{span}\{V, \bm x\}
+    \]
+    From here it follows that $\text{span}\{V, \bm x\} \oplus V^{\perp_n}$ is our direct sum as desired, with $\text{span}\{V, \bm x\}$
+    having the desired basis, that being the basis of $V$ appended with $\bm x$. Thus, by induction the property is true for all $n \in \mathbb{N}$.
+    Since $L_A$ is an orthogonal matrix, it is an orthogonal transformation, and in particular since by \fbox{i}
+    we know that $L_A(V^\perp) = V^\perp$ so it follows that under such a restriction, $L_A \big|_{V^\perp}$ remains 
+    an orthogonal transformation.\\\\
+    \fbox{iii} By the same argument from \fbox{ii}, we know that $|\lambda| = 1$ even if it is complex.
+    Let $\bm v = \bm w_1 + i\bm w_2$ be a complex eigenvector. Write $\lambda = e^{i \alpha} = a + bi$. Suppose that 
+    $\bm w_1 = c\bm w_2$. Then we write $L_A(\bm v) = (a-b(c))\bm w_1 + i((c)a + b)\bm w_1$. So we say that 
+    \[
+        L_A(\bm w_1) = (a - b(c))\bm w_1 \ \ \ \ \ \ \ \ \ \ L_A(\bm w_2) = ((c)a + b) \bm w_1 \ \ \ \ \ \ \ \ \ \ (c)L_A(\bm w_1) = L_A(\bm w_2)
+    \]    
+    So it follows that $L_A(\bm w_1) = L_A(\bm w_2) / c = \left(a + \frac{b}{c}\right)\bm w_1$. From these equations we write 
+    \begin{align*}
+        (a-b(c))\bm w_1 &= \left(a + \frac{b}{c}\right)\bm w_1 \\
+        a - b(c) &= a + \frac{b}{c} \\
+        -b(c) &= \frac{b}{c} \\
+        -b(c^2) &= b \\
+        -c^2 &= 1 \\
+        c^2 &= -1
+    \end{align*}
+    This clearly implies that the scalar $c$ must be equal to $i$, making $\bm v = \bm w_1 + \frac{i}{i}\bm w_1$ which is not complex (contradiction). So it must be 
+    the case that $\bm w_1$ and $\bm w_2$ are independent. Since the vectors are independent the images under $L_A$ will also 
+    be independent since dot product is preserved. So it follows that their span will be preserved as well.
+    So it follows that in the subspace of span$\{\bm w_1, \bm w_2\}$ since both angle and span are preserved,
+    we have a two dimension rotation matrix representing $L_A |_W$,
+    \[ L_A |_W = \begin{pmatrix}
+        \cos \alpha & -\sin \alpha\\
+        \sin \alpha & \cos \alpha
+    \end{pmatrix}\]
+    \fbox{iv} We will use induction to show that $\mathbb{R}^n$ admits a basis such that $L_A(\bm v_i) = \pm \bm v_i$ or $L_A$
+    is a rotation matrix of the above form.
+    For $n = 1$ we claerly have this since $O(1) = 1$. For the inductive step, by \fbox{ii} we have the direct sum $V \oplus V^\perp$ for which $V$ already has the desired property.
+    By \fbox{iii}, and since the dimension of $V^\perp$ is less than that of $\mathbb{R}^n$ we can also assume that, being a subspace isomorphic to $\mathbb{R}^k$ where $k<n$,
+    it too must yield a basis with the desired property. Thus $\mathbb{R}^n$ is a direct sum of subspaces with the desired basis vector properties,
+    so the space itself must be so as well.\\\\
+    \fbox{v} Since $\det(A) = 1$ it follows that the number of $-1$'s along the diagonal must be even. So it follows that 
+    the rotation matrix can take the $W$ subspaces to the identity matrix without causing the determinant to equal 0, so we end up with a
+    path to the identity matrix as follows:
+    \[
+        \begin{pmatrix}
+            1 & f & \cdots & f\\
+            0 & 1 & \cdots & f\\
+            0 & \cos \pi t & -\sin \pi t \\
+            0 & \sin \pi t & \cos \pi t
+        \end{pmatrix}
+    \]
+    Or something of this form, which will be $A$ at $t = 0$, and $I$ at $t=1$.
+\end{proof}
+\section*{Problem 4}
+\begin{mdframed}[]
+    Compute $\pi_1(S^1 \vee S^1)$.
+\end{mdframed}
+Let $X = \{ z \in \mathbb{Z} \ | \ z = e^{2\pi i t} \text{ or } z=e^{it} + 1, t \in \mathbb{R}\}$ with the subspace topology inherited from the 
+complex plane. Then let 
+\[
+    A = \left\{ z \in \mathbb{Z} \ | \ z = e^{2\pi it} \text{ or } z=e^{2\pi is}, t \in \mathbb{R}, s \in \left(-\frac{1}{2},\frac{1}{2}\right)\right\}
+    \ \ \ \ \ \ 
+    B = \left\{ z \in \mathbb{Z} \ | \ z = e^{2\pi it} \text{ or } z=e^{2\pi is}, t \in \left(-\frac{1}{2},\frac{1}{2}\right), s \in \mathbb{R}\right\}
+\]
+Since the additional half circle is contractible, we say that $\pi_1(A,1) \cong \pi_1(S^1,1)$, and that $\pi_1(B,1) \cong \pi_1(S^1 + 1, 1)$. 
+Then we know that both $A$ and $B$ are open in $X$, since their complements are the closed left or right half circles. We can write 
+$X = A \cup B = S^1 \vee S^1$. Then the point $z = 1 = x_0$ lies within the intersection $A \cap B$. By \fbox{Theorem 59.1 (Munkres)},
+it follows that $\pi_1(X, 1)$ is generated by path homotopy classes in $A$ and $B$. That is, we can concatenate 
+any finite number of loops in either to create a loop in $X$. For two circles touching at one point, this means all paths are 
+generated by going around in some kind of ordered set of loops (clockwise/counterclockwise, multiple times/trivially no times) in either the first 
+or second circle. Since the fundamental group for $S^1$ is isomorphic to $\mathbb{Z}$, it follows that 
+$\pi_1(S^1 \vee S^1)$ will be isomorphic to $\mathbb{Z} \times \mathbb{Z}$.
+\end{document}
