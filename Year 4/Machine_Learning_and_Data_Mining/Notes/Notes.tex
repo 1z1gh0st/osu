@@ -1,0 +1,86 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Machine Learning and Data Mining - Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{9/29}
+\subsection{Lecture 1.2: Statistical Learning - MLE / MAP}
+Jhomas.
+    \subsubsection{Probability}
+        \begin{mdframed}[]
+            \begin{definition}
+                A sample space $\Omega$ is a set of all possible outcomes.
+            \end{definition}
+            \begin{definition}
+                An event $A$ is a subset of $\Omega$. That is, $A \subset \Omega$.
+            \end{definition}
+        \end{mdframed}
+        A probability must be non-negative for any event. Must be 1 for the entire sample space, 0 for the empty set, and must 
+        not be double-counting.\\
+        \fbox{Marginalization:}
+        \begin{align}
+            P(A) &= \sum_{b \in \text{Val}(B)}P(A,B = b) & \text{(discrete)}\\
+            P(A) &= \int_{b \in \text{Val}(B)}P(A,B = b) & \text{(continuous)}
+        \end{align}
+        \fbox{Conditional Distribution:}
+        \begin{align}
+            P(A \ | \ B) = \frac{P(A,B)}{P(B)}
+        \end{align}
+        \fbox{Chain Rule:}
+        \begin{align}
+            P(A,B) = P(A \ | \ B)P(B) = P(B\ |\ A)P(A)
+        \end{align}
+        \fbox{Bayes Rule:}
+        \begin{align}
+            P(A \ | \ B) = \frac{P(B \ | \ A)P(A)}{P(B)}
+        \end{align}
+        \begin{mdframed}[]
+            \begin{definition}
+                A random variable $X$ is a mapping between events in $\Omega$ to numbers. They can be discrete or continuous.
+            \end{definition}
+        \end{mdframed}
+        A probability density describes the mapping from values of a random variable $X$ to probabilities. Some common 
+        discrete distributions are the following:
+        \begin{align}
+            \text{Bernoulli:} \ \ \ \ p_X(x) &= \theta^x (1- \theta)^{(1-x)}\\
+            \text{Categorical:} \ \ \ \ p_X(x) &= \theta_x
+        \end{align}
+        Common continuous distributions:
+        \begin{align}
+            \text{Gaussian:} \ \ \ \ f_X(x) &= \frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}
+        \end{align}
+        \begin{mdframed}[]
+            \begin{definition}
+                The expectation of a random variable is given by 
+                \[
+                    E_X[g(x)] = \int_{x \in \text{Val(X)}}f_x(x)g(x)dx
+                \]
+            \end{definition}
+        \end{mdframed}
+        
+\end{document}

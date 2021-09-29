@@ -1,0 +1,74 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Applied Ordinary Differential Equations Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{September 22}
+We begin with the following form of a second order autonomous ODE:
+\[
+    ay''(t) + by'(t) + cy(t) = f(t)
+\]
+This equation can be transformed to a first order system of ODE's, if we define two equations to be 
+\begin{align*}
+    x_1(t) &= y(t) \\
+    x_2(t) &= y'(t)
+\end{align*}
+Then the euqation can be rewritten in terms of $x_1, x_2$ as
+\begin{align*}
+    ax_2'(t) + bx_2(t) + cx_1(t) = f(t)
+\end{align*}
+Which immediately gives us this first order system of ODE's:
+\begin{align*}
+    x_1'(t) &= x_2(t) \\
+    x_2'(t) &= -\frac{c}{a} x_1(t) - \frac{b}{a}x_2(t) + \frac{f(t)}{a}
+\end{align*}
+For notational purposes, write $\vec x (t) = \begin{pmatrix}
+    x_1(t)\\x_2(t)
+\end{pmatrix}, \vec{x'}(t) = \begin{pmatrix}
+    x_1'(t)\\x_2'(t)
+\end{pmatrix}$. Then we can write many first order systems of ODE's as 
+\begin{mdframed}[]
+    \begin{align*}
+        A\vec x (t) &= \begin{pmatrix}
+            a_{1 1} & a_{1 2} \\ a_{2 1} & a_{2 2}
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            a_{1 1}x_1(t) + a_{1 2}x_2(t) \\
+            a_{2 1}x_1(t) + a_{2 2}x_2(t)
+        \end{pmatrix}
+    \end{align*}
+\end{mdframed}
+For our previous example we would have $A = \begin{pmatrix}
+    0 & 1 \\ -c/a & -b/a
+\end{pmatrix}$ ignoring the $f(t)$ term.\\\\
+Now we study autonomous first order systems of ODE's. That is,$
+    \vec{x'}(t) = A\vec x (t)$. These have solutions that can be represented as
+\[
+    \vec{x}(t) = e^{At} \vec{x_0}, \ \ \ \ \ \ \ e^{At} = \sum_{j=0}^{\infty} \frac{1}{j!} A^j t^j
+\]
+\end{document}

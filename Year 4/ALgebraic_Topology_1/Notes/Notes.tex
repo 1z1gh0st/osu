@@ -1,0 +1,43 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Algebraic Topology Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{September 22}
+We start by defining Euclidean space, the unit ball and the unit sphere:
+\begin{align}
+    D^n &= \{x \in \mathbb{R}^n \ : \ ||x|| \leqslant 1 \} \\
+    S^{n-1} &= \{x \in \mathbb{R}^n \ : \ ||x|| = 1\}
+\end{align}
+\begin{mdframed}[]
+    \begin{theorem}[Bauer Fixed Point]
+        For all $n \geqslant 1$ every self-map of the unit n-ball $D^n$ has a fixed point.
+    \end{theorem}
+\end{mdframed}
+
+\end{document}
