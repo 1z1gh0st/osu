@@ -1,0 +1,43 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Machine Learning and Data Mining - Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Something}
+    \subsection{Q1}
+        \begin{mdframed}[]
+            Let $D = \{x_1,\cdots,x_N\}$ be a dataset from $N$ poisson random variables, with a rate 
+            of $\lambda \in \mathbb{R}$. Derive the Maximum Likelihood Estimation for $\lambda$.
+        \end{mdframed}
+        We begin by taking $\mathcal{L}(D)$. That is,
+        \begin{align*}
+            \mathcal{L}(D) &= P(D \ | \ \lambda) \\
+            &=P(\{x_1,\cdots,x_N\} \ | \ \lambda) \\
+            &=P(x_1 \ | \ \lambda )
+        \end{align*}
+\end{document}

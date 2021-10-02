@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1632958639 "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.tex" "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.pdf" "Notes" 1632958640
-  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.aux" 1632958640 445 1867ae6ce07247e3d434d3057af34f0b "pdflatex"
-  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.tex" 1632958639 2953 596bd1aa6b54250e1d8b6638921d73b7 ""
+["pdflatex"] 1632959679 "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.tex" "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.pdf" "Notes" 1633190885
+  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.aux" 1632959680 556 b3a9d83b69cd2590b267d2d02f1f56f6 "pdflatex"
+  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.tex" 1633190885 3342 e9d528362fdc214bf8b2af8e4de41c8a ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm" 1136768653 2172 fd0c924230362ff848a33632ed45dc23 ""
@@ -104,6 +104,6 @@
   "/usr/local/texlive/2020/texmf-var/web2c/pdftex/pdflatex.fmt" 1604348489 2549326 414af182f0399eecc7d401eee4945cf3 ""
   "/usr/local/texlive/2020/texmf.cnf" 1586288231 577 d60164b4589a341208aff7a667fbbdcb ""
   (generated)
-  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.pdf"
   "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.aux"
+  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.pdf"
   "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Notes/Notes.log"
