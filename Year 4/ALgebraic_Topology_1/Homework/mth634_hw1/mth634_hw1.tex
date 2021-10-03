@@ -1,0 +1,93 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\usepackage{tikz-cd}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Algebraic Topology - Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 0.3}
+    \begin{mdframed}[]
+        Assume, for $n \geq 1$, that $H_i(S^n) = \mathbb{Z}$ if $i = 0, n,$ and that $H_i(S^n) = 0$ otherwise.
+        Using the technique of the proof of Lemma 0.2, prove that the equator of the $n$-sphere is not a retract.
+    \end{mdframed}
+    \begin{proof}
+        Assume that $S^{n-1}$ is the equator of the $n$-sphere. Suppose by contradiction that $S^{n-1}$ is a 
+        retract of $S^n$. Then it follows that there exists some retraction $r:S^n \rightarrow S^{n-1}$.
+        Then, with $i:S^{n-1} \rightarrow S^n$ being the inclusion map, and with $1$ being, of course, the 
+        identity map, it follows that we would have a commutative diagram:
+        \begin{center}
+            \begin{tikzcd}[]
+                S^{n-1} \ar[rr, "1"] \ar[rdd, "i"] && S^{n-1} \\\\
+                & S^n \ar[ruu, "r"]
+            \end{tikzcd}
+        \end{center}
+        To this diagram, we can apply our homology functor, giving us
+        \begin{center}
+            \begin{tikzcd}[]
+                H_{n-1}(S^{n-1}) \ar[rr, "H_{n-1}(1)"] \ar[rddd, "H_{n-1}(i)"] && H_{n-1}(S^{n-1}) \\\\\\
+                & H_{n-1}(S^n) \ar[ruuu, "H_{n-1}(r)"]
+            \end{tikzcd}
+        \end{center}
+        We know by assumption that $H_{n-1}(S^n) = 0$ since $n-1 \neq n$ and that $H_n(S^{n-1}) = \mathbb{Z}$ since
+        $n - 1 = n - 1$. This new diagram should continue to commute by the properties of our functor $H_{n-1}$.
+        Since $H_{n-1}(S^n) = 0$, it follows that its image under $H_{n-1}(r)$ must also be zero. That is, $H_{n-1}(S^{n-1}) =0$.
+        However, this means that our identity map 1 takes a countable algebra to a trivial one, which is a contradiction.
+        therefore $S^{n-1}$ cannot be a retract of $S^n$.
+    \end{proof}
+\section*{Problem 0.5}
+\section*{Problem 0.7}
+    \begin{mdframed}[]
+        Let $f \in \text{Hom}(A,B)$, and let $g,h \in \text{Hom}(B,A)$ such that $g \circ f = 1_A$ and that 
+    $f \circ h = 1_B$. Then $g = h$.
+    \end{mdframed}
+    \begin{proof}
+        Suppose that $h \neq g$,
+        \begin{align*}
+            h & \neq g \\
+            h \circ f & \neq g \circ f \\
+            f \circ h \circ f & \neq f \circ g \circ f \\
+            (f \circ h) \circ f & \neq f \circ (g \circ f)\\
+            1_B \circ f & \neq f \circ 1_A \\
+            f & \neq f
+        \end{align*}
+        However, this is a contradiction, and we conclude that $h = g$.
+    \end{proof}
+\section*{Problem 0.18}
+    \begin{mdframed}[]
+        For an abelian group $G$, let 
+        \[
+            tG = \{x \in G \ : \ \text{x has finite order}\}
+        \]
+        denote its torsion subgroup.
+    \end{mdframed}
+    \subsection*{(ii)}
+        \begin{mdframed}[]
+            
+        \end{mdframed}
+
+\end{document}
