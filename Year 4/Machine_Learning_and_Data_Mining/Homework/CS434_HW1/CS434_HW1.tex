@@ -28,7 +28,7 @@
 \author{Philip Warton}
 \date{\today}
 \maketitle
-\section{Something}
+\section{Statistical Estimation}
     \subsection{Q1}
         \begin{mdframed}[]
             Let $D = \{x_1,\cdots,x_N\}$ be a dataset from $N$ poisson random variables, with a rate 
@@ -44,7 +44,7 @@
         \end{align*}
         Then to get the log-likelihood, we take $\ln \mathcal{L}(D)$.
         \begin{align*}
-            \ln\mathcal{L}(D) &= \ln prod_{i = 1}^N \frac{\lambda^{x_i}e^{-\lambda}}{x_i!}\\
+            \ln\mathcal{L}(D) &= \ln \prod_{i = 1}^N \frac{\lambda^{x_i}e^{-\lambda}}{x_i!}\\
             &= \sum_{i=1}^N \ln \left( \frac{\lambda^{x_i}e^{-\lambda}}{x_i!} \right) \\
             &= \sum_{i=1}^N \left[
                 \ln(\lambda^{x_i}e^{-\lambda}) - \ln(x_i!)
@@ -73,8 +73,82 @@
             \lambda &= \frac{1}{N} \sum_{i = 1}^N x_i \\
             \lambda &= \overline{x}
         \end{align*}
-\section{Something else}
+    \subsection{Q2}
+        \begin{mdframed}[]
+            Poo Poo
+        \end{mdframed}
+        We take the derivative of the log posterior.
+        \begin{align*}
+            (d/d\lambda) \log P(\lambda \ | \ D) &= (d / d\lambda) c\log P(D \ | \ \lambda) + \log \left(\text{Gamma of lambda}\right) \\
+            &= \frac{1}{\lambda}\sum_{i=1}^N x_i - N + \frac{d}{d\lambda }\left( \ln \left( \frac{\beta^\alpha \lambda^{\alpha - 1}e^{-\beta\lambda}}{\Gamma(\alpha)}\right) \right) \\
+            &= \frac{1}{\lambda}\sum_{i=1}^N x_i - N + \frac{d}{d\lambda }\bigg( 
+                \ln(\beta^\alpha) + \ln(\lambda^{\alpha-1}) + \ln(e^{-\beta\lambda}) - \ln(\Gamma(\alpha))
+            \bigg)\\
+            &= \frac{1}{\lambda}\sum_{i=1}^N x_i - N + \frac{d}{d\lambda }\bigg( 
+                \alpha \ln(\beta) + (\alpha - 1)\ln(\lambda) + -\beta\lambda - \ln(\Gamma(\alpha))
+            \bigg)\\
+            &= \frac{1}{\lambda}\sum_{i=1}^N x_i - N + \bigg( 
+                0 + (\alpha - 1)\frac{1}{\lambda} + -\beta - 0
+            \bigg) \\
+            &= \frac{1}{\lambda}\sum_{i=1}^N x_i - N + \frac{\alpha - 1}{\lambda} + -\beta \\
+            &= \frac{1}{\lambda} \left( 
+                \left(\sum_{i=1}^N x_i\right)  + \alpha - 1 
+            \right)
+            - (N + \beta)
+        \end{align*}
+        Now let this derivative be equal to 0. Then,
+        \begin{align*}
+            0 & = \frac{1}{\lambda} \left( 
+                \left(\sum_{i=1}^N x_i\right)  + \alpha - 1 
+            \right)
+            - (N + \beta) \\
+            N + \beta &= \frac{1}{\lambda} \left( 
+                \left(\sum_{i=1}^N x_i\right)  + \alpha - 1 
+            \right) \\
+            \lambda &= \frac{1}{N + \beta} \left( 
+                \left(\sum_{i=1}^N x_i\right)  + \alpha - 1 
+            \right) \\
+            \lambda &= \frac{\left(\sum_{i=1}^N x_i\right) + \alpha - 1}{N + \beta}
+        \end{align*}
+        And thus we have a closed form solution for our parameter $\lambda$.
+\section{k-Nearest Neighbor Classifier}
     \subsection{Q4}
-    To see how these different embeddings of categorical variables in finite-dimensional Euclidean space,
-    take, for example,
+        Consider the case where we have one sample $x$ such that workclass$[x] = $ Private 
+        and where all other variables are 0. Then we have another sample $y$ such that 
+        workclass$[y] = $ Never-worked and all other variables are 0. Within our first encoding, we have 
+        \[
+            ||x - y|| = \sqrt{ 0 + \cdots + 1^2 + 0 + 1^2 + \cdots + 0} = \sqrt{2}
+        \]
+        Whereas in the second encoding, where we simply keep one column but associate different integers with category we would have 
+        \[
+            ||x - y|| = \sqrt{0 + \cdots + (3 - 1)^2 + \cdots + 0} = 2
+        \]
+        This discrepancy will grow larger as the number of categories in a given column grows larger, and 
+        what we see is certain categorical differences will be a greater difference than other categorical differences
+        within that same column. For this reason, we prefer binarization so that the categories are evenly spaced,
+        even though we may have to work in a higher dimension.
+    \subsection{Q5}
+    We use the following code to compute the percentage of people with an income larger than 50 thousand dollars per year:
+        \begin{verbatim}
+def printPercentOver50k(D):
+    k = 0
+    for x in D:
+        if (x[85] == 1):
+            k += 1
+    n = 8000
+    print(100 * (k / n))
+
+printPercentOver50k(D)
+            \end{verbatim}
+            This gives us a result of $24.5875 \%$. We know that $70\%$ accuracy will not be very good because we could achieve 
+            this accuracy by classifying each datapoint as 0. We want our model to have a much higher accuracy than this.
+    \subsection{Q6}
+        \begin{proof}
+            Let $x, z \in \mathbb{R}^n$.
+            \begin{align*}
+                d(x, z) &= \sqrt{(x_1 - z_1)^2 + (x_2 - z_2)^2 + \cdots + (x_n - z_n)^2} \\
+                &= \sqrt{\sum_{i = 1}^n (x_i - z_i)^2} \\
+                &= ||x - z||_2
+            \end{align*}
+        \end{proof}
 \end{document}

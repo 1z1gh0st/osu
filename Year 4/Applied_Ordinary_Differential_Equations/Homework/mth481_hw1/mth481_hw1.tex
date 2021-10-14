@@ -1,0 +1,244 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{bm}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Applied Ordinary Differential Equations - Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{7.5.3}
+    \subsection*{(b)}
+        \begin{mdframed}[]
+            Find the general solution of the given system of equations 
+            and describe the behavior of the solution as $t \rightarrow \infty$.
+            \[
+                \bm x' = \begin{pmatrix}
+                    2 & -1 \\ 3 & -2
+                \end{pmatrix}  \bm x
+            \]
+        \end{mdframed}
+        We begin by writing the characteristic polynomial,
+        \[
+            (2 - \lambda)(-2 - \lambda) - (-1)(3) = \lambda^2
+        \]
+        So we have two real and distinct eigenvalues $\lambda_1 = -1, \lambda_2 = 1$.
+        We can write 
+        \[
+            [A - \lambda_1(I)]\bm u = \begin{pmatrix}
+                3 & -1 \\ 3 & -1
+            \end{pmatrix} \cdot \begin{pmatrix}
+                u_1 \\ u_2
+            \end{pmatrix} = \begin{pmatrix}
+                3u_1 -u_2 \\ 3u_1 - u_2
+            \end{pmatrix} = \bm 0
+        \]
+        This gives us an eigenvector of $\bm u = (1,\ 3)^T$. Then we write 
+        \[
+            [A - \lambda_2(I)]\bm v = \begin{pmatrix}
+                1 & -1 \\ 3 & -3
+            \end{pmatrix} \cdot \begin{pmatrix}
+                v_1 \\ v_2
+            \end{pmatrix} = \begin{pmatrix}
+                v_1 - v_2\\3v_1 - 3v_2
+            \end{pmatrix} = \bm 0
+        \]
+        And then we have an eigenvector $\bm v = (1, \ \ -1)^T$.
+        This leads to a general solution,
+        \[
+            \bm x = c_1 \begin{pmatrix}
+                1 \\ 3
+            \end{pmatrix}e^{-t} + c_2 \begin{pmatrix}
+                1 \\ -1
+            \end{pmatrix}e^{t}
+        \]
+\section*{7.5.7}
+    \begin{mdframed}[]
+        Find the general solution  of the given system of equations
+        \[
+            \bm x' = \begin{pmatrix}
+                1 & 1 & 2 \\
+                1 & 2 & 1 \\
+                2 & 1 & 1
+            \end{pmatrix} \bm x
+        \]
+    \end{mdframed}
+    We begin by solving for eigenvalues,
+    \begin{align*}
+        \det\begin{pmatrix}
+            1 - \lambda & 1 & 2 \\
+            1 & 2 - \lambda & 1 \\
+            2 & 1 & 1 - \lambda
+        \end{pmatrix} & = (1 - \lambda)[(2 - \lambda)(1 - \lambda) - 1] - (1)[(1)(1 - \lambda) - (1)(2)] + (2)[(1)(1) - (2)(2 - \lambda)] \\
+        & = -\lambda^3 + 4\lambda^2 + \lambda - 4
+    \end{align*}
+    This gives us three eigenvalues $\lambda_1 = -1, \lambda_2 = 1, \lambda_3 = 4$.
+    After performing row reduction for the respective kernels of $A - \lambda I$.
+    This yields the following eigenvectors,
+    \[
+        \bm u = \begin{pmatrix}
+            1 \\ 0 \\ -1
+        \end{pmatrix}, \ \ \bm v = \begin{pmatrix}
+            1 \\ -2 \\ 1
+        \end{pmatrix}, \ \ \bm w = \begin{pmatrix}
+            1 \\ 1 \\ 1
+        \end{pmatrix}
+    \]
+\section*{7.5.20}
+    Consider a $2 \times 2$ system $\bm x ' = \bm{Ax}$. If we assume
+    that $r_1 \neq r_2$, the general solution is $\bm x = c_1 \xi^{(1)}e^{r_1t} + c_2 \xi^{(2)}e^{r_2t}$,
+    provided that $\xi^{(1)}$ and $\xi^{(2)}$ by assuming that they are
+    linearly dependent and then showing that this leads to a contradiction.
+    \subsection*{(a)}
+        \begin{mdframed}[]
+            Explain how we know that $\xi^{(1)}$ satisfies the matrix 
+            equation $(A - r_1 I)\xi^{(1)} = \bm 0$. Similarly, explain why 
+            $(A - r_2I)\xi^{(2)} = \bm 0$.
+        \end{mdframed}
+        We know that $r_i$ is the eigenvalue corresponding to the eigenvector $\xi^{(i)}$.
+        We also know that $A \xi^{(i)} = r_i \xi^{(i)}$. So then we expand our term to 
+        \[
+            (A - r_i I)\xi^{(i)} = A\xi^{(i)} - r_i I\xi^{(i)} = r_i \xi^{(i)} - r_i \xi^{(i)} = \bm 0
+        \]
+    \subsection*{(b)}
+        \begin{mdframed}[]
+            Show that $(A - r_2I)\xi^{(1)} = (r_1 - r_2)\xi^{(1)}$.
+        \end{mdframed}
+        We start by expanding the LHS term to give us 
+        \begin{align*}
+            (A - r_2I) \xi^{(1)} &= A \xi^{(1)} - r_2I\xi^{(1)} \\
+            &= r_1 \xi^{(1)} - r_2 \xi^{(1)}\\
+            &=(r_1 - r_2) \xi^{(1)}
+        \end{align*}
+    \subsection*{(c)}
+        \begin{mdframed}[]
+            Suppose that $\xi^{(1)}$ and $\xi^{(2)}$ are linearly dependent.
+            Then $c_1 \xi^{(1)} + c_2 \xi^{(2)} = \bm 0$ and at least one 
+            of $c_1$ and $c_2$ (say, $c_1$) is not zero. Show that 
+            $(A - r_2I)(c_1 \xi^{(1)} + c_2 \xi^{(2)}) = \bm 0$, and also 
+            show that $(A - r_2I)(c_1 \xi^{(1)} + c_2\xi^{(2)}) = c_1(r_1 - r_2)\xi^{(1)}$.
+            Hence $c_1 = 0$, which is a contradiction. Therefore, $\xi^{(1)}$ and $\xi^{(2)}$ are 
+            linearly independent.
+        \end{mdframed}
+        We can expand a certain term as follows:
+        \begin{align*}
+            (A - r_2I)(c_1 \xi^{(1)} + c_2\xi^{(2)}) &= Ac_1\xi^{(1)} + Ac_2\xi^{(2)} -r_2 I c_1 \xi^{(1)} - r_2 I c_2 \xi^{(2)} \\
+            &=c_1 A\xi^{(1)} + c_2A\xi^{(2)} - r_2 c_1 I \xi^{(1)} - r_2 c_2 I \xi^{(2)} \\
+            &= c_1 r_1 \xi^{(1)} + c_2 r_2 \xi^{(2)} - c_1 r_2 \xi^{(1)} - c_2 r_2 \xi^{(2)} \\
+            &= c_1 r_1 \xi^{(1)}  - c_1 r_2 \xi^{(1)} + c_2 r_2 \xi^{(2)} - c_2 r_2 \xi^{(2)} \\
+            &= c_1 r_1 \xi^{(1)}  - c_1 r_2 \xi^{(1)} \\
+            &= c_1\xi^{(1)}(r_1 - r_2)
+        \end{align*}
+        However, by assumption, $c_1 \xi^{(1)} + c_2 \xi^{(2)} = \bm 0$, so we know that
+        \[
+            (A - r_2I)(c_1 \xi^{(1)} + c_2 \xi^{(2)}) = (A - r_2I)(\bm 0) = \bm 0
+        \]
+        Therefore we know that $\bm 0 = c_1 \xi^{(1)}(r_1 - r_2)$, and we know that $r_1 - r_2$ is non-zero, so it follows 
+        that $c_1$ must 0. This is a contradiction to our assumption, so we conclude that $\xi^{(1)}$ and $\xi^{(2)}$ are
+        linearly independent.
+    \subsection*{(d)}
+        \begin{mdframed}[]
+            Modify the argument of part (c) if we assume that $c_2 \neq 0$.
+        \end{mdframed}
+        The argument holds still.
+    \subsection*{(e)}
+        \begin{mdframed}[]
+            Carry out a similar argument for the case where $A$ is $3 \times 3$.
+        \end{mdframed}
+        \begin{proof}
+            Assume that $\xi^{(1)}, \xi^{(2)}, \xi^{(3)}$ are dependent. Then for any $i,j \in \{1,2,3\}$ we can write the following:
+            Firstly, simlarly to part (a),
+            \[
+                (A - r_iI)\xi^{(i)} = r_i \xi^{(i)} - r_i \xi^{(1)} = 0
+            \]
+            Secondly, similarly to part (b),
+            \[
+                (A - r_iI)\xi^{(j)} = r_j\xi^{(j)} - r_i\xi^{(j)}  = (r_j - r_i)\xi^{(j)}
+            \]
+            Finally, assume there exists some non-trivial solution to $c_1\xi^{(1)} + c_2\xi^{(2)} + c_3\xi^{(3)} = 0$.
+            Without loss of generality, suppose that $c_1 \neq 0$. Now we write that 
+            \[
+                (A - r_3I)(A - r_2I)(c_1\xi^{(1)} + c_2\xi^{(2)} + c_3\xi^{(3)}) = 0
+            \]
+            And this is true trivially because $c_1\xi^{(1)} + c_2\xi^{(2)} + c_3\xi^{(3)} = 0$ by assumption. However,
+            now we can also write 
+            \begin{align*}
+                &(A - r_3I)(A - r_2I)(c_1\xi^{(1)} + c_2\xi^{(2)} + c_3\xi^{(3)}) \\\\
+                &= (A - r_3I)(c_1 r_1 \xi^{(1)} + c_2r_2\xi^{(2)} + c_3r_3\xi^{(3)} - c_1r_2\xi^{(1)} - c_2r_2\xi^{(2)} - c_3r_2\xi^{(3)}) \\\\
+                &=(A - r_3I)(c_1(r_1 - r_2)\xi^{(1)} + c_3(r_3 - r_2)\xi^{(3)}) \\\\
+                &=[c_1 r_1 (r_1 - r_2)\xi^{(1)} + c_3r_3(r_3 - r_2)\xi^{(3)}]\\
+                & \ -[c_1 r_3 (r_1 - r_2)\xi^{(1)} + c_3 r_3 (r_3 - r_2)\xi^{(3)}] \\\\
+                &=c_1 r_1 (r_1 - r_2)\xi^{(1)} - c_1 r_3 (r_1 - r_2)\xi^{(1)} \\\\
+                &=c_1(r_1 - r_3)(r_1 - r_2)\xi^{(1)}
+            \end{align*}
+            So from this and from our previous assertion that the same term was equal to 0, we can write,
+            \[
+                c_1(r_1 - r_3)(r_1 - r_2)\xi^{(1)} = 0 \Longrightarrow c_1 = 0
+            \]
+            This is true because we assume our eigenvalues to be distinct. However this clearly leads to the same contradiction
+            as within our $2 \times 2$ case. So we conclude that our eigenvectors must be linearly independent.
+        \end{proof}
+\section*{7.5.21}
+    \subsection*{(a)}
+        Take the ordinary differntial equation 
+        \[
+            ay'' + by' + cy = 0
+        \]
+        Let $x_1 = y, x_2 = y'$.
+        Then,
+        \begin{align*}
+            ax_2' + bx_2 + cx_1 &= 0\\
+            x_2' &= -(bx_2 + cx_1)/a \\
+            x_2' &= -\frac{b}{a}x_2 - \frac{c}{a}x_1
+        \end{align*}
+        Also,
+        \begin{align*}
+            ax_2' + bx_1' + cx_1 &= 0 \\
+            x_1' &= -(ax_2' + cx_1)/b \\
+            &= -(a(\frac{-bx_2}{a} - \frac{cx_1}{a}) + cx_1) / b \\
+            &= -(-bx_2 - cx_1 + cx_1)/b \\
+            &= bx_2 / b \\
+            &= x_2
+        \end{align*}
+        So we can now write this differential equation as a system of first order ODE's of the form $\bm x' = A \bm x$. We can write 
+        \[
+            \bm x' = \begin{pmatrix}
+                0 & 1 \\ -c/a & -b/a
+            \end{pmatrix} \bm x
+        \]
+    \subsection*{(b)}
+        To find the roots of the characteristic polynomial we want to compute $\det(A - \lambda I)=0$. That is,
+        \begin{align*}
+            \det \begin{pmatrix}
+                0 - \lambda & 1 \\
+                -c/a & -b/a - \lambda
+            \end{pmatrix} &= 0\\
+            (-\lambda)(-b/a - \lambda) - (1)(-c/a) &= 0\\
+            \lambda(b/a) + \lambda^2 + c/a &= 0 \\\\
+            a\lambda^2 + b\lambda + c &= 0
+        \end{align*}
+        This equation is the same as $ar^2 + br + c = 0$, the characteristic polynomial for our second order system 
+        of ordinary differential equations.
+\end{document}

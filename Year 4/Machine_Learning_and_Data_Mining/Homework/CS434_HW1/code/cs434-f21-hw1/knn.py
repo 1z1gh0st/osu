@@ -1,6 +1,8 @@
 import numpy as np
 import time
 
+from numpy import linalg
+
 def main():
 
     #############################################################
@@ -18,7 +20,7 @@ def main():
     # and k=1, each point should be its own nearest neighbor
     
     for i in range(len(example_train_x)):
-        assert(i == get_nearest_neighbors(example_train_x, example_train_x[i], 1))
+        assert([i] == get_nearest_neighbors(example_train_x, example_train_x[i], 1))
         
     #########
     # Sanity Check 2: See if neighbors are right for some examples (ignoring order)
@@ -74,19 +76,14 @@ def main():
     for k in [1,3,5,7,9,99,999,8000]:
       t0 = time.time()
 
-      #######################################
-      # TODO Compute train accuracy using whole set
-      #######################################
-      train_acc = 0 
+      # Compute train accuracy using whole set
+      train_acc = compute_accuracy(train_y, predict(train_X, train_y, train_X, k))
 
-      #######################################
-      # TODO Compute 4-fold cross validation accuracy
-      #######################################
-      val_acc, val_acc_var = 0,0
+      # Compute 4-fold cross validation accuracy
+      val_acc, val_acc_var = cross_validation(train_X, train_y, 4, k)
       
       t1 = time.time()
       print("k = {:5d} -- train acc = {:.2f}%  val acc = {:.2f}% ({:.4f})\t\t[exe_time = {:.2f}]".format(k, train_acc*100, val_acc*100, val_acc_var*100, t1-t0))
-    
     #######################################
 
 
@@ -95,14 +92,13 @@ def main():
     #######################################
 
 
-    # TODO set your best k value and then run on the test set
-    best_k = 1
+    best_k = 9
 
     # Make predictions on test set
     pred_test_y = predict(train_X, train_y, test_X, best_k)    
     
     # add index and header then save to file
-    test_out = np.concatenate((np.expand_dims(np.array(range(2000),dtype=np.int), axis=1), pred_test_y), axis=1)
+    test_out = np.concatenate((np.expand_dims(np.array(range(2000),dtype=int), axis=1), pred_test_y), axis=1)
     header = np.array([["id", "income"]])
     test_out = np.concatenate((header, test_out))
     np.savetxt('test_predicted.csv', test_out, fmt='%s', delimiter=',')
@@ -132,8 +128,17 @@ def main():
 ######################################################################
 
 def get_nearest_neighbors(example_set, query, k):
-    #TODO
-    return idx_of_nearest  
+
+    # Take difference of x_i's and z
+    A = example_set - query
+
+    # Create array of norms
+    norms = np.linalg.norm(A, axis=1)
+
+    # Get the indices of the k-th smallest norms
+    idx_of_nearest = np.argpartition(norms, kth=k-1)
+
+    return idx_of_nearest[0:k]
 
 
 ######################################################################
@@ -157,7 +162,23 @@ def get_nearest_neighbors(example_set, query, k):
 ######################################################################
 
 def knn_classify_point(examples_X, examples_y, query, k):
-    #TODO
+    
+    # Check fo the edge case
+    k = min(k, len(examples_y))
+
+    # Get our k nearest neighbors
+    knn = get_nearest_neighbors(examples_X, query, k)
+    avg = 0
+
+    # Sum the 1's among our nearest neighbors
+    for i in knn:
+        avg += examples_y[i] 
+    
+    # Get average classification of neighbors
+    avg = avg / k
+
+    # If most neighbors are 1, return 1. Otherwise return 0
+    predicted_label = int(avg > 0.5) 
     return predicted_label
 
 
@@ -179,8 +200,48 @@ def knn_classify_point(examples_X, examples_y, query, k):
 #   var_val_acc --      the variance of validation accuracy across the folds
 ######################################################################
 
-def cross_validation(train_X, train_y, num_folds=4, k):
-    #TODO
+def cross_validation(train_X, train_y, num_folds=4, k=1):
+
+    # Split data into folds
+    folds_x = np.vsplit(train_X, num_folds)
+    folds_y = np.vsplit(train_y, num_folds)
+
+    accuracies = np.array([])
+
+    # Test on each fold
+    for i in range(num_folds):
+
+        # Test fold at i-th index is here
+        fold_i_test_X = folds_x[i]
+        fold_i_test_y = folds_y[i]
+
+        # Training folds need to be put together here
+        fold_i_train_X = np.array([]) 
+        fold_i_train_y = np.array([])
+
+        # Stich our other folds together
+        for j in range(num_folds):
+            if i != j:
+
+                # Check that our array is not empty
+                if (fold_i_train_X.size == 0 and fold_i_train_y.size == 0):
+                    fold_i_train_X = folds_x[j]
+                    fold_i_train_y = folds_y[j]
+                
+                # Otherwise append the next fold
+                else:
+                    fold_i_train_X = np.append(fold_i_train_X, folds_x[j], axis=0)
+                    fold_i_train_y = np.append(fold_i_train_y, folds_y[j], axis=0)
+
+        # Run prediction
+        fold_i_predicted_y = predict(fold_i_train_X, fold_i_train_y, fold_i_test_X, k)
+
+        # Compute accuracy and add it to array
+        accuracies = np.append(accuracies, compute_accuracy(fold_i_test_y, fold_i_predicted_y))
+
+    avg_val_acc = np.average(accuracies)
+    varr_val_acc = np.var(accuracies)
+
     return avg_val_acc, varr_val_acc
 
 
@@ -232,7 +293,7 @@ def predict(examples_X, examples_y, queries_X, k):
     # For each query, run a knn classifier
     predicted_y = [knn_classify_point(examples_X, examples_y, query, k) for query in queries_X]
 
-    return np.array(predicted_y,dtype=np.int)[:,np.newaxis]
+    return np.array(predicted_y,dtype=int)[:,np.newaxis]
 
 # Load data
 def load_data():

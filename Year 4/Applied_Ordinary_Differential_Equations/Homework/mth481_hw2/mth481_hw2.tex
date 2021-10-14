@@ -1,0 +1,143 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{bm}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{.5\linewidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Applied Ordinary Differential Equations - Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{7.5.11}
+    \begin{mdframed}[]
+        Solve the given initial value problem. Describe the behavior of the solution as $t \rightarrow \infty$.
+        \[
+            \bm x' = 
+            \begin{pmatrix}
+                -2 & 1 \\
+                -5 & 4
+            \end{pmatrix}
+            \bm x, \ \ \ \ 
+            \bm x (0) =
+            \begin{pmatrix}
+                1 \\
+                3
+            \end{pmatrix}
+        \]
+    \end{mdframed}
+    First off we want to find our eigenvalues. To do this, we just take the determinant of $A - \lambda I$, set it 
+    equal to 0 and solve for $\lambda$. 
+    \begin{align*}
+        \det (A - \lambda I) &= \det \begin{pmatrix}
+            -2 - \lambda & 1 \\
+            -5 & 4 - \lambda
+        \end{pmatrix} \\
+        &= (-2 - \lambda)(4 - \lambda) - (1)(-5) \\
+        &= \lambda^2 - 2\lambda - 8 + 5 \\
+        &= \lambda^2 - 2\lambda - 3 \\
+        &= (\lambda - 3)(\lambda + 1)
+    \end{align*}
+    So we conclude that $\lambda_1 = 3, \lambda_2 = -1$. So since we have one positive and one negative real eigenvalue,
+    we know that we will have a saddle point style solution. To get the general solution, we'll solve for the eigenvectors.
+    We write
+    \begin{align*}
+        A - \lambda_1 I &= \begin{pmatrix}
+            -5 & 1 \\
+            -5 & 1
+        \end{pmatrix} \ \ \ \ \Longrightarrow \ \ \ \ \bm u = \begin{pmatrix}
+            1 \\
+            5
+        \end{pmatrix} \\\\
+        A - \lambda_2 I &= \begin{pmatrix}
+            -1 & 1 \\
+            -5 & 5
+        \end{pmatrix} \ \ \ \ \Longrightarrow \ \ \ \ \bm v = \begin{pmatrix}
+            1 \\
+            1
+        \end{pmatrix}
+    \end{align*}
+    This yields the general solution
+    \[
+        \bm x = c_1 
+        \begin{pmatrix}
+            1 \\
+            5
+        \end{pmatrix}
+        e^{3t} + c_2 
+        \begin{pmatrix}
+            1 \\
+            1
+        \end{pmatrix} 
+        e^{-t}
+    \]
+    Take the fact that $\bm x (0) = \begin{pmatrix}
+        1 \\
+        3
+    \end{pmatrix}$ and it follows that $c_1 = c_2 = \frac{1}{2}$. So we have a solution
+    \[
+        \bm x = \frac{1}{2}
+        \begin{pmatrix}
+            1 \\
+            5
+        \end{pmatrix}
+        e^{3t} + \frac{1}{2}
+        \begin{pmatrix}
+            1 \\
+            1
+        \end{pmatrix}
+        e^{-t}
+    \]
+    This solution will asymptotically approach the span of $(1 \ \ 5)^T$ as $t \rightarrow \infty$.
+    The general qualitative properties of the given solution can be seen in \fbox{Figure 1}.
+    \begin{figure}[ht]
+        \centering
+        \incfig{1}
+        \caption{Solution to the diffential equation given in \fbox{7.5.11}}
+        \label{fig:1}
+    \end{figure}
+\section*{Problem 7.5.23}
+    \begin{mdframed}[]
+        Consider the system
+        \[
+            \bm x' =
+            \begin{pmatrix}
+                -1 & -1 \\
+                -\alpha & -1
+            \end{pmatrix}
+            \bm x
+        \]
+    \end{mdframed}
+    \subsection*{(a)}
+        Solve the system for $\alpha = \frac{1}{2}$. Find the eigenvalues of the coefficient matrix, and classify the 
+        type of equilibrium point at the origin.\\\\
+        Let $\alpha = \frac{1}{2}$. Then we have a characteristic polynomial given by 
+        \[
+            \det (A - \lambda I) = \lambda^2 + 2 \lambda + 1 - \frac{1}{2} = \lambda^2 + 2 \lambda + \frac{1}{2}
+        \]
+        This gives us two eigenvalues of $\lambda_1 = -1 + \frac{\sqrt{2}}{2}, \lambda_2 = -1 - \frac{\sqrt{2}}{2}$. Since both eigenvalues 
+        are negative, we say that the origin is an unstable `source' equilibrium point.
+    \subsection*{(b)}
+        Solve the system for $\alpha = 2$. Find the eigenvalues of the coefficient matrix, and classify the type of equilibrium point at the origin.\\\\
+        
+\end{document}

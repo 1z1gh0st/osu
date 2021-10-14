@@ -10,6 +10,7 @@
 \usepackage{xifthen}
 \usepackage{pdfpages}
 \usepackage{transparent}
+\usepackage{bm}
 
 \usepackage{tikz-cd}
 
@@ -30,7 +31,7 @@
 \author{Philip Warton}
 \date{\today}
 \maketitle
-\section*{Problem 0.3}
+\section{Problem 0.3}
     \begin{mdframed}[]
         Assume, for $n \geq 1$, that $H_i(S^n) = \mathbb{Z}$ if $i = 0, n,$ and that $H_i(S^n) = 0$ otherwise.
         Using the technique of the proof of Lemma 0.2, prove that the equator of the $n$-sphere is not a retract.
@@ -56,28 +57,52 @@
         We know by assumption that $H_{n-1}(S^n) = 0$ since $n-1 \neq n$ and that $H_n(S^{n-1}) = \mathbb{Z}$ since
         $n - 1 = n - 1$. This new diagram should continue to commute by the properties of our functor $H_{n-1}$.
         Since $H_{n-1}(S^n) = 0$, it follows that its image under $H_{n-1}(r)$ must also be zero. That is, $H_{n-1}(S^{n-1}) =0$.
-        However, this means that our identity map 1 takes a countable algebra to a trivial one, which is a contradiction.
-        therefore $S^{n-1}$ cannot be a retract of $S^n$.
+        However, since this diagram commutes, it follows that the identity map takes a countable object to a trivial one (contradiction).
+        Therefore, $S^{n-1}$ is not a retract of $S^n$.
     \end{proof}
-\section*{Problem 0.5}
-\section*{Problem 0.7}
+\section{Problem 0.5}
+    \begin{mdframed}[]
+        Let $f,g : I \rightarrow I \times I$ such that $f(0) = (a, 0), f(1) = (b,1), g(0) = (0,c), g(1) = (1,d)$.
+        Show that there exists some point $(s,t)$ such that $f(s) = g(t)$.
+    \end{mdframed}
+    \begin{proof}
+        Say that its the case that $f(s) \neq g(t)$ for all $(s,t) \in I^2$. Define 
+        \[
+            N(s,t) = \max\{ |g_1(t) - f_1(s)| , |g_2(t) - f_2(s)|\}
+        \]
+        Then we define a function $F: I^2 \rightarrow I^2$ to be 
+        \[
+            F(s,t) = \left(
+                \frac{g_1(t) - f_1(s)}{2 N(s,t)} + 1, \frac{g_2(t) - f_2(s)}{2 N(s,t)} + 1
+            \right)
+        \]
+        Then we have that $F(I^2) \subset \partial I^2$.
+        Suppose we have a fixed point $(x,y)$. Then we say that $F(s,t) = (s,t)$ therefore $(s,t) \in \partial I^2$.
+        This means that $s = 0, s=1, t = 0$ or $t = 1$. Within any one of these cases, the fixed point does not hold so we 
+        no fixed point for $F$ (justify). Then since $I^2$ is homeomorphic to $D^2$, we say that a contradiction is reached 
+        by Brouwer fixed point.
+    \end{proof}
+\section{Problem 0.7}
     \begin{mdframed}[]
         Let $f \in \text{Hom}(A,B)$, and let $g,h \in \text{Hom}(B,A)$ such that $g \circ f = 1_A$ and that 
     $f \circ h = 1_B$. Then $g = h$.
     \end{mdframed}
     \begin{proof}
-        Suppose that $h \neq g$,
+        We write the following:
         \begin{align*}
-            h & \neq g \\
-            h \circ f & \neq g \circ f \\
-            f \circ h \circ f & \neq f \circ g \circ f \\
-            (f \circ h) \circ f & \neq f \circ (g \circ f)\\
-            1_B \circ f & \neq f \circ 1_A \\
-            f & \neq f
+            f & = f \\
+            f \circ 1_A &= 1_B \circ f & \text{(identity in $hom(A,A)$ and $hom(B,B)$)}\\
+            f \circ (g \circ f) &= (f \circ h) \circ f & \text{(by assumption)}\\
+            (f \circ g \circ f) &= (f \circ h \circ f) & \text{(associativity)}\\
+            h \circ (f \circ g \circ f) & = h \circ (f \circ h \circ f) & \text{(properties of equivalence relation)}\\
+            (h \circ f \circ g \circ f) & = (h \circ f \circ h \circ f) & \text{(associativity)}\\
+            (h \circ f \circ g \circ f) \circ g & = (h \circ f \circ h \circ f) \circ g & \text{(properties of equivalence relation)}\\
+            (h \circ f) \circ g \circ (f \circ g) &=(h \circ f) \circ h \circ (f \circ g) & \text{(associativity)}\\
+            1_B \circ g \circ 1_A &= 1_B \circ h \circ 1_A & \text{(by assumption)}\\
+            g &= h & \text{(identity in $hom(A,A)$ and $hom(B,B)$)}
         \end{align*}
-        However, this is a contradiction, and we conclude that $h = g$.
     \end{proof}
-\section*{Problem 0.18}
+\section{Problem 0.18}
     \begin{mdframed}[]
         For an abelian group $G$, let 
         \[
@@ -87,7 +112,108 @@
     \end{mdframed}
     \subsection*{(ii)}
         \begin{mdframed}[]
-            
+            Assume that $t$ defines a functor and that $t(f) = f\bigg|_{tG}$ for every homomorphism $f$.
+            If $f$ is injective, then $t(f)$ is injective.
         \end{mdframed}
-
+        \begin{proof}
+            Let $G,H$ be abelian groups, and let $f:G \rightarrow H$ be an injection.
+            Then, for any $a,b \in G$ we know that $f(a) = f(b) \Longrightarrow a = b$.
+            Choose some $x,y \in tG$ such that $tf(x) = tf(y)$, or equivalently, $f\bigg|_{tG}(x) = f\bigg|_{tG}(y)$.
+            Since both $x$ and $y$ belong to the torsion group, it follows that $f(x) = f(y)$.
+            Then, by the injectivity of $f$, we know that $x = y$ in $G$, and since both are in $tG$, the same is true there.
+        \end{proof}
+    \subsection*{(iii)}
+        \begin{mdframed}[]
+            Give an example of a surjective homomorphism $f$ for which $t(f)$ is not surjective.
+        \end{mdframed}
+        Define a function $f:\mathbb{Z} \rightarrow \mathbb{Z}_2$ such that 
+        \[
+            f(x) = \begin{cases}
+                [0] & x \text{ is even }\\
+                [1] & x \text{ is odd }
+            \end{cases}  
+        \]
+        Since $\mathbb{Z}$ contains both odd and even integers, $f$ is clearly surjective.
+        It can also be demonstrated that $f$ is a group homomorphism.
+        But, all non-zero integers have infinite order under addition, so we say that $t\mathbb{Z} = \{0\}$.
+        Since $\mathbb{Z}_2$ is cyclic, we know that $t\mathbb{Z}_2 = \mathbb{Z}_2$.
+        Take the element $[1] \in \mathbb{Z}_2$.
+        Notice that it's pre-image under $f$ is confined to only odd integers, so since 0 is not odd,
+        it can't have a pre-image under $t(f)$.
+        Since there is an element of $t\mathbb{Z}_2$ with no pre-image under $t(f)$, the function is not surjective.
+\section{Problem 0.19}
+    Let $p$ be a fixed prime in $\mathbb{Z}$.
+    Define a functor $f: \bm{Ab} \rightarrow \bm{Ab}$ by $F(G) = G / pG$ and 
+    $F(f):x + pG \mapsto f(x) + pH$ (where $f: G \rightarrow H$ is a homomorphism).
+    \subsection*{(i)}
+        \begin{mdframed}[]
+            Show that if $f$ is a surjection, then $F(f)$ is a surjection.
+        \end{mdframed}
+        \begin{proof}
+            Let $y + pH \in H / pH$. Then since $y + pH \in H / pH$ it follows that $y \in H$.
+            Because we know that $f$ is a surjection, it follows that if $y \in H$ there exists some $x \in G$ 
+            such that $f(x) = y$. So then take the point $x + pG \in G / pG$, and of course it must be the case that 
+            \[
+                F(f)(x + pG) = f(x) + pH = y + pH
+            \]
+            And it has been proven that $F(f)$ is surjective.
+        \end{proof}
+    \subsection*{(ii)}
+        \begin{mdframed}[]
+            Give an example of a group homomorphism $f$ that is an injection such that $F(f)$ is not an injection.
+        \end{mdframed}
+        Let our prime number $p$ be equal to 2. Then let $G = (\{0,2\}, + \mod{4}), H = \mathbb{Z}_4$. Finally, let $f$ simply be the inclusion map. It follows that 
+        $f$ is injective since it is the inclusion map. Then $F(f)(4) = F(f)(2) = 2 + 2H$, and we say that $F(f)$ is not injective. This does not hold, 
+        try $p = 3, \{0,2,4,6\}, \mathbb{Z}_8$ and the inclusion map.
+\section{Problem 0.20}
+    \subsection*{(ii)}
+        \begin{mdframed}[]
+            Show that there is a contravariant functor between $Top$ and $Ring$, given by $C(X)$.
+        \end{mdframed}
+        \fbox{(i)} Let $X \in objTop$, then $C(X) \in objRing$ by \fbox{Part (i)}. \\\\
+        \fbox{(ii)} Let $f : X \rightarrow Y$.
+        Then let $u \in C(Y)$. We define $f^* : C(Y) \rightarrow C(X)$ by
+        \[
+            f^*(u) = u \circ f
+        \]
+        Then $f^*(u)$ is a continuous map from $X$ to $\mathbb{R}$. That is, if $u \in C(Y)$ then $f^*(u) \in C(X)$,
+        and $f^*$ acts as a ring homomorphism. 
+        To demonstrate this, let $u,v \in C(Y)$ and $h : X \rightarrow Y$ where $X,Y$ are topological spaces.
+        Let $x\in X$ be arbitrary. Then we can write 
+        \begin{align}
+            h^*(f + g)(x) &= ((f + g) \circ h)(x) \\
+            &= (f + g)(h(x)) \\
+            &= f(h(x)) + g(h(x)) \\
+            &= (f \circ h)(x) + (g \circ h)(x) \\
+            &= h^*(f(x)) + h^*(g(x))
+        \end{align}
+        Finally we write
+        \begin{align}
+            h^*(fg)(x) &= (fg \circ h)(x)\\
+            &= (fg)(h(x)) \\
+            &= f(h(x))g(h(x)) \\
+            &= (f\circ h)(x) \cdot (g \circ h)(x) \\
+            &= h^*(g(x)) \cdot h^*(g(x))
+        \end{align}
+        So the ring structure is preserved, adn the property is satisfied.
+        \\\\
+        \fbox{(iii)} Let $f:X \rightarrow Y$ and $g: Y \rightarrow Z$ so that both are continuous and
+         $g \circ f$ is defined and a morphism in $Hom(X,Z)$. Let $u \in C(Z)$ be a continuous function on $Z$.
+        Then we write 
+        \begin{align}
+            (g \circ f)^*(u) &= u \circ (g \circ f) & \text{(definition of $(g \circ f)^*$)}\\
+            &= (u \circ g) \circ f  & \text{(associativity of functional composition)}\\
+            &= g^*(u) \circ f  & \text{(definition of $g^*$)} \\
+            &=f^*(g^*(u)) & \text{(definition of $f^*$)}\\
+            &=(f^* \circ g^*)(u) & \text{(definition of composition)}
+        \end{align}\\
+        \fbox{(iv)} Let $X \in objTop$. Then let $u \in C(X)$ be arbitrary. We then can write 
+        \begin{align}
+            (1_X)^*(u) & = u \circ 1_X & \text{(by definition of $1_X^*$)} \\
+            &= u & \text{(identity in $Hom(X,X)$)} \\
+            &= 1_{C(X)} \circ u & \text{(identity in $Hom(C(X),C(X)$)} \\
+            &= 1_{C(X)}(u) & \text{(definition of composition)}
+        \end{align}
+        Since all of these properties have been shown, we conclude that we have a contravariant functor from
+        the class of topological spaces to the ring of continuous maps. 
 \end{document}
