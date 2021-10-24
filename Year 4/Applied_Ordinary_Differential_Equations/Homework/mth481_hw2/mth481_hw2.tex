@@ -116,7 +116,7 @@
         \caption{Solution to the diffential equation given in \fbox{7.5.11}}
         \label{fig:1}
     \end{figure}
-\section*{Problem 7.5.23}
+\section*{7.5.23}
     \begin{mdframed}[]
         Consider the system
         \[
@@ -139,5 +139,169 @@
         are negative, we say that the origin is an unstable `source' equilibrium point.
     \subsection*{(b)}
         Solve the system for $\alpha = 2$. Find the eigenvalues of the coefficient matrix, and classify the type of equilibrium point at the origin.\\\\
-        
+        Let $\alpha = 2$. Then we have a characteristic polynomial given by
+        \[
+            \det (A - \lambda I) = \lambda^2 + 2 \lambda + 1 - 2 = \lambda^2 + 2 \lambda - 1
+        \]
+        This gives us two eigenvalues of $\lambda_1 = -1 + \sqrt{2}, \lambda_2 = -1 - \sqrt{2}$.
+        Since we have $\lambda_1 > 0$ and $\lambda_2 < 0$, we know that we have an unstable saddle point equilibrium.
+    \subsection*{(c)}
+    We can find the bifurcation point by writing
+    \begin{align*}
+        \det\begin{pmatrix}
+            -1 & -1 \\
+            - \alpha & -1
+        \end{pmatrix} &= (-1 - \lambda)^2 - (-1)(-\alpha) \\
+        &= \lambda^2 + 2\lambda + 1 - \alpha
+    \end{align*}
+    From here we can determine the eigenvalues as
+    \begin{align*}
+        \lambda &= \frac{-2 \pm \sqrt{2^2 - 4(1)(1-\alpha)}}{2} \\
+        &= -1 \pm \frac{\sqrt{4 - 4 + 4\alpha}}{2} \\
+        &= -1 \pm \sqrt{\alpha}
+    \end{align*}
+    The bifurcation point is exactly when one of our eigenvalues is equal to 0 because that is when one of them changes from 
+    positive to negative as we vary $\alpha$. This occurs when $\alpha = 1$ which lies between $\frac{1}{2}$ and $2$ as desired.
+\section*{7.6.5}
+    \begin{mdframed}[]
+        Compute the general solution in terms of real-valued functions of the following system of differential equations,
+        \[
+            x' = \begin{pmatrix}
+                1 & 0 & 0 \\
+                2 & 1 & -1 \\
+                3 & 2 & 1
+            \end{pmatrix}x
+        \]
+    \end{mdframed}
+    We write 
+    \begin{align*}
+        \det\begin{pmatrix}
+            1 & 0 & 0 \\
+                2 & 1 & -1 \\
+                3 & 2 & 1
+        \end{pmatrix} &= (1 - \lambda)\left((1 - \lambda)(1 - \lambda) - (2)(-2)\right) \\
+        &= (1 - \lambda)(\lambda^2 + 2\lambda + 1 + 4)
+    \end{align*}
+    This gives us eigenvalues of $\lambda_1 = 1, \lambda_2 = 1 - 2i, \lambda_3 = 1 + 2i$. From 
+    these values we can determine that the eigenvectors are given by
+    \[
+        \begin{pmatrix}
+            2 \\
+            3 \\
+            2
+        \end{pmatrix}, \ \ \ \ \begin{pmatrix}
+            0 \\
+            -i \\
+            1
+        \end{pmatrix} \ \ \ \ \begin{pmatrix}
+            0 \\
+            i \\
+            1
+        \end{pmatrix}
+    \]
+    Then we can write the general solution,
+    \[
+        \bm x = c_1 \begin{pmatrix}
+            2\\
+            3\\
+            2
+        \end{pmatrix}e^t + c_2 \bm u + c_3 \bm v
+    \]
+    Where 
+    \begin{align*}
+        \bm u (t) &= e^t \left(
+            \begin{pmatrix}
+                0\\
+                0 \\
+                1
+            \end{pmatrix}\cos(-2t) - \begin{pmatrix}
+                0 \\
+                -1 \\
+                0
+            \end{pmatrix}\sin(-2t)
+        \right)\\
+        \bm v(t) &= e^t \left(
+            \begin{pmatrix}
+                0\\
+                0 \\
+                1
+            \end{pmatrix}\sin(-2t) + \begin{pmatrix}
+                0 \\
+                -1 \\
+                0
+            \end{pmatrix}\cos(-2t)
+        \right)
+    \end{align*}
+\section*{7.6.11}
+    \begin{mdframed}[]
+        Determine eigenvalues in terms of $\alpha$, and then find and sketch the bevior around the bifurcation 
+        point of this parameter.
+        \[
+            \bm x' = \begin{pmatrix}
+                \alpha & 1 \\
+                -1 & \alpha
+            \end{pmatrix}\bm x
+        \]
+    \end{mdframed}
+    We write 
+    \begin{align*}
+        \det \begin{pmatrix}
+            \alpha & 1 \\
+            -1 & \alpha
+        \end{pmatrix} - \lambda \bm I &= 0 \\
+        (\alpha - \lambda)^2 + (1)(1) &= 0 \\
+        \lambda^2 - 2\alpha \lambda + \alpha^2 + 1 &= 0 \\
+        \lambda^2 - 2\alpha \lambda + \alpha^2 &= 1 \\
+        (\lambda - \alpha)^2 &= -1
+    \end{align*}
+    This will give us two eigenvalues given by 
+    \begin{align*}
+        \lambda &= \alpha \pm i
+    \end{align*}
+    The real part of these eigenvalues is positive if and only if $\alpha$ is also positive,
+    giving us a bifurcation point at $\alpha = 0$. Our solutions are stable when $\alpha < 0$,
+    and unstable when $\alpha > 0$. When $\alpha < 0$ our solutions will spiral toward the origin,
+    and when $\alpha > 0$ they will spiral away. This is pictured in our sketches in \fbox{Figure 2}
+    \begin{figure}[ht]
+        \centering
+        \incfig{2}
+        \caption{Sketch of phase portraits for given values of $\alpha$}
+        \label{fig:1}
+    \end{figure}
+\section*{7.7.12}
+    \begin{mdframed}[]
+        Show that $\Phi(t)$ does have the principle algebraic properties associated with the exponential.
+    \end{mdframed}
+    \begin{proof}
+        We first wanna show that $\Phi(t)\Phi(s) = \Phi(t + s)$. Without loss of generality let $s$ be fixed and 
+        $t$ be a variable, then we know that $\Phi(s)$ is some fixed matrix. Now let $Z(t) = \Phi(t)\Phi(s)$. Then 
+        we can say that 
+        \[
+            Z(0) = \Phi(0)\Phi(s) = \bm I \Phi(s) = \Phi(s)
+        \]
+        Now let $Y(t) = \Phi(t + s)$. Then we similarly get
+        \[
+            Y(0) = \Phi(0 + s) = \Phi(s)
+        \]
+        Given that we can fix any $s$ and let $t$ vary, it follows that this will hold for any initial value
+        given this system of equations. So we conclude that $\Phi(x)\Phi(y) = \Phi(x + y)$.\\\\
+        Now we look at the property stating that $\Phi(t)\Phi(-t) = \bm I$. Now this follows somewhat trivially from 
+        our previous result. That is,
+        \[
+            \Phi(t)\Phi(-t) = \Phi(t - t) = \Phi(0) = \bm I  
+        \]
+        So for any value $t$ we have a matrix that, right-multiplied with $\Phi(t)$, gives us the identity. This gives us 
+        the following result 
+        \begin{align*}
+            \Phi(t)\Phi(-t) &= \bm I \\
+            \Phi^{-1}(t)\Phi(t)\Phi(-t) &= \Phi^{-1}(t) \bm I \\
+            \Phi(-t) &= \Phi^{-1}(t)
+        \end{align*}
+        And then finally, it follows obviously that 
+        \begin{align*}
+            \Phi(t - s) &= \Phi(t + (-s)) \\
+            &= \Phi(t)\Phi(-s) \\
+            &= \Phi(t)\Phi^{-1}(s)
+        \end{align*}
+    \end{proof}
 \end{document}

@@ -74,9 +74,10 @@
             \lambda &= \overline{x}
         \end{align*}
     \subsection{Q2}
-        \begin{mdframed}[]
-            Poo Poo
-        \end{mdframed}
+        The log posterior is 
+        \[
+            \log P(\lambda \ | \ D) \propto P(D \ | \ \lambda) + P(\lambda) = \prod_{i = 1}^N \frac{\lambda^{x_i}e^{-\lambda}}{x_i!} + \frac{\beta^{\alpha}\lambda^{\alpha - 1}e^{-\beta\lambda}}{\Gamma(\alpha)}
+        \]
         We take the derivative of the log posterior.
         \begin{align*}
             (d/d\lambda) \log P(\lambda \ | \ D) &= (d / d\lambda) c\log P(D \ | \ \lambda) + \log \left(\text{Gamma of lambda}\right) \\
@@ -111,6 +112,15 @@
             \lambda &= \frac{\left(\sum_{i=1}^N x_i\right) + \alpha - 1}{N + \beta}
         \end{align*}
         And thus we have a closed form solution for our parameter $\lambda$.
+    \subsection{Q3}
+    We write 
+    \begin{align*}
+        \left(\prod{i=1}^N \frac{\lambda^{x_i}e^{-\lambda}}{x_i!}\right)\left(\frac{\beta^\alpha\lambda^{\alpha-1}e^{-\beta\lambda}}{\Gamma(\alpha)} \right)
+        &= \left(
+            \frac{\beta}
+            {\Gamma(\alpha)\prod x_i}\cdot \lambda^{(\sum x_i + \alpha) - 1}\cdot e^{-(N + \beta)\lambda} 
+        \right) \approx \text{Gamma}
+    \end{align*}
 \section{k-Nearest Neighbor Classifier}
     \subsection{Q4}
         Consider the case where we have one sample $x$ such that workclass$[x] = $ Private 
@@ -151,4 +161,19 @@ printPercentOver50k(D)
                 &= ||x - z||_2
             \end{align*}
         \end{proof}
+    \subsection{Q8}
+    \subsection{Q9}
+        The best number of $k$ I observed would be $k=1$ or $k=9$. For $k=1$ it had good accuracy on the training data, but 
+        not so much on the $k$-fold cross validation. As $k$ increased, training accuracy decreased and $k$-fold cross validation
+        accuracy fluctuated somewhat. For $k = 1$, our training error was minute, but not zero. This is because we have some duplicate points
+        that may have different outputs.
+    \subsection{Q10}
+\section{Status Report}
+\begin{verbatim}
+~15.5h
+Difficult
+Discussed the problems with others
+I understand the material about 20%
+No other comments
+\end{verbatim}
 \end{document}

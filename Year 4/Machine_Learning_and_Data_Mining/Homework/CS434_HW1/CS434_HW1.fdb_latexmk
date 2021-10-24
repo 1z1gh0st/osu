@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1634168711 "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.tex" "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.pdf" "CS434_HW1" 1634168754
-  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.aux" 1634168712 808 313127f0f1aaf5e9cae45686c8b84c0a "pdflatex"
-  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.tex" 1634168752 6882 55dbc578f7209a78bb4f9fdb32c65536 ""
+["pdflatex"] 1634194375 "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.tex" "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.pdf" "CS434_HW1" 1634923337
+  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.aux" 1634194376 1290 23f0dc511d408743358e71553ebb8a61 "pdflatex"
+  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.tex" 1634923336 8149 dab5457da09d16445d6b95634b1cc903 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -38,6 +38,7 @@
   "/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb" 1248133631 32762 224316ccc9ad3ca0423a14971cfa7fc1 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb" 1248133631 32716 08e384dc442464e7285e891af9f45947 ""
+  "/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb" 1248133631 30457 bc0868ebece724ed7c3d37e3d9bff7bd ""
   "/usr/local/texlive/2020/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb" 1248133631 34694 ad62b13721ee8eda1dcc8993c8bd7041 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb" 1136849748 45758 19968a0990191524e34e1994d4a31cb6 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/type1/urw/times/utmb8a.pfb" 1136849748 44729 811d6c62865936705a31c797a1d5dada ""
@@ -113,5 +114,5 @@
   "/usr/local/texlive/2020/texmf.cnf" 1586288231 577 d60164b4589a341208aff7a667fbbdcb ""
   (generated)
   "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.pdf"
-  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.log"
   "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.aux"
+  "/Users/philip/Documents/OSU/Year 4/Machine_Learning_and_Data_Mining/Homework/CS434_HW1/CS434_HW1.log"
