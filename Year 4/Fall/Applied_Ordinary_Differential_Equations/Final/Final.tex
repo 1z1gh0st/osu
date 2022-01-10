@@ -1,0 +1,45 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Applied Ordinary Differential Equations --- Final Exam}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+
+\section*{1.}
+
+\end{document}

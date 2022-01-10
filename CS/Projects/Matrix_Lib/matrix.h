@@ -21,7 +21,7 @@ class Matrix {
     private:
         unsigned m_numRows;
         unsigned m_numCols;
-        vector<vector<double>> m_matrix;
+        vector< vector<double> > m_matrix;
     public:
         /* --- CONSTRUCTORS --- */
         Matrix(unsigned, unsigned, double); // Constructor

@@ -1,0 +1,273 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{bm}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Applied Ordinary Differential Equations - Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Problem 1}
+    \begin{mdframed}[]
+        Find the general solution to the differential equation 
+        \[
+            \bm x' = \begin{pmatrix}
+                1 & 1 \\
+                4 & -2
+            \end{pmatrix} \bm x + \begin{pmatrix}
+                e^{-2t} \\
+                -2e^t
+            \end{pmatrix}
+        \]
+    \end{mdframed}
+    First we wish to diagonalize our matrix. That is, find the eigenvalues and their corresponding eigenvectors, 
+    and the inverse of the matrix where columns are eigenvectors.
+    So we begin by writing our characteristic polynomial 
+    \[
+        (1 - \lambda)(-2 - \lambda) - (1)(4) = \lambda^2 + \lambda - 1 - 4 = \lambda^2 + \lambda - 5    
+    \] 
+    So this gives us eigenvalues $r_1 = 2$ and $r_2 = -3$. From there we find eigenvectors given by 
+    \[
+        \ker(A - 2I) = span(\begin{pmatrix}
+            1 \\ 1
+        \end{pmatrix})   
+        \ \ \ \ \ \ \ \
+        \ker(A + 3I) = span(\begin{pmatrix}
+            -1 \\ 4
+        \end{pmatrix})
+    \]
+    So then we write 
+    \[
+        T = \begin{pmatrix}
+            1 & -1 \\
+            1 & 4
+        \end{pmatrix}    
+        \ \ \ \ \ T^{-1} = \frac{1}{5}\begin{pmatrix}
+           4 & 1 \\
+           -1 & 1 
+        \end{pmatrix}
+    \]
+    Let $\bm x = T \bm y$ and we get the following system of ODE's 
+    \[
+        \bm y' = \begin{pmatrix}
+            2 & 0 \\
+            0 & -3
+        \end{pmatrix}   
+        \bm y + T^{-1}\begin{pmatrix}
+            e^{-2t} \\
+            -2e^t
+        \end{pmatrix}
+    \]
+    Which we can then write as 
+    \begin{align*}
+        y_1' &= -2y_1 + \frac{1}{5}(4e^{-2t} - 2e^t)\\
+        y_2' &= 3y_2 + \frac{1}{5}(-e^{-2t} + 2e^t)
+    \end{align*}
+    Which is a decoupled system of non-homogenous ODE's. We then solve each of these using integrating factors
+    and plug this back into $\bm x = T\bm y$.
+    So then we can equivalently write 
+    \begin{align*}
+        y_1' - 2y_1 &= \frac{1}{5}(4e^{-2t} - 2e^t) \\
+        y_2' - 3y_2 &= \frac{1}{5}(-e^{-2t} + 2e^t) \\\\
+        y_1 &= e^{
+            -\int (1/5) (4e^{-2t} - 2e^t)dt
+        } \left[
+            \int e^{
+                \int (1/5) (4e^{-2t} - 2e^t)dt
+            }(-2)dt + C
+        \right] \\
+        y_2 &=  e^{
+            -\int (1/5) (-e^{-2t} + 2e^t)dt
+        } \left[
+            \int e^{
+                \int (1/5) (-e^{-2t} + 2e^t)dt
+            }(-3)dt + C
+        \right] \\\\
+        y_1 &= \frac{-1 + 2e^3t}{5e^2t} + c_1e^{2t} \\
+        y_2 &= \frac{\frac{1}{e^{5t}}-\frac{5}{e^{2t}}}{25e^{-3t}}+c_2e^{3t}
+    \end{align*}
+    So then we have a solution given by 
+    \[
+        \bm x = T\bm y = \begin{pmatrix}
+            1 & -1 \\
+            1 & 4
+        \end{pmatrix}   
+        \begin{pmatrix}
+            y_1 \\ y_2
+        \end{pmatrix}
+        = \begin{pmatrix}
+            y_1 - y_2 \\
+            y_1 + 4y_2
+        \end{pmatrix}
+    \]
+\section*{Problem 2}
+    \begin{mdframed}[]
+        The equation of motion of the mass spring system is 
+        \[
+            m \dfrac{d^2 u}{dt^2} + c \dfrac{du}{dt} + ku = 0
+        \]
+        where $m, c, k$ are positive. Write this second order equaiton as a system of two first 
+        order equations for $x = u$ and $y = du / dt$. Show that $x = 0, y = 0$ is a critical point 
+        and analyze the nature and stability of the critical points as a function of the parameters
+        $m,c,k$.
+    \end{mdframed}
+    So we have a system $mu'' + cu' + ku = 0$.
+    Let $x = u, y = u'$ and then we can write both 
+    \begin{align*}
+        my' + cy + kx &= 0 \\
+        my' + cx' + kx &= 0
+    \end{align*}
+    So it follows that 
+    \begin{align*}
+        y' &= \left(\frac{-k}{m}\right)x + \left(\frac{-c}{m}\right)y\\   
+        x' &= y
+    \end{align*}
+    This means that we can write this as a system of ordinary differential equations
+    given by 
+    \[
+        \bm x' =
+        \begin{pmatrix}
+            0 & 1 \\
+            -k / m & -c / m
+        \end{pmatrix}\bm x 
+    \]
+    Now let $\bm x$ be the constant function mapping $t$ to $\bm 0$. Then obviously $\bm x' = A \bm x = A \bm 0 = \bm 0$.
+    This will be an equilibrium solution because as $t \rightarrow \infty$, $\bm x(t) \rightarrow \bm 0$.
+    Now we can say that $x = 0, y = 0$ is a critical point. To analyze this point, we will look at techniques from 
+    chapter 7.
+    That is we will find the general solution of the form 
+    \[
+        \bm x = c_1 e^{r_1 t} \xi^{(1)} + c_2 e^{r_2 t} \xi^{(2)}   
+    \]
+    So we have a characteristic polynomial given by 
+    \[
+        (-\lambda)(-c / m - \lambda) - (1)(-k / m) = \lambda^2 + (c / m) \lambda + (k / m)   
+    \]
+    Which gives us two eigenvalues
+    \begin{align*}
+        r &= \frac{-(c/m) \pm \sqrt{(c/m)^2 - 4(k/m)}}{2} \\
+        &= \frac{-c}{2m} \pm \frac{\sqrt{\frac{c^2 - 4km}{m^2}}}{2} \\
+        &= \frac{-c}{2m} \pm \frac{\sqrt{c^2 - 4km}}{2m}
+    \end{align*}
+    So we say that $r_1 = (-c + \sqrt{c^2 - 4km})/2m, r_2 = (-c - \sqrt{c^2 - 4km})/2m$.
+    With 3 parameters, $c, k, m$, we can partition $\mathbb{R}^3$ by certain bifurcation points for 
+    these different parameters. We create the following table of conditions that affect the type and stability
+    of our system:
+    \begin{center}
+        \begin{tabular}{ | l | l | l | }
+            \hline
+        \textbf{Parameters}       & \textbf{Type of Point}           & \textbf{Stability}             \\
+            \hline
+        $c^2 - 4km < 0$  &                         &                       \\
+        $\ \ \ \ \ \ \ \ c < 0$  & Spiral Point            & Unstable              \\
+        $ \ \ \ \ \ \ \ \ c > 0$ & Spiral Point            & Asymptotically Stable \\
+        $ \ \ \ \ \ \ \ \  c = 0$ & Center                  & Stable                \\
+            \hline
+        $c^2 - 4km = 0$  &                         &                       \\
+        $\ \ \ \ \ \ \ \ c < 0$  & Proper or improper node & Unstable              \\
+        $ \ \ \ \ \ \ \ \ c > 0$ & Proper or improper node & Asymptotically Stable \\
+            \hline
+        $c^2 - 4km > 0$  &                         &                       \\
+        $ \ \ \ \ \ \ \ \ k < 0$ & Node                    & Unstable              \\
+        $ \ \ \ \ \ \ \ \ k > 0$ & Node                    & Asymptotically Stable \\
+        $ \ \ \ \ \ \ \ \ k = 0$ & Saddle Point            & Unstable            \\ 
+            \hline
+        \end{tabular}
+    \end{center}
+\section*{Problem 3}
+    \begin{mdframed}[]
+        Consider the linear system
+        \[
+            \frac{dx}{dt} = a_{11}x + a_{12}y, \ \ \ \ \frac{dy}{dt} = a_{21}x + a_{22}y
+        \]
+        where $a_{11}, a_{12}, a_{21}, a_{22} \in \mathbb{R}$. Let $p = a_{11} + a_{22}$
+        be the trace and $q = a_{11}a_{22} - a_{12}a_{21}$ be the determinant of the corresponding
+        coefficient matrix. Let $\Delta = p^2 - 4q$. Show that the critical point $(0,0)$ is a 
+        \begin{itemize}
+            \item Node if $q > 0$ and $\Delta \geq 0$ \\
+            \item Saddle point if $q < 0$ \\
+            \item Spiral point if $p \neq 0$ and $\Delta < 0$ \\
+            \item Center if $p = 0$ and $q > 0$
+        \end{itemize}
+        A theorem from linear algebra says that if $r_1$ and $r_2$ are eigenvalues of the coefficient matrix,
+        then $q = r_1r_2$ and $p = r_1 + r_2$.
+    \end{mdframed}
+    \begin{proof}
+        We can write our system as 
+        \[
+            \bm x' = \begin{pmatrix}
+                a_{11} & a_{12} \\
+                a_{21} & a_{22}
+            \end{pmatrix} \bm x 
+        \]
+        Then we get eigenvalues given by 
+        \begin{align*}
+            (a_{11} - \lambda)(a_{22} - \lambda) - (a_{12})(a_{21}) &= \lambda^2 - (a_{11} + a_{22})\lambda + a_{11}a_{22} - a_{12}a_{21} \\
+            &= \lambda^2 - p\lambda + q \\
+            \Longrightarrow \lambda &= \frac{p \pm \sqrt{p^2 - 4q}}{2} \\
+            &= \frac{p \pm \sqrt{\Delta}}{2}
+        \end{align*}
+        \fbox{Node}
+        Suppose that $q > 0$ then by the theorem $q = r_1 r_2$ so it follows that either both $r_1,r_2 > 0$ or $r_1,r_2 < 0$.
+        So it follows that if our eigenvalues are real that we will have either a source or sink node. Since $\Delta \geq 0$ 
+        and our eigenvalues are given by $\lambda = (p \pm \sqrt{\Delta})/2$ we know that our eigenvalues are both real. So then 
+        we have $r_1,r_2 > 0$ or $r_1, r_2 <0$ and so we are guaranteed to have a source or a sink node. \\\\
+        \fbox{Saddle} Suppose that $q < 0$. Then the product of our eigenvalues is negative. Also our $\Delta = p^2 - 4q$ is guaranteed 
+        to be positive so both our eigenvalues are real. So we have two real eigenvalues whose product is negative so it must be the case 
+        that one is positive and one is negative. Therefore we must have a saddle point. \\\\
+        \fbox{Spiral} Suppose that $\Delta < 0$, then we must have some complex part to both of our eigenvalues since they are given by $\lambda = \frac{p \pm \sqrt{\Delta}}{2}$.
+        And since $p \neq 0$, it follows that our eigenvalues have both a real and a complex part, which means that we must have a spiral point either inwards 
+        or outwards. \\\\
+        \fbox{Center} If $p$ is equal to 0 then our eigenvalues are given by $\lambda = \pm \frac{\sqrt{\Delta}}{2}$. Then if we assume that $\Delta < 0$ 
+        then it follows that our eigenvalues must have no real part and only distinct complex parts. So, therefore, we have a center point at the 
+        given location.
+    \end{proof}
+\section*{Problem 4}
+    \begin{mdframed}[]
+        Continuing the previous problem, show that the critical point $(0,0)$ is 
+        \begin{itemize}
+            \item Asymptotically stable if $q > 0$ and $p < 0$ \\
+            \item Stable if $q > 0$ and $p = 0$ \\
+            \item Unstable if $q < 0$ or $p > 0$
+        \end{itemize}
+    \end{mdframed}
+    \begin{proof}
+        Recall that our eigenvalues are given by $\lambda = (p \pm \sqrt{\Delta})/2$. Now, \\\\
+        \fbox{Asymptotically stable}
+        Suppose that $q > 0$ and $p < 0$. Then we have $p / 2 < 0$ so if $\frac{\sqrt{\Delta}}{2}$ is a complex number then we have a spiral point 
+        with a negative real part so it must spiral inward towards $(0,0)$. Then if our $\Delta > 0$ and we do not have a complex part, it follows that 
+        since $q = r_1 r_2$ our eigenvalues are of the same sign. Since one of our eigenvalues is given by $\frac{p - \sqrt{\Delta}}{2}$, with $p < 0$ and 
+        $\sqrt{\Delta} / 2$ being guaranteed to be postive we know that one of our eigenvalues must be negative. Then since both are the same size, both are negative 
+        so we have a nodal sink point. Since both a spiral sink and a nodal sink are asymptotically stable, we must have an asymptotically stable point. \\\\
+        \fbox{Stable}
+        By the previous problem, the conditions $q > 0$ and $p = 0$ guarantee that our point is a center point, which means that we know it to be stable. \\\\
+        \fbox{Unstable}
+        Suppose that $q < 0$ or $p > 0$. If $p > 0$ then we have two cases, real and complex. In the complex case then we have a positive real part so it follows 
+        that our point is a spiral source, and therefore unstable. In the real case, then we have at least one positive eigenvalue given by $r_1 = \frac{p + \sqrt{\Delta}}{2}$ 
+        so it follows that we must have a saddle point or a nodal source, which are both unstable. If $q < 0$ then $r_1 r_2 < 0$. Then since $\Delta = p^2 - 4q$ it must be 
+        the case that $\Delta \geq 0$ and our eigenvalues are real. This means 
+        that one of our eigenvalues is positive and one is negative giving us a saddle point which is unstable. 
+    \end{proof}
+\end{document}

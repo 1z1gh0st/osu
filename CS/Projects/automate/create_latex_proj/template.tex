@@ -1,21 +1,30 @@
 \documentclass{article}
 
-\usepackage{times}
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
 \usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
 \usepackage[margin=.5in]{geometry}
 \usepackage{graphicx}
-\usepackage[linewidth=1pt]{mdframed}
-
 \usepackage{import}
-\usepackage{xifthen}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
 \usepackage{pdfpages}
+\usepackage{times}
 \usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
 
+% Figure command
 \newcommand{\incfig}[1]{%
-    \def\svgwidth{\columnwidth}
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
     \import{./figures/}{#1.pdf_tex}
 }
 
+% Theorem command
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}[section]
 \newtheorem*{remark}{Remark}
@@ -24,8 +33,11 @@
 
 \begin{document}
 
+% -------------------------------------------- %
 \title{Title}
 \author{Philip Warton}
 \date{\today}
 \maketitle
+% -------------------------------------------- %
+
 \end{document}

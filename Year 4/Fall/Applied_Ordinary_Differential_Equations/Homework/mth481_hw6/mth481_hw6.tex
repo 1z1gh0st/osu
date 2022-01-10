@@ -1,0 +1,607 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Applied Ordinary Differential Equations --- Homework 6}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+
+\section*{Section 5.4 -- Problem 25}
+    Find all values of $\beta$ for which all solutions of $x^2 y'' + \beta y = 0$
+    approach zero as $x \rightarrow 0$. 
+    \\ \hline
+    \subsection*{Solution}
+        We begin by letting $y = x^r$, making the assumption that solutions will take this form.
+        Then the derivatives of $y$ can be computed.
+        \[
+        y = x^r \ \ \ \ \longrightarrow \ \ \ \ y' = r x^{r-1} \ \ \ \ \longrightarrow \ \ \ \ y' = r (r-1) x^{r-2}
+        \] 
+        These can be substituted into the differential eqution, and then this can be simplified as follows.
+        \begin{align*}
+            x^2 (r(r-1)x^{r-2}) + \beta (x^r) &= 0 \\
+            r(r-1)x^r + \beta x^r &= 0 \\
+            x^r (r(r-1) + \beta) &= 0 \\
+            x^r (r^2 - r + \beta) &= 0 
+        \end{align*}
+        The roots of the inner polynomial can now be computed by the quadratic formula.
+        This yields
+        \[
+        r = \frac{1 \pm \sqrt{1 - 4\beta}}{2}
+        \] 
+        Since we say that $y = x^r$, it follows that if $x \rightarrow 0$ then $x^r \rightarrow 0$ if and only if $r$ has a positive real part.
+        In order to have complex eigenvalues, it must be the case that $1 - 4\beta < 0$. Equivalently,
+        \begin{align*}
+            1 - 4\beta &< 0 \\
+            1 &< 4\beta \\
+            \frac{1}{4} &< \beta
+        \end{align*}
+        And in this scenario the real part will be guaranteed to be positive.
+        In the case that we have real eigenvalues, for $r_1, r_2$ to be positive, it must be the case that $1 - \sqrt{1 - 4\beta} > 0$. Equivalently,
+        \begin{align*}
+            1 - \sqrt{1 - 4\beta} &> 0 \\
+            1 &> \sqrt{1- 4\beta} \\
+            1 &> 1 - 4\beta \\
+            0 &> -4\beta \\
+            0 &< \beta
+        \end{align*}
+        In combination, we can guarantee a postive real part for both eigenvalues simply by restricting $\beta$ to be strictly positive.
+        That is, if $\beta > 0$ then all solutions of $x^2 y'' + \beta y = 0$ approach zero as $x \rightarrow 0$. 
+        \pagebreak
+\section*{Section 5.4 -- Problem 28}
+    Using the method of reduction of order, show that if $r_1$ is a repeated root of $r(r - 1) + \alpha r + \beta = 0$,
+then $x^{r_1}$ and $x^{r_1} \ln x$ are solutions of $x^2 y'' + \alpha x y' + \beta y = 0$ for $x > 0$.
+    \\ \hline
+    \subsection*{Solution}
+    It can be reasonably assumed that, to find a solution, we can substitute $y = x^r$ once again. These can all be differentiated, giving the following.
+    \[
+        y = x^r \ \ \ \ \longrightarrow \ \ \ \ y' = r x^{r-1} \ \ \ \ \longrightarrow \ \ \ \ y' = r (r-1) x^{r-2}
+    \] 
+    This can be substituted into our original equation
+    \begin{align*}
+        x^2 r (r-1) x^{r-2} + \alpha x r x^{r-1} + \beta x^r &= 0 \\
+        r (r-1) x^r + \alpha r x^r + \beta x^r &= 0 \\
+        x^r(r (r-1) + \alpha r + \beta) &= 0 
+    \end{align*}
+    If $r_1$ is a root for $r(r-1) + \alpha r + \beta$, then we clearly have a solution for the differential equation given by $y = x^{r_1}$, since having the term in parenthesis go to 0 causes the entire left-hand side to be 0 and thus the equation is satisfied. If $r_1$ is a repeated root, then we can determine an equality involving $\alpha$ and $\beta$.
+    %TODO: Delet from here if unnecessary
+    \begin{align*}
+        r(r - 1) + \alpha r + \beta &= 0 \\
+        r^2 - r + 1 + \alpha r + \beta &= 0 \\
+        r^2 + (\alpha - 1)r + (\beta + 1) &= 0 \\
+    \end{align*}
+    The quadratic equation can be used to solve for the roots.
+    \begin{align*}
+        r &= \frac{(1- \alpha) \pm \sqrt{(\alpha - 1)^2 - 4(\beta + 1)} }{2} \\
+    \end{align*}
+    Assuming that we have a repeated root $r_1$ we know that $(\alpha - 1)^2 - 4(\beta + 1) = 0$. Then we know that $r_1$ is of the following form.
+    \[
+    r_1 = \frac{1- \alpha}{2}
+    \] 
+    Set $y = v(x)x^r$, by the method of reduction of order, then the first and second derivative can be taken.
+    \[
+    y = v x^r \ \ \ \ \longrightarrow \ \ \ \ y' = v' x^r + v r x^{r-1} \ \ \ \ \longrightarrow \ \ \ \ y'' = v'' x^r + v' (2 r x^{r-1}) + v (r (r-1) x^{r-2}) 
+    \] 
+    Then we will substitute in these for $y, y'$, and $y''$.
+    \[
+        x^2 \left[
+            v'' x^r + v' (2 r x^{r-1}) + v (r (r-1) x^{r-2}
+        \right] + \alpha x \left[
+            v' x^r + v r x^{r-1}
+        \right] + \beta \left[ v x^r \right]
+    \] 
+    This can be simplified with some algebra.
+    \begin{align*}
+        0 &= x^2 \left[
+            v'' x^r + v' (2 r x^{r-1}) + v (r (r-1) x^{r-2}
+        \right] + \alpha x \left[
+            v' x^r + v r x^{r-1}
+        \right] + \beta \left[ x^r \right]
+        \\
+        0 &= [v'' x^{r+2} + v'2rx^{r+1} + v(r(r-1)x^r)] +
+        [v'\alpha x^{r+1} + v \alpha rx^r] + v[\beta x^r] \\
+        0 &= v''(x^{r+2}) + v'(x^{r+1}(2r + \alpha)) + v(x^r(r(r-1) + \alpha r + \beta))
+    \end{align*}
+    Since $r_1$ is a root of $r(r-1) + \alpha r + \beta$, the coefficient of $v$ is equal to 0. 
+    Since $r_1 = \dfrac{1-\alpha}{2}$, we can simplify the coefficient on the term with $v'$.
+    \begin{align*}
+        2 r_1 + \alpha &= 2 \frac{1-\alpha}{2} + \alpha \\
+        &= 1 - \alpha + \alpha \\
+        &= 1
+    \end{align*}
+    So then our equation simplfies further.
+    \begin{align*}
+        0 &= v''(x^{r+2}) + v'(x^{r+1}(2r + \alpha)) + v(x^r(r(r-1) + \alpha r + \beta)) \\
+        0 &= v''(x^{r+2}) + v'(x^{r+1}) 
+    \end{align*}
+    Let $w = v'$, and we can reduce the order of our differential equation.
+    Substituting in our new variable $w$, and $w' = v''$, we can rewrite the equation.
+     \[
+    0 = w' x^{r+2} + w x^{r+1}
+    \] 
+    This can be solved using the seperation of variables method.
+    \begin{align*}
+        0 &= w' x^{r+2} + w x^{r+1} \\
+        -w x^{r+1} &= w' x^{r+2} \\
+        \frac{-w}{x} &= w' \\
+        \frac{-w}{x} &= \frac{dw}{dx} \\
+        \frac{-1}{x} &= \frac{1}{w} \cdot \frac{dw}{dx} \\
+        \frac{-1}{x}dx &= \frac{1}{w}dw \\ 
+        -\ln |x| + c &= \ln |w| \\
+        e^{-\ln |x| + c} &= e^{\ln |w|} \\
+        \frac{e^c}{e^{\ln |x|}} &= w \\
+        \frac{k}{x} &= w 
+    \end{align*}
+    Since $w = v'$, we can integrate $w$ to solve for $v$.
+    \begin{align*}
+        \frac{k}{x} &= w \\
+        \frac{k}{x} &= v' \\
+        \int \frac{k}{x} dx &= \int v' dx \\
+        k\ln |x| + c &= v \\
+    \end{align*}
+    If we assume that our constants of integration were both zero, then $k=e^{c_1} = e^0 = 1$ and $c_2 = 1$. Then $v$ can be substituted into our original solution $y = v x^r$, giving us 
+    \[
+    y = x^r \ln x
+    \] 
+\pagebreak
+\section*{Section 5.5 -- Problem 10}
+    The Bessel equation of order 0 is
+    \[
+    x^2 y'' + x y' + x^2 y = 0
+    \] 
+    \begin{enumerate}[a.]
+        \item Show that $x=0$ is a regular singular point.
+        \item Show that the roots of the indicial equation are $r_1=r_2=0$.
+        \item Show that one solution for $x>0$ is
+        \[
+            J_0(x) = 1 + \sum_{n=1}^\infty \frac{(-1)^n x^{2n}}{2^{2n}(n!)^2}
+        \] 
+    The function $J_0$ is known as the Bessel function of the first kind of order zero. 
+        \item Show that the series for $J_0(x)$ converges for all $x$.
+    \end{enumerate}
+    \\ \hline
+    \subsection*{Solution}
+        \subsubsection*{a.}
+            \begin{proof}
+                Firstly, it must be identified that $P(x) = x^2, Q(x) = x, R(x) = x^2$.
+                The point $x_0 = 0$ must be a singular point since
+                \[
+                    P(x_0) = P(0) = 0^2 = 0
+                \]
+                To check that it is regular, it must be the case that the following limits are both finite.
+                \begin{enumerate}
+                    \item $\lim_{x\to 0}x\frac{Q(x)}{P(x)}$\\
+                    \item $\lim_{x\to 0}x^2 \frac{R(x)}{P(x)}$
+                \end{enumerate}
+                The first can be evaulated simply.
+                \begin{align*}
+                    \lim_{x\to 0} x\frac{Q(x)}{P(x)} &= \lim_{x\to 0}x \frac{x}{x^2} \\
+                    &= \lim_{x\to 0} 1 \\
+                    &= 1
+                \end{align*}
+                Similarly we can also evaluate the second limit somewhat trivially.
+                \begin{align*}
+                    \lim_{x\to 0} x^2 \frac{R(x)}{P(x)} &= \lim_{x\to 0}x^2 \frac{x^2}{x^2} \\
+                    &= \lim_{x\to 0}x^2 \\
+                    &= 0 \\
+                \end{align*}
+            Since both limits are finite, we conclude the point $x = 0$ is a regular singular point.
+            \end{proof}
+        \subsubsection*{b.}
+            \begin{proof}
+                We assume that we have some solution of the form
+                \[
+                y = \sum_{n=0}^\infty a_n x^{r+n}
+                \] 
+                This can be differentiated twice to find $y'$ and $y''$.                
+                \[
+                y = \sum_{n=0}^\infty a_n x^{r+n} \ \ \ \ \longrightarrow \ \ \ \ y' = \sum_{n=0}^{\infty} a_n (r+n) x^{r+n-1} \ \ \ \ \longrightarrow \ \ \ \ y'' = \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n - 2} 
+            \] 
+            These power series representations can be substituted in to our original order 0 Bessel equation.
+            \begin{align*}
+                x^2 \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n - 2}
+                \right] + x \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) x^{r+n-1}
+                \right] + x^2 \left[
+                    \sum_{n=0}^\infty a_n x^{r+n}
+                \right] &= 0 \\
+                \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n}
+                \right] + \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) x^{r+n}
+                \right] + \left[
+                    \sum_{n=0}^\infty a_n x^{r+n+2}
+                \right] &= 0 \\
+                \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n}
+                \right] + \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) x^{r+n}
+                \right] + \left[
+                    \sum_{n=2}^\infty a_{n-2} x^{r+n}
+                \right] &= 0 \\
+                \left[
+                    \sum_{n=0}^{2} a_n (r+n)^2 x^{r + n}
+                \right] + \left[
+                    \sum_{n=2}^\infty x^{r+n}(a_n(r+n)(r+n-1) + a_n(r+n) + a_{n-2})
+                \right] &= 0 \\
+                a_0 r^2 x^r + a_1 (r+1)^2 x^{r+1} + \left[
+                    \sum_{n=2}^\infty x^{r+n}(a_n(r+n)^2 + a_{n-2})
+                \right] &= 0 \\
+            \end{align*}
+            Since we know that our term $x^r$ cannot be zero, and it must be the case that $a_0 \neq 0$, then our indical equation is 
+            \[
+                r^2 = 0
+            .\]
+            Clearly, the roots for this equation must both be 0.
+            That is, $r_1 = r_2 = 0$.
+            \end{proof}
+        \subsubsection*{c.}
+            \begin{proof}
+            For the terms that remain within the sum, we know that they must also be equal to 0 for this sum to be equal to 0.                
+            This gives us an equation that can be turned into an equivalence relation.
+            \begin{align*}
+                a_n(r+n)^2 + a_{n-2} &= 0 \\
+                a_n(r+n)^2 &= -a_{n-2} \\
+                a_n &= \frac{-a_{n-2}}{(r+n)^2} \\
+            \end{align*}
+            So we can compute some of our power series coefficients in terms of $a_1$ and $a_2$.
+            \begin{align*}
+                a_2 &= \frac{(-1)}{(r+2)^2} \cdot a_0 \\
+                a_4 &= \frac{(-1)^2}{(r+4)^2(r+2)^2} \cdot a_0 \\
+                a_6 &= \frac{(-1)^3}{(r+6)^2(r+4)^2(r+2)^2} \cdot a_0 \\
+                \vdots & \\
+                a_3 &= \frac{(-1)}{(r+3)^2} \cdot a_1 \\
+                a_5 &= \frac{(-1)^2}{(r+5)^2(r+3)^2} \cdot a_1 \\
+                a_7 &= \frac{(-1)^3}{(r+7)^2(r+5)^2(r+3)^2} \cdot a_1 \\
+            \end{align*}
+            Let $r = 0$, and let $n$ be even, then 
+            \[
+            a_n = \frac{(-1)^{\frac{n}{2}}}{(n)^2(n-2)^2\cdots(2)^2}
+            .\] 
+            And since all the terms in the denominator are even, we can write
+            \[
+            a_n = \frac{(-1)^k a_0}{(2k)^2(2(k-1))^2\cdots(2)^2} 
+            = \frac{(-1)^k a_0}{2^2(k)^2 2^2(k-1)^2\cdots_2^2 (2)^2} 
+            = \frac{(-1)^k a_0}{2^{2^k}(k!)^2} \ \ \ \ \left(\text{where } k = \frac{n}{2}\right)
+            .\] 
+            Let $a_1$ be zero and it follows that we have a solution 
+            \begin{align*}
+            a_0 x^0 + \sum_{n=2}^{\infty} \frac{(-1)^k a_0 x^n}{2^{2^k}(k!)^2} &= 0 \\
+            x^0 + \sum_{n=2}^{\infty} \frac{(-1)^k x^n}{2^{2^k}(k!)^2} &= 0 \\
+            J_0(x) = 1 + \sum_{k=1}^{\infty} \frac{(-1)^k x^{2k}}{2^{2k}(k!)^2} &= 0
+            \end{align*}
+            \end{proof}
+        \subsubsection*{d.}
+            \begin{proof}
+                We need only check that the series converges for all $x$.
+                The ratio test will be useful in testing the convergence of this series.
+                So we will first simplify the fraction $a_{n+1}x^{n+1}/a_n x^n$.
+                \begin{align*}
+                    \frac{
+                        \frac{(-1)^{k+1}x^{2k + 1}}{2^{2(k+1)}(k+1)!^2}
+                    }{
+                        \frac{(-1)^k x^{2k}}{2^{2k}(k!)^2}
+                    } &= 
+                        \frac{(-1)^{k+1}x^{2k + 1}}{2^{2(k+1)}(k+1)!^2}
+                        \cdot \frac{2^{2k}(k!)^2}{(-1)^k x^{2k}} \\
+                        &= \frac{(-1)(-1)^k x x^{2k}}{2^2 2^{2k}(k+1)^2(k!)^2} \cdot \frac{2^{2k}(k!)^2}{(-1)^k x^{2k}} \\
+                        &= \frac{(-1)x}{2^2 (k+1)^2} \\
+                \end{align*}
+                Now we take the limit as $k\to \infty$ and we get 
+                \begin{align*}
+                    \lim_{k\to \infty} \frac{(-1)x}{2^2 (k+1)^2} &=
+                    \frac{(-1)x}{2^2} \lim_{k\to \infty} \frac{1}{(k+1)^2} \\
+                    &= \frac{(-1)x}{2^2} \cdot 0 \\
+                    &= 0 \ \ \ \ \forall x
+                .\end{align*}
+                This means that we can conclude that the series converges for all $x$.
+            \end{proof}
+        \pagebreak
+\section*{Section 5.5 -- Problem 12}
+    The Bessel equation of order one is
+    \[
+    x^2 y'' + x y' + (x^2 - 1) y = 0
+    \] 
+    \begin{enumerate}[a.]
+        \item Show that $x = 0$ is a regular singular point.
+        \item Show that the roots of the indical equation are $r_1 = 1$ and $r_2 = -1$.
+        \item Show that one solution for $x > 0$ is 
+            \[
+            J_1(x) = \frac{x}{2} \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(n+1)!n!2^{2n}}
+            \] 
+        The function $J_1$ is known as the Bessel function of the first kind of order 1.
+        \item Show that the series for $J_1(x)$ converges for all $x$.
+    \end{enumerate}
+    \\ \hline
+    \subsection*{Solution}
+    \subsubsection*{a.}
+                Firstly, it must be identified that $P(x) = x^2, Q(x) = x, R(x) = x^2 - 1$.
+                The point $x_0 = 0$ must be a singular point since
+                \[
+                    P(x_0) = P(0) = 0^2 = 0
+                \]
+                To check that it is regular, it must be the case that the following limits are both finite.
+                \begin{enumerate}
+                    \item $\lim_{x\to 0}x\frac{Q(x)}{P(x)}$\\
+                    \item $\lim_{x\to 0}x^2 \frac{R(x)}{P(x)}$
+                \end{enumerate}
+                The first can be evaulated simply.
+                \begin{align*}
+                    \lim_{x\to 0} x\frac{Q(x)}{P(x)} &= \lim_{x\to 0}x \frac{x}{x^2} \\
+                    &= \lim_{x\to 0} 1 \\
+                    &= 1
+                \end{align*}
+                Similarly we can also evaluate the second limit somewhat trivially.
+                \begin{align*}
+                    \lim_{x\to 0} x^2 \frac{R(x)}{P(x)} &= \lim_{x\to 0}x^2 \frac{x^2 - 1}{x^2} \\
+                    &= \lim_{x\to 0}x^2 - 1\\
+                    &= -1 \\
+                \end{align*}
+            Since both limits are finite, we conclude the point $x = 0$ is a regular singular point.
+            \end{proof}
+    \subsubsection*{b.}
+    \begin{proof}
+        We assume that we have some solution of the form
+        \[
+        y = \sum_{n=0}^\infty a_n x^{r+n}
+        \] 
+        This can be differentiated twice to find $y'$ and $y''$.                
+                \[
+                y = \sum_{n=0}^\infty a_n x^{r+n} \ \ \ \ \longrightarrow \ \ \ \ y' = \sum_{n=0}^{\infty} a_n (r+n) x^{r+n-1} \ \ \ \ \longrightarrow \ \ \ \ y'' = \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n - 2} 
+            \] 
+        These power series representations can be substituted in to our original order 1 Bessel equation.
+        \begin{align*}
+                x^2 \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n - 2}
+                \right] + x \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) x^{r+n-1}
+                \right] + (x^2-1) \left[
+                    \sum_{n=0}^\infty a_n x^{r+n}
+                \right] &= 0 \\
+                \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n}
+                \right] +  \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) x^{r+n}
+                \right] + \left[
+                    \sum_{n=0}^\infty a_n x^{r+n+2} - a_n x^{r+n}
+                \right] &= 0 \\
+                \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n}
+                \right] +  \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) x^{r+n}
+                \right] + \left[
+                    \sum_{n=0}^\infty a_n x^{r+n+2}
+                \right] - \left[ \sum_{n=0}^{\infty} a_n x^{r+n}
+                \right] &= 0 \\
+                \sum_{n=0}^{\infty} a_n x^{r+n} \left((r+n)(r+n-1) + (r+n) - 1\right) + \sum_{n=2}^{\infty} a_{n-2}x^{r+n} &= 0 \\
+                a_0 x^r \left(r(r-1) + r - 1\right)
+                + a_1x^{r+1}\left((r+1)(r) + r\right)
+                + \sum_{n=2}^{\infty} \left[ x^{r+n}\left(
+                a_n \left((r + n)(r + n - 1) + (r + n) - 1\right)
+                + a_{n-2}\right)\right] &= 0 \\
+        \end{align*} 
+        Since $a_0 \neq 0$ and our $x^r$ term must be non-trivial, the 
+        only way for this equation to hold is if our indical equation,
+        \[
+        r(r-1) +r -1,
+        \] 
+       is equal to 0. So we solve for roots on this equation.
+       \begin{align*}
+           r(r-1) + r - 1 &= 0 \\
+           r^2 - r + r - 1 &= 0 \\
+           r^2 - 1 &= 0 \\
+           r^2 &= 1 \\
+           r &= \pm 1 \\
+       \end{align*}
+       Therefore, we have two roots to the indical equation $r_1 = 1, r_2 = -1$.
+    \end{proof}
+    \subsubsection*{c.}
+    \begin{proof}
+       For the remaining terms, we must ensure that they are 0 as well.
+       That is, that
+       \[
+           a_n((r+n)(r+n-1)+(r+n)-1) + a_{n-2} = 0
+       \] 
+       From this, we can find a recurrence relation.
+       \begin{align*}
+           a_n((r+n)(r+n-1)+(r+n)-1) &= -a_{n-2} \\
+           a_n &= \frac{-a_{n-2}}{(r+n)(r+n-1) + (r+n) - 1} \\
+       \end{align*}
+       Let us fix $r = r_1 = 1$, then this can be simplified to
+       \begin{align*}
+           a_n &= \frac{-a_{n-2}}{(1+n)(1+n-1) + (1+n) - 1} \\
+            a_n &= \frac{-1}{(1+n)n + n} \cdot a_{n-2} \\
+            a_n &= \frac{-1}{n(n + 2)} \cdot a_{n-2} \\
+       \end{align*}
+       For $n = 2,4,6,\cdots$ we can write
+       \begin{align*}
+           a_2 &= \frac{(-1)}{2(4)}\cdot a_0 \\
+           a_4 &= \frac{(-1)^2}{2(4)(4)(6)}\cdot a_0 \\
+           a_6 &= \frac{(-1)^3}{2(4)(4)(6)(6)(8)}\cdot a_0 \\
+       \end{align*}
+       So we can write the following general relation for even $n$.
+       \begin{align*}
+           a_n &= \frac{(-1)^{n / 2}}{(n+2) \cdot 2(n)2(n-2) \cdots 2(4) \cdot 2} \cdot a_0 \\
+           &= \frac{(-1)^{n / 2}}{[(n+2)(n)(n-2)\cdots(4)][(n)(n-2)\cdots(4)(2)]} \cdot a_0  \\
+       \end{align*}
+       Since $n$ is even, let $k = \frac{n}{2}$. Now a 2 can be factored out fom both terms in the denominator.
+       \begin{align*}
+           a_n &= \frac{(-1)^{n / 2}}{[(n+2)(n)(n-2)\cdots(4)][(n)(n-2)\cdots(4)(2)]} \cdot a_0 \\
+          &=  \frac{(-1)^k}{2^k[(k+1)(k)(k-1)\cdots(2)]2^k[(k)(k-1)\cdots(2)(1)]}\cdot a_0\\ 
+          &= \frac{(-1)^k}{2^{2k}(k+1)!k!}\cdot a_0 \\
+       \end{align*}
+       And this begins to take the desired form.
+       Let $a_1=0$ and the odd terms will vanish, so what we are left with is 
+       \begin{align*}
+       \sum_{k=0}^{\infty} \frac{(-1)^k x^{1+2k}}{2^{2k}(k+1)!k!}\cdot a_0
+       &= \frac{x}{2}\cdot \sum_{k=1}^{\infty} \frac{(-1)^k x^{2k}}{(k+1)!k! 2^{2k}} \cdot a_0 
+       .\end{align*}
+       So we can ommit the $a_0$ term, which finally gives us 
+       \[
+       J_1(x) = \frac{x}{2}\cdot \sum_{k=1}^{\infty} \frac{(-1)^k x^{2k}}{(k+1)!k! 2^{2k}} 
+       .\] 
+    \end{proof}
+    \subsubsection*{d.}
+    \begin{proof}
+        To show that the series converges, it is sufficient to show that 
+        \[
+        \sum_{k=1}^{\infty} \frac{(-1)^k x^{2k}}{(k+1)!k! 2^{2k}} 
+
+        \] 
+        converges. By the ratio test, if $\lim_{k\to \infty}|a_{k+1}/a_k| < 1$ then the series converges.
+        \begin{align*}
+            \frac{
+            \frac{(-1)^{k+1} x^{2(k+1)}}{(k+2)!(k+1)! 2^{2(k+1)}} 
+            }{
+            \frac{(-1)^k x^{2k}}{(k+1)!k! 2^{2k}} 
+            } &=  \frac{(-1)^{k+1} x^{2(k+1)}}{(k+2)!(k+1)! 2^{2(k+1)}} 
+            \cdot \frac{(k+1)!k! 2^{2k}}{(-1)^k x^{2k}} \\
+            &= \frac{(-1)(-1)^k x^2 x^{2k}}{(k+2)(k+1)2^2(k+1)!k!2^{2k}} 
+            \cdot \frac{(k+1)!k! 2^{2k}}{(-1)^k x^{2k}}\\
+            &= \frac{-x^2}{2^2(k+2)(k+1)} \\
+            &= \frac{-x^2}{2^2} \cdot \frac{1}{k^2 + 3k + 2}
+        \end{align*}
+        So if we take the limit as $k \to \infty$, then we get 
+        \begin{align*}
+            \lim_{k\to \infty} \left|\frac{-x^2}{2^2} \cdot \frac{1}{k^2 + 3k + 2} \right|&= \frac{x^2}{4} \lim_{k\to \infty}\left|\frac{1}{k^2 + 3k + 2}\right| \\
+            &= \frac{x^2}{4} \cdot 0 \\
+            &= 0  \\
+        \end{align*}
+        So we conclude that the series does converge for all $x$.
+    \end{proof}
+\pagebreak
+\section*{Section 5.7 -- Problem 8}
+    Consider the Bessel equation of order $\nu$.
+    \[
+    x^2 y'' + x y' + (x^2 - \nu^2) = 0
+    \] 
+    where $\nu$ is real and positive.
+    \begin{enumerate}[a.]
+        \item Show that $x = 0$ is a regular singular point and that the roots of the indical equation are $\nu$ and $-\nu$.
+        \item Corresponding to the larger root $\nu$, show that one solution is 
+        \[
+        y_1(x) = x^\nu \left(
+1 - \frac{1}{1!(1+\nu)}\left(\frac{x}{2}\right)^2 + 
+\frac{1}{2!(1+\nu)(2+\nu)}\left(\frac{x}{2}\right)^4 +
+\sum_{m=3}^{\infty} \frac{(-1)^m}{m!(1+\nu)\cdots(m+\nu)}\left(\frac{x}{2}\right)^{2m}
+        \right)
+        \] 
+        \item If $2\nu$ is not an integer, show that a second solution is
+        \[
+        y_1(x) = x^{-\nu} \left(
+1 - \frac{1}{1!(1-\nu)}\left(\frac{x}{2}\right)^2 + 
+\frac{1}{2!(1-\nu)(2-\nu)}\left(\frac{x}{2}\right)^4 +
+\sum_{m=3}^{\infty} \frac{(-1)^m}{m!(1-\nu)\cdots(m+\nu)}\left(\frac{x}{2}\right)^{2m}
+        \right)
+        \] 
+        \item Verify by direct methods that the power series in the expressions for $y_1(x)$ and $y_2(x)$ converge absolutely for all $x$. Also verify that $y_2$ is a solution, provided only that ν is not an integer.
+    \end{enumerate}
+    \\ \hline
+    \subsection*{Solution}
+    \subsubsection*{a.}
+    \begin{proof}
+        Firstly, it must be identified that $P(x) = x^2, Q(x) = x, R(x) = x^2 - \nu^2$.
+        The point $x_0 = 0$ must be a singular point since
+        \[
+            P(x_0) = P(0) = 0^2 = 0
+        \]
+        To check that it is regular, it must be the case that the following limits are both finite.
+        \begin{enumerate}
+            \item $\lim_{x\to 0}x\frac{Q(x)}{P(x)}$\\
+            \item $\lim_{x\to 0}x^2 \frac{R(x)}{P(x)}$
+        \end{enumerate}
+        The first can be evaulated simply.
+        \begin{align*}
+            \lim_{x\to 0} x\frac{Q(x)}{P(x)} &= \lim_{x\to 0}x \frac{x}{x^2} \\
+            &= \lim_{x\to 0} 1 \\
+            &= 1
+        \end{align*}
+        Similarly we can also evaluate the second limit somewhat trivially.
+        \begin{align*}
+            \lim_{x\to 0} x^2 \frac{R(x)}{P(x)} &= \lim_{x\to 0}x^2 \frac{x^2 - \nu^2}{x^2} \\
+            &= \lim_{x\to 0}x^2 - \nu^2\\
+            &= -\nu^2 \\
+        \end{align*}
+            Since both limits are finite, we conclude the point $x = 0$ is a regular singular point.
+        We assume that we have some solution of the form
+        \[
+        y = \sum_{n=0}^\infty a_n x^{r+n}
+        \] 
+        This can be differentiated twice to find $y'$ and $y''$.                
+                \[
+                y = \sum_{n=0}^\infty a_n x^{r+n} \ \ \ \ \longrightarrow \ \ \ \ y' = \sum_{n=0}^{\infty} a_n (r+n) x^{r+n-1} \ \ \ \ \longrightarrow \ \ \ \ y'' = \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n - 2} 
+            \] 
+        These power series representations can be substituted in to our original order 1 Bessel equation.
+        \begin{align*}
+                x^2 \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) (r + n - 1) x^{r + n - 2}
+                \right] + x \left[
+                    \sum_{n=0}^{\infty} a_n (r+n) x^{r+n-1}
+                \right] + (x^2-\nu^2) \left[
+                    \sum_{n=0}^\infty a_n x^{r+n}
+                \right] &= 0 \\
+\left[\sum_{n=0}^{\infty}a_n(r+n)(r+n-1)x^{r+n}\right]
++ \left[\sum_{n=0}^{\infty}a_n(r+n)x^{r+n}\right]
++\left[\sum_{n=0}^{\infty}a_n(x^2-\nu^2)x^{r+n}\right]
+                &= 0 \\
+\left[\sum_{n=0}^{\infty}a_n(r+n)(r+n-1)x^{r+n}\right]
++ \left[\sum_{n=0}^{\infty}a_n(r+n)x^{r+n}\right]
++\left[\sum_{n=0}^{\infty}a_nx^{r+n+2}\right]
+-\left[\sum_{n=0}^{\infty}a_n\nu^2x^{r+n}\right]
+                &= 0 \\
+\left[\sum_{n=0}^{\infty}a_n(r+n)(r+n-1)x^{r+n}
++ a_n(r+n)x^{r+n}
+- a_n\nu^2x^{r+n}\right]
++\left[\sum_{n=0}^{\infty}a_nx^{r+n+2}\right] &= 0 \\
+\left[ \sum_{n=0}^{\infty}
+a_nx^{r+n}\left((r+n)(r+n-1)+(r+n)-\nu^2\right)
+\right] + \left[ \sum_{n=2}^{\infty}
+a_{n-2}x^{r+n}
+\right] &= 0 \\
+a_0x^r\left((r)(r-1)+r-\nu^2\right)
++a_1x^{r+1}\left((r+1)(r)+(r+1)-\nu^2\right)
++\left[\sum_{n=2}^{\infty}
+a_nx^{r+n}\left((r+n)(r+n-1)+(r+n)-\nu^2\right) + a_{n-2}x^{r+n}
+\right] &= 0 \\
+        \end{align*}
+        So we have our indical equation,
+        \[
+        r(r-1) + r - \nu^2 = r^2 -\nu^2 = (r+\nu)(r-\nu)
+        .\] 
+        Clearly, this has two roots that are equal to $\nu$ and $-\nu$.
+    \end{proof}
+\end{document}

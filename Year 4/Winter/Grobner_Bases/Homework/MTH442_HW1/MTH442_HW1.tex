@@ -1,0 +1,87 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Gr{\"o}bner Bases --- Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+
+\section*{Problem 1}
+Let $S = \{x - y, z \} \subseteq \mathbb{R}[x,y,z]$. Describe the variety $V(S)$ both using set notation and geometrically.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+We know that the variety $V(S)$ is the set of points such that every function in $S$ is equal to 0 at said point.
+That is, in set notation,
+\begin{align*}
+    V(S) &= \{(x,y,z) \subset \mathbb{R}^3 \ | \ x - y = 0 = z \} \\
+    &= \{(x,y,z) \subset \mathbb{R}^3 \ | \ x = y \text{ and } z = 0\}.
+\end{align*}
+We can also just write this as all points in $\mathbb{R}^3$ of the form $(\alpha, \alpha, 0)$ where $\alpha \in \mathbb{R}$.
+Geometrically, this consists of a straight line passing through the origin that lies in the $x$-$y$ plane 
+that is represented by the equation $x = y$.
+\\\\
+\section*{Problem 2}
+Let $K$ be a field. Recall that for a set $S \subseteq K^n$, we define
+\[
+    I(S) = \{f \in K[x_1, \cdots, x_n] \ | \ f(\vec a) = 0 \text{ for all } \vec a \in S\}
+\]
+Prove that $I(S)$ is an ideal of the ring $K[x_1, \cdots, x_n]$.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+\begin{proof}
+Recall that a subring $I$ of a ring $R$ is an ideal if for every $x \in R, y \in I$,
+we can say $xy \in I$.
+In our case specifically, let $S \subseteq K^n$, let
+\[
+    f \in K[x_1, \cdots, x_n]    
+,\]
+and let 
+\[
+    g \in I(S)
+.\]
+Choose any $\vec a \in S$ to be arbitrary. Then 
+\begin{align*}
+    (fg)(\vec a) &= f(\vec a)g(\vec a) \\
+    &= f(\vec a) \cdot 0 \\
+    &= 0
+\end{align*}
+Since $(fg)(\vec a) = 0$ for any $\vec a \in S$, it follows that $fg \in I(S)$
+and it must be true that $I(S)$ is an ideal.
+\end{proof}
+\end{document}

@@ -1,0 +1,17 @@
+\frametitle{First Frame}
+Hello, world!
+    \begin{lstlisting}[language=Python][frame=single][mathescape=true]
+def dummyAugment(X):
+
+    # Take the length of our array
+    n = len(X)
+
+    # Create a column of ones
+    one_col = np.ones((n, 1))
+
+    # Append it to front of our array X
+    X_augmented = np.hstack((one_col, X))
+
+    return X_augmented
+
+    \end{lstlisting}

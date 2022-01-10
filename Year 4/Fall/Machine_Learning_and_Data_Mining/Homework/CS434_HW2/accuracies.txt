@@ -1,0 +1,39 @@
+1
+2021-10-26 19:19:25 INFO     Running cross-fold validation for bias case:
+2021-10-26 19:19:25 INFO     2-fold Cross Val Accuracy -- Mean (stdev): 94.64% (2.361%)
+2021-10-26 19:19:25 INFO     3-fold Cross Val Accuracy -- Mean (stdev): 96.78% (0.01962%)
+2021-10-26 19:19:25 INFO     4-fold Cross Val Accuracy -- Mean (stdev): 96.15% (1.95%)
+2021-10-26 19:19:26 INFO     5-fold Cross Val Accuracy -- Mean (stdev): 95.69% (1.437%)
+2021-10-26 19:19:27 INFO     10-fold Cross Val Accuracy -- Mean (stdev): 96.13% (2.987%)
+2021-10-26 19:19:29 INFO     20-fold Cross Val Accuracy -- Mean (stdev): 95.62% (4.264%)
+2021-10-26 19:19:34 INFO     50-fold Cross Val Accuracy -- Mean (stdev): 95.53% (7.089%)
+
+.1
+2021-10-26 19:22:03 INFO     Running cross-fold validation for bias case:
+2021-10-26 19:22:03 INFO     2-fold Cross Val Accuracy -- Mean (stdev): 93.56% (1.288%)
+2021-10-26 19:22:03 INFO     3-fold Cross Val Accuracy -- Mean (stdev): 92.69% (2.648%)
+2021-10-26 19:22:03 INFO     4-fold Cross Val Accuracy -- Mean (stdev): 95.51% (2.585%)
+2021-10-26 19:22:04 INFO     5-fold Cross Val Accuracy -- Mean (stdev): 96.75% (2.41%)
+2021-10-26 19:22:05 INFO     10-fold Cross Val Accuracy -- Mean (stdev): 94.83% (3.069%)
+2021-10-26 19:22:07 INFO     20-fold Cross Val Accuracy -- Mean (stdev): 95.83% (4.37%)
+2021-10-26 19:22:11 INFO     50-fold Cross Val Accuracy -- Mean (stdev): 95.53% (7.383%)
+
+.01
+2021-10-26 19:23:47 INFO     Running cross-fold validation for bias case:
+2021-10-26 19:23:47 INFO     2-fold Cross Val Accuracy -- Mean (stdev): 93.78% (1.931%)
+2021-10-26 19:23:47 INFO     3-fold Cross Val Accuracy -- Mean (stdev): 93.76% (2.531%)
+2021-10-26 19:23:47 INFO     4-fold Cross Val Accuracy -- Mean (stdev): 96.36% (2.121%)
+2021-10-26 19:23:48 INFO     5-fold Cross Val Accuracy -- Mean (stdev): 95.67% (2.892%)
+2021-10-26 19:23:49 INFO     10-fold Cross Val Accuracy -- Mean (stdev): 96.3% (3.004%)
+2021-10-26 19:23:50 INFO     20-fold Cross Val Accuracy -- Mean (stdev): 95.42% (4.732%)
+2021-10-26 19:23:55 INFO     50-fold Cross Val Accuracy -- Mean (stdev): 96.38% (5.988%)
+
+.00001
+2021-10-26 19:25:01 INFO     Running cross-fold validation for bias case:
+2021-10-26 19:25:01 INFO     2-fold Cross Val Accuracy -- Mean (stdev): 87.55% (0.4292%)
+2021-10-26 19:25:01 INFO     3-fold Cross Val Accuracy -- Mean (stdev): 89.26% (2.613%)
+2021-10-26 19:25:01 INFO     4-fold Cross Val Accuracy -- Mean (stdev): 89.71% (1.974%)
+2021-10-26 19:25:02 INFO     5-fold Cross Val Accuracy -- Mean (stdev): 89.93% (3.148%)
+2021-10-26 19:25:03 INFO     10-fold Cross Val Accuracy -- Mean (stdev): 89.9% (3.052%)
+2021-10-26 19:25:05 INFO     20-fold Cross Val Accuracy -- Mean (stdev): 90.42% (8.65%)
+2021-10-26 19:25:10 INFO     50-fold Cross Val Accuracy -- Mean (stdev): 90.35% (9.384%)

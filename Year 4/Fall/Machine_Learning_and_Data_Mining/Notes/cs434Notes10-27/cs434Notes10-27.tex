@@ -1,0 +1,90 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Machine Learning and Data Mining -- Midterm Review}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{Structure}
+Concept questions
+\begin{itemize}
+    \item Machine Learning Terms 
+    \item kNN
+    \item Probability / MLE / MAP
+    \item Naive Bayes
+    \item Lin. Reg.
+    \item Log. Reg. and Perceptron
+    \item SVMs
+\end{itemize}
+In-depth qestions
+\begin{itemize}
+    \item kNN and Cross Validation
+    \item Linear Classifiers and Regularization
+    \item Naive Bayes
+    \item SVMs
+\end{itemize}
+\section*{General Concepts}
+We are interested in mappings $f:X \rightarrow Y$ from an input to an output.\\\\
+We have $2^{2^d}$ mappings even with only binary data, so there is no way to figure out the true function without 
+some assumptions.
+For example, kNN assumes that labels change smoothly as features change in local regions. That is, locality matters.
+For logistic regression, we assume that
+\begin{itemize}
+    \item the relationship between input/output can be derived from a linear function
+    \item label changes smoothly
+    \item independent variables
+\end{itemize}
+Hypothesis space, $\mathcal{H}$. Find a function $g \in \mathcal{H}$ such that $g \approxeq f$ where 
+$f:X \rightarrow Y$ is the ``true function''.
+Modeling error is the difference between the best $g \in \mathcal{H}$ and $f$. That is, $f$ lies outside $\mathcal{H}$.
+Estimation error is the difference between $g_D$ and $g$ given some dataset $D$. Optimization error is the 
+difference beween a chosen function $g$ and the best function given that dataset $g_D$. Linear regression 
+has an analytic answer and therefore no optimization error.
+Overfitting: good on train bad on test. Underfitting: bad on train bad on test.
+\section*{kNN}
+    Nearby points determine label (majority vote). $k=1$ tends to be overfit. As $k$ becomes closer to $n$ 
+    we start to simply take the majority class. The algorithm is given by 
+    \[
+        f_k(x) = \frac{1}{k}\sum_{i \in \mathbb{N}}||y_i||
+    \]
+    Some properties:
+    \begin{itemize}
+        \item computationally expensive
+        \item $O(nd)$ for every test points
+        \item Lots of work to speed this up with with smart data structures
+        \item For massive datasets, it requires lots of memory, remove ``unimportant examples''
+    \end{itemize}
+Scale of values is important, so features should be normalized.
+Irrelevant features contribute to distance.
+Hyperparameters:
+\begin{itemize}
+    \item Metric $d$
+    \item $k$
+    \item Input function
+    \item Output function
+\end{itemize}
+Cross validation: training on different ``chunks''/``folds''
+\end{document}

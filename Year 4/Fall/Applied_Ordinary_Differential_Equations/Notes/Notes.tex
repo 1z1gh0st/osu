@@ -1,0 +1,225 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+\usepackage{bm}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Applied Ordinary Differential Equations Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{September 22}
+We begin with the following form of a second order autonomous ODE:
+\[
+    ay''(t) + by'(t) + cy(t) = f(t)
+\]
+This equation can be transformed to a first order system of ODE's, if we define two equations to be 
+\begin{align*}
+    x_1(t) &= y(t) \\
+    x_2(t) &= y'(t)
+\end{align*}
+Then the euqation can be rewritten in terms of $x_1, x_2$ as
+\begin{align*}
+    ax_2'(t) + bx_2(t) + cx_1(t) = f(t)
+\end{align*}
+Which immediately gives us this first order system of ODE's:
+\begin{align*}
+    x_1'(t) &= x_2(t) \\
+    x_2'(t) &= -\frac{c}{a} x_1(t) - \frac{b}{a}x_2(t) + \frac{f(t)}{a}
+\end{align*}
+For notational purposes, write $\vec x (t) = \begin{pmatrix}
+    x_1(t)\\x_2(t)
+\end{pmatrix}, \vec{x'}(t) = \begin{pmatrix}
+    x_1'(t)\\x_2'(t)
+\end{pmatrix}$. Then we can write many first order systems of ODE's as 
+\begin{mdframed}[]
+    \begin{align*}
+        A\vec x (t) &= \begin{pmatrix}
+            a_{1 1} & a_{1 2} \\ a_{2 1} & a_{2 2}
+        \end{pmatrix} \\
+        &= \begin{pmatrix}
+            a_{1 1}x_1(t) + a_{1 2}x_2(t) \\
+            a_{2 1}x_1(t) + a_{2 2}x_2(t)
+        \end{pmatrix}
+    \end{align*}
+\end{mdframed}
+For our previous example we would have $A = \begin{pmatrix}
+    0 & 1 \\ -c/a & -b/a
+\end{pmatrix}$ ignoring the $f(t)$ term.\\\\
+Now we study autonomous first order systems of ODE's. That is,$
+    \vec{x'}(t) = A\vec x (t)$. These have solutions that can be represented as
+\[
+    \vec{x}(t) = e^{At} \vec{x_0}, \ \ \ \ \ \ \ e^{At} = \sum_{j=0}^{\infty} \frac{1}{j!} A^j t^j
+\]
+\section{October 4}
+    \subsection{Matrix Exponential}
+        \begin{mdframed}(Taylor Series)
+            We define the Taylor series at 0 as 
+            \[
+                f(x) = \sum_{j=0}^\infty \frac{f^{(j)}(0)}{j!}x^j
+            \]
+        \end{mdframed}
+        For example, $e^x = \sum_{j=1}^\infty \frac{x^j}{j!}$.
+        Now we are prepared for the matrix exponential, which we define as follows:
+        \[
+            e^A = \sum_{j=0}^\infty \frac{A^j}{j!}
+        \]
+        When $A \mapsto e^A$, we have a group homomorphism from the set 
+        of $n \times n$ matrices with addition over to $n \times n$ invertible matrices with
+        multiplication.
+        Take the initial value problem
+        \[
+            \begin{cases}
+                \vec x'(t) = A\vec x (t) \\
+                \vec x(0) = \vec x_0
+            \end{cases}
+        \]
+        The unique solution is $e^{At}\vec{x_0}$.
+        Let $X(t) = e^{At}$. This is the matrix of fundamental solutions.
+        \[
+            X(0) = \begin{pmatrix}
+                1 & 0 & \cdots & 0 \\
+                0 & 1 & \cdots & 0 \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \cdots & 1
+            \end{pmatrix} = I
+        \]
+        Then $X'(t) = AX(t), X(0) = I$. Therefore we get 
+        $\vec x(0) = I\vec x_0 = \vec x_0$.\\\\
+        Suppose $A$ is diagonalizable,
+        \[
+            A = U \Lambda U^{-1}, \ \ \ \ \ \ \ \ \ \ \ \text{ where } \Lambda = \begin{pmatrix}
+                \lambda_1 & 0 & \cdots & 0 \\
+                0 & \lambda_2 & \cdots & 0 \\
+                \vdots & \vdots & \ddots & \vdots \\
+                0 & 0 & \cdots & \lambda_n
+            \end{pmatrix} \ \ \ \ U = (\vec u_1, \cdots , \vec u_n)
+        \]
+        Then we know that 
+        \begin{align}
+            X(t) &= e^{At} \\
+            &= \sum_{j=0}^\infty \frac{A^jt^j}{j!}\\
+            &= \sum_{j=0}^\infty \frac{(U\Lambda U^{-1})^jt^j}{j!} \\
+            &= \sum_{j=0}^\infty \frac{U\Lambda^j U^{-1}t^j}{j!}
+        \end{align}
+        In the case of diagonal matrices, we get a linear composition.
+        \begin{align*}
+            \vec x(t) &= Ue^{\Lambda t}U^{-1}\vec{x_0}\\
+            &= c_1 e^{\lambda_1 t}\vec u_1 + \cdots c_n e^{\lambda_n t}\vec u_n \\
+            &= c_1 \vec \Psi_1(t) + \cdots + c_n \vec \Psi_n(t)
+        \end{align*}
+        When we have a diagonalizable matrix we have a nice formula for the solution.
+        Now we will move on to an example:
+        \begin{mdframed}[]
+            Consider the following system:
+            \[
+                \begin{pmatrix}
+                    x_1'(t)\\
+                    x_2'(t)
+                \end{pmatrix} = \begin{pmatrix}
+                    1 & 1 \\ 0 & 1
+                \end{pmatrix} \begin{pmatrix}
+                    x_1(t) \\ x_2(t)
+                \end{pmatrix}, \ \ \ \ \ \ \ \ \begin{pmatrix}
+                    x_1(0) \\ x_2(0)
+                \end{pmatrix} = \begin{pmatrix}
+                    2 \\ 5
+                \end{pmatrix}
+            \]
+            We know the solution to this is just $\vec x(t) = e^{\begin{pmatrix}1 & 1 \\0 & 1\end{pmatrix}t}\begin{pmatrix}
+                2\\ 5
+            \end{pmatrix}$. Now we write
+            \[
+                e^{\begin{pmatrix}1 & 1 \\0 & 1\end{pmatrix}t} = \sum_{j=0}^\infty \frac{\begin{pmatrix}1 & 1 \\0 & 1\end{pmatrix}^jt^j}{j!}
+            \]
+            Now we know that $\begin{pmatrix}1 & 1 \\0 & 1\end{pmatrix}^j = \begin{pmatrix}1 & j\\0 & 1\end{pmatrix}$.
+            This means that we can actually write out what our matrix exponential is explicitly in terms of series in each component.
+            We do this as follows:
+            \[
+                e^{\begin{pmatrix}1 & 1 \\0 & 1\end{pmatrix}t} =\begin{pmatrix}
+                    \sum_{j=0}^\infty \frac{t^j}{j!} & \sum_{j=1}^\infty \frac{j t^j}{j!}\\
+                    0 & \sum_{j=0}^\infty \frac{t^j}{j!} 
+                \end{pmatrix} = \begin{pmatrix}
+                    e^t & te^t \\
+                    0 & e^t
+                \end{pmatrix}
+            \]
+        \end{mdframed}
+        The Wronskian again:
+        \[
+            W(t) = \det(X(t)) \ \ \ \ W'(t) = \frac{d}{dt}\det(e^{At}) = \frac{d}{dt}e^{\text{tr}(At)} = \text{tr}(A)e^{\text{tr}(A)t} = \text{tr}(A)W(t)
+        \]
+\section*{October 25}
+With a system that has only complex eigenvalues we have trajectories that are ellipses, with fixed semiaxes and fixed
+ratios $\frac{\rho_2}{\rho_1} = c$.
+\begin{mdframed}[]
+    Let $\vec x^0$ be an isolated critical point. WLOG takes $\vec x ^0 = \vec 0 (\vec x = \vec x - \vec x ^ 0)$.
+\end{mdframed}
+\begin{proof}
+    $x' = f(x)$ is nearly linear at isolated critical point $0$ if $f(x) = Ax + g(x)$ such that 
+    $\det(A) \neq 0 $ and  $\frac{||g||}{||f||} = 0$? idk what he wrote
+\end{proof}
+\fbox{Example:} Let us have the given (damped pendulum) system
+\[
+    \frac{dx}{dt} = y, \ \ \ \ \frac{dy}{dt} = -\omega^2 \sin x - \gamma y
+\]
+Then let 
+\[
+    \bm x = \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}, \ \ \ \ \bm x = \begin{pmatrix}
+        0 & 1 \\
+        -\omega^2 & - \gamma
+    \end{pmatrix}\bm x - \omega^2 \begin{pmatrix}
+        0 \\
+        \sin (x) - x
+    \end{pmatrix}
+\]
+So we have 
+\[
+    -\omega^2 \sin x = - \omega^2 x + \frac{\omega^2x^3}{3!} - \cdots
+\]
+But we still need to show that $\dfrac{||\bm g(\bm x)||}{||\bm x||} \rightarrow \bm 0$ as $\bm x \rightarrow \bm 0$.
+\begin{align*}
+    ||\bm g(\bm x)|| &= \omega^2 |\sin (\bm x) - \bm x|\\
+    &\approx \frac{\omega^2}{3!}|x^3|\\\\
+    \Longrightarrow \frac{||\bm g(\bm x)||}{||\bm x||} &\approx \frac{1}{r} \frac{\omega^2}{3!} | r^3 \cos^3 \theta | \\
+    &= \frac{r^2\omega^2|\cos^3 \theta|}{3!} \\
+    & \leq \frac{r^2\omega^2}{3!} \rightarrow \bm 0
+\end{align*}
+\section*{Non-linear stability and pendulum problemns}
+\[
+    x' = f(x) = A(x - x^0) + g(x), \ \ \ \ \lim_{x \rightarrow x^0}\frac{||g(x)||}{||x - x^0||} = 0
+\]
+Where $A$ is a 2x2 real matrix (non-singular), the matrix has two eigenvalues $r_1, r_2$.
+Stability of locally linear system at $x^0$ (critical point).
+\begin{align*}
+    r_2 > r_1 > 0 && \text{(unstable node)} \\
+    r_1 < r_2 < 0 && \text{(stable node)} \\
+    r_2 < 0 < r_1 && \text{(saddle point)} \\
+    r_1 = r_2 > 0 && \text{(unstable node or spiral point)} \\
+    r_1 = r_2 < 0 && \text{(stable node or spiral point)} \\
+    r_1,r_2 = \lambda \pm i\mu && \text{(unstable/stable spiral, or circles)}
+\end{align*}
+\end{document}

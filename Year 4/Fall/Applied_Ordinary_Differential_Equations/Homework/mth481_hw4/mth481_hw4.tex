@@ -1,0 +1,421 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Applied Ordinary Differential Equations - Homework 4}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section*{9.3}
+    \subsection*{4}
+        \begin{mdframed}[]
+            Observe the following system:
+            \[
+                dx / dt = (2+x)(y-x), \ \ \ \ dy/dt=(4-x)(y+x)
+            \]
+        \end{mdframed} 
+        To have $dx / dt = 0$, it must be the case that $x = -2$ or $x = y$.
+        To have $dy / dt = 0$, it must be that $x=4$ or $y=-x$.
+        The only points that cause both to be 0 are $(0,0),(-2,2),(4,4)$.
+        Let $F(x,y) = (2+x)(y-x), G(x,y)=(4-x)(y+x)$.
+        Our next step is to find the matrix 
+        \begin{align*}
+            D(x,y) &= \begin{pmatrix}
+               F_x & F_y \\
+               G_x & G_y 
+            \end{pmatrix}\\
+            &= \begin{pmatrix}
+                -2 - 2x + y & 2 + x \\
+                4 -2x -y & 4-x
+            \end{pmatrix}
+        \end{align*}
+        For $(0,0)$, we simply have 
+        \[
+            x' = 
+            \begin{pmatrix}
+                -2 & 2 \\
+                4 & 4
+            \end{pmatrix}x
+        \]
+        This has eigenvalues of $r = 1 \pm \sqrt{17}$. Since $1 < \sqrt{17}$ it must be the 
+        case that we have one positive and one negative real eigenvalue. This means that 
+        we will have a saddle point at $(0,0)$ in the linearized system, so we have a point of 
+        a similar nature in our overall system. For the equilibrium point $(-2,2)$, we get
+        \[
+            u' = \begin{pmatrix}
+                4 & 0\\
+                6 & 6
+            \end{pmatrix}u
+        \]
+        The matrix in this linearized system has two eiegenvalues $r=4, r = 6$. This means 
+        that we will have an unstable source node at the point $(-2,2)$. For $(4,4)$, we get 
+        \[
+            v' = \begin{pmatrix}
+                -6 & 6 \\
+                -8 & 0
+            \end{pmatrix}   v
+        \]
+        This system has eigenvalues of $r = -3 \pm \sqrt{39}i$. With this, it follows that we have 
+        a stable spiral point, since we have a negative real part, and a non-zero complex part.
+    \subsection*{5}
+        \begin{mdframed}[]
+            \[
+                dx/dt = x-x^2-xy, \ \ \ \ dy/dt = 3y - xy - 2y^2
+            \]
+        \end{mdframed}
+        To have $dx/dt=0$, it must be the case that $x = 0$, or that $1-x = y$. Then to have 
+        $dy/dt = 0$, we need the conditions that $y = 0$ or that $3 - x = 2y$.
+        The points that cause both derivatives to be 0 are $(0,0),(1,0),(0,3/2), (-1,2)$.
+        As in the previous problem, let $F(x,y) = x - x^2 - xy, G(x,y) = 3y - xy -2y^2$. 
+        We can write 
+        \begin{align*}
+            D(x,y) &= \begin{pmatrix}
+                F_x & F_y \\
+                G_x & G_y
+            \end{pmatrix} \\
+            &= \begin{pmatrix}
+                1 - 2x - y & -x \\
+                -y & 3 - x -4y
+            \end{pmatrix} 
+        \end{align*}
+        Then for the point $(0,0)$, we have a linearized system given by 
+        \[
+            x' = \begin{pmatrix}
+                1 & 0 \\
+                0 & 3
+            \end{pmatrix}x
+        \]
+        Since this is a diagonal matrix, it is clear that we have eigenvalues $r_1 = 1, r_2 = 3$.
+        Both are positive and real, so it follows that at the origin we will have an 
+        unstable nodal source point. Let $u = (1, 0)$, then we can write linearized system
+        at this point as 
+        \[
+            u' = \begin{pmatrix}
+                -1 & -1 \\
+                0 & 2
+            \end{pmatrix}   u 
+        \]
+        For this matrix we have eigenvalues of $r_1 = -1, r_2 = 2$.
+        So this means that in the non-linear system, we are going to have a saddle point at 
+        $(1,0)$. Now for the point $(0, 3/2)$, we can plug this into our jacobian to find the 
+        linearized system at the point. So, let $v = \begin{pmatrix}
+            x \\
+            y - 3/2
+        \end{pmatrix}$
+        \[
+            v' = \begin{pmatrix}
+            -1/2 & 0 \\
+            -3/2 & -2    
+            \end{pmatrix}
+            v
+        \]
+        This matrix has eigenvalues of $r_1 = -1/2, r_2 = -2$. Since we have two negative 
+        real eigenvalues, we know that in the broader nonlinear system we will have a nodal sink 
+        point, that is, a local stable equilibrium. Let $w = (-1,2)$, then we have linearized system 
+        at $w$ given by 
+        \[
+            w' = \begin{pmatrix}
+                1 & 1\\
+                -2 & -4
+            \end{pmatrix}   
+            w
+        \]
+        This system has two distinct eigenvalues, $r = \dfrac{-3 \pm \sqrt{17}}{2}$.
+        So, since $\sqrt{17} > \sqrt{16} = 4 > 3$, we know that one of these is positive,
+        and the other negative, so we have another saddle point at $w$.
+    \subsection*{24}
+        \begin{mdframed}[]
+            Consider the system 
+            \[
+                x' = \begin{pmatrix}
+                    0 & 1 \\ -1 & 0
+                \end{pmatrix}x
+            \]
+            and show that it has a center point at $(0,0)$ with eigenvalues $r = \pm i$.
+            Then consider the system 
+            \[
+                x' = \begin{pmatrix}
+                    \epsilon & 1 \\
+                    -1 & \epsilon
+                \end{pmatrix}x
+            \]
+            And show behavior with positive and negative $\epsilon$ is as expected.
+        \end{mdframed}
+        To show that the first system is as described, we wish to find the eigenvalues of the system.
+        So we write 
+        \begin{align*}
+            0 &= \det\left( \begin{pmatrix}
+                0 & 1 \\
+                -1 & 0
+            \end{pmatrix}-rI\right)
+            \\
+            0&= r^2 + 1 \\
+            -1 &= r^2 \\
+            \pm i &= r
+        \end{align*}
+        So then since we have no real part, and we do have a complex part, it must be the case 
+        that we have a center point at $(0,0)$ as described in the problem statement.
+        For the second given system here, we have eigenvalues given by 
+        \begin{align*}
+            0 &=\det\left(\begin{pmatrix}
+                \epsilon & 1 \\
+                -1 & \epsilon
+            \end{pmatrix} - rI\right) \\
+            0 &= \det \begin{pmatrix}
+                \epsilon - r & 1 \\
+                -1 & \epsilon - r
+            \end{pmatrix} \\
+            0 &= (\epsilon - r)^2 + 1\\
+            -1 &= (\epsilon - r)^2 \\
+            \pm i &= \epsilon - r \\
+            r &= \epsilon \pm i
+        \end{align*}
+        So for this system we do have a non-zero real part and also an imaginary part.
+        This means that if our real part, $\epsilon$, is positive, we have a spiral source 
+        point at the origin. Then if $\epsilon$ is negative we must have a stable spiral sink point.
+        Thus for any non-zero $\epsilon$ we still do not have a center point. We may consider $\epsilon = 0$
+        to be a bifurcation point since our system goes from stable to unstable as we vary $\epsilon$, 
+        and since at this point we have a qualitatively unique type of system.
+\section*{9.4}
+    \subsection*{1}
+        \begin{mdframed}[]
+            Consider the system:
+            \[
+                dx/dt = x(1.5 - x - 0.5y), \ \ \ \ dy/dt = y(2 - y - 0.75x)
+            \]
+        \end{mdframed}
+        First, let us determine at which points does the system have an equilibrium 
+        solution. For $dx/dt = 0$, we must have $x = 0$ or $2x = 3 - y$. Then for 
+        $dy/dt = 0$, it follows that $y = 0$ or that $3x= 8 - 4y$.
+        So, to satisfy both, we of course have $(0,0)$. Then, additionally, we have 
+        $(0,2), (2/3,0)$, and $(4/5, 7/5)$. Let us find the jacobian of our non-linear 
+        system so that it can be linearized at each point. We get the following result:
+        \begin{align*}   
+            D(x,y) &= \begin{pmatrix}
+                F_x & F_y \\
+                G_x & G_y
+            \end{pmatrix} \\
+            &= \begin{pmatrix}
+                -2x + 1.5 -0.5y & -0.5x \\
+                -0.75y & -2y + 2  - 0.75x
+            \end{pmatrix}
+        \end{align*}
+        So for the origin $(0,0)$ we have the locally linearized system 
+        \[
+            x' = \begin{pmatrix}
+                1.5 & 0 \\
+                0 & 2
+            \end{pmatrix}x
+        \]
+        This clearly has two positive eigenvalues, and so we will have a nodal source 
+        (unstable) at the origin. Let $u = (x, y-2)$, and then we have a linearized system 
+        given by 
+        \[
+            u' = \begin{pmatrix}
+                0.5 & 0 \\
+                -1.5 & -2
+            \end{pmatrix}   
+            u
+        \]
+        This system has two eigenvalues of $r_1 = 0.5, r_2 = -2$. So, with one positive 
+        and one negative real eigenvalues, we must have a saddle point at $(0,2)$ in our system.
+        Now let $v = (x - 2/3, y)$ and we will have the locally linearized system at $(2/3, 0)$ given by 
+        \begin{align*}
+            v' &= \begin{pmatrix}
+                -2(\frac{2}{3}) +1.5 - 0.5(0) & -0.5(\frac{2}{3}) \\
+                -0.75(0) & -2(0) + 2 -0.75(\frac{2}{3})
+            \end{pmatrix} v \\
+            &= \begin{pmatrix}
+                \frac{-4}{3} + 1.5 & \frac{-1}{3} \\
+                0 & 2 - \frac{1}{2}
+            \end{pmatrix} v \\
+            &= \begin{pmatrix}
+                1/6 & -1/3 \\
+                0 & 3/2
+            \end{pmatrix}
+            v
+        \end{align*}
+        This linearized system at $(2/3, 0)$ has two distinct eigenvalues which can be derived as 
+        \begin{align*}
+            \det(A - rI) &= \det\left(
+                \begin{pmatrix}
+                    1/6 - r & -1/3\\
+                    0 & 3/2 - r
+                \end{pmatrix}
+            \right)\\
+            &= (1/6 - r)(3/2 - r)
+        \end{align*}
+        And clearly this has two zeros at $r_1 = 1/6, r_2 = 3/2$ and thus we have two 
+        positive real eigenvalues for our system.
+        This means that at the point $(3/2, 0)$ we have an unstable nodal source system.
+        Finally let $w = (4/5-x, 7/5-y)$. Then we have a linearized system at the point $w$ given by.
+        \begin{align*}
+            w' &= \begin{pmatrix}
+                -2(4/5) + 1.5 - 0.5(7/5) & -0.5(4/5) \\
+                -0.75(7/5) & -2(7/5) + 2 - 0.75(4/5)
+            \end{pmatrix} w \\
+            &= \begin{pmatrix}
+                -4/5 & -2/5 \\
+                -21/20 & -7/5
+            \end{pmatrix}
+            w
+        \end{align*}
+        The eigenvalues of this system are values of $r$ such that $\det(A - rI) = 0$.
+        That is, when 
+        \begin{align*}
+            \det\left(
+                \begin{pmatrix}
+                    -4/5 - r & -2/5 \\
+                    -21/20 & -7/5 - r
+                \end{pmatrix}
+            \right) &= 0 \\
+            (-4/5 - r)(-7/5 - r) - (-2/5)(-21/20) &= 0 \\
+            r^2 - 11/5 r + 28/25 - 21/50 &= 0 \\
+            r^2 - 11/5 r + 56/50 - 21/50 &= 0 \\
+            r^2 - 11/5 r + 35/50 &= 0 \\
+            r^2 - 11/5 r + 7/10 &= 0
+        \end{align*}
+        And this, of course, gives us eigenvalues of 
+        $r = -11/10 \pm \frac{\sqrt{51}}{10}$.
+        We know that $\sqrt{51} < 11$ implies both eigenvalues are negative,
+        and therefore we have a stable nodal source point at $(4/5, 7/5)$.
+        \\\\
+        We conclude that for the majority of starting conditions, the populations 
+        wil converge to the point $(4/5, 7/5)$ because solutions will tend away 
+        from these other nodes and in the direction of the stable source node.
+        Or, if far away enough, the solutions will simply trend straight towards 
+        the point since both $F$ and $G$ will be negative. No graph is given for this 
+        system (I'm already a bit behind schedule).
+\section*{9.5}
+    \subsection*{1}
+        Consider the system
+        \[
+            dx / dt = x(1.5 - 0.5y), \ \ \ \ dy/dt = y(-0.5+x)
+        \]  
+        Let $F(x,y) = x(1.5 - 0.5y), G(x,y) = y(-0.5+x)$.
+        To find critical points, we must determine when $F = G = 0$.
+        These points are given by $(0,0), (\frac{1}{2}, 3)$.
+        Then we write 
+        \begin{align*}
+            F_x &= \frac{3}{2} - \frac{y}{2} \\
+            F_y &= \frac{-x}{2} \\ 
+            G_x &= y \\
+            G_y &= \frac{-1}{2} + x
+        \end{align*}
+        Which gives way to the jacobian matrix. That is 
+        \[
+            D(x,y) = \begin{pmatrix}
+                \frac{3}{2} - \frac{y}{2} & \frac{-x}{2} \\
+                y & \frac{-1}{2} + x
+            \end{pmatrix}   
+        \]
+        For the linearized system at the origin, we can write
+        \[
+            x' = \begin{pmatrix}
+                \frac{3}{2} & 0 \\
+                0 & \frac{-1}{2}
+            \end{pmatrix}   
+        \]
+        This clearly has two eigenvalues $r_1 = \dfrac{3}{2}$ and $r_2 = \dfrac{-1}{2}$.
+        So this gives us a saddle point at the origin for this system. 
+        Now, let $u = (x - \frac{1}{2}, y - 3)$, and we have a linearized system at $u = 0$
+        of 
+        \begin{align*}
+            u' &= \begin{pmatrix}
+                \frac{3}{2} - \frac{3}{2} & \frac{-\frac{1}{2}}{2} \\
+                3 & \frac{-1}{2} + \frac{1}{2}
+            \end{pmatrix} u \\
+            &= \begin{pmatrix}
+                0 & \frac{-1}{4} \\
+                3 & 0
+            \end{pmatrix} u
+        \end{align*}
+        To determine the eigenvalues, let $\det(A - rI) = 0$. Then 
+        \begin{align*}
+            r^2 - (\frac{-1}{4})(3) &= 0 \\
+            r^2 + \frac{3}{4} &= 0 \\
+            r^2 &= \frac{-3}{4} \\
+            r &= \pm \frac{i\sqrt{3}}{2} 
+        \end{align*}
+        Since we have no real part, this is an asymptotically stable center point at 
+        $(1/2, 3)$. Since the coefficient to our real part is positive, we 
+        know that this will rotate counter-clockwise.
+        For the overall system, we say that if sufficiently close to 
+        the point $(1/2, 3)$ the populations will give and take in a trigonmetric fashion 
+        as the trajectory circles counterclockwise around the equilibrium point. 
+        If we only have a population for $x$ then it will just 
+        grow permanently, and if we only have a population for $y$,
+        it will simply shrink permanently, this is given by the nature of a saddle point on the origin.
+    \subsection*{2}
+        \begin{mdframed}
+            Consider the system
+            \[
+                dx/dt = x(1 - 0.5y), \ \ \ \ dy/dt = y(-0.25 + 0.5x)   
+            \]
+        \end{mdframed}
+        Let $F(x,y) = x(1 - 0.5y), G(x,y) = y(-0.25 + 0.5x)$.
+        We identify our equilibrium points to be the origin $(0,0)$ and 
+        $(1/2, 2)$. Then we must write our jacobian matrix.
+        To do so, we must get each of our desired partial derivatives:
+        \begin{align*}
+            F_x &= 1 - \frac{y}{2} && G_x = \frac{y}{2} \\
+            F_y &= \frac{-x}{2} && G_y = \frac{-1}{4} + \frac{x}{2}
+        \end{align*}
+        So then you have a jacobian matrix given by 
+        \[
+            D(x,y) = \begin{pmatrix}
+                1 - \frac{y}{2} & \frac{y}{2} \\
+                \frac{-x}{2} & \frac{-1}{4} + \frac{x}{2}
+            \end{pmatrix}   
+        \]
+        At the origin, we can linearize the system giving us 
+        \[
+            x' = \begin{pmatrix}
+                1 & 0 \\
+                0 & \frac{-1}{4}
+            \end{pmatrix}  x 
+        \]
+        Then this has two eigenvalues, $r_1 = 1, r_2 = \frac{-1}{4}$.
+        So this gives us a saddle point at the origin, with an eigenvector in the 
+        $x$-direction associated with 1, and an eigenvector in the $y$-direction 
+        which is associated with $\frac{-1}{4}$.
+        Then for the point at $(1/2, 2)$, we have the system
+        \begin{align*}
+            u' = \begin{pmatrix}0 & 1 \\
+            \frac{-1}{4} & 0\end{pmatrix}u
+        \end{align*}
+        And for this system, we can get our eigenvalues by solving 
+        \begin{align*}
+            r^2 - (1)(\frac{-1}{4}) &= 0 \\
+            r^2 &= \frac{-1}{4} \\
+            r &= \pm \frac{i}{2}
+        \end{align*}
+        We have a center point given by this system. We can make 
+        a decent guess if it is clockwise or counter clockwise by the behavior 
+        at the nearby saddle point's linearized system. 
+        By this, we guess that it is probably in the counterclockwise direction.
+        The behavior of the populations of this system are quite similar to the last,
+        in that most starting points will ultimately spiral around our non-trivial equilibrium point.
+\end{document}

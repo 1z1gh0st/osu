@@ -1,0 +1,98 @@
+\documentclass{article}
+
+\usepackage{times}
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage[linewidth=1pt]{mdframed}
+
+\usepackage{import}
+\usepackage{xifthen}
+\usepackage{bm}
+\usepackage{pdfpages}
+\usepackage{transparent}
+
+\newcommand{\incfig}[1]{%
+    \def\svgwidth{\columnwidth}
+    \import{./figures/}{#1.pdf_tex}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+\title{Notes - Octoboer 25}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+\section{Hard-Margin Support Vector Machine}
+Linear decision rule:
+    \begin{align*}
+        &\bm{w}^T \bm x + b > 0 &\Rightarrow 1 \\
+        &\bm{w}^T \bm x + b < 0 &\Rightarrow 0
+    \end{align*}
+We solve for an optimal $\bm w$ and $b$ by doing
+    \[
+        \min_{\bm{w},b} \frac{1}{2} \bm w^T \bm w \ \ : \ \ y_i(\bm{w}^T\bm{x_i} + b) \geq 1 \forall i  
+    \]
+    QP-solvers (Quadratic Problem Solvers) solve equations of the form 
+    \[
+        \min_z \frac{1}{2} \bm{z}^TP\bm{z} + \bm{q}^T\bm{z} \ \ : \ \ Gz \leq h, Az = b, etc..
+    \]
+Obviously using a QP-solver will help us find an optimal $\bm w, b$, so we need not implement this ourselves.\\\\
+Notice that 
+\[
+    \begin{bmatrix}
+        w_0 & w_1 & b
+    \end{bmatrix}\begin{bmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 0
+    \end{bmatrix}\begin{bmatrix}w_0 \\ w_1 \\ b\end{bmatrix} = \begin{bmatrix}
+        w_0 \\ w_1 \\ 0
+    \end{bmatrix}\begin{bmatrix}w_0 \\ w_1 \\ b\end{bmatrix} = w^Tw
+\]
+So we let $P = \begin{bmatrix}
+    I_d & 0 \\
+    0 & 0
+\end{bmatrix}_{d + 1 \times d + 1}$ in order to satisfy our needs.
+\begin{align*}
+    y_iw^T x_i + y_i b &\geq 1 \\\\
+    \Longrightarrow \begin{bmatrix}
+        y_1 x_1^T y_1 \\
+        y_2 x_2^T y_2 \\
+        \vdots \\
+        y_n x_n^T y_n
+    \end{bmatrix}\begin{bmatrix}
+        w \\ b
+    \end{bmatrix} \geq \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}
+\end{align*}
+So what we just looked at was the ``Hard-Margin SVM Primal'', but there is a more complicated version
+called the ``Hard-Margin SVM Dual''. However, they both end up being quadratic programs with linear constraints.
+\\\\
+Notice the following:
+\begin{itemize}
+    \item The optimal weight vector is a linear combination of only a few of our training examples
+    \[
+    w^* = \sum_{i} \alpha_i^*y_ix_i
+    \]
+    \item Both the objective and classifying new examples are just based on dot-products between input vectors.
+\end{itemize}
+Two opposing goals
+\begin{itemize}
+    \item Very large margin, many errors.
+    \item Very small margin, few errors.
+\end{itemize}
+This yields a hyperparameter that we may find ourselves tweaking in homework at some point.
+Let's allow each example to violate our requirement by some value. That is,
+\[
+    y_iw^T x_i + y_i b \geq 1 + \eta
+    \]
+Where $\eta$ is our error or ``slack variable''.
+\end{document}

@@ -1,0 +1,30 @@
+% !TEX program = xelatex
+\documentclass{beamer}
+\usepackage{listings}
+\usetheme{metropolis}           % Use metropolis theme
+\title{A minimal example}
+\date{\today}
+\author{Matthias Vogelgesang}
+\institute{Centre for Modern Beamer Themes}
+\begin{document}
+  \maketitle
+  \section{First Section}
+  \begin{frame}[fragile]{First Frame}
+    Hello, world!
+    \begin{lstlisting}[language=Python][frame=single][mathescape=true]
+def dummyAugment(X):
+
+    # Take the length of our array
+    n = len(X)
+
+    # Create a column of ones
+    one_col = np.ones((n, 1))
+
+    # Append it to front of our array X
+    X_augmented = np.hstack((one_col, X))
+
+    return X_augmented
+
+    \end{lstlisting}
+  \end{frame}
+\end{document}

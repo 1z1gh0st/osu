@@ -1,0 +1,402 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.25in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Algebraic Topology --- Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+\section*{Problem 1}
+Prove that if $A$ is a compact subspace of a Hausdorff space $X$, 
+then $A$ is closed in $X$: $A \subset^{cl} X$.
+\\ \hline
+\subsection*{Solution}
+    \begin{proof}
+    Let $x \in X \setminus A$.          
+    Then for any point $a$ in $A$, we have some neighborhood of $a$, $U_a$,
+    that is disjoint from some neighborhood of $x$, $V_a$, since $X$ is
+    Hausdorff.
+    Then it follows that 
+    \[
+    \bigcup_{a\in A}U_a
+    \] 
+    is an open cover cover of $A$. Since $A$ is compact, it follows that there is some finite subcover of $A$. We will denote this by
+    \[
+    \bigcup_{f\in F}U_f.
+    \] 
+    So then since $F$ is finite, it follows that the intersection
+    \[
+    \bigcap_{f\in F}V_f
+    \] 
+    is an open neighborhood of $x$ that is disjoint from our finite cover
+    of $A$, and is therefore disjoint from $A$.
+    So if any arbitrary point $x \notin  A$ has a neighborhood that is 
+    disjoint from $A$, then $A$ is closed.
+    \end{proof}
+\pagebreak
+\section*{Problem 2}
+Prove that if $\phi: B^n \ra X$ is a characteristic map for an $n$-cell $c^n $ in a Hausdorff space $X$, then $\bar{c}^n = \phi(B^n)$ is the closure of the open cell $c^n = \phi(\mathrm{int}(B^n))$ in $X$.
+\\ \hline
+\subsection*{Solution}
+    \begin{proof}
+    By \fbox{Problem 1}, we know that $\phi(B^n)$ is closed. This is
+    because a continuous map carries compactness, and a compact subset of 
+    a Hausdorff space is closed. By basic properties of sets and maps, we 
+    know too that $\phi(int(B^n))\subset \phi(B^n)$.
+    Suppose that $\phi(B^n)$ is not the closure of $\phi(int(B^n))$, then 
+    it must be the case that $cl(\phi(int(B^n)))\subsetneq \phi(B^n)$.
+    Then there must be some point $x \in \phi(B^n) \setminus cl(\phi(int(B^n)))$.
+    Since $x$ is not a limit point of $\phi(int(B^n))$, we know that 
+    $\phi^{-1}(x)$ is not a limit point of $int(B^n)$. This is a 
+    contradiction because any point in $B^n$ is a limit point of $int(B^n)$.
+    So we conclude that $\phi(B^n) = cl(c^n)$.
+    \end{proof}
+    What is left to show is that continuity preserves limit/accumulation points\ldots
+    \\\\
+Let $f:X \to Y$ be continuous.
+Let $B \subset Y$ and let $y \in Y$ not be a limit point of $B$.
+Then $f^{-1}(y) = x$ is not a limit point of $f^{-1}(B)$.
+\begin{proof}
+   Since $y$ is not a limit point of $B$, there is some open neighborhood $U$ of $y$ such that $U$ is disjoint from $B$.
+   Therefore the pre-image $f^{-1}(U)$ is disjoint from the pre-image of $B$.
+   So there is an open set ($f_{-1}(U)$) such that it is an open neighborhood of $y$ and is disjoint from $f^{-1}(B)$.
+   Therefore the pre-image of $y$ is not a limit point of the pre-image of $B$.
+\end{proof}
+\pagebreak
+\section*{Problem 3}
+Let $\mathcal{F}$ be a family of closed subsets of a topological space $X$.
+\begin{enumerate}[i.]
+\item Prove that $\{A \subseteq X\ :\ A \cap F \subset^{cl} F\ \mbox{for all}\ F \in \mathcal{F}\}$ is the set of closed sets for a topology on $X$. This is called the \textbf{weak topology} on $X$ relative to $\mathcal{F}$. We write $X_w$ to refer to the set $X$ together with this weak topology.
+\item Prove that if $U \subseteq X$, then $U \op X_w$ if and only if $U \cap F \subset^{op} F$ for all $F \in \mathcal{F}$.
+\item Prove that for each $F \in \mathcal{F}$, the subspace topology inherited from $X_w$ is the same as the subspace topology inherited from $X$.
+\item Prove that if $Y$ is any space, then a function $f:X_w \rightarrow Y$ is continuous if and only if $f|_F: F \rightarrow Y$ is continuous for all $F \in \mathcal{F}$.
+\item Prove that the identity function $1_X: X_w \rightarrow X$ is continuous.
+\item Give an example to show that $X_w$ need not be homeomorphic to $X$.
+\end{enumerate}
+\\ \hline
+    \subsection*{Solution}
+    We denote $\{A \subset X \ : \ A \cap F \subset^{cl} F \text{for all} F \in \mathcal{F}\} = \mathcal{A}$.
+    \subsubsection*{i.} 
+    \begin{proof}
+    We wish to show that if we let $\mathcal{A}$ be our family of closed sets, that this will form a topology on $X$. To do this, one must show that the axioms of a topological space hold.\\\\
+    \fbox{$\emptyset, X \in \mathcal{A}$} We begin with the empty set.
+    For any $F \in \mathcal{F}$
+    \begin{align*}
+        \emptyset \cap F = \emptyset \subset^{cl} F.
+    \end{align*}
+    For the universal set,
+    \[
+    X \cap F = F \subset^{cl} F.
+    \] 
+    \fbox{Closure under arbitrary intersection}
+    Let 
+    \[
+    \bigcap_{i \in I}A_i
+    \] 
+    be some arbitrary intersection of sets in $\mathcal{A}$.
+    Then let $F \in \mathcal{F}$ be arbitrary. It follows that 
+    \[
+    \left(\bigcap_{i \in I}A_i\right) \cap F = \bigcap_{i\in I}\left(A_i \cap F\right)
+    \] 
+    Since each $A_i \cap F$ is closed in the subspace of $F$, it follows that this intersection will also be closed.\\\\
+    \fbox{Closure under finite union}
+    Let
+    \[
+    \bigcup_{j \in J}A_j 
+    \] 
+    Be a finite union of sets in $\mathcal{A}$. Then let $F \in \mathcal{F}$ be arbitrary, and we write 
+    \[
+    \left(\bigcup_{j \in J}A_j\right) \cap F =
+    \bigcup_{j\in J}\left(A_j \cap F\right)
+    \] 
+    Then each $A_j \cap F$ is closed in $F$ so it follows that a finite union of sets closed in $F$ is closed in $F$, and therefore this union belongs in $\mathcal{A}$. Having shown these three properties, this set of closed sets forms a topology on $X$.
+    \end{proof}
+    \subsubsection*{ii.}
+    \begin{proof}
+    Suppose that $U \subset X$. Then we know that 
+    \begin{align*}
+    U \subset^{op} X_w &\Leftrightarrow (X \setminus U) \subset^{cl} X_w\\
+    &\Leftrightarrow (X \setminus U) \in \mathcal{A}\\
+&\Leftrightarrow (X \setminus U) \cap F \subset^{cl} F \ \ \ \ \forall F \in \mathcal{F}\\
+&\Leftrightarrow U \cap F \subset^{op} F \ \ \ \ \forall F\in\mathcal{F}\\
+    \end{align*}
+    \end{proof}
+    \subsubsection*{iii.}
+    \begin{proof}
+    Let $F \in \mathcal{F}$ be arbitrary, without loss of generality.
+    To show that the topologies are the same we will demonstrate that a set is closed in one topology if and only if it is closed in the other. Let $C \subset F$ be closed under the subspace topology induced by $X_w$.
+    The set $C$ is closed in $F_w$ (slight abuse of notation, $F_w$ is $F$ equipped with the subspace topology induced by $X_w$) if and only if there exists some $C'$ closed in $X_w$ such that $C' \cap F = C$. Then
+    \begin{align*}
+        C' \subset^{cl} X_w &\Leftrightarrow C' \cap F \subset^{cl} F \ \ \ \ \forall F \in \mathcal{F} \\
+    &\Leftrightarrow C' \cap F \subset^{cl} F \text{ for our fixed $F$} \\
+    &\Leftrightarrow C \subset^{cl} F
+    \end{align*}
+    So we conclude that $C \subset^{cl} F_w$ if and only if $C \subset^{cl} F$.
+    \end{proof}
+    \subsubsection*{iv.}
+    \begin{proof}
+    Let $Y$ be any space. Then a function $f:X_w \rightarrow Y$ is 
+    continuous if and only if closed sets in $Y$ have closed pre-images.
+    Closed sets $C \subset Y$ have closed pre-images in $X_w$ if and only if $f^{-1}(C) \cap F \subset^{cl} F$ for every $F \in \mathcal{F}$.
+    Then $f^{-1}(C) \cap F \subset^{cl} F$ for every $F \in \mathcal{F}$ if and only if $f^{-1}\big|_F(C) \subset^{cl} F$ for every $F \in \mathcal{F}$. And this is the case if and only if $f\big|_F$ is continuous for every $F \in \mathcal{F}$.
+    \end{proof}
+    \subsubsection*{v.}
+    \begin{proof}
+    Let $C \subset^{cl} X$. Then we wish to show that its pre-image under 
+    the identity function is also closed. Let $F \in \mathcal{F}$ be 
+    arbitrary without loss of generality. Then by definition of subspace 
+    topology $C \cap F \subset^{cl} F$.
+    Then it follows that if $C \cap F \subset^{cl} F$ for every $F$,
+    then $C \subset^{cl} X_w$.
+    \end{proof}
+    \subsubsection*{vi.}
+    Take $X = \mathbb{R}$. The let $\mathcal{F} = \{\{0\}\}$.
+    Then what we are left with is the discrete, weakest, topology.
+    That is, every set is both open and closed. If a set does not contain 0
+    , then its intersection with every $F \in \mathcal{F}$ is empty and 
+    is trivially closed. And if a set contains 0 then its intersection with
+    every $F \in \mathcal{F}$ is $\{0\}$ and therefore closed in $\{0\}$.
+    So $\mathbb{R}_w$ and $\mathbb{R}$ are not homeomorphic because 
+    $\mathbb{R}$ is connected and $\mathbb{R}_w$ is disconnected. A simple 
+    disconnection for $\mathbb{R}_w$ is $\mathbb{R}_w = \{0\} \cup 
+    (\mathbb{R} \setminus \{0\})$.
+    Thus, we conclude that $X$ and $X_w$ need not be homeomorphic.
+\pagebreak
+\section*{Problem 4}
+Prove that if $(X,\mathcal{C})$ is a CW complex, then the zero-skeleton $X^0$ is discrete.
+\\ \hline
+    \subsection*{Solution}
+    % NOTES
+    % Option 1 -- we violate colusre-finiteness (unlikely)
+    % Option 2 -- we violate coherence (likely)
+    % Option 3 -- we violate definition of CW-complex (also pretty likely)
+
+    % As it turns out, option 3 was our friend. All cells are open + all singleton sets are closed
+    % -> boom we are done
+    \begin{proof}
+    Suppose that $(X,\mathcal{C})$ is a CW complex.
+    The 0-skeleton $X^0$ is defined as
+    \[
+    (X^0, \mathcal{C}^0) \text{ where } \mathcal{C}^0 = \{c \in \mathcal{C} \ : \ dim(c) \leq 0\}, X^0 = \bigcup_{dim(c) \leq 0}c
+    \] 
+    Since our dimension is 0, this means that all our open cells $c \in \mathcal{C}$
+    are of dimension 0 or lower. Since all cells of dimension $n < 0$ 
+    are non-existent (being images of the empty set). We conclude that
+    all open cells $c \in \mathcal{C}$ are of dimension 0.
+    \[
+    \forall c \in \mathcal{C}^0, dim(c) = 0
+    \] 
+    Let $c \in \mathcal{C}^0$ be arbitrary.
+    Then by definition of a CW complex, $\{c\}$ is open.
+    By definition of a 0-cell, $c$ is simply a single point in $X$.
+    Then, since $X$ is Hausdorff, it follows $\{c\}$ is closed.
+    Since the singleton set of any point in the 0-skeleton is both open and closed,
+    it follows that $X^0$ is discrete.
+    \end{proof}
+\pagebreak
+\section*{Problem 5}
+Prove that $H_k(B^n,S^{n-1}) \cong \left\{\begin{array}{rl} \mathbb{Z} &k=n\\0&k\neq n\end{array}\right.$.
+\\ \hline
+    \subsection*{Solution}
+    % NOTES
+
+    % Long exact sequence is our friend
+    % Use the point + n-cell decomp on S^n
+    % Show that the k-th homology on S^n is the same as on (B^n S^n-1)
+    % Proof done?
+    \begin{proof}
+    We know that for $n > 1$, for the homology of the sphere,
+    \[
+        H_k(S^n) = \begin{cases}
+            \mathbb{Z} & k = n \\
+            0 & k \neq n
+        \end{cases} 
+    \] 
+    Let $n,k > 1$, then we have an exact sequence 
+    \[
+    0 = H_k(B^n) \rightarrow^f H_k(B^n, S^{n-1}) \rightarrow^g H_{k-1}(S^{n-1}) \rightarrow^h H_{k-1}(B^n) = 0
+    \] 
+    Then 
+    \[
+    H_{k-1}(S^{n-1}) = ker(h) = im(g) \Rightarrow g \text{ is surjective}
+    ,\]
+    and
+    \[
+    ker(g) = im(f) = 0 \Rightarrow g \text{ is injective}
+    .\] 
+    So the middle mapping is a bijection therefore 
+    \[
+    H_k(B^n, S^{n-1}) \cong H_{k-1}(S^{n-1}) = \begin{cases}
+        \mathbb{Z} & k-1 = n-1 \\
+        0 & k-1 \neq n-1
+    \end{cases}
+    .\] 
+    Critically $k-1=n-1$ if and only if $k=n$.
+    For $k=1$,
+    \[
+    0 = H_1(B^n) \to^f H_1(B^n, S^{n-1}) \to^g H_0(S^{n-1}) \to^h H_0(B^n) = \mathbb{Z}
+    \] 
+    If $n = 1$ then $H_0(S^{0}) = \mathbb{Z} \oplus \mathbb{Z}$ so it follows that 
+    \[
+    \mathbb{Z} = ker(h) = im(g)
+    .\] 
+    Then since 
+    \[
+    ker(g) = imk(g) = 0
+    ,\] 
+    it follows that $g$ is injective, and since it's image is $\mathbb{Z}$, $f^{-1}(\mathbb{Z}) = \mathbb{Z}$.
+    Therefore,
+    \[
+    H_1(B^1, S^0) = \mathbb{Z}
+    .\] 
+    If $n > 1$ then $H_0(S^n) = H_0(B^n) = \mathbb{Z}$ so $h$ is an isomorphism.
+    So then $0 = ker(h) = im(g)$, and therefore $g$ is the 0 map.
+    Since $im(g)$ is 0, it must be the case that $ker(f) = 0$, then $H_1(B^n, S^{n-1})$ must be 0 for $n > 1$.
+    If $n=0$, then
+    \[
+    H_1(B^0, S^{-1}) = H_1(B^0, \emptyset) = H_1(B^0) = H_1(\{pt\}) = 0
+    .\] 
+    For $k=0, n = 0$, we have 
+    \[
+    H_0(B^0, S^{-1}) = H_0(B^0, \emptyset) = H_0(B^0) = H_0(\{pt\}) = \mathbb{Z}
+    .\] 
+    \end{proof}
+    This is incomplete. Edge cases are handled messily and incorrectly.
+    Note: shouldn't $H_k(B^1, S^0)$ be isomorphic to $H_k(S^1)$, since we are quotienting 
+    the endpoints together in hand-wavey way?
+\pagebreak
+\section*{Problem 6}
+Prove that if 
+$$
+C: C_m \stackrel{\partial_m}{\rightarrow} C_{m-1} \rightarrow \cdots \rightarrow C_1 \stackrel{\partial_1}{\rightarrow} C_0
+$$ 
+is a chain complex consisting of finitely generated abelian groups $C_0, \ldots, C_m$, then
+$$
+\sum_{i=0}^m (-1)^i\mathrm{rk}(C_i) = \sum_{i=0}^m (-1)^i\mathrm{rk}(H_i(C)).
+$$
+Use this to prove that if $(X, \mathcal{C})$ is a finite CW complex and $\alpha_i$ is the number of $i$-cells in $\mathcal{C}$, then $$\chi(X,\mathcal{C}) = \sum_{i = 0}^{\mathrm{dim}(X)} (-1)^i \alpha_i$$ is an invariant of the homotopy type of the space $X$. In particular, this number is independent of the choice of (finite) cellular decomposition $\mathcal{C}$, so we denote this number by $\chi(X)$. It is the \textbf{Euler characteristic} of $X$.
+\\ \hline
+    \subsection*{Solution}
+    % NOTES
+
+    % rk is rank
+    % For a SES of finitely generated ab groups 0 -> A -> B -> C -> 0
+    % We want to show that the alternating sum on the chain complex is equal to the alternating sum on the homology of the chain complex
+    % What does the above statement really mean?
+
+
+    % Induction?
+    \begin{proof}
+    First, notice that there are two important chain complexes
+    \[
+    0\to ker\partial_n \to C_n \to im\partial_n \to 0
+    \] 
+    and,
+    \[
+    0\to im\partial_{n+1}\to ker\partial_n \to H_n(C)\to 0
+    .\] 
+    By the rank nullity theorem
+    \begin{align*}
+        rk(C_n) &= rk(ker\partial_n) + rk(im\partial_n) \\
+        rk(H_n(C)) &= rk(ker\partial_n) - rk(im\partial_{n+1}) \\
+    \end{align*}
+    Then,
+    \begin{align*}
+        \sum_{i=0}^{m} (-1)^i rk(C_n) &= \sum_{i=0}^{m} (-1)^i \left(rk(ker\partial_n) + rk(im\partial_n)\right) \\
+        &= \sum_{i=0}^{m} (-1)^i rk(ker\partial_n) + \sum_{i=0}^{m} (-1)^i rk(im\partial_n) \\
+        &= \sum_{i=0}^{m} (-1)^i rk(ker\partial_n) - \sum_{i=0}^{m} (-1)^{i-1} rk(im\partial_n) \\
+        &= \sum_{i=0}^{m} (-1)^i rk(ker\partial_n) - \sum_{i=-1}^{m} (-1)^{i} rk(im\partial_{n+1}) \\
+        &= \sum_{i=0}^{m} (-1)^i rk(ker\partial_n) - \sum_{i=0}^{m} (-1)^{i} rk(im\partial_{n+1}) \\
+        &= \sum_{i=0}^{m} (-1)^i rk(H_n(C)) \\
+    \end{align*}
+    \end{proof}
+    \begin{proof}
+        Having proven the first property, proving that the Euler characteristic is invariant to 
+        the choice of finite cell decomposition $\mathcal{C}$ becomes relatively simple.
+        First, notice that the cell decomposition $\mathcal{C}$ forms a chain complex,
+        \[
+            0\to C_d \to^\partial C_{d-1} \to^\partial  C_{d-2} \to^\partial \cdots \to^\partial C_0 \to 0
+        \] 
+        Then, since we have a finite number of cells, it follows that these abelian groups are
+        finitely generated, and that their rank is equal to the number of cells of that dimension.
+        So we write,
+        \begin{align*}
+            \chi(X,\mathcal{C}) = \sum_{i=0}^{dim(X)} (-1)^i \alpha_i = \sum_{i=0}^{dim(X)} (-1)^i rk(C_i) = \sum_{i=0}^{dim(X)} (-1)^i rk(H_n(C)) = \chi(X)
+        \end{align*}
+    \end{proof}
+\pagebreak
+\section*{Problem 7}
+Calculate $\chi(X)$ where
+\begin{enumerate}
+\item $X$ is a finite contractible CW complex
+\item $X = S^n$
+\end{enumerate}
+\\ \hline
+    \subsection*{Solution}
+    \subsubsection*{1.}
+    Suppose that $X$ is a finite contractible CW complex.
+    That $X$ is homotopy equivalent to a singular point.
+    So a cellular decomposition of a singular point is trivially,
+    \[
+    \mathcal{C} = \mathcal{C}^0 = \{c\}
+    \] 
+    where $c$ is a 0-cell.
+    Then, we can simply compute,
+    \[
+    \chi(\{pt\},\mathcal{C}) = \sum_{i=0}^{0} (-1)^i \alpha_i = (-1)^0 \cdot 1 = 1
+    \] 
+    \subsubsection*{2.}
+    For the $n$-sphere, it is slightly less trivial.
+    We have a cellular decomposition given by one $n$-cell and one 0-cell,
+    the point-$n$-cell pair that is quite useful.
+    To compute $\alpha_n$, it should be clear that 
+    \[
+    \alpha_n = \begin{cases}
+        1 & n\in\{0,n\}\\
+        0 & \text{otherwise}
+    \end{cases}
+    \] 
+    Finally,
+    \begin{align*}
+        \chi(X,\mathcal{C}) &= \sum_{i=0}^n (-1)^n \alpha_i \\
+                            &= (-1)^0 \alpha_0 + \cdots + (-1)^n \alpha_n \\
+                            &= 1 + 0 + \cdots + 0 \pm 1 \\
+                            &= \begin{cases}
+            2 & n \text{ is even }\\
+            0 & n \text{ is odd}
+        \end{cases} 
+    \end{align*}
+\end{document}

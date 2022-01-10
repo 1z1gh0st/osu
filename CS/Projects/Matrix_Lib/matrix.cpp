@@ -172,7 +172,7 @@ Matrix Matrix::operator*(const Matrix &A) {
         throw("Matrix multiplication: invalid dimensions");
     } else {
         unsigned p = m_numCols;
-        vector<vector<double>> result (m_numRows, vector<double> (A.m_numCols, 0));
+        vector< vector<double> > result (m_numRows, vector<double> (A.m_numCols, 0));
         for (unsigned i = 0; i < result.size(); i++) {
             for (unsigned j = 0; j < result[0].size(); j++) {
                 for (unsigned k = 0; k < p; k++) {
@@ -214,7 +214,7 @@ float Matrix::determinant() {
 
 // Transpose
 void Matrix::transpose() {
-    vector<vector<double>> result (m_numCols, vector<double> (m_numRows, 0));
+    vector< vector<double> > result (m_numCols, vector<double> (m_numRows, 0));
     for (unsigned i = 0; i < m_numRows; i++) {
         for (unsigned j = 0; j < m_numCols; j++) {
             result[j][i] = m_matrix[i][j];

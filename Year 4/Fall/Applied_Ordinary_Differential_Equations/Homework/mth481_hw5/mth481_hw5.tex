@@ -1,0 +1,98 @@
+\documentclass{article} 
+% -------------------------------------------- % 
+% ------------------PACKAGES------------------ % 
+% -------------------------------------------- % 
+\usepackage{amssymb, amsmath, amsthm} 
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx} \usepackage{import} \usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Applied Ordinary Differential Equations --- Homework 5}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+
+\section*{5.2}
+    \subsection*{5.2.5}
+        \begin{mdframed}
+            Do the following:
+            \begin{enumerate}[a.]
+                \item Seek the power series relationship around the point $x_0$,
+                    and figure out the recurrence relation on $a_n$.
+                \item Find the first four non-zero terms in the power series'
+                    for two solutions $y_1, y_2$.
+                \item Show that $y_1,y_2$ form a fundamental set of
+                    solutions by computing the wronskian $W[y_1,y_2](x_0)$.
+                \item If possible, find the general term in each solution.
+            \end{enumerate}
+            \[ 
+                y'' + k^2 x^2 y = 0, \ \ \ \ x_0 = 0, k \text{ is constant}
+            \]
+        \end{mdframed}
+            \subsubsection*{a.}
+                To find the power series solution around the point $x_0$,
+                we must observe that $P(x) = 1, Q(x) = 0, R(X) = k^2 x^2$.
+                This equation does not change when we divide by $P(X)$ since 
+                it is equal to 1, so we can also write $p(x) = 0, q(x) = k^2 x^2$.
+                So we write,
+                \begin{align*}
+                    y &= \sum_{n=0}^\infty a_n x^n \\
+                    y' &= \sum_{n=1}^\infty n a_n x^{n-1} \\
+                    y'' &= \sum_{n=2}^\infty n (n-1) a_n x^{n-2}
+                \end{align*}
+                Then if we substitute this into our original equation we get 
+                \[
+                    \sum_{n=2}^\infty n (n-1) a_n x^{n-2}
+                    + k^2 x^2 \sum_{n=0}^\infty a_n x^n 
+                    = 0
+                \] 
+                We can shift the index by 2 and then we have 
+                \begin{align*}
+                    \sum_{n=0}^\infty (n+2) (n+1) a_{n+2} x^{n}
+                    + k^2 x^2 \sum_{n=0}^\infty a_n x^n 
+                    &= 0 \\
+                    \sum_{n=0}^\infty (n + 2) (n + 1) a_{n+2} x^n
+                    + k^2 x^2 a_n x^n &= 0 \\
+                    \sum_{n=0}^\infty \left( (n + 2) (n + 1) a_{n+2} 
+                    + k^2 x^2 a_n\right) x^n &= 0 \\
+                \end{align*}
+                So for this to be true for every $x$, it follows that 
+                \begin{align*}
+                    (n + 2) (n + 1) a_{n+2} + k^2 x^2 a_n &= 0 \\
+                    (n + 2) (n + 1) a_{n+2} &= -k^2 x^2 a_n \\
+                    a_{n+2} &= \frac{-k^2 x^2}{(n+2) (n+1)} \cdot a_n
+                \end{align*}
+                And thus we have our recurrence relation.
+            \subsubsection*{b.}
+                
+    \subsection*{5.2.18}
+\section*{5.3}
+    \subsection*{5.3.8}
+    \subsection*{5.3.17}
+    \subsection*{5.3.18}
+\end{document}

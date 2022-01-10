@@ -1,0 +1,83 @@
+%% Creator: Inkscape 1.0.1 (c497b03c, 2020-09-10), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'q1_b.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{539.07041261bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.73338133)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{q1_b.pdf}}%
+    \put(0.28328414,0.62242898){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}T\end{tabular}}}}%
+    \put(0.51167884,0.6249073){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}F\end{tabular}}}}%
+    \put(0.19325076,0.48720177){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1 < 25$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{q1_b.pdf}}%
+    \put(0.10103364,0.40462828){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}T\end{tabular}}}}%
+    \put(0.32942832,0.40710663){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}F\end{tabular}}}}%
+    \put(0.07488719,0.25340751){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1 < 10$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{q1_b.pdf}}%
+    \put(0,0.16192574){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}T\end{tabular}}}}%
+    \put(0.22839469,0.16440409){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}F\end{tabular}}}}%
+    \put(0.32169981,0.2588608){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$E$\end{tabular}}}}%
+    \put(0.02842194,0.02007967){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$A$\end{tabular}}}}%
+    \put(0.18507122,0.01740931){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B$\end{tabular}}}}%
+    \put(0.36560426,0.690556){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_2 < 15$\end{tabular}}}}%
+    \put(0.55579221,0.48333632){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1 < 5$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{q1_b.pdf}}%
+    \put(0.48414841,0.40515768){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}T\end{tabular}}}}%
+    \put(0.71254309,0.40763603){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}F\end{tabular}}}}%
+    \put(0.67370148,0.24972962){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x_1 < 25$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{q1_b.pdf}}%
+    \put(0.61288082,0.16192574){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}T\end{tabular}}}}%
+    \put(0.79795203,0.01740931){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$F$\end{tabular}}}}%
+    \put(0.60925978,0.00980961){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$D$\end{tabular}}}}%
+    \put(0.4677948,0.25766552){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$C$\end{tabular}}}}%
+    \put(0.81520422,0.16363061){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}F\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
