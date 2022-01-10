@@ -1,0 +1,72 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Algebraic Topology --- Homework 1}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+
+\section*{Problem 3.1.1}
+Show that Ext$(H,G)$ is a contravariant functor of $H$ for fixed $G$, 
+and a covariant functor of $G$ for fixed $H$.
+
+\section*{Problem 3.1.2}
+Show that the maps $G \xrightarrow{n}G$ and $H\xrightarrow{n}H$ multiplying
+each element by the integer $n$ induce multiplication by $n$ in Ext$(H,G)$.
+
+\section*{Problem 3.1.5}
+Regarding a cochain $\phi \in C^1(X;G)$ as a function from paths in $X$ to 
+$G$, show that if $\phi$ is a cocycle, then 
+\begin{enumerate}
+    \item $\phi(f \cdot g) = \phi(f) + \phi(g),$
+    \item $\phi$ takes the value 0 on constant paths,
+    \item $\phi(f) = \phi(g)$ if $f \simeq g$,
+    \item $\phi$ is a coboundary iff $\phi(f)$ depends only on the endpoints 
+    \item of $f$, for all $f$. 
+\end{enumerate}
+[In particular, (a) and (c) give a map $H^1(X;G) \to$ Hom$(\pi_1(X),G)$,
+which the universal coefficient theorem says is an isomorphism if $X$ 
+is path-connected.]
+
+\section*{Problem 3.1.6 (a)}
+Directly from the definitions, compute the simplicial cohomology groups 
+of $S^1 \times S^1$ with $\mathbb{Z}$ and $\mathbb{Z}_2$ coefficients,
+using the $\Delta$-complex structure given in \S 2.1.
+
+\section*{Problem 3.1.8 (c)}
+Show that if $A$ is a retract of $X$ then $H^n(X;G) \approx H^n(A;G) \oplus H^n(X,A;G)$.
+\end{document}
