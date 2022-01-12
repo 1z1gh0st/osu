@@ -1,1 +1,2 @@
 C:\CS271\Project32_VS2019\Debug\Project.exe
+C:\Users\phili\Documents\osu\Year 4\Winter\Computer_Arch___Assembly_Language\share\Project32_VS2019\Debug\Project.exe
