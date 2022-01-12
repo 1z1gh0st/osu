@@ -65,6 +65,16 @@ Prove that $I(S)$ is an ideal of the ring $K[x_1, \cdots, x_n]$.
 \par\noindent\rule{\textwidth}{0.4pt}
 \subsection*{Solution}
 \begin{proof}
+First, we will show that $I(S) \subset K^n[x]$ is a subring, 
+and then we will show that it is an ideal. To show that $I(S)$ is 
+a subring, first one should notice that the additive identity, $0$
+is trivially an element of $I(S)$ since clearly the $0$ function 
+will map everything to 0, making it a memeber of $I(S)$. 
+Let $f \in I(S)$ arbitrarily, then the typical additive inverse will 
+still evaluate to 0, so we say that $-f \in I(S)$.
+Let $f,g \in I(S)$ arbitrarily, then we say that for any $\vec a \in S$
+$f(\vec a) = 0 = g(\vec a)$. So then $(f + g)(\vec a) = f(\vec a) + g(\vec a) = 0 + 0 = 0$
+so we say that $I(S)$ is closed under addition.
 Recall that a subring $I$ of a ring $R$ is an ideal if for every $x \in R, y \in I$,
 we can say $xy \in I$.
 In our case specifically, let $S \subseteq K^n$, let
