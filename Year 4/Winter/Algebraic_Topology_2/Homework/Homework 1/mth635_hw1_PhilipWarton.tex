@@ -43,6 +43,39 @@
 \section*{Problem 3.1.1}
 Show that Ext$(H,G)$ is a contravariant functor of $H$ for fixed $G$, 
 and a covariant functor of $G$ for fixed $H$.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\section*{Solution}
+\fbox{Ext$(\cdot, G)$ is a contravariant functor}
+\begin{proof}
+    We must show that the following are true:
+    \begin{enumerate}
+        \item Every $X$ is associated to some cohomology group
+        \item Every $\alpha : X \rightarrow Y$ is associated to some $\alpha^* :$ Ext$(X,G) \rightarrow $Ext$(Y,G)$
+        \item $1_X^* = 1_{\text{Ext}(X,G)}$ 
+        \item $(\beta \circ \alpha)^* = \alpha^* \circ \beta^*$ for every $X \xrightarrow{\alpha} Y \xrightarrow{\beta} Z$
+    \end{enumerate}
+    For the first property, this is true by definition.
+    Let $X$ be an abelian group. Then it has some free resolution $F$ given by
+    \[
+        0 \to F_1 \to F_0 \to X \to 0   
+    .\]
+    Then, $H^1(F;G) = \text{Ext}(X,G)$, and the first property has been demonstrated.
+    \\\\
+    Let $\alpha : X \rightarrow Y$ be arbitrary.
+    Then, we can naturally extend this homomorphism to connect our 
+    free resolutions $F$ and $F'$. That is,
+    \begin{align*}
+        0 &\to F_1 \to F_0 \to X \to 0 \\
+        & \ \ \ \ \ \downarrow\alpha_1 \ \ \ \downarrow\alpha_0 \ \ \downarrow\alpha \\
+        0 &\to F_1' \to F_0' \to Y \to 0
+    \end{align*}
+    Since every basis element of $X$ must be mapped to $Y$ under $\alpha$,
+    it follows that we can simply restrict $\alpha$ to these basis elements and have a
+    map $\alpha_0 : F_0 \to F_0'$. Similarly we can also extend to $\alpha_1$
+\end{proof}
+\fbox{Ext$(H,\cdot)$ is a covariant functor}
+
 
 \section*{Problem 3.1.2}
 Show that the maps $G \xrightarrow{n}G$ and $H\xrightarrow{n}H$ multiplying
