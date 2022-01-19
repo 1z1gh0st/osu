@@ -1,0 +1,142 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Gr{\"o}bner Bases --- Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+
+\section*{Problem 1}
+Consider $\mathbb{Q}[x,y,z,t]$, and let 
+\begin{align*}
+    f_1 &= x - 2y + z + t \\
+    f_2 &= x + y + 3z + t \\
+    f_3 &= 2x - y -z - t \\
+    f_4 &= 2x + 2y + z + t
+.\end{align*}
+Solve our four ``important questions/goals'' from the introduction for 
+this set of polynomials.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+\subsubsection*{1}
+Given some linear function $f \in \mathbb{Q}[x,y,z,t]$, is $f \in \langle f_1,f_2,f_3,f_4\rangle$.
+We will start with row reduction,
+\[
+    \begin{bmatrix}
+        1 & -2 & 1 & 1 \\
+        1 & 1 & 3 & 1 \\
+        2 & -1 & -1 & -1 \\
+        2 & 2 & 1 & 1
+    \end{bmatrix}   
+    \to 
+    \begin{bmatrix}
+        1 & -2 & 1 & 1 \\
+        0 & 3 & 2 & 0 \\
+        0 & 3 & -2 & -2 \\
+        0 & 6 & -1 & -1
+    \end{bmatrix} 
+    \to 
+    \begin{bmatrix}
+        1 & -2 & 1 & 1 \\
+        0 & 3 & 2 & 0 \\
+        0 & 0 & -4 & 0 \\
+        0 & 0 & -5 & -1 
+    \end{bmatrix}
+    \to 
+    \begin{bmatrix}
+        1 & -2 & 1 & 1 \\
+        0 & 3 & 2 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 
+    \end{bmatrix}
+    \to 
+    I
+\]
+Since we have $\langle f_1, f_2, f_3, f_4\rangle = \langle x,y,z,t\rangle$,
+it follows that our ideal $I$ is equal to any linear combination of our four variables 
+$x,y,z,t$. To check that some $f$ is a member of $\langle x,y,z,t \rangle$,
+we wish to demonstrate that it is only a linear combination of these terms. 
+That is to say, that it does not have a \textbf{constant term}.
+\subsubsection*{2}
+So then to write any $f$ as a linear
+\subsubsection*{3}
+\subsubsection*{4}
+\section*{Problem 2}
+Find a single generator for the ideal $I = \langle x^6 - 1, x^4 + 2x^3 + 2x^2 -2x -3\rangle$.
+Is $x^5 + x^3 + x^2 - 7$ in $I$? Is $x^4 + 2x^2 - 3$ in $I$?
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+We wish to find the greatest common denominator, so we use the ``euclidean algorithm for polynomials'' to do so.
+Let $f = x^6 - 1, g = $. Then in the first pass,
+\begin{align*}
+    x^6 - 1 & \xrightarrow{x^4 + 2x^3 + 2x^2 - 2x - 3} 2x^3 - 5x^2 - 2x +5 \\
+    f &:=x^4 + 2x^3 + 2x^2 - 2x - 3 \\
+    g &:= 2x^3 - 5x^2 - 2x +5
+.\end{align*}
+In the second pass,
+\begin{align*}
+    x^4 + 2x^3 + 2x^2 - 3 &\xrightarrow{ 2x^3 - 5x^2 - 2x +5} \frac{57}{4}x^2 - \frac{57}{4} \\
+    f &:= 2x^3 - 5x^2 - 2x +5 \\
+    g &:= \frac{57}{4}x^2 - \frac{57}{4} 
+.\end{align*}
+In the third pass,
+\begin{align*}
+    2x^3 - 5x^2 - 2x +5 &\xrightarrow{\frac{57}{4}x^2 - \frac{57}{4}} 0 \\
+    f &:= \frac{57}{4}x^2 - \frac{57}{4} \\
+    g &:= 0
+.\end{align*}
+So finally let 
+\[
+    f := \frac{1}{\frac{57}{4}}\left(\frac{57}{4}x^2 - \frac{57}{4}\right) = x^2 - 1
+.\]
+And the algorithm is completed. So, we say that $I = \langle x^2 - 1 \rangle$. \\\\
+\fbox{$x^5 + x^3 + x^2 - 7$}
+Recall that $f \in I = \langle g\rangle$ if and only if $f \xrightarrow{g}_+ 0$.
+So we will divide the one by the other, giving us 
+\[
+    x^5 + x^3 + x^2 - 7 \xrightarrow{x^2 - 1} 2x - 6 \neq 0
+.\]
+The function \textbf{does not} belong to the ideal.\\\\
+\fbox{$x^4 + 2x^2 - 3$} Again, we divide this polynomial by $x^2 - 1$ and see our 
+remainder. That is,
+\[
+    x^4 + 2x^2 - 3 \xrightarrow{x^2 - 1} 0  
+.\]
+The function \textbf{does} belong to the ideal.
+\end{document}
