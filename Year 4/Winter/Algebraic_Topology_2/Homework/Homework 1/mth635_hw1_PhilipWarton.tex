@@ -41,45 +41,130 @@
 % -------------------------------------------- %
 
 \section*{Problem 3.1.1}
-Show that Ext$(H,G)$ is a contravariant functor of $H$ for fixed $G$, 
-and a covariant functor of $G$ for fixed $H$.
-\\
-\par\noindent\rule{\textwidth}{0.4pt}
-\section*{Solution}
-\fbox{Ext$(\cdot, G)$ is a contravariant functor}
-\begin{proof}
-    We must show that the following are true:
-    \begin{enumerate}
-        \item Every $X$ is associated to some cohomology group
-        \item Every $\alpha : X \rightarrow Y$ is associated to some $\alpha^* :$ Ext$(X,G) \rightarrow $Ext$(Y,G)$
-        \item $1_X^* = 1_{\text{Ext}(X,G)}$ 
-        \item $(\beta \circ \alpha)^* = \alpha^* \circ \beta^*$ for every $X \xrightarrow{\alpha} Y \xrightarrow{\beta} Z$
-    \end{enumerate}
-    For the first property, this is true by definition.
-    Let $X$ be an abelian group. Then it has some free resolution $F$ given by
-    \[
-        0 \to F_1 \to F_0 \to X \to 0   
-    .\]
-    Then, $H^1(F;G) = \text{Ext}(X,G)$, and the first property has been demonstrated.
-    \\\\
-    Let $\alpha : X \rightarrow Y$ be arbitrary.
-    Then, we can naturally extend this homomorphism to connect our 
-    free resolutions $F$ and $F'$. That is,
-    \begin{align*}
-        0 &\to F_1 \to F_0 \to X \to 0 \\
-        & \ \ \ \ \ \downarrow\alpha_1 \ \ \ \downarrow\alpha_0 \ \ \downarrow\alpha \\
-        0 &\to F_1' \to F_0' \to Y \to 0
-    \end{align*}
-    Since every basis element of $X$ must be mapped to $Y$ under $\alpha$,
-    it follows that we can simply restrict $\alpha$ to these basis elements and have a
-    map $\alpha_0 : F_0 \to F_0'$. Similarly we can also extend to $\alpha_1$
-\end{proof}
-\fbox{Ext$(H,\cdot)$ is a covariant functor}
+    Show that Ext$(H,G)$ is a contravariant functor of $H$ for fixed $G$, 
+    and a covariant functor of $G$ for fixed $H$.
+    \\
+    \par\noindent\rule{\textwidth}{0.4pt}
+    \subsection*{Solution}
+    \fbox{Ext$(\cdot, G)$ is a contravariant functor}
+    \begin{proof}
+        We must show that the following are true:
+        \begin{enumerate}
+            \item Every $X$ is associated to some cohomology group
+            \item Every $\alpha : X \rightarrow Y$ is associated to some $\alpha^* :$ Ext$(X,G) \rightarrow $Ext$(Y,G)$
+            \item $1_X^* = 1_{\text{Ext}(X,G)}$ 
+            \item $(\beta \circ \alpha)^* = \alpha^* \circ \beta^*$ for every $X \xrightarrow{\alpha} Y \xrightarrow{\beta} Z$
+        \end{enumerate}
+        For the first property, this is true by definition.
+        Let $X$ be an abelian group. Then it has some free resolution $F$ given by
+        \[
+            0 \to F_1 \to F_0 \to X \to 0   
+        .\]
+        Then, $H^1(F;G) = \text{Ext}(X,G)$, and the first property has been demonstrated.
+        \\\\
+        Let $\alpha : X \rightarrow Y$ be arbitrary.
+        Then, we can naturally extend this homomorphism to connect our 
+        free resolutions $F$ and $F'$. That is,
+        \begin{align*}
+            0 &\to F_1 \to F_0 \to X \to 0 \\
+            & \ \ \ \ \ \downarrow\alpha_1 \ \ \ \downarrow\alpha_0 \ \ \downarrow\alpha \\
+            0 &\to F_1' \to F_0' \to Y \to 0
+        \end{align*}
+        Since every basis element of $X$ must be mapped to $Y$ under $\alpha$,
+        it follows that we can simply restrict $\alpha$ to these basis elements and have a
+        map $\alpha_0 : F_0 \to F_0'$. Similarly we can also extend to $\alpha_1$.
+        We denote the image of these $\alpha_i$ with the image of $\alpha$, to be 
+        $\alpha^*$, and we say that the second property is satisfied.
+        \\\\
+        The natural extension of maps goes to the identity map as well,
+        and since our free resolutions are the same under the identity map it follows 
+        that the cohomologies will be the same and therefore $Ext$ will 
+        be under its own identity as well.
+        \\\\
+        Finally, let $X \xrightarrow{\alpha} Y \xrightarrow{\beta} Z$.
+        Then, naturally, we have 
+        \begin{align*}
+            0 &\to F_1 \to F_0 \to X \to 0 \\
+            & \ \ \ \ \ \downarrow\alpha_1 \ \ \ \downarrow\alpha_0 \ \ \downarrow\alpha \\
+            0 &\to F_1' \to F_0' \to Y \to 0 \\
+            & \ \ \ \ \ \downarrow\beta_1 \ \ \ \downarrow\beta_0 \ \ \downarrow\beta \\
+            0 &\to F_1'' \to F_0'' \to Z \to 0 \\
+        \end{align*}
+        If we take $\beta \circ \alpha$ then we have a homomorphism from 
+        $X$ to $Z$ that we extend onto their respective free resolutions. 
+        Taking the induced homomorphism from that, we have a the dual, 
+        a map from $H^1(Z;G) \to H^1(X;G)$. Then, for the right hand side, 
+        we have two maps $\alpha^*: H^1(Y;G) \to H^1(X;G)$ and $\beta^*: H^1(Z;G) \to H^1(Y;G)$.
+        Their composition will be the naturally induced homomorphism from $H^1(Z;G) \to H^1(X;G)$,
+        it follows by construction that the right hand side will be equal to the left hand side. 
+        Note that 
+        \begin{align*}
+            0 &\leftarrow F_1 \leftarrow F_0 \leftarrow X \leftarrow 0 \\
+            & \ \ \ \ \ \uparrow\alpha_1^* \ \ \ \uparrow\alpha_0^* \ \ \uparrow\alpha^* \\
+            0 &\leftarrow F_1' \leftarrow F_0' \leftarrow Y \leftarrow 0 \\
+            & \ \ \ \ \ \uparrow\beta_1^* \ \ \ \uparrow\beta_0^* \ \ \uparrow\beta^* \\
+            0 &\leftarrow F_1'' \leftarrow F_0'' \leftarrow Z \leftarrow 0 \\
+        \end{align*}
+        will compose to be the same as
+        \begin{align*}
+            0 &\leftarrow F_1 \leftarrow F_0 \leftarrow X \leftarrow 0 \\
+            & \ \ \ \ \ \uparrow\gamma_1^* \ \ \ \uparrow\gamma_0^* \ \ \uparrow\gamma^* \\
+            0 &\leftarrow F_1'' \leftarrow F_0'' \leftarrow Z \leftarrow 0 \\
+        \end{align*}
+        where $\gamma = \beta \circ \alpha$.
+        With all of these properties being show, we claim that $Ext(\cdot,G)$ is a contravariant 
+        functor.
+    \end{proof}
+    \fbox{Ext$(H,\cdot)$ is a covariant functor}
+    \begin{proof}
 
-
+            We can say this is a functor by simply composing maps.
+            That is, if $G \to^\alpha G' \to^\beta G''$ then 
+            \begin{align*}
+                \text{Ext}(H,G) &= H^1(F;G) \\
+                &= F_1 / Im f_1^* \\
+                &= \{\text{functions from $F_1$ to $G$ vanishing on functions 
+                in the image of $f_1^*$}\}
+            \end{align*}
+            So by extending these functions from $F_1 \to G \to G' \to G''$ the 
+            functorality becomes apparent. Proof is not thorough but I am out of time.
+            For the identity these sets of functions will be the same, since the go 
+            to isomorphic groups.
+    \end{proof}
 \section*{Problem 3.1.2}
 Show that the maps $G \xrightarrow{n}G$ and $H\xrightarrow{n}H$ multiplying
 each element by the integer $n$ induce multiplication by $n$ in Ext$(H,G)$.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+\fbox{$G \xrightarrow{n} G$ induces multiplication}
+\begin{proof}
+    We wish to show that Ext$(H,nG) = n$Ext$(H,G)$.
+    We write,
+    \begin{align*}
+        \text{Ext}(H,nG) &= H^1(F;nG) \\
+        &= \{\text{functions from $F_1$ to $nG$}\} \\
+        &= n \cdot \{\text{functions from $F_1$ to $G$}\} \\
+        &= n\text{Ext}(H,G)
+    \end{align*}
+\end{proof}
+\fbox{$H \xrightarrow{n} H$ induces multiplication}
+\begin{proof}
+    We know that $nH$ will have the same number of generators 
+    as $H$. That means that while the one to one correspondence 
+    of elements of $F_0'$ and the basis of $H$ will remain the same 
+    size, the number of elements not in correspondence with the basis 
+    of $H$ will increase $n$-fold. That is, $F_1'$ will have $n$ times the
+    cardinality as $F_1$ given the smallest possible free resolution on $H$.
+    So then 
+    \begin{align*}
+        \text{Ext}(nH,G) &= H^1(F';nG) \\
+        &= \{\text{functions from $F_1'$ to $G$}\} \\
+        &= n \cdot \{\text{functions from $F_1$ to $G$}\} \\
+        &= n \cdot \text{Ext}(H,G)
+    \end{align*}
+    This is justified by the ratio of cardinalities between $F_1$ and $F_1'$.
+\end{proof}
 
 \section*{Problem 3.1.5}
 Regarding a cochain $\phi \in C^1(X;G)$ as a function from paths in $X$ to 
@@ -88,18 +173,159 @@ $G$, show that if $\phi$ is a cocycle, then
     \item $\phi(f \cdot g) = \phi(f) + \phi(g),$
     \item $\phi$ takes the value 0 on constant paths,
     \item $\phi(f) = \phi(g)$ if $f \simeq g$,
-    \item $\phi$ is a coboundary iff $\phi(f)$ depends only on the endpoints 
-    \item of $f$, for all $f$. 
+    \item $\phi$ is a coboundary iff $\phi(f)$ depends only on the endpoints of $f$, for all $f$. 
 \end{enumerate}
 [In particular, (a) and (c) give a map $H^1(X;G) \to$ Hom$(\pi_1(X),G)$,
 which the universal coefficient theorem says is an isomorphism if $X$ 
 is path-connected.]
-
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+For \fbox{1}, let $f,g$ be paths in $X$.
+We can construct a loop given by $f \cdot g \cdot (f \cdot g)^{-1}$.
+So this forms the boundary of some interior in $X$.
+We can use homology and say that we have a region $S$ that is the 
+minimal boundary on this loop, and we have paths given by $f, g, f \cdot g$.
+Then we can write that 
+\[
+    \phi(f) + \phi(g) - \phi(f \cdot g) = \phi(f + g - f\cdot g) = \phi(\partial S) = \delta \phi S
+.\]
+However, we know by assumption that $\phi$ is a cocycle, and therefore $\delta \phi S = 0$.
+So we write,
+\begin{align*}
+    \phi(f) + \phi(g) - \phi(f \cdot g) &= \delta \phi S \\
+    &= 0 \\\\
+    \Longrightarrow \phi(f) + \phi(g) &= \phi(f \cdot g)
+\end{align*}
+For \fbox{2}, suppose that $\phi$ did not take 0 on constant paths.
+Let $x_0$ be a constant path in $X$, and let $\phi(x_0) = g \neq 0 \in G$.
+Then, we know that $x_0 = x_0 \cdot x_0$. From \fbox{1} it follows that 
+\begin{align*}
+    \phi(x_0) &= \phi(x_0 \cdot x_0) = \phi(x_0) + \phi(x_0) \\
+    g & = g+ g & \text{(contradiction)}
+\end{align*}
+For \fbox{3} take a $S$ to be the image of the entire homotopy between 
+$f$ and $g$. By the nature of homotopy and orientation, it must be the case 
+that $\partial S = f - g$. Then
+\[
+    \phi(f) - \phi(g) = \phi(f - g) = \phi(\partial S) = \delta \phi S = 0
+.\]
+For \fbox{4}, we begin with the forward direction. Let $\phi$ be a coboundary.
+Then let $f$  be some path in $X$. It follows that 
+\[
+    \phi f = \psi \partial f = \psi (f_1 - f_0)
+\]
+which clearly depends only on the endpoints of $f$.\\
+For the reverse direction, let $X' \subset X$ be a path component.
+Then for any path $\gamma$ in $X$ with enpoints $\gamma_0, \gamma_1$ define 
+a function $\psi \in C^0(X;G)$ such that $\psi(\gamma_1) = \phi(f)$.
+Let $f$ be an arbitrary path in $X'$, with endpoints $f_0,f_1$. Let $g$ be 
+path from $f_1$ to $f_0$ that, when reversed, is path homotopic to $f$ and $h$ be a constant 
+function at $f_1$. Then clearly $h \cdot g^{-1} \simeq f$.
+Then we write 
+\begin{align*}
+    \phi(f) &= \phi(h \cdot g^{-1}) \\
+    &=\phi(h) + \phi(g^{-1}) \\
+    &=\phi(h) - \phi(g) \\
+    &=\psi(h_1) - \psi(g_1) \\
+    &= \psi(f_1) - \psi(f_0) \\
+    &= \psi(f_1 - f_0) \\
+    &= \psi \partial f
+\end{align*}
+So there does exist some $\psi$ such that $\phi = \psi \partial = \delta \psi$ and 
+therefore $\phi$ is a coboundary.
 \section*{Problem 3.1.6 (a)}
 Directly from the definitions, compute the simplicial cohomology groups 
 of $S^1 \times S^1$ with $\mathbb{Z}$ and $\mathbb{Z}_2$ coefficients,
 using the $\Delta$-complex structure given in \S 2.1.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+To compute the simplicial cohomology groups of $S^1 \times S^1$, let us recall 
+the computation of the siplicial homology of the space. We have the chain group 
+\[
+    0 \xrightarrow{0} C_2 \xrightarrow{\partial} C_1 \xrightarrow{\partial} C_0 \xrightarrow[]{0} 0    
+.\]
+Then we observed that the boundary maps are defined as follows:
+\begin{align*}
+    \partial U &= a + b - c \\
+    \partial L &= a - c + b \\
+    \partial a &= v - v = 0 \\
+    \partial b &= v - v = 0 \\
+    \partial c &= v - v = 0
+\end{align*}
+Then since each cycle in $C^1$ goes to 0, we say that $\partial_1 = 0$.
+Our coefficients will be equal to 0 or 1, since we are in a simplicial case.
+So we can treat the $\mathbb{Z}$ and $\mathbb{Z}_2$ coefficient cases as equivalent.
+Now take the dual of each chain to be denoted by itself with a 
+$*$ in the superscript. That is, $U^*(U) = 1, U^*(L) = 0$ etc. Then we wish
+to compute the coboundary maps of each of our duals.
+Since $\partial: C_1 \to C_0$ is the 0-map, then its dual 
+$\delta: C^0 \to C^1$ is also the 0-map. 
+So we say that
+\begin{align*}
+    Im \ \delta_0 &= 0 \\
+    Ker \ \delta_0 &= C^0 
+\end{align*}
+For $\delta_1:C^1\to C^2$,
+we wish to compute how it acts upon different cochains in $C^1$.
+So, we can compute $\delta$ for each of our duals.
+\begin{align*}
+    \delta a^* U &= a^* \partial U = a^* (a + b - c) = a^* a =1 \\
+    \delta b^* U &= b^* \partial U = b^* (a + b - c) = b^* b = 1 \\
+    \delta c^* U &= c^* \partial U = c^* (a + b - c) = -c^* c = -1 \\\\
+    \delta a^* L &= a^* \partial L = a^* (a - c + b) = a^* a = 1 \\
+    \delta b^* L &= b^* \partial L = b^* (a - c + b) = b^* b = 1 \\
+    \delta c^* L &= c^* \partial L = c^* (a - c + b) = - c^* c = -1
+\end{align*}
+Since $\delta a^*$ is equal to 1 for both $U$ and $L$ it follows that 
+$\delta a^* = U^* + L^*$ so that it has a positive coefficient acting 
+upon either $U$ or $L$.
+Then the same is true for $b^*$, and the opposite is true. So we say that
+\begin{align*}
+    \delta_1 a^* &= U^* + L^* \\
+    \delta_1 b^* &= U^* + L^* \\
+    \delta_1 c^* &= -U^* - L^*
+\end{align*}
+Since these are clearly not independent, we say that
+\[
+    Im \ \delta_1 = \mathbb{Z}(U^* + L^*)
+.\]
+Then since $\delta_1 a^* = \delta_1 b^*$ is the opposite of $\delta_1 c^*$,
+it follows that 
+\[
+    Ker \ \delta_1 = \mathbb{Z}(a^* + c^*) \oplus \mathbb{Z}(b^* + c^*)
+.\]
+Then, finally for $\delta_2$, it is 0 since it is the dual of the 0 map.
+Therefore its kernel is its entire domain, and its image, 0.
+So at long last we can compute the cohomology,
+\begin{align*}
+    H^3(S^1 \times S^1; \mathbb{Z}\text{ or }\mathbb{Z}_2) &= \frac{Ker \ \delta_0}{Im \ \delta_{-1}} = \frac{C^0}{0} = C^0 = \mathbb{Z}v^* \\
+    H^1(S^1 \times S^1; \mathbb{Z}\text{ or }\mathbb{Z}_2) &= \frac{Ker \ \delta_1}{Im \ \delta_0} = \frac{\mathbb{Z}(a^* + c^*) \oplus \mathbb{Z}(b^* + c^*)}{0} = \mathbb{Z}(a^* + c^*) \oplus \mathbb{Z}(b^* + c^*) \\
+    H^2(S^1 \times S^1; \mathbb{Z}\text{ or }\mathbb{Z}_2) &= \frac{Ker \ \delta_2}{Im \ \delta_1} = \frac{C^2}{\mathbb{Z}(U^* + L^*)} = \frac{\mathbb{Z}U^* + \mathbb{Z}L^*}{\mathbb{Z}(U^* + L^*)} = \frac{\mathbb{Z}U^* + \mathbb{Z}(U^* + L^*)}{\mathbb{Z}(U^* + L^*)} = \mathbb{Z}U^* \\
+    H^3(S^1 \times S^1; \mathbb{Z}\text{ or }\mathbb{Z}_2) &= 0 \\
+    & \vdots
+\end{align*}
 
 \section*{Problem 3.1.8 (c)}
 Show that if $A$ is a retract of $X$ then $H^n(X;G) \approx H^n(A;G) \oplus H^n(X,A;G)$.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+\begin{proof}
+Assume that $A$ is a retract of $X$. Then we have a short exact sequence 
+\[
+    0 \to H^n(A;G) \to H^n(X;G) \to H^n(X,A;G) \to 0
+.\]
+Also, we have some $r:X \to A$ as our retraction and similarly $i:A \to X$ as our inclusion.
+Then, we have induced homomorphisms $r^*: H^n(X;G) \to H^n(A;G)$,
+$i^*: H^n(A;G) \to H^n(X;G)$. So we can also use these functions to construct 
+the following diagrams (which yield a split exact sequence):
+\begin{align*}
+    0 &\longrightarrow H^n(A;G) \longrightarrow_{i^*} H^n(X;G) \longrightarrow_{r^*} H^n(X,A;G) \longrightarrow 0 \\
+0 &\longrightarrow H^n(A;G) \rightarrow H^n(A;G) \oplus H^n(X,A;G) \longrightarrow H^n(X,A;G) \longrightarrow 0
+.\end{align*}
+Since we have isomorphism on the left term and the right term, it follows 
+that $H^n(A;G) \approx H^n(A;G) \oplus H^n(X,A;G)$.
+\end{proof}
 \end{document}

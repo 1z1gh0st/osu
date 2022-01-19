@@ -1,8 +1,8 @@
-Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/11/22 14:52:02
-#Program Template     (template.asm			     Page 1 - 1
+Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/16/22 15:25:46
++Assignment1_PhilipWarton     (template.asm		     Page 1 - 1
 
 
-				TITLE Program Template     (template.asm)
+				TITLE Assignment1_PhilipWarton     (template.asm)
 
 				; Author: Philip Warton
 				; Last Modified: 01/08/2022
@@ -54,7 +54,15 @@ Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/11/22 14:52:02
 	   70 65 72 61 74
 	   69 6F 6E 73 27
 	   0A 00
- 00000049 50 69 63 6B 20		prompt0	BYTE	"Pick 2 numbers (the first being greater than the second), and see some binary operations!", 10, 0
+ 00000049 45 78 74 72 61		ec_txt	BYTE	"Extra credit parts (1) and (2) done", 10, 0
+	   20 63 72 65 64
+	   69 74 20 70 61
+	   72 74 73 20 28
+	   31 29 20 61 6E
+	   64 20 28 32 29
+	   20 64 6F 6E 65
+	   0A 00
+ 0000006E 50 69 63 6B 20		prompt0	BYTE	"Pick 2 numbers (the first being greater than the second), and see some binary operations!", 10, 0
 	   32 20 6E 75 6D
 	   62 65 72 73 20
 	   28 74 68 65 20
@@ -73,17 +81,17 @@ Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/11/22 14:52:02
 	   65 72 61 74 69
 	   6F 6E 73 21 0A
 	   00
- 000000A4 49 4E 50 55 54		prompt1 BYTE	"INPUT FIRST NUBMER:  >> ", 0
+ 000000C9 49 4E 50 55 54		prompt1 BYTE	"INPUT FIRST NUBMER:  >> ", 0
 	   20 46 49 52 53
 	   54 20 4E 55 42
 	   4D 45 52 3A 20
 	   20 3E 3E 20 00
- 000000BD 49 4E 50 55 54		prompt2 BYTE	"INPUT SECOND NUMBER: >> ", 0
+ 000000E2 49 4E 50 55 54		prompt2 BYTE	"INPUT SECOND NUMBER: >> ", 0
 	   20 53 45 43 4F
 	   4E 44 20 4E 55
 	   4D 42 45 52 3A
 	   20 3E 3E 20 00
- 000000D6 45 52 52 4F 52		err_str BYTE	"ERROR: First number must be greater than the second!", 0
+ 000000FB 45 52 52 4F 52		err_str BYTE	"ERROR: First number must be greater than the second!", 0
 	   3A 20 46 69 72
 	   73 74 20 6E 75
 	   6D 62 65 72 20
@@ -94,25 +102,25 @@ Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/11/22 14:52:02
 	   20 74 68 65 20
 	   73 65 63 6F 6E
 	   64 21 00
- 0000010B 20 0A 00			return	BYTE	" ", 10, 0
+ 00000130 20 0A 00			return	BYTE	" ", 10, 0
 
- 0000010E 58 20 5E 20 32		n1		BYTE	"X ^ 2 = ", 0
+ 00000133 58 20 5E 20 32		n1		BYTE	"X ^ 2 = ", 0
 	   20 3D 20 00
- 00000117 59 20 5E 20 32		n2		BYTE	"Y ^ 2 = ", 0
+ 0000013C 59 20 5E 20 32		n2		BYTE	"Y ^ 2 = ", 0
 	   20 3D 20 00
- 00000120 58 20 2B 20 59		n3		BYTE	"X + Y = ", 0
+ 00000145 58 20 2B 20 59		n3		BYTE	"X + Y = ", 0
 	   20 3D 20 00
- 00000129 58 20 2D 20 59		n4		BYTE	"X - Y = ", 0
+ 0000014E 58 20 2D 20 59		n4		BYTE	"X - Y = ", 0
 	   20 3D 20 00
- 00000132 58 20 2A 20 59		n5		BYTE	"X * Y = ", 0
+ 00000157 58 20 2A 20 59		n5		BYTE	"X * Y = ", 0
 	   20 3D 20 00
- 0000013B 58 20 2F 20 59		n6		BYTE	"X / Y = ", 0
+ 00000160 58 20 2F 20 59		n6		BYTE	"X / Y = ", 0
 	   20 3D 20 00
- 00000144 20 72 65 6D 61		n7		BYTE	" remainder ", 0
+ 00000169 20 72 65 6D 61		n7		BYTE	" remainder ", 0
 	   69 6E 64 65 72
 	   20 00
 
- 00000150 73 65 65 20 79		bye		BYTE	"see ya!"
+ 00000175 73 65 65 20 79		bye		BYTE	"see ya!"
 	   61 21
 
  00000000			.code
@@ -120,130 +128,132 @@ Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/11/22 14:52:02
 					; Intro
  00000000  BA 00000024 R		mov		edx,		OFFSET intro
  00000005  E8 00000000 E		call	WriteString					; Print name and program title
- 0000000A  BA 00000049 R		mov		edx,		OFFSET prompt0
- 0000000F  E8 00000000 E		call	WriteString					; Print instructions
+ 0000000A  BA 00000049 R		mov		edx,		OFFSET ec_txt
+ 0000000F  E8 00000000 E		call	WriteString					; Print extra credit stuff
+ 00000014  BA 0000006E R		mov		edx,		OFFSET prompt0
+ 00000019  E8 00000000 E		call	WriteString					; Print instructions
 
 					; Getting first input
- 00000014  BA 000000A4 R		mov		edx,		OFFSET prompt1
- 00000019  E8 00000000 E		call	WriteString					; Print first prompt
- 0000001E  E8 00000000 E		call	ReadInt
- 00000023  A3 00000000 R		mov		x,			eax				; Read input into variable 'x'
+ 0000001E  BA 000000C9 R		mov		edx,		OFFSET prompt1
+ 00000023  E8 00000000 E		call	WriteString					; Print first prompt
+ 00000028  E8 00000000 E		call	ReadInt
+ 0000002D  A3 00000000 R		mov		x,			eax				; Read input into variable 'x'
 
 					; Getting second input
- 00000028  BA 000000BD R		mov		edx,		OFFSET prompt2
- 0000002D  E8 00000000 E		call	WriteString					; Print second prompt
- 00000032  E8 00000000 E		call	ReadInt
- 00000037  A3 00000004 R		mov		y,			eax				; Read input into variable 'y'
+ 00000032  BA 000000E2 R		mov		edx,		OFFSET prompt2
+ 00000037  E8 00000000 E		call	WriteString					; Print second prompt
+ 0000003C  E8 00000000 E		call	ReadInt
+ 00000041  A3 00000004 R		mov		y,			eax				; Read input into variable 'y'
 
 					; CHECK x > y
- 0000003C  A1 00000000 R		mov		eax,		x
- 00000041  3B 05 00000004 R		cmp		eax,		y				; Compare x to y
- 00000047  7C 02			jl		throw_error					; Go to flag 'throw_error' if x < y
- 00000049  EB 11			jmp		continue					; Continue otherwise
+ 00000046  A1 00000000 R		mov		eax,		x
+ 0000004B  3B 05 00000004 R		cmp		eax,		y				; Compare x to y
+ 00000051  7C 02			jl		throw_error					; Go to flag 'throw_error' if x < y
+ 00000053  EB 11			jmp		continue					; Continue otherwise
 
- 0000004B			throw_error:
- 0000004B  BA 000000D6 R		mov		edx,		OFFSET err_str
- 00000050  E8 00000000 E		call	WriteString					; Print error message
+ 00000055			throw_error:
+ 00000055  BA 000000FB R		mov		edx,		OFFSET err_str
+ 0000005A  E8 00000000 E		call	WriteString					; Print error message
 					invoke	ExitProcess,0				; Quit program
- 00000055  6A 00	   *	    push   +000000000h
- 00000057  E8 00000000 E   *	    call   ExitProcess
+ 0000005F  6A 00	   *	    push   +000000000h
+ 00000061  E8 00000000 E   *	    call   ExitProcess
 
- 0000005C			continue:
+ 00000066			continue:
 					; SQUARE_x
- 0000005C  A1 00000000 R		mov		eax,		x
- 00000061  8B 1D 00000000 R		mov		ebx,		x
- 00000067  F7 E3			mul		ebx							; Mutliply x with x
- 00000069  A3 00000008 R		mov		x_sq,		eax				; Store x^2 value
+ 00000066  A1 00000000 R		mov		eax,		x
+ 0000006B  8B 1D 00000000 R		mov		ebx,		x
+ 00000071  F7 E3			mul		ebx							; Mutliply x with x
+ 00000073  A3 00000008 R		mov		x_sq,		eax				; Store x^2 value
 
 					; SQUARE_y
- 0000006E  A1 00000004 R		mov		eax,		y
- 00000073  8B 1D 00000004 R		mov		ebx,		y
- 00000079  F7 E3			mul		ebx							; Multiply y with y
- 0000007B  A3 0000000C R		mov		y_sq,		eax				; Store y^2 value
+ 00000078  A1 00000004 R		mov		eax,		y
+ 0000007D  8B 1D 00000004 R		mov		ebx,		y
+ 00000083  F7 E3			mul		ebx							; Multiply y with y
+ 00000085  A3 0000000C R		mov		y_sq,		eax				; Store y^2 value
 
 					; ADD
- 00000080  A1 00000000 R		mov		eax,		x
- 00000085  03 05 00000004 R		add		eax,		y				; Add x and y
- 0000008B  A3 00000010 R		mov		sum,		eax				; Store sum value
+ 0000008A  A1 00000000 R		mov		eax,		x
+ 0000008F  03 05 00000004 R		add		eax,		y				; Add x and y
+ 00000095  A3 00000010 R		mov		sum,		eax				; Store sum value
 
 					; SUBTRACT
- 00000090  A1 00000000 R		mov		eax,		x
- 00000095  2B 05 00000004 R		sub		eax,		y				; Subtrack y from x
- 0000009B  A3 00000014 R		mov		diff,		eax				; Store difference value
+ 0000009A  A1 00000000 R		mov		eax,		x
+ 0000009F  2B 05 00000004 R		sub		eax,		y				; Subtrack y from x
+ 000000A5  A3 00000014 R		mov		diff,		eax				; Store difference value
 
 					; MULTIPLY
- 000000A0  A1 00000000 R		mov		eax,		x
- 000000A5  8B 1D 00000004 R		mov		ebx,		y
- 000000AB  F7 E3			mul		ebx							; Multiply x and y
- 000000AD  A3 00000018 R		mov		prod,		eax				; Store product value
+ 000000AA  A1 00000000 R		mov		eax,		x
+ 000000AF  8B 1D 00000004 R		mov		ebx,		y
+ 000000B5  F7 E3			mul		ebx							; Multiply x and y
+ 000000B7  A3 00000018 R		mov		prod,		eax				; Store product value
 					
 					; DIVIDE
- 000000B2  A1 00000000 R		mov		eax,		x
- 000000B7  99				cdq									; Expand register (setup)
- 000000B8  8B 1D 00000004 R		mov		ebx,		y
- 000000BE  BA 00000000			mov		edx,		0
- 000000C3  F7 F3			div		ebx							; Divide x by y
- 000000C5  A3 0000001C R		mov		quo,		eax				; Store quotient value
- 000000CA  89 15 00000020 R		mov		rem,		edx				; Store remainder value
+ 000000BC  A1 00000000 R		mov		eax,		x
+ 000000C1  99				cdq									; Expand register (setup)
+ 000000C2  8B 1D 00000004 R		mov		ebx,		y
+ 000000C8  BA 00000000			mov		edx,		0
+ 000000CD  F7 F3			div		ebx							; Divide x by y
+ 000000CF  A3 0000001C R		mov		quo,		eax				; Store quotient value
+ 000000D4  89 15 00000020 R		mov		rem,		edx				; Store remainder value
 
 					; PRINT RESULTS
- 000000D0  BA 0000010E R		mov		edx,		OFFSET n1
- 000000D5  E8 00000000 E		call	WriteString
- 000000DA  A1 00000008 R		mov		eax,		x_sq
- 000000DF  E8 00000000 E		call	WriteDec
- 000000E4  BA 0000010B R		mov		edx,		OFFSET return
- 000000E9  E8 00000000 E		call	WriteString					; Print x^2
+ 000000DA  BA 00000133 R		mov		edx,		OFFSET n1
+ 000000DF  E8 00000000 E		call	WriteString
+ 000000E4  A1 00000008 R		mov		eax,		x_sq
+ 000000E9  E8 00000000 E		call	WriteDec
+ 000000EE  BA 00000130 R		mov		edx,		OFFSET return
+ 000000F3  E8 00000000 E		call	WriteString					; Print x^2
 
- 000000EE  BA 00000117 R		mov		edx,		OFFSET n2
- 000000F3  E8 00000000 E		call	WriteString
- 000000F8  A1 0000000C R		mov		eax,		y_sq
- 000000FD  E8 00000000 E		call	WriteDec
- 00000102  BA 0000010B R		mov		edx,		OFFSET return
- 00000107  E8 00000000 E		call	WriteString					; Print y^2
+ 000000F8  BA 0000013C R		mov		edx,		OFFSET n2
+ 000000FD  E8 00000000 E		call	WriteString
+ 00000102  A1 0000000C R		mov		eax,		y_sq
+ 00000107  E8 00000000 E		call	WriteDec
+ 0000010C  BA 00000130 R		mov		edx,		OFFSET return
+ 00000111  E8 00000000 E		call	WriteString					; Print y^2
 
- 0000010C  BA 00000120 R		mov		edx,		OFFSET n3
- 00000111  E8 00000000 E		call	WriteString
- 00000116  A1 00000010 R		mov		eax,		sum
- 0000011B  E8 00000000 E		call	WriteDec
- 00000120  BA 0000010B R		mov		edx,		OFFSET return
- 00000125  E8 00000000 E		call	WriteString					; Print x + y
+ 00000116  BA 00000145 R		mov		edx,		OFFSET n3
+ 0000011B  E8 00000000 E		call	WriteString
+ 00000120  A1 00000010 R		mov		eax,		sum
+ 00000125  E8 00000000 E		call	WriteDec
+ 0000012A  BA 00000130 R		mov		edx,		OFFSET return
+ 0000012F  E8 00000000 E		call	WriteString					; Print x + y
 
- 0000012A  BA 00000129 R		mov		edx,		OFFSET n4
- 0000012F  E8 00000000 E		call	WriteString
- 00000134  A1 00000014 R		mov		eax,		diff
- 00000139  E8 00000000 E		call	WriteDec
- 0000013E  BA 0000010B R		mov		edx,		OFFSET return
- 00000143  E8 00000000 E		call	WriteString					; Print x - y
+ 00000134  BA 0000014E R		mov		edx,		OFFSET n4
+ 00000139  E8 00000000 E		call	WriteString
+ 0000013E  A1 00000014 R		mov		eax,		diff
+ 00000143  E8 00000000 E		call	WriteDec
+ 00000148  BA 00000130 R		mov		edx,		OFFSET return
+ 0000014D  E8 00000000 E		call	WriteString					; Print x - y
 
- 00000148  BA 00000132 R		mov		edx,		OFFSET n5
- 0000014D  E8 00000000 E		call	WriteString
- 00000152  A1 00000018 R		mov		eax,		prod
- 00000157  E8 00000000 E		call	WriteDec
- 0000015C  BA 0000010B R		mov		edx,		OFFSET return
- 00000161  E8 00000000 E		call	WriteString					; Print x * y
+ 00000152  BA 00000157 R		mov		edx,		OFFSET n5
+ 00000157  E8 00000000 E		call	WriteString
+ 0000015C  A1 00000018 R		mov		eax,		prod
+ 00000161  E8 00000000 E		call	WriteDec
+ 00000166  BA 00000130 R		mov		edx,		OFFSET return
+ 0000016B  E8 00000000 E		call	WriteString					; Print x * y
 
- 00000166  BA 0000013B R		mov		edx,		OFFSET n6
- 0000016B  E8 00000000 E		call	WriteString
- 00000170  A1 0000001C R		mov		eax,		quo
- 00000175  E8 00000000 E		call	WriteDec
- 0000017A  BA 00000144 R		mov		edx,		OFFSET n7
- 0000017F  E8 00000000 E		call	WriteString
- 00000184  A1 00000020 R		mov		eax,		rem
- 00000189  E8 00000000 E		call	WriteDec
- 0000018E  BA 0000010B R		mov		edx,		OFFSET return
- 00000193  E8 00000000 E		call	WriteString					; Print x / y
+ 00000170  BA 00000160 R		mov		edx,		OFFSET n6
+ 00000175  E8 00000000 E		call	WriteString
+ 0000017A  A1 0000001C R		mov		eax,		quo
+ 0000017F  E8 00000000 E		call	WriteDec
+ 00000184  BA 00000169 R		mov		edx,		OFFSET n7
+ 00000189  E8 00000000 E		call	WriteString
+ 0000018E  A1 00000020 R		mov		eax,		rem
+ 00000193  E8 00000000 E		call	WriteDec
+ 00000198  BA 00000130 R		mov		edx,		OFFSET return
+ 0000019D  E8 00000000 E		call	WriteString					; Print x / y
 
 					; Saying bye
- 00000198  BA 00000150 R		mov		edx,		OFFSET bye
- 0000019D  E8 00000000 E		call	WriteString					; Print statement in variable 'bye'
+ 000001A2  BA 00000175 R		mov		edx,		OFFSET bye
+ 000001A7  E8 00000000 E		call	WriteString					; Print statement in variable 'bye'
 
 					exit
- 000001A2  6A 00	   *	    push   +000000000h
- 000001A4  E8 00000000 E   *	    call   ExitProcess
- 000001A9			main ENDP
+ 000001AC  6A 00	   *	    push   +000000000h
+ 000001AE  E8 00000000 E   *	    call   ExitProcess
+ 000001B3			main ENDP
 				END main
-Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/11/22 14:52:02
-#Program Template     (template.asm			     Symbols 2 - 1
+Microsoft (R) Macro Assembler Version 14.29.30138.0	    01/16/22 15:25:46
++Assignment1_PhilipWarton     (template.asm		     Symbols 2 - 1
 
 
 
@@ -336,8 +346,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00001000 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 00000157 Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 000001A9 Para	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	32 Bit	 0000017C Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000001B3 Para	  Public  'CODE'	
 
 
 Procedures, parameters, and locals:
@@ -444,9 +454,9 @@ WriteStackFrame  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External
 WriteString  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteToFile  . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
 WriteWindowsMsg  . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External STDCALL
-main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000001A9 Public STDCALL
-  throw_error  . . . . . . . . .	L Near	 0000004B _TEXT	
-  continue . . . . . . . . . . .	L Near	 0000005C _TEXT	
+main . . . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 000001B3 Public STDCALL
+  throw_error  . . . . . . . . .	L Near	 00000055 _TEXT	
+  continue . . . . . . . . . . .	L Near	 00000066 _TEXT	
 printf . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 scanf  . . . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
 wsprintfA  . . . . . . . . . . .	P Near	 00000000 FLAT	Length= 00000000 External C
@@ -668,10 +678,11 @@ WriteConsole . . . . . . . . . .	Text   	 WriteConsoleA
 black  . . . . . . . . . . . . .	Number	 00000000h   
 blue . . . . . . . . . . . . . .	Number	 00000001h   
 brown  . . . . . . . . . . . . .	Number	 00000006h   
-bye  . . . . . . . . . . . . . .	Byte	 00000150 _DATA	
+bye  . . . . . . . . . . . . . .	Byte	 00000175 _DATA	
 cyan . . . . . . . . . . . . . .	Number	 00000003h   
 diff . . . . . . . . . . . . . .	DWord	 00000014 _DATA	
-err_str  . . . . . . . . . . . .	Byte	 000000D6 _DATA	
+ec_txt . . . . . . . . . . . . .	Byte	 00000049 _DATA	
+err_str  . . . . . . . . . . . .	Byte	 000000FB _DATA	
 exit . . . . . . . . . . . . . .	Text   	 INVOKE ExitProcess,0
 gray . . . . . . . . . . . . . .	Number	 00000008h   
 green  . . . . . . . . . . . . .	Number	 00000002h   
@@ -683,21 +694,21 @@ lightGreen . . . . . . . . . . .	Number	 0000000Ah
 lightMagenta . . . . . . . . . .	Number	 0000000Dh   
 lightRed . . . . . . . . . . . .	Number	 0000000Ch   
 magenta  . . . . . . . . . . . .	Number	 00000005h   
-n1 . . . . . . . . . . . . . . .	Byte	 0000010E _DATA	
-n2 . . . . . . . . . . . . . . .	Byte	 00000117 _DATA	
-n3 . . . . . . . . . . . . . . .	Byte	 00000120 _DATA	
-n4 . . . . . . . . . . . . . . .	Byte	 00000129 _DATA	
-n5 . . . . . . . . . . . . . . .	Byte	 00000132 _DATA	
-n6 . . . . . . . . . . . . . . .	Byte	 0000013B _DATA	
-n7 . . . . . . . . . . . . . . .	Byte	 00000144 _DATA	
+n1 . . . . . . . . . . . . . . .	Byte	 00000133 _DATA	
+n2 . . . . . . . . . . . . . . .	Byte	 0000013C _DATA	
+n3 . . . . . . . . . . . . . . .	Byte	 00000145 _DATA	
+n4 . . . . . . . . . . . . . . .	Byte	 0000014E _DATA	
+n5 . . . . . . . . . . . . . . .	Byte	 00000157 _DATA	
+n6 . . . . . . . . . . . . . . .	Byte	 00000160 _DATA	
+n7 . . . . . . . . . . . . . . .	Byte	 00000169 _DATA	
 prod . . . . . . . . . . . . . .	DWord	 00000018 _DATA	
-prompt0  . . . . . . . . . . . .	Byte	 00000049 _DATA	
-prompt1  . . . . . . . . . . . .	Byte	 000000A4 _DATA	
-prompt2  . . . . . . . . . . . .	Byte	 000000BD _DATA	
+prompt0  . . . . . . . . . . . .	Byte	 0000006E _DATA	
+prompt1  . . . . . . . . . . . .	Byte	 000000C9 _DATA	
+prompt2  . . . . . . . . . . . .	Byte	 000000E2 _DATA	
 quo  . . . . . . . . . . . . . .	DWord	 0000001C _DATA	
 red  . . . . . . . . . . . . . .	Number	 00000004h   
 rem  . . . . . . . . . . . . . .	DWord	 00000020 _DATA	
-return . . . . . . . . . . . . .	Byte	 0000010B _DATA	
+return . . . . . . . . . . . . .	Byte	 00000130 _DATA	
 sum  . . . . . . . . . . . . . .	DWord	 00000010 _DATA	
 white  . . . . . . . . . . . . .	Number	 0000000Fh   
 wsprintf . . . . . . . . . . . .	Text   	 wsprintfA
