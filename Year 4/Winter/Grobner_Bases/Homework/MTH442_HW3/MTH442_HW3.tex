@@ -1,0 +1,150 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Gr{\"o}bner Bases --- Homework 3}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+\section*{Problem 1.4.1}
+Let $f = 3x^4z - 2x^3y^4 + 7x^2y^2z^3 - 8xy^3z^3 \in \mathbb{Q}[x,y,z]$.
+Determine the leading term, leading coefficient, and leading power product of $f$
+with respect to deglex, lex, and degrevlex with $x > y > z$. Repeat the exercise with $x < y < z$.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+\fbox{$x > y > z$}\\
+With respect to deglex, we first note the sum of powers for each term.
+\begin{align*}
+    3x^4z       &\to 5 \\
+    -2x^3y^4    &\to 7 \\
+    7x^2y^2z^3  &\to 7 \\
+    -8xy^3z^3   &\to 7
+\end{align*}
+So by degree we know that $3x^4z$ is smaller than our other terms.
+Within the terms that have degree 7, we look at which has the highest 
+power of $x$. This gives us the following ordering of terms:
+\[
+    3 x^4 z         <
+    -8 x y^3 z^3    <
+    7 x^2 y^2 z^3   <
+    -2x^3y^4
+.\]
+So, our leading term is $-2x^3y^4$, our leading coefficient is $-2$, and 
+our leading power product is $x^3y^4$.\\\\
+With respect to lex ordering, we look first at our powers of $x$. This 
+immediately gives us an ordering of our terms,
+\[
+    -8 x y^3 z^3    <
+    7 x^2 y^2 z^3   <
+    -2x^3y^4        <
+    3 x^4 z
+.\]
+Thus our leading term is $3x^4$, our leading coefficient is $3$, and our leading 
+power product is $x^4z$.\\\\
+With respect to degrevlex, we take the degree order from degrev, 
+but reverse the lexigraphical aspec. This gives us an ordering,
+\[
+    3 x^4 z         <
+    -2x^3y^4        <
+    7 x^2 y^2 z^3   <
+    -8 x y^3 z^3
+.\]
+Therefore our leading term is $-8xy^3z^3$, our leading coefficient is $-8$,
+and our leading power product $xy^3z^3$.\\\\
+\fbox{$x < y < z$}\\
+With respect to deglex, we take the same degree order as above.
+Then we first look at the powers of $z$. So then $3x^4 < -2x^3y^4$, and 
+both are smaller than the other two. Since the other two both have $z^3$,
+we then look at powers of $y$. This gives us the ordering 
+\[
+    3x^4z < -2x^3y^4 < 7x^2y^2z^3 < -8xy^3z^3  
+.\]
+So we have 
+\[
+    lt(f) = -8xy^3z^3, \ \ \ \ lc(f) = -8, \ \ \ \ lp(f) = xy^3z^3
+.\]
+With respect to lexigraphical ordering, we look at the powers of $z$.
+To order the two terms with $z^3$, we look at powers of $y$. This gives 
+us 
+\[
+    -2x^3y^4 < 3x^4z < 7x^2y^2z^3 < -8xy^3z^3 
+.\]
+Thus,
+\[
+    lt(f) = -8xy^3z^3, \ \ \ \ lc(f) = -8, \ \ \ \ lp(f) = xy^3z^3   
+.\]
+With respect to degrevlex, we keep the usual degree order. Then we 
+reverse the remaining terms, giving us
+\[
+    3x^4z < -8xy^3z^3 < 7x^2y^2z^3 < -2x^3y^4
+.\]
+Therefore 
+\[
+    lt(f) = -2x^3y^4, \ \ \ \ lc(f) = -2, \ \ \ \ lp(f) = x^3y^4
+.\]
+\section*{Problem 1.5.5}
+Let $f,g,h,r,s \in R = K[x_1,\cdots,x_n]$, and let $F$ be a collection of non-zero 
+polynomials in $R$. Disprove the following (by providing counterexamples).
+\begin{enumerate}[(a)]
+    \item If $f \xrightarrow{F}_+r$ and $g \xrightarrow{F}_+s$, then $f+g\xrightarrow{F}_+r+s$ \\
+    \item If $f\xrightarrow{F}_+r$ and $g\xrightarrow{F}_+s$, then $fg\xrightarrow{F}_+rs$.
+\end{enumerate}
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+Let $x > y > z$ with degree lexigraphical ordering.
+\subsubsection*{(a)}
+Let 
+\begin{align*}
+    F &= \{x+z, y\}\\
+    f &= x + y \\
+    g &= -y + z
+.\end{align*}
+Then $f \xrightarrow{F}_+ x, g \xrightarrow{F}_+ z$.
+So we say that $r + s = x + z$.
+Then $f + g = x + y - y + z = x + z$. The only reduction that 
+exists is $f + g \xrightarrow{F}_+ 0$. Clearly $x + z \neq 0$.
+\subsubsection*{(b)}
+Let
+\begin{align*}
+    F &= \{x,y\} \\
+    f &= x + y \\
+    g &= x - y
+\end{align*}
+By choosing reductions carefully, we say that $f \xrightarrow{y} x$ and 
+$g \xrightarrow{x} -y$. So then $rs = -xy$. Then $fg = (x + y)(x - y) = x^2 - y^2$.
+Clearly we do not have a way to reduce this to something with an $xy$ term.
+\end{document}
