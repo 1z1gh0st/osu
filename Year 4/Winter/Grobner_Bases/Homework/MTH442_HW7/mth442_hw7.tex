@@ -1,0 +1,116 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem {remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Gr{\"o}bner Bases --- Homework 7}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+\section*{Problem 1}
+Let $R=\mathbb{Q}[x,y]$, and set $f=x^4y + x^2y^3 - 3x^3y - 3xy^3$, $g=x^5y - 3x^4y - 
+x^2y^2 + 3xy^2$.  Use our Gr\"obner basis elimination order strategy from class to 
+compute the following.  (Note: you can check your work using the gcd command in 
+sagemath, but please explain the whole method and do all the relevant computations 
+in sagemath for your hand in work.)
+\begin{enumerate}
+\item
+$\text{lcm}(f,g)$
+\item
+$\gcd(f,g)$
+\end{enumerate}
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+First, we will compute the reduced Gr{\"o}bner basis for the ideal $\langle wf,(1-w)g \rangle$ with respect to the elimination order of $x,y$
+being smaller than $w$. We will use sagemath in order to do this. We get 
+\begin{verbatim}
+REDUCED_GROEBNER_BASIS:
+w*x^4*y - 3*w*x^3*y + w*x^2*y^3 - 3*w*x*y^3
+w*x^3*y^2 - w*x^2*y^5 - 3*w*x^2*y^2 + 3*w*x*y^5 + x^6*y - 3*x^5*y - x^3*y^2 + 3*x^2*y^2
+w*x^2*y^6 + w*x^2*y^2 - 3*w*x*y^6 - 3*w*x*y^2 - x^6*y^2 + 3*x^5*y^2 + x^5*y - 3*x^4*y + x^3*y^3 - 3*x^2*y^3 - x^2*y^2 + 3*x*y^2
+x^7*y - 3*x^6*y + x^5*y^3 - 3*x^4*y^3 - x^4*y^2 + 3*x^3*y^2 - x^2*y^4 + 3*x*y^4
+\end{verbatim}
+The last polynomial is our $lcm$ since there is no $w$ variable in this polynomial. That is,
+\[
+    lcm(f,g)=x^7  y - 3  x^6  y + x^5  y^3 - 3  x^4  y^3 - x^4  y^2 + 3  x^3  y^2 - x^2  y^4 + 3  x  y^4
+.\]
+Then by our theorem, we know that $fg = lcm(f,g)gcd(f,g)$. We will use sagemath to compute $\frac{fg}{lcm(f,g)} = gcd(f,g)$.
+We get as our result,
+\[
+    gcd(f,g)=x(x-3)y  
+.\]
+\section*{Problem 2}
+Let $R=\mathbb{Q}[x,y]$, and set 
+\begin{align*}
+f_1 &= x^2\\
+f_2 &= x+y\\
+g_1 &= x(x+y)^2\\
+g_2 &= y.\\
+\end{align*}
+Let $A=\langle f_1,f_2 \rangle$ and let $B=\langle g_1, g_2 \rangle$.  Use our 
+Gr\"obner basis elimination order strategy from class to compute the ideal quotient
+$B:A$. (Note: again you can check your work using the quotient(A) command in 
+sagemath, but please explain the whole method and do all the relevant computations 
+in sagemath for your hand in work.)
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+To solve this we can first use Lemma 2.3.10 and Lemma 2.3.11 which grants us that 
+\[
+    B : A = \left(B : \langle f_1 \rangle\right) \cap \left(B : \langle f_2 \rangle\right)
+    = \left(\frac{1}{f_1}(B \cap \langle f_1 \rangle)\right) \cap \left(\frac{1}{f_2}(B \cap \langle f_2 \rangle)\right)
+.\]
+Then we can use lemma 2.3.7 to get the result that 
+\[
+B \cap \langle f_i \rangle = \langle lcm(B,f_i) \rangle
+= \langle lcm(g_1,g_2,f_i) \rangle
+.\]
+First, we can simply find the Gro\"obner basis, $G_1$, of $\langle wg_1, wg_2, (1-w)f_1\rangle$ and 
+$G_2$ of $\langle wg_1, wg_2, (1-w)f_2\rangle$
+using sagemath. This grants us 
+\[
+    G_1 = \{x^3, x^2y\}, \ \ \ \ \ G_2 = \{x^3 + y^3, xy + y^2\}
+.\]
+So then dividing by $f_1$ and $f_2$ respectively, we say
+\[
+ \frac{1}{f_1}(B \cap \langle f_1\rangle) = \langle x, y \rangle, \ \ \ \ \ \ \ \ \
+ \frac{1}{f_2}(B \cap \langle f_2 \rangle) = \langle x^2 - yx + y^2, y \rangle
+.\]
+So now to intersect these two, we use sagemath to compute the Gr\"obner basis of 
+$\langle wx,wy, (1-w)(x^2 - yx + y^2), (1-w)y\rangle$, which is given by
+\[
+    \langle x, y^2 \rangle
+.\]
+So, in all, $B : A = \langle x, y^2 \rangle$.
+\end{document}

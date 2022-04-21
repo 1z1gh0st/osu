@@ -1,0 +1,197 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+% -------------------------------------------- %
+\title{CS 381 --- Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+\section{Elm}
+Trace for the evaluation of $[1,2] ++ [5]$.
+\begin{mdframed}
+    \begin{verbatim}
+[1,2] ++ [5]
+1::([2] ++ [5])
+1::(2::[5])
+1::[2,5]
+[1,2,5]
+        \end{verbatim}
+\end{mdframed}
+For the function definition
+\begin{mdframed}[]
+    \begin{verbatim}
+(++) : List Int -> List Int -> List Int
+l1 ++ l2 = case l1 of
+        []      -> l2
+        x::xs   -> x::(xs ++ l2)
+    \end{verbatim}
+\end{mdframed}
+First quiz is on Thursday in person, written on paper. We are allowed one sheet of notes, single sided.
+A function is a \textbf{parameterized expression}. Take something such as $3 + 5$ and replace these with
+$x + y$ and now it is a function on two variables. Notice how in ``MAD LIBS'' the parameters are given types
+that say what kind of argument should be placed into the function.
+A \textbf{function definition} is simply giving a name to a function.
+We make a simple sign function as follows
+\begin{mdframed}[]
+    \begin{verbatim}
+sign : Int -> Int
+sign x = if x==0 then 0 else x//abs x
+    \end{verbatim}
+\end{mdframed}
+Assume that a min function already exists that returns the smallest integer given two arguments. Then we can define 
+min3 as 
+\begin{mdframed}[]
+    \begin{verbatim}
+min3 : Int -> Int -> Int -> Int
+min3 x y z = min x (min y z)
+    \end{verbatim}
+\end{mdframed}
+We can also create a while loop recursively:
+\begin{mdframed}[]
+    \begin{verbatim}
+loop(state) = if cond(state) then
+                loop(update(state))
+              else
+                result(state)
+loop(initValues)
+    \end{verbatim}
+\end{mdframed}
+We must remember to keep in mind the mindshift about processing values.
+In programming with pattern matching 
+\begin{itemize}
+    \item A \textbf{value} $v$ is a term built out of constructors
+    \item A \textbf{pattern} $p$ is a term build out of constructors and variables
+    \item A \textbf{rule} $p \to e$ consists of a patter $p$ and an expression $e$
+    \item \textbf{Matching} $v$ agains $p$ creates a set of \textbf{variable bindings}
+    \item \textbf{Evaluating} a rule for $v$ means to evaluate $e$ in the context of bindings produced by matching $v$ against $p$
+\end{itemize}
+For elm, the following syntax will give us pattern matching
+\begin{verbatim}
+case v of
+    ...
+    p -> e
+\end{verbatim}
+General recursion template:
+\begin{mdframed}[]
+    \begin{verbatim}
+type T = Val | Con S T
+
+f : T -> U
+f x = case x of 
+        Val         -> e1{Val}      -- base case
+        Con s t     -> e2{s, f t}   -- inductive case
+    \end{verbatim}
+\end{mdframed}
+We practice this by constructing a recursive isEven function:
+\begin{mdframed}[]
+    \begin{verbatim}
+isEven : Int -> Bool
+isEven x = case x of
+        0 -> True
+        1 -> False
+        n -> isEven (n-2)
+    \end{verbatim}
+\end{mdframed}
+\subsection{Lists}
+Lists are built with two constructors, $[]$ and $v::l$. That is, 
+\begin{verbatim}
+[]      : List a
+(::)    : a -> List a -> List a
+\end{verbatim}
+We have some accessors as well
+\begin{verbatim}
+isEmpty : List a -> Bool
+head    : List a -> Maybe a
+tail    : List a -> Maybe (List a)
+\end{verbatim}
+If you apply head to an empty list then \textbf{Maybe} becomes important. You can raise a runtime error 
+like Haskell does, or we can do it like elm. If head finds some element then it will return the value,
+otherwise some error will be thrown.
+We have a template for list processing using pattern matching:
+\begin{mdframed}[]
+    \begin{verbatim}
+f: List T -> U
+f l = case l of
+    []      -> e1           -- result for empty list
+    x::xs   -> e2{x, xs}    -- result for non-empty list
+    \end{verbatim}
+\end{mdframed}
+
+% 04/12/22
+\subsection{Higher order functions and polymorphism}
+Every elm value has a type, as do functions, with some small exceptions ex. 3 (Number).
+If we recall our function `length', it took a type of `List a' to `Int'. We are using a variable 
+for the type. This is called parametric polymorphism instead of sub-type polymorphism. That is, `a' is 
+a type parameter that will work for any different type. Another example is our function `Tuple.first' which 
+maps a tuple $(a,b) \to a$. In this example we can have a tuple with two different type variables to the type 
+variable of the first. If you see the same type variable name twice, they must inherit the same type.
+Often with these type parameters the type of a function dictates much of the implementation of that function. For example see this zip function that can be implemented in elm:
+\begin{mdframed}
+	\begin{verbatim}
+zip : List a -> List b -> List (a,b)
+zip l1 l2 = case l1 of
+    [] -> []
+    x::xs -> case l2 of
+        [] -> []
+        y::ys -> (x,y)::zip xs ys
+\end{verbatim}
+\end{mdframed}
+The map function will apply a function to each element of a list. It is defined as
+\begin{verbatim}
+map : (a -> b) -> List a -> List b
+map f l = case l of
+    [] -> []
+    x::xs -> f x::map f xs
+\end{verbatim}
+One can notice that the type of the function almost entirely defines how we can possibly define the function.
+\begin{verbatim}
+andThen : Maybe a -> (a -> Maybe b) -> Maybe b
+andThen m f = case m of
+    Nothing -> Nothing
+    Just x -> f x
+
+reverse : List a -> List a
+reverse l = case l of 
+    [] -> []
+    x::xs -> reverse xs ++ [x]
+
+last : List a -> Maybe a
+last = head << reverse
+\end{verbatim}
+We think of $f << g$ as `f composed with g'.
+
+
+
+\end{document}

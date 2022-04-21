@@ -1,0 +1,67 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+% -------------------------------------------- %
+\title{PH203 --- Notes}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+\section{Ray Optics}
+Dispersion is the phenomenon that occurs because the index of refraction depends on the frequency of the light.
+It occurse becuase different wavelengths refract at different angles, and is the underlying mechanics of 
+the rainbow prism effect.
+Recall that 
+\[
+    n_1 \sin \theta_1 = n_2 \sin \theta_2   
+\]
+and that 
+\[
+    \lambda_1 > \lambda_2 \Rightarrow n_1 < n_2   
+.\]
+\subsection{Formation of images, ray tracing}
+\begin{mdframed}[]
+Which of the following are sources of light in the room?
+\begin{enumerate}
+    \item Flashlight
+    \item Laser
+    \item Sun 
+    \item Pencil 
+    \item Cat 
+    \item Your friend's nose
+\end{enumerate}
+Answer: all of them! If you are seeing something, light is coming off of that object.
+\end{mdframed}
+
+\end{document}

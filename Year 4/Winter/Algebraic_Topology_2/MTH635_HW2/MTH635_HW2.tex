@@ -1,0 +1,72 @@
+\documentclass{article}
+
+% -------------------------------------------- %
+% ------------------PACKAGES------------------ %
+% -------------------------------------------- %
+\usepackage{amssymb, amsmath, amsthm}
+\usepackage{bm}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+\usepackage{graphicx}
+\usepackage{import}
+\usepackage{listings}
+\usepackage[linewidth=1pt]{mdframed}
+\usepackage{pdfpages}
+\usepackage{times}
+\usepackage{transparent}
+\usepackage{xifthen}
+% -------------------------------------------- %
+
+% Figure command
+\newcommand{\incfig}[1]{%
+    % Adjust number for defualt figure width
+    \def\svgwidth{.5\columnwidth} 
+    \import{./figures/}{#1.pdf_tex}
+}
+
+% Theorem command
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\begin{document}
+
+% -------------------------------------------- %
+\title{Algebraic Topology --- Homework 2}
+\author{Philip Warton}
+\date{\today}
+\maketitle
+% -------------------------------------------- %
+\section*{Problem 3.11 (a)}
+Let $X$ be a Moore space $M(\mathbb{Z}_m,n)$ obtained from $S^n$ by attaching a cell $e^{n+1}$ by a map of degree $m$.
+Show that the quotient map $X \to X / S^n = S^{n+1}$ induces the trivial map on $H_i(\circ;\mathbb{Z})$ for all $i$ but not on $H^{n+1}(\circ ; \mathbb{Z})$.
+Deduce taht the splitting in the universal coefficient theorem for cohomology cannot be natural.
+\\
+\par\noindent\rule{\textwidth}{0.4pt}
+\subsection*{Solution}
+First we show that the trivial map is induced on the reduced homology with integer coefficients.
+We say that if $i = n$ then $0 = H_n(S^{n+1}) = H_n(S^{n+1};\mathbb{Z}) \Rightarrow 0 = \tilde{H_n}(S^{n+1})$.
+Since this is the target of the induced homomorphism from the quotient map, it follows that this map must necessarily be trivial.
+If $i \neq n$ then we have $0 = H_i(X) = H_i(X;\mathbb{Z}) \Rightarrow 0 = \tilde{H_i}(X;\mathbb{Z})$.
+Since the domain of our map is trivial, the map must be trivial.\\
+Then we wish to show that we do not have the induced map be trivial on $H^{n+1}(\circ ; \mathbb{Z})$.
+We have the long exact sequence
+\[
+    \cdots \to {H}_{n+1}(S^n) \to {H}_{n+1}(X) \to {H}_{n+1}(X / S^n) \to \cdots
+\]
+and its dual 
+\[
+    \cdots \leftarrow {H}^{n+1}(S^n;\mathbb{Z}) \leftarrow {H}^{n+1}(X;\mathbb{Z}) \leftarrow {H}^{n+1}(X / S^n;\mathbb{Z}) \leftarrow \cdots  
+\]
+We know that the $n+1$ cohomology of the $n$-sphere will be 0. By the universal coefficient theorem we have 
+\[
+    0 \to Ext(H_ns)  
+\]
+\section*{Problem 3.1.1}
+Assuming as known the cup product structure on the torus $S^1 \times S^1$, compute the cup 
+product structure in $H^*(M_g)$ for $M_g$ the closed orientable surface of genus $g$ by using the quotient map 
+from $M_g$ to a wedge sum of $g$ tori, shown in the text.
+
+\end{document}
