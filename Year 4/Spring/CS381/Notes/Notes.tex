@@ -191,7 +191,16 @@ last : List a -> Maybe a
 last = head << reverse
 \end{verbatim}
 We think of $f << g$ as `f composed with g'.
-
-
-
+\section{Grammar}
+I am missing a lot of stuff on here to be honest.
+\subsection{Parse Trees}
+\subsection{Abstract Syntax}
+All of the following were correct
+\begin{itemize}
+    \item type Bin = A $|$ B $|$ Conc Bin Bin
+    \item type Bin = Single Bool $|$ Many Bool Bin
+    \item type Bin = OnlyZero $|$ OnlyOne $|$ ZeroAnd Bin $|$ OneAnd Bin
+    \item type Bin = Seq Bool [Bool]
+\end{itemize}
+I am deceased.
 \end{document}

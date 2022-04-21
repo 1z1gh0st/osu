@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1649196400 "c:/Users/phili/Documents/osu/Year 4/Spring/CS381/Notes/Notes.tex" "Notes.pdf" "Notes" 1649196402
-  "C:/Users/phili/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1641696119 82507 a9eef8696c92627b87e9975edea03b2a ""
+["pdflatex"] 1650576819 "c:/Users/phili/Documents/osu/Year 4/Spring/CS381/Notes/Notes.tex" "Notes.pdf" "Notes" 1650576820
+  "C:/Users/phili/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1649799967 82507 a9eef8696c92627b87e9975edea03b2a ""
   "C:/Users/phili/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1641695929 9769966 2550a561846d221f2de5e490c27a0eb0 ""
   "C:/Users/phili/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc" 1458473887 4993 80dc9bab7f31fb78a000ccfed0e27cab ""
   "C:/Users/phili/AppData/Local/Programs/MiKTeX/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -120,9 +120,9 @@
   "C:/Users/phili/AppData/Local/Programs/MiKTeX/tex/latex/xifthen/xifthen.sty" 1448278036 5689 1bfa68243e89a54479e7d0580773c57e ""
   "C:/Users/phili/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-abspage.sty" 1602241898 2275 d29aca6fd67823551cb07584e3681d5d ""
   "C:/Users/phili/AppData/Local/Programs/MiKTeX/tex/latex/zref/zref-base.sty" 1602241898 20688 beaddf14d96104d4bf016523be5395c5 ""
-  "Notes.aux" 1649196401 295 c136c9b4b6c73e0d1089c07e1e0179d6 "pdflatex"
-  "Notes.tex" 1649196399 4847 e800de1de1027e98cfbb25cbf049b291 ""
-  "c:/Users/phili/Documents/osu/Year 4/Spring/CS381/Notes/Notes.tex" 1649196399 4847 e800de1de1027e98cfbb25cbf049b291 ""
+  "Notes.aux" 1650576820 734 1d27b694e58f564c95a2998aaa6e6521 "pdflatex"
+  "Notes.tex" 1650576818 7017 23efe50886de2d20a21840275354f52f ""
+  "c:/Users/phili/Documents/osu/Year 4/Spring/CS381/Notes/Notes.tex" 1650576818 7017 23efe50886de2d20a21840275354f52f ""
   (generated)
   "Notes.aux"
   "Notes.log"
