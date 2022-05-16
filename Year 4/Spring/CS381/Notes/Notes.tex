@@ -202,5 +202,44 @@ All of the following were correct
     \item type Bin = OnlyZero $|$ OnlyOne $|$ ZeroAnd Bin $|$ OneAnd Bin
     \item type Bin = Seq Bool [Bool]
 \end{itemize}
-I am deceased.
+Binary predicate example: factorial!
+\[
+    \frac{}{fac(1,1)} \ \ \ \ \ \ \ \frac{fac(n-1,m)}{fac(n,n\cdot m)}  
+\]
+We can also come up with other ways to formulate the second rule, which may be useful for readability or workability.
+It is also possible to define these things using different syntax.
+As an exercise, we define fibonacci numbers using inference rules:
+\[
+    \frac{}{fib(1,1)} \ \ \ \ \frac{}{fib(2,1)} \ \ \ \ \frac{fib(n-1,a), fib(n-2,b)}{fib(n,a+b)}
+.\]
+A derivation can be though of as a proof trees. Leaves are axioms, and internal nodes are instances of rules.
+\begin{align*}
+    & \frac{}{n \Downarrow \underline{n}} \\\\
+    & \frac{e \Downarrow n}{-e \Downarrow -n} \\\\
+    & \frac{e_1 \Downarrow n \ \ \ \ e_2 \Downarrow m}{e_1 + e_2 \Downarrow n + m} \\\\
+    & \frac{e_1 \Downarrow n \ \ \ \ e_2 \Downarrow m}{e_1 * e_2 \Downarrow n \cdot m}
+\end{align*}
+For creating a type system we need the following components:
+\begin{align*}
+    v &\in var \\
+    e &\in expr \\
+    T &\in type 
+\end{align*}
+Type system in 4 steps:
+\begin{enumerate}
+    \item Define object language
+    \item Define type language
+    \item Define typing rules
+    \item Finally we need a type checker
+\end{enumerate}
+\begin{mdframed}
+    \begin{align*}
+        e \in expr &::= n \ | \ e+e \ | \ e=e \ | \ not \ e \\
+        T \in type &::= Int \ | \ Bool\\\\
+        r_1 &= \frac{}{n:Int} \\\\
+        r_2 &= \frac{e_1:Int \ \ \ \ e_2:Int}{e_1+e2:Int} \\\\
+        r_3 &= \frac{e_1:Int \ \ \ \ e_2:Int}{e_1=e_2:Bool} \\\\
+        r_4 &= \frac{e:Bool}{not \ e:Bool}
+    \end{align*}
+\end{mdframed}
 \end{document}
