@@ -1,0 +1,140 @@
+Homework 5
+Philip Warton
+
+    Exercise 1. Runtime Stack
+            []
+        1   [x:?]
+        2   [y:?, x:?]
+        3   [y:1, x:?]
+        4   [f:{}, y:1, x:?]
+        11  [x:2, f:{}, y:1, x:?]
+        >>  x=0 is false
+            8 [x:1, x:2, f:{}, y:1, x:?]
+            >>  x=0 is false
+                8 [x:0, x:1, x:2, f:{}, y:1, x:?]
+                >>  x=0 is true
+                    6 [x:0, x:1, x:2, f:{}, y:1, x:?]
+                                            ^
+                    return 1
+                8 [x:1, x:2, f:{}, y:2, x:?]
+                return 2
+            8 [x:2, f:{}, y:5, x:?]
+            return 5
+        11 [f:{}, y:1, x:5]
+
+    Exercise 2. Static and Dynamic Scope
+                []
+            1   [x:?]
+            2   [y:?, x:?]
+            3   [z:?, y:?, x:?]
+            4   [z:?, y:?, x:3]
+            5   [z:?, y:7, x:3]
+            6   [f:{}, z:?, y:7, x:3]
+            7   [y:?, f:{}, z:?, y:7, x:3]
+            8   [y:11, f:{}, z:?, y:7, x:3]
+            9   [g:{}, y:11, f:{}, z:?, y:7, x:3]
+            10  [y:?, g:{}, y:11, f:{}, z:?, y:7, x:3]
+            11  [y:13, g:{}, y:11, f:{}, z:?, y:7, x:3]
+            12  [x:2, y:13, g:{}, y:11, f:{}, z:?, y:7, x:3]
+        Static:
+            >>  enter g
+                9   [y:13, x:2, y:13, g:{}, y:11, f:{}, z:?, y:7, x:3]
+                >>  enter f
+                    return 13*2 = 26
+                return 26
+            12  [y:13, g:{}, y:11, f:{}, z:26, y:7, x:3]
+        Dynamic:
+            >> enter g
+                9   [y:11, x:2, y:13, g:{}, y:11, f:{}, z:?, y:7, x:3]
+                >>  enter f
+                    return 3*11 = 33
+                return 33
+            12  [y:13, g:{}, y:11, f:{}, z:33, y:7, x:3]
+
+
+    Exercise 3. Parameter Passing
+            []
+        1   [y:?]
+        2   [z:?, y:?]
+        3   [z:?, y:7]
+        4   [f:{}, z:?, y:7]
+        10  [g:{}, f:{}, z:?, y:7]
+            ...
+
+    (i) call by value
+        15  [x:7, g:{}, f:{}, z:?, y:7]
+        >>  enter g
+            11  [x:7, x:7, g:{}, f:{}, z:?, y:7]
+            >>  enter f
+                5   [x:8, x:7, g:{}, f:{}, z:?, y:7]
+                6   [x:8, x:7, g:{}, f:{}, z:?, y:8]
+                7   [x:9, x:7, g:{}, f:{}, z:?, y:8]
+                8   [res:8, x:9, x:7, g:{}, f:{}, z:?, y:8]
+                return 8
+            11  [x:7, g:{}, f:{}, z:?, y:9]
+            12  [x:9, x:7, g:{}, f:{}, z:?, y:9]
+            >>  enter f
+                5   [x:10, x:7, g:{}, f:{}, z:?, y:9]
+                6   [x:10, x:7, g:{}, f:{}, z:?, y:10]
+                7   [x:11, x:7, g:{}, f:{}, z:?, y:10]
+                8   [res:10, x:11, x:7, g:{}, f:{}, z:?, y:10]
+                return 10
+            12  [x:13, x:7, g:{}, f:{}, z:?, y:9]
+            13  [res:13, x:13, x:7, g:{}, f:{}, z:?, y:9]
+            return 13
+        15  [g:{}, f:{}, z:13, y:9]
+
+    (ii) call by reference
+        15  [x:->y, g:{}, f:{}, z:?, y:7]
+        >>  enter g
+            11  [x:->y, x:->y, g:{}, f:{}, z:?, y:7]
+            >>  enter f
+                5   [x:->y, x:->y, g:{}, f:{}, z:?, y:8]
+                6   [x:->y, x:->y, g:{}, f:{}, z:?, y:8]
+                7   [x:->y, x:->y, g:{}, f:{}, z:?, y:9]
+                8   [res:9, x:->y, x:->y, g:{}, f:{}, z:?, y:9]
+                return 9
+            11  [x:->y, g:{}, f:{}, z:?, y:10]
+            12  [x:->y, x:->y, g:{}, f:{}, z:?, y:10]
+            >>  enter f
+                5   [x:->y, x:->y, g:{}, f:{}, z:?, y:11]
+                6   [x:->y, x:->y, g:{}, f:{}, z:?, y:11]
+                6   [x:->y, x:->y, g:{}, f:{}, z:?, y:12]
+                7   [res:12, x:->y, x:->y, g:{}, f:{}, z:?, y:12]
+                return 12
+            12  [x:->y, g:{}, f:{}, z:?, y:15]
+            13  [res:15, x:->y, g:{}, f:{}, z:?, y:15]
+            return 15
+        15  [g:{}, f:{}, z:15, y:15]
+
+    (iii) call by value-result
+        15  [x:7, g:{}, f:{}, z:?, y:7]
+        >>  enter g
+            11  [x:7, g:{}, f:{}, z:?, y:7]
+            11  [x:7, x:7, g:{}, f:{}, z:?, y:7]
+            >>  enter f
+                5   [x:8, x:7, g:{}, f:{}, z:?, y:7]
+                6   [x:8, x:7, g:{}, f:{}, z:?, y:8]
+                7   [x:9, x:7, g:{}, f:{}, z:?, y:8]
+                8   [res:8, x:9, x:7, g:{}, f:{}, z:?, y:8]
+                9   [res:8, x:9, x:9, g:{}, f:{}, z:?, y:8]
+                return 8
+            11  [x:9, g:{}, f:{}, z:?, y:9]
+            12  [x:9, x:9, g:{}, f:{}, z:?, y:9]
+            >>  enter f
+                5   [x:10, x:9, g:{}, f:{}, z:?, y:9]
+                6   [x:10, x:9, g:{}, f:{}, z:?, y:10]
+                7   [x:11, x:9, g:{}, f:{}, z:?, y:10]
+                8   [res:10, x:11, x:9, g:{}, f:{}, z:?, y:10]
+                9   [res:10, x:11, x:11, g:{}, f:{}, z:?, y:10]
+                return 10
+            12  [x:11, g:{}, f:{}, z:?, y:13]
+            13  [res:11, x:11, g:{}, f:{}, z:?, y:13]
+            14  [res:11, x:11, g:{}, f:{}, z:?, y:11]
+            return 11
+        15  [g:{}, f:{}, z:11, y:11]
+
+        Hopefully I did not make too many errors... parameters are tough
+
+
+

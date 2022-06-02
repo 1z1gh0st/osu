@@ -1,0 +1,111 @@
+Homework 5
+Philip Warton
+
+    Exercise 1. Runtime Stack
+        []
+
+        [x:?]
+         ^
+
+        [y:?,x:?]
+         ^
+
+        [y:1,x:?]
+         ^
+
+        [f:{},y:1,x:?]
+         ^
+
+        [x:2,f:{},y:1,x:?]
+         ^ argument for 'f' within its scope
+            2!=0 => else block
+            2-1=1
+            f(1)*y+1
+
+        [x:1,x:2,f:{},y:1,x:?]
+         ^ argument for nested 'f'
+            1!=0 => else block
+            f(0)*y+1
+
+        [x:0,x:1,x:2,f:{},y:1,x:?]
+         ^ argument for nested nested 'f'
+             0==0 => if block
+
+        [x:0,x:1,x:2,f:{},y:1,x:?]
+                          ^ redefined, no change
+            exit scope of nested nested 'f', 1 is returned
+
+        [x:1,x:2,f:{},y:1,x:?]
+            f(0)*y+1 -> 1*y+1 -> 1*1+1 -> 2
+
+        [x:1,x:2,f:{},y:2,x:?]
+                      ^
+            exit scope of nested 'f', 2 is returned
+
+        [x:2,f:{},y:2,x:?]
+            f(1)*y+1 -> 2*y+1 -> 2*2+1 -> 4+1 -> 5
+        
+        [x:2,f:{},y:5,x:?]
+                  ^
+            exit scope of 'f', 5 is returned
+
+        [f:{},y:5,x:?]
+            after argument 'x:2' is popped
+
+        [x:5,f:{},y:5,x:?]
+            'x' is defined within this indented scope
+
+    Exercise 2. Static and Dynamic Scope
+        - STATIC SCOPING -
+            []
+            [x:?]
+            [y:?, x:?]
+            [z:?, y:?, x:?]
+            [z:?, y:?, x:3]
+            [z:?, y:7, x:3]
+            [f:{};x:3, z:?, y:7, x:3]
+            [y:?, f:{};x:3, z:?, y:7, x:3]
+            [y:11, f:{};x:3, z:?, y:7, x:3]
+            [g:{};y:11 y:11, f:{};x:3, z:?, y:7, x:3]
+            [y:?, g:{};y:11 y:11, f:{};x:3, z:?, y:7, x:3]
+            [y:13, g:{};y:11 y:11, f:{};x:3, z:?, y:7, x:3]
+            [x:2, y:13, g:{};y:11 y:11, f:{};x:3, z:?, y:7, x:3]
+                enter 'g(x:2)'
+                [x:2, y:13, g:{};y:11 y:11, f:{};x:3, z:?, y:7, x:3]
+                [y:11, x:2, y:13, g:{};y:11 y:11, f:{};x:3, z:?, y:7, x:3]
+                    enter 'f(y:11)'
+                    return 3*11=33
+                    return 33
+                    pop y:11
+                    pop x:2
+            [z:33, y:13, g:{};y:11 y:11, f:{};x:3, z:?, y:7, x:3]
+        ANSWER: z:=33
+
+        - DYNAMIC SCOPING -
+            []
+            [x:?] 
+            [y:?, x:?] 
+            [z:?, y:?, x:?] 
+            [f:{}, z:?, y:?, x:?] 
+            [y:?, f:{}, z:?, y:?, x:?] 
+            [y:11, f:{}, z:?, y:?, x:?] 
+            [g:{}, y:11, f:{}, z:?, y:?, x:?] 
+            [y:?, g:{}, y:11, f:{}, z:?, y:?, x:?] 
+            [y:13, g:{}, y:11, f:{}, z:?, y:?, x:?] 
+            [x:2, y:13, g:{}, y:11, f:{}, z:?, y:?, x:?] 
+                enter g(x:2)
+                return f(y:13)
+            [y:13, x:2, y:13, g:{}, y:11, f:{}, z:?, y:?, x:?] 
+                enter f(y:13)
+                return x*y -> 2*13 -> 26
+                exit f and pop y:13
+                exit g and pop x:2
+            [z:26, y:13, g:{}, y:11, f:{}, z:?, y:?, x:?] 
+        ANSWER: z:=26
+
+    Exercise 3. Parameter Passing
+        (i) call by value
+
+        (ii) call by reference
+
+        (iii) call by value-result
